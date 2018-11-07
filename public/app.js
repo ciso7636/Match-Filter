@@ -13,7 +13,7 @@ var hightScore = {
     average23_koeficient: 1.25,
     average14_4last_koeficient: 1.3,
     average23_4last_koeficient: 1.2,
-    johnHaighs_Under25_koeficient: 37,
+    johnHaighs_Under25_koeficient: 50,
     johnHaighs_Under25_koeficient_under: 67,
     vincent_Scale_koeficient: 3.5,
     vincent_Scale_koeficient_under: 2.5
@@ -21,23 +21,22 @@ var hightScore = {
 
 window.onload = function () {
     var allLinks = document.querySelectorAll('#btable .trow8 td:last-child > a:first-child');
-    overGoalPrediction(allLinks);
+    //overGoalPrediction(allLinks);
     //underGoalPrediction(allLinks);
     //awayTeamScorePrediction(allLinks);
     //homeTeamWinPrediction(allLinks);
-    //goalPrediction(allLinks);
+    goalPrediction(allLinks);
 };
 
 function overGoalPrediction(allLinks) {
-
     var filterDataBy_Yuvalfra = yuvalfra_Strategy(allLinks);
-    var filterDataBy_johnHaighsTable = johnHaighsTable_Strategy(filterDataBy_Yuvalfra);
+    var filterDataBy_johnHaighsTable = johnHaighsTable_Strategy(allLinks);
     var startMatch_ELEMENT = $(allLinks).closest('tr').find('td[align="center"] > font');
 
     Loop1: // The first for loop is labeled "Loop1"
-    for (var j = 0; j < allLinks.length; j++) {
+    for (var j = 0; j < filterDataBy_johnHaighsTable.length; j++) {
 
-        var statsHref = allLinks[j].getAttribute("href");
+        var statsHref = filterDataBy_johnHaighsTable[j].getAttribute("href");
         var decodeStatsHref = decodeURI(statsHref);
 
         if (statsHref != null) {
@@ -190,13 +189,13 @@ function overGoalPrediction(allLinks) {
 function underGoalPrediction(allLinks) {
 
     var filterDataBy_Yuvalfra = yuvalfra_Strategy_under(allLinks);
-    var filterDataBy_johnHaighsTable = johnHaighsTable_Strategy_under(filterDataBy_Yuvalfra);
+    var filterDataBy_johnHaighsTable = johnHaighsTable_Strategy_under(allLinks);
     var startMatch_ELEMENT = $(allLinks).closest('tr').find('td[align="center"] > font');
 
     Loop1: // The first for loop is labeled "Loop1"
-    for (var j = 0; j < filterDataBy_johnHaighsTable.length; j++) {
+    for (var j = 0; j < allLinks.length; j++) {
 
-        var statsHref = filterDataBy_johnHaighsTable[j].getAttribute("href");
+        var statsHref = filterDataBy_Yuvalfra[j].getAttribute("href");
         var decodeStatsHref = decodeURI(statsHref);
 
         if (statsHref != null) {
@@ -524,9 +523,9 @@ function awayTeamScorePrediction(allLinks) {
 
 function goalPrediction(allLinks) {
 
-    var filterDataBy_Yuvalfra = yuvalfra_Strategy(allLinks);
-    var filterDataBy_johnHaighsTable = johnHaighsTable_Strategy(filterDataBy_Yuvalfra);
-    var startMatch_ELEMENT = $(allLinks).closest('tr').find('td[align="center"] > font');
+    //var filterDataBy_Yuvalfra = yuvalfra_Strategy(allLinks);
+    //var filterDataBy_johnHaighsTable = johnHaighsTable_Strategy(filterDataBy_Yuvalfra);
+    //var startMatch_ELEMENT = $(allLinks).closest('tr').find('td[align="center"] > font');
 
     Loop1: // The first for loop is labeled "Loop1"
     for (var j = 0; j < allLinks.length; j++) {
@@ -592,6 +591,7 @@ function goalPrediction(allLinks) {
                                                 continue Loop3;
                                             }
 
+                                            var filterDataBy_Yuvalfra = yuvalfra_StrategyAverage(totalScored_Home, totalConceded_Home, totalScored_Away, totalConceded_Away);
                                             var positionInTable =  getPpositionInTable(html);
                                             var average14Val_4last = (averageGoals.averageScored_Home_4_match + averageGoals.averageConceded_Away_4_match) / 2;
 
@@ -621,6 +621,13 @@ function goalPrediction(allLinks) {
                                                     console.log('%c probabilityBy_Vincent:           ' + probabilityBy_Vincent, 'background: yellow; color: black; display: block;')
                                                 } else {
                                                     console.log('%c probabilityBy_Vincent:           ' + probabilityBy_Vincent, 'background: red; color: white; display: block;')
+                                                }
+                                                if(filterDataBy_Yuvalfra >= 2){
+                                                    console.log('%c probabilityBy_Yuvalfra:           ' + filterDataBy_Yuvalfra, 'background: green; color: white; display: block;')
+                                                } else if (filterDataBy_Yuvalfra > 0 && filterDataBy_Yuvalfra < 2) {
+                                                    console.log('%c probabilityBy_Yuvalfra:           ' + filterDataBy_Yuvalfra, 'background: yellow; color: black; display: block;')
+                                                } else {
+                                                    console.log('%c probabilityBy_Yuvalfra:           ' + filterDataBy_Yuvalfra, 'background: red; color: white; display: block;')
                                                 }
 
                                                 if(averageGoals.averageTotalScored_Home >= 1.5){
@@ -892,7 +899,7 @@ function yuvalfra_Strategy(links) {
             var homeConc = parseFloat(parseFloat(homeTeamTG - homeGF).toFixed(2));
             var awayGF = parseFloat(parseFloat(tr.children[14].innerText).toFixed(2));
             var awayConc = parseFloat(parseFloat(awayTeamTG - awayGF).toFixed(2));
-
+            
             var higthHomeGF_awayConc = homeGF >= awayConc ? homeGF : awayConc;
             var higthAwayGF_homeConc = awayGF >= homeConc ? awayGF : homeConc;
             var minHomeGF_awayConc = homeGF <= awayConc ? homeGF : awayConc;
@@ -910,6 +917,19 @@ function yuvalfra_Strategy(links) {
     }
 
     return data;
+}
+
+function yuvalfra_StrategyAverage(homeGF, homeConc, awayGF, awayConc) {
+    
+    var higthHomeGF_awayConc = homeGF >= awayConc ? homeGF : awayConc;
+    var higthAwayGF_homeConc = awayGF >= homeConc ? awayGF : homeConc;
+    var minHomeGF_awayConc = homeGF <= awayConc ? homeGF : awayConc;
+    var minAwayGF_homeConc = awayGF <= homeConc ? awayGF : homeConc;
+
+    var higthAmount = higthHomeGF_awayConc + higthAwayGF_homeConc;
+    var minAmount = minHomeGF_awayConc + minAwayGF_homeConc;
+
+    return parseFloat(parseFloat((higthAmount + minAmount) / 2).toFixed(2));
 }
 
 function yuvalfra_Strategy_under(links) {
