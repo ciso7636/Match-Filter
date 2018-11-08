@@ -24,8 +24,8 @@ window.onload = function () {
     //overGoalPrediction(allLinks);
     //underGoalPrediction(allLinks);
     //awayTeamScorePrediction(allLinks);
-    //homeTeamWinPrediction(allLinks);
-    goalPrediction(allLinks);
+    homeTeamWinPrediction(allLinks);
+    //goalPrediction(allLinks);
 };
 
 function overGoalPrediction(allLinks) {
@@ -264,19 +264,56 @@ function underGoalPrediction(allLinks) {
                                                 var average14Val_4last = (averageGoals.averageScored_Home_4_match + averageGoals.averageConceded_Away_4_match) / 2;
 
                                                 if (Math.abs(averageGoals.averageScored_Home_4_match - averageGoals.averageTotalScored_Home) < 0.3 && average14Val_4last <= hightScore.average14_4last_koeficient) {
+
                                                     console.log('Liga:' + league.toUpperCase() + ': ' + homeTeam + ' vs ' + awayTeam);
-                                                    console.log('Domáci tím pozícia v tabuľke:    ' + positionInTable.home)
-                                                    console.log('Hosťujúci tím pozícia v tabuľke: ' + positionInTable.away)
-                                                    console.log("Čisté konto domáci tím doma:     " + cleanSheetsHome + '%')
-                                                    console.log("Čisté konto hosťujúci tím vonku: " + cleanSheetsAway + '%')
+                                                    console.log('Domáci tím pozícia v tabuľke:    ' + positionInTable.home + ' / ' + positionInTable.all)
+                                                    console.log('Hosťujúci tím pozícia v tabuľke: ' + positionInTable.away + ' / ' + positionInTable.all)
+                                                    if(cleanSheetsHome <= 25){
+                                                        console.log("%c Čisté konto domáci tím doma:     " + cleanSheetsHome + '%', 'background: green; color: white; display: block;')
+                                                    } else if (cleanSheetsHome > 25 && cleanSheetsHome < 40) {
+                                                        console.log("%c Čisté konto domáci tím doma:     " + cleanSheetsHome + '%', 'background: yellow; color: black; display: block;')
+                                                    } else {
+                                                        console.log("%c Čisté konto domáci tím doma:     " + cleanSheetsHome + '%', 'background: red; color: white; display: block;')
+                                                    }
+    
+                                                    if(cleanSheetsAway <= 25){
+                                                        console.log("%c Čisté konto hosťujúci tím vonku: " + cleanSheetsAway + '%', 'background: green; color: white; display: block;')
+                                                    } else if (cleanSheetsAway > 25 && cleanSheetsAway < 40) {
+                                                        console.log("%c Čisté konto hosťujúci tím vonku: " + cleanSheetsAway + '%', 'background: yellow; color: black; display: block;')
+                                                    } else {
+                                                        console.log("%c Čisté konto hosťujúci tím vonku: " + cleanSheetsAway + '%', 'background: red; color: white; display: block;')
+                                                    }
                                                     console.log('Average(1)&(4) 4-match/total:    ' + average14Val_4last + ' / ' + average14Val)
                                                     console.log('Average(2)&(3):                  ' + (averageGoals.averageConceded_Home + averageGoals.averageScored_Away) / 2 )
-                                                    console.log('probabilityBy_Vincent:           ' + probabilityBy_Vincent)
-                                                    console.log('Domáci tím strelené góly Doma 4-match/total:       ' + averageGoals.averageScored_Home_4_match + ' / ' + averageGoals.averageTotalScored_Home)
+                                                    
+                                                    if(probabilityBy_Vincent >= 2){
+                                                        console.log('%c probabilityBy_Vincent:           ' + probabilityBy_Vincent, 'background: green; color: white; display: block;')
+                                                    } else if (probabilityBy_Vincent > 0 && probabilityBy_Vincent < 2) {
+                                                        console.log('%c probabilityBy_Vincent:           ' + probabilityBy_Vincent, 'background: yellow; color: black; display: block;')
+                                                    } else {
+                                                        console.log('%c probabilityBy_Vincent:           ' + probabilityBy_Vincent, 'background: red; color: white; display: block;')
+                                                    }
+    
+                                                    if(averageGoals.averageTotalScored_Home >= 1.5){
+                                                        console.log('%c Domáci tím strelené góly Doma 4-match/total:       ' + averageGoals.averageScored_Home_4_match + ' / ' + averageGoals.averageTotalScored_Home , 'background: green; color: white; font-weight: bold; display: block;')
+                                                    } else if (averageGoals.averageTotalScored_Home >= 1.2 && averageGoals.averageTotalScored_Home < 1.5) {
+                                                        console.log('%c Domáci tím strelené góly Doma 4-match/total:       ' + averageGoals.averageScored_Home_4_match + ' / ' + averageGoals.averageTotalScored_Home , 'background: yellow; color: black; font-weight: bold; display: block;')
+                                                    } else {
+                                                        console.log('%c Domáci tím strelené góly Doma 4-match/total:       ' + averageGoals.averageScored_Home_4_match + ' / ' + averageGoals.averageTotalScored_Home , 'background: red; color: white; font-weight: bold; display: block;')
+                                                    }
+                                                    
                                                     console.log('Hosťujúci tím inkasované góly Vonku 4-match/total: ' + averageGoals.averageConceded_Away_4_match + ' / ' + averageGoals.averageTotalConceded_Away)
-                                                    console.log('Hosťujúci tím strelené góly Vonku 4-match/total:   ' + averageGoals.averageScored_Away_4_match + ' / ' + averageGoals.averageTotalScored_Away)
+                                                    
+                                                    if(averageGoals.averageTotalScored_Away >= 1.35){
+                                                        console.log('%c Hosťujúci tím strelené góly Vonku 4-match/total:   ' + averageGoals.averageScored_Away_4_match + ' / ' + averageGoals.averageTotalScored_Away , 'background: green; color: white; font-weight: bold; display: block;')
+                                                    } else if (averageGoals.averageTotalScored_Away >= 1.1 && averageGoals.averageTotalScored_Away < 1.35) {
+                                                        console.log('%c Hosťujúci tím strelené góly Vonku 4-match/total:   ' + averageGoals.averageScored_Away_4_match + ' / ' + averageGoals.averageTotalScored_Away , 'background: yellow; color: black; font-weight: bold; display: block;')
+                                                    } else {
+                                                        console.log('%c Hosťujúci tím strelené góly Vonku 4-match/total:   ' + averageGoals.averageScored_Away_4_match + ' / ' + averageGoals.averageTotalScored_Away , 'background: red; color: white; font-weight: bold; display: block;')
+                                                    }
                                                     console.log('Domáci tím inkasované góly Doma 4-match/total:     ' + averageGoals.averageConceded_Home_4_match + ' / ' + averageGoals.averageTotalConceded_Home);
                                                     console.log('==================================================================================================================================================================================');
+                                                    
                                                 }
                                             }
                                         }
@@ -429,7 +466,7 @@ function awayTeamScorePrediction(allLinks) {
                         homeTeam = decodeURI(html.URL).split('stats')[decodeURI(html.URL).split('stats').length - 1].split('-vs-')[0];
                         awayTeam = decodeURI(html.URL).split('stats')[decodeURI(html.URL).split('stats').length - 1].split('-vs-')[1];
 
-                        if (cleanSheetsHome <= 30) {
+                        if (cleanSheetsHome <= 40) {
                             Loop3: for (var l = 0; l < html.querySelectorAll('.trow3 td:first-child').length; l++) {
                                 if (html.querySelectorAll('.trow3 td:first-child')[l].innerText.indexOf("League average (home goals per match) ") != -1) {
                                     var average14 = html.querySelectorAll('.trow3 td:first-child')[l] || 0;
@@ -1077,9 +1114,7 @@ function awayTeamFavorits_Filter(links) {
             var homeTeam_homeConc = parseFloat(parseFloat(homeTeamTG - homeTeam_homeGF).toFixed(2));
             var awayTeam_awayGF = parseFloat(parseFloat(tr.children[14].innerText).toFixed(2));
             var awayTeam_awayConc = parseFloat(parseFloat(awayTeamTG - awayTeam_awayGF).toFixed(2));
-            //if (((homeTeam_homeGF - homeTeam_homeConc) > 1 && homeTeam_homeConc < 1) && (homeTeam_homeConc - awayTeam_awayGF < 1) && (awayTeam_awayGF <= 1 && awayTeam_awayConc >= 1.7)) {
-
-            if (homeTeam_homeConc >= 1.5 && awayTeam_awayGF >= 1.5) {
+            if (awayTeam_awayConc < 1.1 && (awayTeam_awayConc - homeTeam_homeGF < 1) && (homeTeam_homeGF <= 1 && homeTeam_homeConc >= 1.2)) {
                 data.push(links[a]);
             }
         }
