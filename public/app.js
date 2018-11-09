@@ -21,10 +21,10 @@ var hightScore = {
 
 window.onload = function () {
     var allLinks = document.querySelectorAll('#btable .trow8 td:last-child > a:first-child');
-    //overGoalPrediction(allLinks);
+    overGoalPrediction(allLinks);
     //underGoalPrediction(allLinks);
     //awayTeamScorePrediction(allLinks);
-    homeTeamWinPrediction(allLinks);
+    //homeTeamWinPrediction(allLinks);
     //goalPrediction(allLinks);
 };
 
