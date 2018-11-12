@@ -37,7 +37,7 @@ $(function(){
         $(self).addClass('loading');
         $('.row-buttons').hide();
         $('h1').show();
-        $('h1').text('Loading data');
+        $('h1').text('...loading data');
         startProgressBar(allLinks.length);
         loadMatchesData(allLinks).then(function (allMatchesData) {
             allMatchesStatistics = allMatchesData;
