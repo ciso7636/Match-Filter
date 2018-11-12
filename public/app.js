@@ -141,7 +141,7 @@ function loadMatchesData(allLinks) {
                     allMatchesData.push(stats);
 
                     resolveLoop();
-                    moveProgressBar(i, 100/allLinks.length, allLinks.length);
+                    moveProgressBar(i + 1, 100/allLinks.length, allLinks.length);
 
                     if(allLinks.length - 1 === i) {
                         resolvelLoadMatchesData(allMatchesData);
@@ -1391,6 +1391,7 @@ function progressBar() {
   }
 
 function startProgressBar(allLinks) {
+    $("#myBar").width(0);
     $("#myBar").text(0 + '/' + allLinks);
     $("#myBar").show();
 }
