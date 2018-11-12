@@ -1,6 +1,23 @@
 body{
     background-color: #1b1c1d;
 }
+#myProgress {
+  width: 450px;
+  margin: auto;
+  background-color: #ddd;
+  border-radius: 5px;
+}
+
+#myBar {
+  display: none;
+  margin-top: 40px;
+  height: 30px;
+  background-color: #4CAF50;
+  text-align: center;
+  line-height: 30px;
+  color: white;
+  border-radius: 5px;
+}
 .hidden.menu {
     display: none;
   }

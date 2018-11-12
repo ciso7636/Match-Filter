@@ -38,6 +38,7 @@ $(function(){
         $('.row-buttons').hide();
         $('h1').show();
         $('h1').text('Loading data');
+        startProgressBar(allLinks.length);
         loadMatchesData(allLinks).then(function (allMatchesData) {
             allMatchesStatistics = allMatchesData;
             $(self).removeClass('loading');
@@ -54,12 +55,9 @@ $(function(){
 
 function overGoalPrediction(allMatchesStatistics){
     for (let matchStats of allMatchesStatistics) {
-        console.log('filterDataBy_Yuvalfra: ' + matchStats.filterDataBy_Yuvalfra);
-        console.log('filterDataBy_johnHaighsTable: ' + matchStats.filterDataBy_JohnHaighsTable);
-        console.log('filterDataBy_Vincent: ' + matchStats.filterDataBy_Vincent);
-        console.log('homeTeamFavorits: ' + matchStats.homeTeamFavorits);
-        console.log('awayTeamFavorits: ' + matchStats.awayTeamFavorits);
-
+        if(matchStats instanceof Object === false){
+            continue;
+        }
         // if(matchStats.Domaci.cisteKontoDoma >= 35 || matchStats.Hostia.cisteKontoVonku >= 32){
         //     return false;
         // }
@@ -77,6 +75,13 @@ function overGoalPrediction(allMatchesStatistics){
             console.log('Liga:' + matchStats.Liga + ': ' + matchStats.Domaci.nazovTimu + ' vs ' + matchStats.Hostia.nazovTimu);
             console.log('Domáci tím pozícia v tabuľke:    ' + matchStats.Domaci.pozicia + ' / ' + matchStats.Domaci.pocetTimov)
             console.log('Hosťujúci tím pozícia v tabuľke: ' + matchStats.Hostia.pozicia + ' / ' + matchStats.Hostia.pocetTimov)
+            console.log('filterDataBy_Yuvalfra: ' + matchStats.filterDataBy_Yuvalfra);
+            console.log('filterDataBy_johnHaighsTable: ' + matchStats.filterDataBy_JohnHaighsTable);
+            console.log('filterDataBy_Vincent: ' + matchStats.filterDataBy_Vincent);
+            console.log('homeTeamFavorits: ' + matchStats.homeTeamFavorits);
+            console.log('awayTeamFavorits: ' + matchStats.awayTeamFavorits);
+    
+            
             if(matchStats.Domaci.cisteKontoDoma <= 25){
                 console.log("%c Čisté konto domáci tím doma:     " + matchStats.Domaci.cisteKontoDoma + '%', 'background: green; color: white; display: block;')
             } else if (matchStats.Domaci.cisteKontoDoma > 25 && matchStats.Domaci.cisteKontoDoma < 40) {
@@ -129,13 +134,16 @@ function overGoalPrediction(allMatchesStatistics){
 function loadMatchesData(allLinks) {
     return new Promise(function (resolvelLoadMatchesData) {
         let allMatchesData = []
-
-        for (let i = 0, p = Promise.resolve(); i < 2; i++) {
+        
+        for (let i = 0, p = Promise.resolve(); i < allLinks.length; i++) {
             p = p.then(_ => new Promise(resolveLoop =>
                 getAllMatchData(allLinks[i]).then(function (stats) {
                     allMatchesData.push(stats);
+
                     resolveLoop();
-                    if(2 - 1 === i) {
+                    moveProgressBar(i, 100/allLinks.length, allLinks.length);
+
+                    if(allLinks.length - 1 === i) {
                         resolvelLoadMatchesData(allMatchesData);
                     }
                 }).catch(function (err) {
@@ -1365,6 +1373,31 @@ function hasTableSufficientNumberOfRows(rows) {
         return false;
     } 
     return false;
+}
+
+function progressBar() {
+    var elem = document.getElementById("myBar");   
+    var width = 10;
+    var id = setInterval(frame, 10);
+    function frame() {
+      if (width >= 100) {
+        clearInterval(id);
+      } else {
+        width++; 
+        elem.style.width = width + '%'; 
+        elem.innerHTML = width * 1  + '%';
+      }
+    }
+  }
+
+function startProgressBar(allLinks) {
+    $("#myBar").text(0 + '/' + allLinks);
+    $("#myBar").show();
+}
+
+function moveProgressBar(i, multiple, allLinks) {
+    $("#myBar").width(Math.round((multiple * i) * 100) / 100 + '%')
+    $("#myBar").text(i * 1 + '/' + allLinks);
 }
 
 function getData(method, url) {
