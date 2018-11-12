@@ -31,7 +31,7 @@ window.onload = function () {
 
 $(function(){
     const allLinks = document.querySelectorAll('#btable .trow8 td:last-child > a:first-child');
-
+    $('h1.header').text('Cick to load ' + allLinks.length + ' matches')
     $('.load-button').click(function() {
         let self = this;
         $(self).addClass('loading');
