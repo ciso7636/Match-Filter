@@ -53,89 +53,24 @@ $(function(){
 })
 
 function overGoalPrediction(allMatchesStatistics){
-    for (let matchStats of allMatchesStatistics) {
-        console.log('filterDataBy_Yuvalfra: ' + matchStats.filterDataBy_Yuvalfra);
-        console.log('filterDataBy_johnHaighsTable: ' + matchStats.filterDataBy_JohnHaighsTable);
-        console.log('filterDataBy_Vincent: ' + matchStats.filterDataBy_Vincent);
-        console.log('homeTeamFavorits: ' + matchStats.homeTeamFavorits);
-        console.log('awayTeamFavorits: ' + matchStats.awayTeamFavorits);
-
-        // if(matchStats.Domaci.cisteKontoDoma >= 35 || matchStats.Hostia.cisteKontoVonku >= 32){
-        //     return false;
-        // }
-        // if (matchStats.Hostia.cisteKontoVonku >= 40 && Math.abs(matchStats.Hostia.cisteKontoVonku - matchStats.Domaci.cisteKontoDoma) < 15) {
-        //     return false;
-        // }
-        // if (matchStats.Hostia.cisteKontoVonku >= 45 && Math.abs(matchStats.Hostia.cisteKontoVonku - matchStats.Domaci.cisteKontoDoma) < 20) {
-        //     return false;
-        // }
-        // if (matchStats.Hostia.cisteKontoVonku >= 50 && Math.abs(matchStats.Hostia.cisteKontoVonku - matchStats.Domaci.cisteKontoDoma) < 25) {
-        //     return false;
-        // }
-
-        if (matchStats.priemerStrelenéGóly_Domáci_InkasovaneGóly_Hostia >= hightScore.average14_4last_koeficient) {
-            console.log('Liga:' + matchStats.Liga + ': ' + matchStats.Domaci.nazovTimu + ' vs ' + matchStats.Hostia.nazovTimu);
-            console.log('Domáci tím pozícia v tabuľke:    ' + matchStats.Domaci.pozicia + ' / ' + matchStats.Domaci.pocetTimov)
-            console.log('Hosťujúci tím pozícia v tabuľke: ' + matchStats.Hostia.pozicia + ' / ' + matchStats.Hostia.pocetTimov)
-            if(matchStats.Domaci.cisteKontoDoma <= 25){
-                console.log("%c Čisté konto domáci tím doma:     " + matchStats.Domaci.cisteKontoDoma + '%', 'background: green; color: white; display: block;')
-            } else if (matchStats.Domaci.cisteKontoDoma > 25 && matchStats.Domaci.cisteKontoDoma < 40) {
-                console.log("%c Čisté konto domáci tím doma:     " + matchStats.Domaci.cisteKontoDoma + '%', 'background: yellow; color: black; display: block;')
-            } else {
-                console.log("%c Čisté konto domáci tím doma:     " + matchStats.Domaci.cisteKontoDoma + '%', 'background: red; color: white; display: block;')
-            }
-
-            if(matchStats.Hostia.cisteKontoVonku <= 25){
-                console.log("%c Čisté konto hosťujúci tím vonku: " + matchStats.Hostia.cisteKontoVonku + '%', 'background: green; color: white; display: block;')
-            } else if (matchStats.Hostia.cisteKontoVonku > 25 && matchStats.Hostia.cisteKontoVonku < 40) {
-                console.log("%c Čisté konto hosťujúci tím vonku: " + matchStats.Hostia.cisteKontoVonku + '%', 'background: yellow; color: black; display: block;')
-            } else {
-                console.log("%c Čisté konto hosťujúci tím vonku: " + matchStats.Hostia.cisteKontoVonku + '%', 'background: red; color: white; display: block;')
-            }
-            console.log('Average(1)&(4) 4-match/total:    ' + matchStats.priemerStrelenéGóly_posledne4Zapasy_Domáci_InkasovaneGóly_Hostia + ' / ' + matchStats.priemerStrelenéGóly_Domáci_InkasovaneGóly_Hostia)
-            console.log('Average(2)&(3):                  ' + matchStats.priemerStrelenéGóly_Hostia_InkasovaneGóly_Domáci)
-            
-            if(matchStats.filterDataBy_Vincent >= 2){
-                console.log('%c probabilityBy_Vincent:           ' + matchStats.filterDataBy_Vincent, 'background: green; color: white; display: block;')
-            } else if (matchStats.filterDataBy_Vincent > 0 && matchStats.filterDataBy_Vincent < 2) {
-                console.log('%c probabilityBy_Vincent:           ' + matchStats.filterDataBy_Vincent, 'background: yellow; color: black; display: block;')
-            } else {
-                console.log('%c probabilityBy_Vincent:           ' + matchStats.filterDataBy_Vincent, 'background: red; color: white; display: block;')
-            }
-
-            if(matchStats.Domaci.streleneGoly_Doma >= 1.5){
-                console.log('%c Domáci tím strelené góly Doma 4-match/total:       ' + matchStats.Domaci.posledne_4_ZapasyDoma.streleneGolyPriemer + ' / ' + matchStats.Domaci.streleneGoly_Doma , 'background: green; color: white; font-weight: bold; display: block;')
-            } else if (matchStats.Domaci.streleneGoly_Doma >= 1.2 && matchStats.Domaci.streleneGoly_Doma < 1.5) {
-                console.log('%c Domáci tím strelené góly Doma 4-match/total:       ' + matchStats.Domaci.posledne_4_ZapasyDoma.streleneGolyPriemer + ' / ' + matchStats.Domaci.streleneGoly_Doma , 'background: yellow; color: black; font-weight: bold; display: block;')
-            } else {
-                console.log('%c Domáci tím strelené góly Doma 4-match/total:       ' + matchStats.Domaci.posledne_4_ZapasyDoma.streleneGolyPriemer + ' / ' + matchStats.Domaci.streleneGoly_Doma , 'background: red; color: white; font-weight: bold; display: block;')
-            }
-            
-            console.log('Hosťujúci tím inkasované góly Vonku 4-match/total: ' + matchStats.Hostia.posledne_4_ZapasyVonku.streleneGolyPriemer + ' / ' + matchStats.Hostia.inkasovaneGoly_Vonku)
-            
-            if(matchStats.Hostia.streleneGoly_Vonku >= 1.35){
-                console.log('%c Hosťujúci tím strelené góly Vonku 4-match/total:   ' + matchStats.Hostia.posledne_4_ZapasyVonku.streleneGolyPriemer + ' / ' + matchStats.Hostia.inkasovaneGoly_Vonku , 'background: green; color: white; font-weight: bold; display: block;')
-            } else if (matchStats.Hostia.streleneGoly_Vonku >= 1.1 && matchStats.Hostia.streleneGoly_Vonku < 1.35) {
-                console.log('%c Hosťujúci tím strelené góly Vonku 4-match/total:   ' + matchStats.Hostia.posledne_4_ZapasyVonku.streleneGolyPriemer + ' / ' + matchStats.Hostia.inkasovaneGoly_Vonku , 'background: yellow; color: black; font-weight: bold; display: block;')
-            } else {
-                console.log('%c Hosťujúci tím strelené góly Vonku 4-match/total:   ' + matchStats.Hostia.posledne_4_ZapasyVonku.streleneGolyPriemer + ' / ' + matchStats.Hostia.inkasovaneGoly_Vonku , 'background: red; color: white; font-weight: bold; display: block;')
-            }
-            console.log('Domáci tím inkasované góly Doma 4-match/total:     ' + matchStats.Domaci.posledne_4_ZapasyDoma.inkasovaneGolyPriemer + ' / ' + matchStats.Domaci.inkasovaneGoly_Doma);
-            console.log('==================================================================================================================================================================================');
-        }
+    for(let matchStats of allMatchesStatistics){
+        var filterDataBy_Yuvalfra = yuvalfra_Strategy(allLinks);
+        var filterDataBy_johnHaighsTable = johnHaighsTable_Strategy(allLinks);
     }
+    
+
 }
 
 function loadMatchesData(allLinks) {
     return new Promise(function (resolvelLoadMatchesData) {
         let allMatchesData = []
 
-        for (let i = 0, p = Promise.resolve(); i < 2; i++) {
+        for (let i = 0, p = Promise.resolve(); i < 10; i++) {
             p = p.then(_ => new Promise(resolveLoop =>
                 getAllMatchData(allLinks[i]).then(function (stats) {
                     allMatchesData.push(stats);
                     resolveLoop();
-                    if(2 - 1 === i) {
+                    if(10 - 1 === i) {
                         resolvelLoadMatchesData(allMatchesData);
                     }
                 }).catch(function (err) {
@@ -149,163 +84,163 @@ function loadMatchesData(allLinks) {
     });
 };
 
-// function overGoalPrediction(allLinks) {
-//     var filterDataBy_Yuvalfra = yuvalfra_Strategy(allLinks);
-//     var filterDataBy_johnHaighsTable = johnHaighsTable_Strategy(allLinks);
-//     var startMatch_ELEMENT = $(allLinks).closest('tr').find('td[align="center"] > font');
+function overGoalPrediction(allLinks) {
+    var filterDataBy_Yuvalfra = yuvalfra_Strategy(allLinks);
+    var filterDataBy_johnHaighsTable = johnHaighsTable_Strategy(allLinks);
+    var startMatch_ELEMENT = $(allLinks).closest('tr').find('td[align="center"] > font');
 
-//     Loop1: // The first for loop is labeled "Loop1"
-//     for (var j = 0; j < filterDataBy_johnHaighsTable.length; j++) {
+    Loop1: // The first for loop is labeled "Loop1"
+    for (var j = 0; j < filterDataBy_johnHaighsTable.length; j++) {
 
-//         var statsHref = filterDataBy_johnHaighsTable[j].getAttribute("href");
-//         var decodeStatsHref = decodeURI(statsHref);
+        var statsHref = filterDataBy_johnHaighsTable[j].getAttribute("href");
+        var decodeStatsHref = decodeURI(statsHref);
 
-//         if (statsHref != null) {
-//             getData('GET', 'https://www.soccerstats.com/' + decodeStatsHref).then(function (data) {
-//                 top.soccerUrl = data.URL;
-//                 var html = data;
-//                 var cleanSheetsHome, cleanSheetsAway, homeTeam, awayTeam, league;
-//                 Loop2: // The second for loop is labeled "Loop2"
-//                 for (var i = 0; i < html.querySelectorAll('.trow3 td').length; i++) {
-//                     if (html.querySelectorAll('.trow3 td')[i].innerText.indexOf("Clean sheets") != -1) {
-//                         var cleanSheets = html.querySelectorAll('.trow3 td')[i];
-//                         cleanSheetsHome = parseFloat(cleanSheets.previousSibling.previousSibling.innerText);
-//                         cleanSheetsAway = parseFloat(cleanSheets.nextSibling.nextSibling.innerText);
-//                         league = decodeURI(html.URL).split('?')[1].split('=')[1].split('&')[0];
-//                         homeTeam = decodeURI(html.URL).split('stats')[decodeURI(html.URL).split('stats').length - 1].split('-vs-')[0];
-//                         awayTeam = decodeURI(html.URL).split('stats')[decodeURI(html.URL).split('stats').length - 1].split('-vs-')[1];
+        if (statsHref != null) {
+            getData('GET', 'https://www.soccerstats.com/' + decodeStatsHref).then(function (data) {
+                top.soccerUrl = data.URL;
+                var html = data;
+                var cleanSheetsHome, cleanSheetsAway, homeTeam, awayTeam, league;
+                Loop2: // The second for loop is labeled "Loop2"
+                for (var i = 0; i < html.querySelectorAll('.trow3 td').length; i++) {
+                    if (html.querySelectorAll('.trow3 td')[i].innerText.indexOf("Clean sheets") != -1) {
+                        var cleanSheets = html.querySelectorAll('.trow3 td')[i];
+                        cleanSheetsHome = parseFloat(cleanSheets.previousSibling.previousSibling.innerText);
+                        cleanSheetsAway = parseFloat(cleanSheets.nextSibling.nextSibling.innerText);
+                        league = decodeURI(html.URL).split('?')[1].split('=')[1].split('&')[0];
+                        homeTeam = decodeURI(html.URL).split('stats')[decodeURI(html.URL).split('stats').length - 1].split('-vs-')[0];
+                        awayTeam = decodeURI(html.URL).split('stats')[decodeURI(html.URL).split('stats').length - 1].split('-vs-')[1];
 
-//                         var lastMatchesTable = $(html).contents().find('.six.columns table tr td span a').closest('table').prev()[0]
-//                         var lastMatchesTable_Rows = $(lastMatchesTable).find('tr');
+                        var lastMatchesTable = $(html).contents().find('.six.columns table tr td span a').closest('table').prev()[0]
+                        var lastMatchesTable_Rows = $(lastMatchesTable).find('tr');
 
-//                         var probabilityBy_Vincent = vincent_Strategy(lastMatchesTable_Rows);
-//                         if (probabilityBy_Vincent >= hightScore.vincent_Scale_koeficient) {
+                        var probabilityBy_Vincent = vincent_Strategy(lastMatchesTable_Rows);
+                        if (probabilityBy_Vincent >= hightScore.vincent_Scale_koeficient) {
 
-//                             if(cleanSheetsHome >= 35 || cleanSheetsAway >= 32){
-//                                 return false;
-//                             }
-//                             if (cleanSheetsAway >= 40 && Math.abs(cleanSheetsAway - cleanSheetsHome) < 15) {
-//                                 return false;
-//                             }
-//                             if (cleanSheetsAway >= 45 && Math.abs(cleanSheetsAway - cleanSheetsHome) < 20) {
-//                                 return false;
-//                             }
-//                             if (cleanSheetsAway >= 50 && Math.abs(cleanSheetsAway - cleanSheetsHome) < 25) {
-//                                 return false;
-//                             }
+                            if(cleanSheetsHome >= 35 || cleanSheetsAway >= 32){
+                                return false;
+                            }
+                            if (cleanSheetsAway >= 40 && Math.abs(cleanSheetsAway - cleanSheetsHome) < 15) {
+                                return false;
+                            }
+                            if (cleanSheetsAway >= 45 && Math.abs(cleanSheetsAway - cleanSheetsHome) < 20) {
+                                return false;
+                            }
+                            if (cleanSheetsAway >= 50 && Math.abs(cleanSheetsAway - cleanSheetsHome) < 25) {
+                                return false;
+                            }
 
-//                             Loop3: for (var l = 0; l < html.querySelectorAll('.trow3 td:first-child').length; l++) {
-//                                 if (html.querySelectorAll('.trow3 td:first-child')[l].innerText.indexOf("League average (home goals per match) ") != -1) {
-//                                     var average14 = html.querySelectorAll('.trow3 td:first-child')[l] || 0;
-//                                     var average14Val = parseFloat(average14.parentElement.previousElementSibling.lastElementChild.innerText);
-//                                 } else if (html.querySelectorAll('.trow3 td:first-child')[l].innerText.indexOf("League average (away goals per match) ") != -1) {
+                            Loop3: for (var l = 0; l < html.querySelectorAll('.trow3 td:first-child').length; l++) {
+                                if (html.querySelectorAll('.trow3 td:first-child')[l].innerText.indexOf("League average (home goals per match) ") != -1) {
+                                    var average14 = html.querySelectorAll('.trow3 td:first-child')[l] || 0;
+                                    var average14Val = parseFloat(average14.parentElement.previousElementSibling.lastElementChild.innerText);
+                                } else if (html.querySelectorAll('.trow3 td:first-child')[l].innerText.indexOf("League average (away goals per match) ") != -1) {
 
-//                                     var average23 = html.querySelectorAll('.trow3 td:first-child')[l] || 0;
-//                                     var average23Val = parseFloat(average23.parentElement.previousElementSibling.lastElementChild.innerText);
+                                    var average23 = html.querySelectorAll('.trow3 td:first-child')[l] || 0;
+                                    var average23Val = parseFloat(average23.parentElement.previousElementSibling.lastElementChild.innerText);
 
-//                                     if (average14Val >= hightScore.average14_koeficient && average23Val >= hightScore.average23_koeficient) {
-//                                         Loop4: for (var k = 0; k < html.querySelectorAll('.trow2 td').length; k++) {
-//                                             if (html.querySelectorAll('.trow2 td')[k].innerText.indexOf("Scored+conc. per match") != -1) {
-//                                                 var scoredConc = html.querySelectorAll('.trow2 td')[k];
-//                                                 var scoredConcHome = scoredConc.previousSibling.previousSibling.innerText;
-//                                                 var scoredConcHomeTotal = scoredConc.previousSibling.innerText;
-//                                                 var cscoredConcAway = scoredConc.nextSibling.nextSibling.innerText;
-//                                                 var cscoredConcAwayTotal = scoredConc.nextSibling.innerText;
-//                                             }
-//                                         }
-//                                         var goalsScored_TR = $(scoredConc).closest('tr').prev().prev().prev();
-//                                         var goalsConceded_TR = $(scoredConc).closest('tr').prev();
+                                    if (average14Val >= hightScore.average14_koeficient && average23Val >= hightScore.average23_koeficient) {
+                                        Loop4: for (var k = 0; k < html.querySelectorAll('.trow2 td').length; k++) {
+                                            if (html.querySelectorAll('.trow2 td')[k].innerText.indexOf("Scored+conc. per match") != -1) {
+                                                var scoredConc = html.querySelectorAll('.trow2 td')[k];
+                                                var scoredConcHome = scoredConc.previousSibling.previousSibling.innerText;
+                                                var scoredConcHomeTotal = scoredConc.previousSibling.innerText;
+                                                var cscoredConcAway = scoredConc.nextSibling.nextSibling.innerText;
+                                                var cscoredConcAwayTotal = scoredConc.nextSibling.innerText;
+                                            }
+                                        }
+                                        var goalsScored_TR = $(scoredConc).closest('tr').prev().prev().prev();
+                                        var goalsConceded_TR = $(scoredConc).closest('tr').prev();
 
-//                                         var totalScored_Home = parseFloat(goalsScored_TR.find('td:first-child b').text());
-//                                         var totalScored_Away = parseFloat(goalsScored_TR.find('td:last-child b').text());
-//                                         var totalConceded_Away = parseFloat(goalsConceded_TR.find('td:last-child b').text());
-//                                         var totalConceded_Home = parseFloat(goalsConceded_TR.find('td:first-child b').text());
+                                        var totalScored_Home = parseFloat(goalsScored_TR.find('td:first-child b').text());
+                                        var totalScored_Away = parseFloat(goalsScored_TR.find('td:last-child b').text());
+                                        var totalConceded_Away = parseFloat(goalsConceded_TR.find('td:last-child b').text());
+                                        var totalConceded_Home = parseFloat(goalsConceded_TR.find('td:first-child b').text());
 
-//                                         var last4MatchesTable = $(html).contents().find('.six.columns table tr td span a').closest('table').prev()[1];
-//                                         var last4MatchesTable_TR = $(last4MatchesTable).find('tr');
+                                        var last4MatchesTable = $(html).contents().find('.six.columns table tr td span a').closest('table').prev()[1];
+                                        var last4MatchesTable_TR = $(last4MatchesTable).find('tr');
 
-//                                         if (last4MatchesTable_TR.length === 4 && last4MatchesTable_TR.last().find('td').length === 7) {
-//                                             if (last4MatchesTable_TR.last().find('td:nth-child(2)').text() !== " ") {
+                                        if (last4MatchesTable_TR.length === 4 && last4MatchesTable_TR.last().find('td').length === 7) {
+                                            if (last4MatchesTable_TR.last().find('td:nth-child(2)').text() !== " ") {
 
-//                                                 var averageGoals = calculateAverageGoals(last4MatchesTable_TR, totalScored_Home, totalConceded_Away, totalConceded_Home, totalScored_Away);
+                                                var averageGoals = calculateAverageGoals(last4MatchesTable_TR, totalScored_Home, totalConceded_Away, totalConceded_Home, totalScored_Away);
 
-//                                                 if (!averageGoals) {
-//                                                     continue Loop3;
-//                                                 }
+                                                if (!averageGoals) {
+                                                    continue Loop3;
+                                                }
 
-//                                                 var positionInTable =  getPositionInTable(html);
-//                                                 var average14Val_4last = (averageGoals.averageScored_Home_4_match + averageGoals.averageConceded_Away_4_match) / 2;
+                                                var positionInTable =  getPpositionInTable(html);
+                                                var average14Val_4last = (averageGoals.averageScored_Home_4_match + averageGoals.averageConceded_Away_4_match) / 2;
 
-//                                                 if (average14Val_4last >= hightScore.average14_4last_koeficient) {
-//                                                     console.log('Liga:' + league.toUpperCase() + ': ' + homeTeam + ' vs ' + awayTeam);
-//                                                     console.log('Domáci tím pozícia v tabuľke:    ' + positionInTable.home + ' / ' + positionInTable.all)
-//                                                     console.log('Hosťujúci tím pozícia v tabuľke: ' + positionInTable.away + ' / ' + positionInTable.all)
-//                                                     if(cleanSheetsHome <= 25){
-//                                                         console.log("%c Čisté konto domáci tím doma:     " + cleanSheetsHome + '%', 'background: green; color: white; display: block;')
-//                                                     } else if (cleanSheetsHome > 25 && cleanSheetsHome < 40) {
-//                                                         console.log("%c Čisté konto domáci tím doma:     " + cleanSheetsHome + '%', 'background: yellow; color: black; display: block;')
-//                                                     } else {
-//                                                         console.log("%c Čisté konto domáci tím doma:     " + cleanSheetsHome + '%', 'background: red; color: white; display: block;')
-//                                                     }
+                                                if (average14Val_4last >= hightScore.average14_4last_koeficient) {
+                                                    console.log('Liga:' + league.toUpperCase() + ': ' + homeTeam + ' vs ' + awayTeam);
+                                                    console.log('Domáci tím pozícia v tabuľke:    ' + positionInTable.home + ' / ' + positionInTable.all)
+                                                    console.log('Hosťujúci tím pozícia v tabuľke: ' + positionInTable.away + ' / ' + positionInTable.all)
+                                                    if(cleanSheetsHome <= 25){
+                                                        console.log("%c Čisté konto domáci tím doma:     " + cleanSheetsHome + '%', 'background: green; color: white; display: block;')
+                                                    } else if (cleanSheetsHome > 25 && cleanSheetsHome < 40) {
+                                                        console.log("%c Čisté konto domáci tím doma:     " + cleanSheetsHome + '%', 'background: yellow; color: black; display: block;')
+                                                    } else {
+                                                        console.log("%c Čisté konto domáci tím doma:     " + cleanSheetsHome + '%', 'background: red; color: white; display: block;')
+                                                    }
     
-//                                                     if(cleanSheetsAway <= 25){
-//                                                         console.log("%c Čisté konto hosťujúci tím vonku: " + cleanSheetsAway + '%', 'background: green; color: white; display: block;')
-//                                                     } else if (cleanSheetsAway > 25 && cleanSheetsAway < 40) {
-//                                                         console.log("%c Čisté konto hosťujúci tím vonku: " + cleanSheetsAway + '%', 'background: yellow; color: black; display: block;')
-//                                                     } else {
-//                                                         console.log("%c Čisté konto hosťujúci tím vonku: " + cleanSheetsAway + '%', 'background: red; color: white; display: block;')
-//                                                     }
-//                                                     console.log('Average(1)&(4) 4-match/total:    ' + average14Val_4last + ' / ' + average14Val)
-//                                                     console.log('Average(2)&(3):                  ' + (averageGoals.averageConceded_Home + averageGoals.averageScored_Away) / 2 )
+                                                    if(cleanSheetsAway <= 25){
+                                                        console.log("%c Čisté konto hosťujúci tím vonku: " + cleanSheetsAway + '%', 'background: green; color: white; display: block;')
+                                                    } else if (cleanSheetsAway > 25 && cleanSheetsAway < 40) {
+                                                        console.log("%c Čisté konto hosťujúci tím vonku: " + cleanSheetsAway + '%', 'background: yellow; color: black; display: block;')
+                                                    } else {
+                                                        console.log("%c Čisté konto hosťujúci tím vonku: " + cleanSheetsAway + '%', 'background: red; color: white; display: block;')
+                                                    }
+                                                    console.log('Average(1)&(4) 4-match/total:    ' + average14Val_4last + ' / ' + average14Val)
+                                                    console.log('Average(2)&(3):                  ' + (averageGoals.averageConceded_Home + averageGoals.averageScored_Away) / 2 )
                                                     
-//                                                     if(probabilityBy_Vincent >= 2){
-//                                                         console.log('%c probabilityBy_Vincent:           ' + probabilityBy_Vincent, 'background: green; color: white; display: block;')
-//                                                     } else if (probabilityBy_Vincent > 0 && probabilityBy_Vincent < 2) {
-//                                                         console.log('%c probabilityBy_Vincent:           ' + probabilityBy_Vincent, 'background: yellow; color: black; display: block;')
-//                                                     } else {
-//                                                         console.log('%c probabilityBy_Vincent:           ' + probabilityBy_Vincent, 'background: red; color: white; display: block;')
-//                                                     }
+                                                    if(probabilityBy_Vincent >= 2){
+                                                        console.log('%c probabilityBy_Vincent:           ' + probabilityBy_Vincent, 'background: green; color: white; display: block;')
+                                                    } else if (probabilityBy_Vincent > 0 && probabilityBy_Vincent < 2) {
+                                                        console.log('%c probabilityBy_Vincent:           ' + probabilityBy_Vincent, 'background: yellow; color: black; display: block;')
+                                                    } else {
+                                                        console.log('%c probabilityBy_Vincent:           ' + probabilityBy_Vincent, 'background: red; color: white; display: block;')
+                                                    }
     
-//                                                     if(averageGoals.averageTotalScored_Home >= 1.5){
-//                                                         console.log('%c Domáci tím strelené góly Doma 4-match/total:       ' + averageGoals.averageScored_Home_4_match + ' / ' + averageGoals.averageTotalScored_Home , 'background: green; color: white; font-weight: bold; display: block;')
-//                                                     } else if (averageGoals.averageTotalScored_Home >= 1.2 && averageGoals.averageTotalScored_Home < 1.5) {
-//                                                         console.log('%c Domáci tím strelené góly Doma 4-match/total:       ' + averageGoals.averageScored_Home_4_match + ' / ' + averageGoals.averageTotalScored_Home , 'background: yellow; color: black; font-weight: bold; display: block;')
-//                                                     } else {
-//                                                         console.log('%c Domáci tím strelené góly Doma 4-match/total:       ' + averageGoals.averageScored_Home_4_match + ' / ' + averageGoals.averageTotalScored_Home , 'background: red; color: white; font-weight: bold; display: block;')
-//                                                     }
+                                                    if(averageGoals.averageTotalScored_Home >= 1.5){
+                                                        console.log('%c Domáci tím strelené góly Doma 4-match/total:       ' + averageGoals.averageScored_Home_4_match + ' / ' + averageGoals.averageTotalScored_Home , 'background: green; color: white; font-weight: bold; display: block;')
+                                                    } else if (averageGoals.averageTotalScored_Home >= 1.2 && averageGoals.averageTotalScored_Home < 1.5) {
+                                                        console.log('%c Domáci tím strelené góly Doma 4-match/total:       ' + averageGoals.averageScored_Home_4_match + ' / ' + averageGoals.averageTotalScored_Home , 'background: yellow; color: black; font-weight: bold; display: block;')
+                                                    } else {
+                                                        console.log('%c Domáci tím strelené góly Doma 4-match/total:       ' + averageGoals.averageScored_Home_4_match + ' / ' + averageGoals.averageTotalScored_Home , 'background: red; color: white; font-weight: bold; display: block;')
+                                                    }
                                                     
-//                                                     console.log('Hosťujúci tím inkasované góly Vonku 4-match/total: ' + averageGoals.averageConceded_Away_4_match + ' / ' + averageGoals.averageTotalConceded_Away)
+                                                    console.log('Hosťujúci tím inkasované góly Vonku 4-match/total: ' + averageGoals.averageConceded_Away_4_match + ' / ' + averageGoals.averageTotalConceded_Away)
                                                     
-//                                                     if(averageGoals.averageTotalScored_Away >= 1.35){
-//                                                         console.log('%c Hosťujúci tím strelené góly Vonku 4-match/total:   ' + averageGoals.averageScored_Away_4_match + ' / ' + averageGoals.averageTotalScored_Away , 'background: green; color: white; font-weight: bold; display: block;')
-//                                                     } else if (averageGoals.averageTotalScored_Away >= 1.1 && averageGoals.averageTotalScored_Away < 1.35) {
-//                                                         console.log('%c Hosťujúci tím strelené góly Vonku 4-match/total:   ' + averageGoals.averageScored_Away_4_match + ' / ' + averageGoals.averageTotalScored_Away , 'background: yellow; color: black; font-weight: bold; display: block;')
-//                                                     } else {
-//                                                         console.log('%c Hosťujúci tím strelené góly Vonku 4-match/total:   ' + averageGoals.averageScored_Away_4_match + ' / ' + averageGoals.averageTotalScored_Away , 'background: red; color: white; font-weight: bold; display: block;')
-//                                                     }
-//                                                     console.log('Domáci tím inkasované góly Doma 4-match/total:     ' + averageGoals.averageConceded_Home_4_match + ' / ' + averageGoals.averageTotalConceded_Home);
-//                                                     console.log('==================================================================================================================================================================================');
-//                                                 }
-//                                             }
-//                                         }
-//                                         continue Loop3;
-//                                     }
-//                                 }
-//                             }
-//                         } else {
-//                             break;
-//                         }
-//                     }
-//                 }
-//             }).catch(function (err) {
-//                 console.log(err);
-//                 if (err.status === 404) {
-//                     console.log(top.soccerUrl);
-//                 }
-//             });
-//         }
-//     }
-// }
+                                                    if(averageGoals.averageTotalScored_Away >= 1.35){
+                                                        console.log('%c Hosťujúci tím strelené góly Vonku 4-match/total:   ' + averageGoals.averageScored_Away_4_match + ' / ' + averageGoals.averageTotalScored_Away , 'background: green; color: white; font-weight: bold; display: block;')
+                                                    } else if (averageGoals.averageTotalScored_Away >= 1.1 && averageGoals.averageTotalScored_Away < 1.35) {
+                                                        console.log('%c Hosťujúci tím strelené góly Vonku 4-match/total:   ' + averageGoals.averageScored_Away_4_match + ' / ' + averageGoals.averageTotalScored_Away , 'background: yellow; color: black; font-weight: bold; display: block;')
+                                                    } else {
+                                                        console.log('%c Hosťujúci tím strelené góly Vonku 4-match/total:   ' + averageGoals.averageScored_Away_4_match + ' / ' + averageGoals.averageTotalScored_Away , 'background: red; color: white; font-weight: bold; display: block;')
+                                                    }
+                                                    console.log('Domáci tím inkasované góly Doma 4-match/total:     ' + averageGoals.averageConceded_Home_4_match + ' / ' + averageGoals.averageTotalConceded_Home);
+                                                    console.log('==================================================================================================================================================================================');
+                                                }
+                                            }
+                                        }
+                                        continue Loop3;
+                                    }
+                                }
+                            }
+                        } else {
+                            break;
+                        }
+                    }
+                }
+            }).catch(function (err) {
+                console.log(err);
+                if (err.status === 404) {
+                    console.log(top.soccerUrl);
+                }
+            });
+        }
+    }
+}
 
 function underGoalPrediction(allLinks) {
 
@@ -381,7 +316,7 @@ function underGoalPrediction(allLinks) {
                                                 if (!averageGoals) {
                                                     continue Loop3;
                                                 }
-                                                var positionInTable =  getPositionInTable(html);
+                                                var positionInTable =  getPpositionInTable(html);
                                                 var average14Val_4last = (averageGoals.averageScored_Home_4_match + averageGoals.averageConceded_Away_4_match) / 2;
 
                                                 if (Math.abs(averageGoals.averageScored_Home_4_match - averageGoals.averageTotalScored_Home) < 0.3 && average14Val_4last <= hightScore.average14_4last_koeficient) {
@@ -522,7 +457,7 @@ function homeTeamWinPrediction(allLinks) {
                                                 if (!averageGoals) {
                                                     continue Loop3;
                                                 }
-                                                var positionInTable =  getPositionInTable(html);
+                                                var positionInTable =  getPpositionInTable(html);
                                                 var average14Val_4last = (averageGoals.averageScored_Home_4_match + averageGoals.averageConceded_Away_4_match) / 2;
                                                 var average23Val_4last = (averageGoals.averageScored_Away_4_match + averageGoals.averageConceded_Home_4_match) / 2;
 
@@ -642,7 +577,7 @@ function awayTeamScorePrediction(allLinks) {
                                                         continue Loop3;
                                                     }
                                                 }
-                                                var positionInTable =  getPositionInTable(html);
+                                                var positionInTable =  getPpositionInTable(html);
 
                                                 if (average23Val_4last >= hightScore.average23_4last_koeficient) {
                                                     console.log('Liga:' + league.toUpperCase() + ': ' + homeTeam + ' vs ' + awayTeam);
@@ -750,7 +685,7 @@ function goalPrediction(allLinks) {
                                             }
 
                                             var filterDataBy_Yuvalfra = yuvalfra_StrategyAverage(totalScored_Home, totalConceded_Home, totalScored_Away, totalConceded_Away);
-                                            var positionInTable =  getPositionInTable(html);
+                                            var positionInTable =  getPpositionInTable(html);
                                             var average14Val_4last = (averageGoals.averageScored_Home_4_match + averageGoals.averageConceded_Away_4_match) / 2;
 
                                                 console.log('Liga:' + league.toUpperCase() + ': ' + homeTeam + ' vs ' + awayTeam);
@@ -824,7 +759,6 @@ function goalPrediction(allLinks) {
     }
 }
 
-
 /* 
     Get Data Functions
 */ 
@@ -840,7 +774,7 @@ function getAllMatchData(matchLink) {
                 top.soccerUrl = html.URL;
                 
                 const teamNames = getNameOfTeams(html.URL);
-                const positionInTable = getPositionInTable(html);
+                const positionInTable = getPpositionInTable(html);
                 const cleanSheets = getCleanScheets(html.querySelectorAll('.trow3 td'));
                 const scoredAndConcededGolas = getScoredAndConcededGolas(html.querySelectorAll('.trow2 td'));
 
@@ -850,43 +784,7 @@ function getAllMatchData(matchLink) {
                 const last_4_AllMatches = hasTableSufficientNumberOfRows(lastAllMatchesTable_Rows) ? countResultsOfMatchesBothTeams(lastAllMatchesTable_Rows, 4) : null;
                 const last_4_MatchesCurrentPosition = hasTableSufficientNumberOfRows(lastMatchesCurrentPositionTable_Rows) ? countResultsOfMatchesBothTeams(lastMatchesCurrentPositionTable_Rows, 4) : null;
 
-                const filterDataBy_Yuvalfra = yuvalfra_Strategy(
-                    scoredAndConcededGolas.homeTeamScored_home,
-                    scoredAndConcededGolas.awayTeamScored_away,
-                    scoredAndConcededGolas.homeTeamConceded_home,
-                    scoredAndConcededGolas.awayTeamConceded_away,
-                );
-                const filterDataBy_JohnHaighsTable = johnHaighsTable_Strategy(
-                    scoredAndConcededGolas.homeTeamScored_home,
-                    scoredAndConcededGolas.awayTeamScored_away,
-                );
-                const filterDataBy_Vincent = vincent_Strategy(
-                    last_4_AllMatches.toCountHomeMatchesReslult.matchResults,
-                    last_4_AllMatches.toCountAwayMatchesReslult.matchResults,
-                );
-                const homeTeamFavorits = homeTeamFavorits_Filter(
-                    scoredAndConcededGolas.homeTeamScored_home,
-                    scoredAndConcededGolas.awayTeamScored_away,
-                    scoredAndConcededGolas.homeTeamConceded_home,
-                    scoredAndConcededGolas.awayTeamConceded_away,
-                );
-                const awayTeamFavorits = awayTeamFavorits_Filter(
-                    scoredAndConcededGolas.homeTeamScored_home,
-                    scoredAndConcededGolas.awayTeamScored_away,
-                    scoredAndConcededGolas.homeTeamConceded_home,
-                    scoredAndConcededGolas.awayTeamConceded_away,
-                );
-
                 resolve({
-                    filterDataBy_Yuvalfra: filterDataBy_Yuvalfra,
-                    filterDataBy_JohnHaighsTable: filterDataBy_JohnHaighsTable,
-                    filterDataBy_Vincent: filterDataBy_Vincent,
-                    homeTeamFavorits: homeTeamFavorits,
-                    awayTeamFavorits: awayTeamFavorits,
-                    priemerStrelenéGóly_Domáci_InkasovaneGóly_Hostia: parseFloat(((scoredAndConcededGolas.homeTeamScored_home + scoredAndConcededGolas.awayTeamConceded_away) / 2).toFixed(2)),
-                    priemerStrelenéGóly_posledne4Zapasy_Domáci_InkasovaneGóly_Hostia: parseFloat(((last_4_MatchesCurrentPosition.toCountHomeMatchesReslult.scoredGoalsAverage + last_4_MatchesCurrentPosition.toCountAwayMatchesReslult.concededGoalsAverage) / 2).toFixed(2)),
-                    priemerStrelenéGóly_Hostia_InkasovaneGóly_Domáci: parseFloat(((scoredAndConcededGolas.awayTeamScored_away + scoredAndConcededGolas.homeTeamConceded_home) / 2).toFixed(2)),                                        
-                    priemerStrelenéGóly_posledne4Zapasy_Hostia_InkasovaneGóly_Domáci: parseFloat(((last_4_MatchesCurrentPosition.toCountAwayMatchesReslult.scoredGoalsAverage + last_4_MatchesCurrentPosition.toCountHomeMatchesReslult.concededGoalsAverage) / 2).toFixed(2)),                    
                     Liga: teamNames.league,
                     Domaci: {
                         nazovTimu: teamNames.homeTeam,
@@ -900,20 +798,13 @@ function getAllMatchData(matchLink) {
                         pocetTimov: positionInTable.all,
                         posledne_4_Zapasy: last_4_AllMatches && {
                             streleneGoly: last_4_AllMatches.toCountHomeMatchesReslult.scoredGoals,
-                            streleneGolyPriemer: last_4_AllMatches.toCountHomeMatchesReslult.scoredGoalsAverage,
                             inkasovaneGoly: last_4_AllMatches.toCountHomeMatchesReslult.concededGoals,
-                            inkasovaneGolyPriemer: last_4_AllMatches.toCountHomeMatchesReslult.concededGoalsAverage,
-                            konečnýStav: last_4_AllMatches.toCountHomeMatchesReslult.matchResults,
-                            výsledkyZápasov: last_4_AllMatches.toCountHomeMatchesReslult.results,
-
+                            výsledkyZápasov: last_4_AllMatches.toCountHomeMatchesReslult.matchResults,
                         },
                         posledne_4_ZapasyDoma: last_4_MatchesCurrentPosition && {
                             streleneGoly: last_4_MatchesCurrentPosition.toCountHomeMatchesReslult.scoredGoals,
-                            streleneGolyPriemer: last_4_MatchesCurrentPosition.toCountHomeMatchesReslult.scoredGoalsAverage,
                             inkasovaneGoly: last_4_MatchesCurrentPosition.toCountHomeMatchesReslult.concededGoals,
-                            inkasovaneGolyPriemer: last_4_MatchesCurrentPosition.toCountHomeMatchesReslult.concededGoalsAverage,
-                            konečnýStav: last_4_MatchesCurrentPosition.toCountHomeMatchesReslult.matchResults,
-                            výsledkyZápasov: last_4_MatchesCurrentPosition.toCountHomeMatchesReslult.results,
+                            výsledkyZápasov: last_4_MatchesCurrentPosition.toCountHomeMatchesReslult.matchResults,
                         },
                     },
                     Hostia: {
@@ -928,19 +819,13 @@ function getAllMatchData(matchLink) {
                         pocetTimov: positionInTable.all,
                         posledne_4_Zapasy: last_4_AllMatches && {
                             streleneGoly: last_4_AllMatches.toCountAwayMatchesReslult.scoredGoals,
-                            streleneGolyPriemer: last_4_AllMatches.toCountAwayMatchesReslult.scoredGoalsAverage,
                             inkasovaneGoly: last_4_AllMatches.toCountAwayMatchesReslult.concededGoals,
-                            inkasovaneGolyPriemer: last_4_AllMatches.toCountAwayMatchesReslult.concededGoalsAverage,
-                            konečnýStav: last_4_AllMatches.toCountAwayMatchesReslult.matchResults,
-                            výsledkyZápasov: last_4_AllMatches.toCountAwayMatchesReslult.results,
+                            výsledkyZápasov: last_4_AllMatches.toCountAwayMatchesReslult.matchResults,
                         },
                         posledne_4_ZapasyVonku: last_4_MatchesCurrentPosition && {
                             streleneGoly: last_4_MatchesCurrentPosition.toCountAwayMatchesReslult.scoredGoals,
-                            streleneGolyPriemer: last_4_MatchesCurrentPosition.toCountAwayMatchesReslult.scoredGoalsAverage,
                             inkasovaneGoly: last_4_MatchesCurrentPosition.toCountAwayMatchesReslult.concededGoals,
-                            inkasovaneGolyPriemer: last_4_MatchesCurrentPosition.toCountAwayMatchesReslult.concededGoalsAverage,
-                            konečnýStav: last_4_MatchesCurrentPosition.toCountAwayMatchesReslult.matchResults,
-                            výsledkyZápasov: last_4_MatchesCurrentPosition.toCountAwayMatchesReslult.results,
+                            výsledkyZápasov: last_4_MatchesCurrentPosition.toCountAwayMatchesReslult.matchResults,
                         },
                     }
                 }); 
@@ -965,7 +850,7 @@ const getNameOfTeams = (url) => {
     }
 }
 
-function getPositionInTable (html){
+function getPpositionInTable (html){
     var homeTablePosition = '?';
     var awayTablePosition = '?';
     var home = $($(html).find('.trow7')[1])
@@ -1027,14 +912,11 @@ const getScoredAndConcededGolas = (tableCells) => {
 /* 
     Prediction Functions
 */ 
-function vincent_Strategy(homeTeamMatchesResult, awayTeamMatchesResult) {
-    let calculate = 0;
-    const numberOfMatches = homeTeamMatchesResult.length <= awayTeamMatchesResult.length ? homeTeamMatchesResult.length : awayTeamMatchesResult.length;
-
-    if (homeTeamMatchesResult.length < 2 || awayTeamMatchesResult.length < 2) {
-        return 'malo zapasov k vytvoreniu statistiky'
+function vincent_Strategy(lastMatchesTable_Rows) {
+    var calculate = 0;
+    if(lastMatchesTable_Rows.length < 5){
+        return calculate
     }
-
     var resultsTable = {
         "0:0": [-0.5, -0.75],
         "1:0": [-0.5, -0.75],
@@ -1114,25 +996,75 @@ function vincent_Strategy(homeTeamMatchesResult, awayTeamMatchesResult) {
         "1:10": [0.5, 0.75],
         "2:10": [0.5, 0.75]
         // last 5 matches
-    };
+    };for (var i = 0; i < 5; i++) {
+        var team1_scored_Home = parseFloat(lastMatchesTable_Rows[i].querySelectorAll('td')[2].querySelector('b').innerText.split('-')[0]);
+        var team2_scored_Away = parseFloat(lastMatchesTable_Rows[i].querySelectorAll('td')[2].querySelector('b').innerText.split('-')[1]);
 
-    for (var i = 0; i < numberOfMatches; i++) {
-        var team1_scored_Home = homeTeamMatchesResult[i].current;
-        var team2_scored_Away = homeTeamMatchesResult[i].another;
-
-        var team3_scored_Home = awayTeamMatchesResult[i].current;
-        var team4_scored_Away = awayTeamMatchesResult[i].another;
+        var team3_scored_Home = parseFloat(lastMatchesTable_Rows[i].querySelectorAll('td')[4].querySelector('b').innerText.split('-')[0]);
+        var team4_scored_Away = parseFloat(lastMatchesTable_Rows[i].querySelectorAll('td')[4].querySelector('b').innerText.split('-')[1]);
 
         var matchResult_HomeTeam = '' + team1_scored_Home + ':' + team2_scored_Away + '';
         var matchResult_AwayTeam = '' + team3_scored_Home + ':' + team4_scored_Away + '';
 
         calculate += resultsTable[matchResult_HomeTeam][0] + resultsTable[matchResult_HomeTeam][1] + resultsTable[matchResult_AwayTeam][0] + resultsTable[matchResult_AwayTeam][1];
     }
-
     return calculate;
 }
 
-function yuvalfra_Strategy(homeGF, awayGF, homeConc, awayConc) {
+function yuvalfra_Strategy(links) {
+
+    if (homeTeamTG >= 2.5 && awayTeamTG >= 2.5) {
+
+        var higthHomeGF_awayConc = homeGF >= awayConc ? homeGF : awayConc;
+        var higthAwayGF_homeConc = awayGF >= homeConc ? awayGF : homeConc;
+        var minHomeGF_awayConc = homeGF <= awayConc ? homeGF : awayConc;
+        var minAwayGF_homeConc = awayGF <= homeConc ? awayGF : homeConc;
+
+        var higthAmount = higthHomeGF_awayConc + higthAwayGF_homeConc;
+        var minAmount = minHomeGF_awayConc + minAwayGF_homeConc;
+
+        return average = parseFloat(parseFloat((higthAmount + minAmount) / 2).toFixed(2));
+    }
+}
+
+function yuvalfra_Strategy(links) {
+
+    var data = [];
+
+    for (var a = 0; a < links.length; a++) {
+        var tr = links[a].parentElement.parentElement;
+
+        var homeTeamTG = parseFloat(parseFloat(tr.children[5].lastElementChild.innerText).toFixed(2));
+        var awayTeamTG = parseFloat(parseFloat(tr.children[13].lastElementChild.innerText).toFixed(2));
+
+        if (homeTeamTG >= 2.5 && awayTeamTG >= 2.5) {
+
+            var homeGF = parseFloat(parseFloat(tr.children[4].innerText).toFixed(2));
+            var homeConc = parseFloat(parseFloat(homeTeamTG - homeGF).toFixed(2));
+            var awayGF = parseFloat(parseFloat(tr.children[14].innerText).toFixed(2));
+            var awayConc = parseFloat(parseFloat(awayTeamTG - awayGF).toFixed(2));
+            
+            var higthHomeGF_awayConc = homeGF >= awayConc ? homeGF : awayConc;
+            var higthAwayGF_homeConc = awayGF >= homeConc ? awayGF : homeConc;
+            var minHomeGF_awayConc = homeGF <= awayConc ? homeGF : awayConc;
+            var minAwayGF_homeConc = awayGF <= homeConc ? awayGF : homeConc;
+
+            var higthAmount = higthHomeGF_awayConc + higthAwayGF_homeConc;
+            var minAmount = minHomeGF_awayConc + minAwayGF_homeConc;
+
+            var average = parseFloat(parseFloat((higthAmount + minAmount) / 2).toFixed(2));
+
+            if (average >= hightScore.yuvalfra_Average_koeficient) {
+                data.push(links[a]);
+            }
+        }
+    }
+
+    return data;
+}
+
+function yuvalfra_StrategyAverage(homeGF, homeConc, awayGF, awayConc) {
+    
     var higthHomeGF_awayConc = homeGF >= awayConc ? homeGF : awayConc;
     var higthAwayGF_homeConc = awayGF >= homeConc ? awayGF : homeConc;
     var minHomeGF_awayConc = homeGF <= awayConc ? homeGF : awayConc;
@@ -1144,45 +1076,158 @@ function yuvalfra_Strategy(homeGF, awayGF, homeConc, awayConc) {
     return parseFloat(parseFloat((higthAmount + minAmount) / 2).toFixed(2));
 }
 
-function johnHaighsTable_Strategy(homeGF, awayGF) {
-    var homeTable = switchTable(homeGF);
-    var awayTable = switchTable(awayGF);
+function yuvalfra_Strategy_under(links) {
 
-    if (homeTable == null || awayTable == null) {
-        return null;
+    var data = [];
+
+    for (var a = 0; a < links.length; a++) {
+        var tr = links[a].parentElement.parentElement;
+
+        var homeTeamTG = parseFloat(parseFloat(tr.children[5].lastElementChild.innerText).toFixed(2));
+        var awayTeamTG = parseFloat(parseFloat(tr.children[13].lastElementChild.innerText).toFixed(2));
+
+        if (homeTeamTG <= 2.5 && awayTeamTG <= 2.5) {
+
+            var homeGF = parseFloat(parseFloat(tr.children[4].innerText).toFixed(2));
+            var homeConc = parseFloat(parseFloat(homeTeamTG - homeGF).toFixed(2));
+            var awayGF = parseFloat(parseFloat(tr.children[14].innerText).toFixed(2));
+            var awayConc = parseFloat(parseFloat(awayTeamTG - awayGF).toFixed(2));
+
+            var higthHomeGF_awayConc = homeGF >= awayConc ? homeGF : awayConc;
+            var higthAwayGF_homeConc = awayGF >= homeConc ? awayGF : homeConc;
+            var minHomeGF_awayConc = homeGF <= awayConc ? homeGF : awayConc;
+            var minAwayGF_homeConc = awayGF <= homeConc ? awayGF : homeConc;
+
+            var higthAmount = higthHomeGF_awayConc + higthAwayGF_homeConc;
+            var minAmount = minHomeGF_awayConc + minAwayGF_homeConc;
+
+            var average = parseFloat(parseFloat((higthAmount + minAmount) / 2).toFixed(2));
+
+            if (average <= hightScore.yuvalfra_Average_koeficient) {
+                data.push(links[a]);
+            }
+        }
     }
 
-    var result0_0 = homeTable[0] * awayTable[0];
-    var result1_0 = homeTable[1] * awayTable[0];
-    var result0_1 = homeTable[0] * awayTable[1];
-    var result1_1 = homeTable[1] * awayTable[1];
-    var result2_0 = homeTable[2] * awayTable[0];
-    var result0_2 = homeTable[0] * awayTable[2];
-
-    return (result0_0 + result1_0 + result0_1 + result1_1 + result2_0 + result0_2) / 100;
+    return data;
 }
 
-function homeTeamFavorits_Filter(homeTeam_homeGF, awayTeam_awayGF, homeTeam_homeConc, awayTeam_awayConc) {
-	if (
-		homeTeam_homeGF - homeTeam_homeConc > 1 &&
-		homeTeam_homeConc < 1 &&
-		homeTeam_homeConc - awayTeam_awayGF < 1 &&
-		(awayTeam_awayGF <= 1 && awayTeam_awayConc >= 1.2)
-	) {
-		return true;
-	}
-	return false;
+function johnHaighsTable_Strategy(links) {
+
+    var data = [];
+
+    for (var a = 0; a < links.length; a++) {
+        var tr = links[a].parentElement.parentElement;
+
+        var homeGF = parseFloat(parseFloat(tr.children[4].innerText).toFixed(2));
+        var awayGF = parseFloat(parseFloat(tr.children[14].innerText).toFixed(2));
+
+        var homeTable = switchTable(homeGF);
+        var awayTable = switchTable(awayGF);
+
+        if (homeTable == null || awayTable == null) {
+            continue;
+        }
+
+        var result0_0 = homeTable[0] * awayTable[0];
+        var result1_0 = homeTable[1] * awayTable[0];
+        var result0_1 = homeTable[0] * awayTable[1];
+        var result1_1 = homeTable[1] * awayTable[1];
+        var result2_0 = homeTable[2] * awayTable[0];
+        var result0_2 = homeTable[0] * awayTable[2];
+
+        var probabilityUnder_25 = (result0_0 + result1_0 + result0_1 + result1_1 + result2_0 + result0_2) / 100;
+
+        if (probabilityUnder_25 <= hightScore.johnHaighs_Under25_koeficient) {
+            data.push(links[a]);
+        }
+    }
+
+    return data;
 }
 
-function awayTeamFavorits_Filter(homeTeam_homeGF, awayTeam_awayGF, homeTeam_homeConc, awayTeam_awayConc) {
-	if (
-		awayTeam_awayConc < 1.1 &&
-		awayTeam_awayConc - homeTeam_homeGF < 1 &&
-		(homeTeam_homeGF <= 1 && homeTeam_homeConc >= 1.2)
-	) {
-		return true;
-	}
-	return false;
+function johnHaighsTable_Strategy_under(links) {
+
+    var data = [];
+
+    for (var a = 0; a < links.length; a++) {
+        var tr = links[a].parentElement.parentElement;
+
+        var homeGF = parseFloat(parseFloat(tr.children[4].innerText).toFixed(2));
+        var awayGF = parseFloat(parseFloat(tr.children[14].innerText).toFixed(2));
+
+        var homeTable = switchTable(homeGF);
+        var awayTable = switchTable(awayGF);
+
+        if (homeTable == null || awayTable == null) {
+            continue;
+        }
+
+        var result0_0 = homeTable[0] * awayTable[0];
+        var result1_0 = homeTable[1] * awayTable[0];
+        var result0_1 = homeTable[0] * awayTable[1];
+        var result1_1 = homeTable[1] * awayTable[1];
+        var result2_0 = homeTable[2] * awayTable[0];
+        var result0_2 = homeTable[0] * awayTable[2];
+
+        var probabilityUnder_25 = (result0_0 + result1_0 + result0_1 + result1_1 + result2_0 + result0_2) / 100;
+
+        if (probabilityUnder_25 >= hightScore.johnHaighs_Under25_koeficient_under) {
+            data.push(links[a]);
+        }
+    }
+
+    return data;
+}
+
+function homeTeamFavorits_Filter(links) {
+    var data = [];
+
+    for (var a = 0; a < links.length; a++) {
+        var tr = links[a].parentElement.parentElement;
+
+        var homeTeamTG = parseFloat(parseFloat(tr.children[5].lastElementChild.innerText).toFixed(2));
+        var awayTeamTG = parseFloat(parseFloat(tr.children[13].lastElementChild.innerText).toFixed(2));
+
+        if (homeTeamTG >= 2.4) {
+
+            var homeTeam_homeGF = parseFloat(parseFloat(tr.children[4].innerText).toFixed(2));
+            var homeTeam_homeConc = parseFloat(parseFloat(homeTeamTG - homeTeam_homeGF).toFixed(2));
+            var awayTeam_awayGF = parseFloat(parseFloat(tr.children[14].innerText).toFixed(2));
+            var awayTeam_awayConc = parseFloat(parseFloat(awayTeamTG - awayTeam_awayGF).toFixed(2));
+
+            if (((homeTeam_homeGF - homeTeam_homeConc) > 1 && homeTeam_homeConc < 1) && (homeTeam_homeConc - awayTeam_awayGF < 1) && (awayTeam_awayGF <= 1 && awayTeam_awayConc >= 1.2)) {
+                //if(homeTeam_homeGF >= 2 ){
+                data.push(links[a]);
+            }
+        }
+    }
+
+    return data;
+}
+
+function awayTeamFavorits_Filter(links) {
+    var data = [];
+
+    for (var a = 0; a < links.length; a++) {
+        var tr = links[a].parentElement.parentElement;
+
+        var homeTeamTG = parseFloat(parseFloat(tr.children[5].lastElementChild.innerText).toFixed(2));
+        var awayTeamTG = parseFloat(parseFloat(tr.children[13].lastElementChild.innerText).toFixed(2));
+
+        if (awayTeamTG >= 2) {
+
+            var homeTeam_homeGF = parseFloat(parseFloat(tr.children[4].innerText).toFixed(2));
+            var homeTeam_homeConc = parseFloat(parseFloat(homeTeamTG - homeTeam_homeGF).toFixed(2));
+            var awayTeam_awayGF = parseFloat(parseFloat(tr.children[14].innerText).toFixed(2));
+            var awayTeam_awayConc = parseFloat(parseFloat(awayTeamTG - awayTeam_awayGF).toFixed(2));
+            if (awayTeam_awayConc < 1.1 && (awayTeam_awayConc - homeTeam_homeGF < 1) && (homeTeam_homeGF <= 1 && homeTeam_homeConc >= 1.2)) {
+                data.push(links[a]);
+            }
+        }
+    }
+
+    return data;
 }
 
 
@@ -1192,17 +1237,13 @@ function awayTeamFavorits_Filter(homeTeam_homeGF, awayTeam_awayGF, homeTeam_home
 const countResultsOfMatchesBothTeams = (matches, count) => {
     let resultOfCountingHomeTeamMatches = {
         scoredGoals: 0,
-        scoredGoalsAverage: 0,
         concededGoals: 0,
-        concededGoalsAverage: 0,
-        matchResults: [], 
-        results: [],
+        matchResults:[], 
     }
     let resultOfCountingAwayTeamMatches = {
         scoredGoals: 0,
         concededGoals: 0,
-        matchResults: [], 
-        results: [],
+        matchResults:[], 
     }
 
     if(matches.length >= count){
@@ -1211,19 +1252,12 @@ const countResultsOfMatchesBothTeams = (matches, count) => {
             
             resultOfCountingHomeTeamMatches.scoredGoals += result.homeTeamMatch.currentTeam_score;
             resultOfCountingHomeTeamMatches.concededGoals += result.homeTeamMatch.anotherTeam_score;
-            resultOfCountingHomeTeamMatches.matchResults.push(result.homeTeamMatch.matches);
-            resultOfCountingHomeTeamMatches.results.push(result.homeTeamMatch.result);
+            resultOfCountingHomeTeamMatches.matchResults.push(result.homeTeamMatch.result);
 
             resultOfCountingAwayTeamMatches.scoredGoals += result.awayTeamMatch.currentTeam_score;
             resultOfCountingAwayTeamMatches.concededGoals += result.awayTeamMatch.anotherTeam_score;
-            resultOfCountingAwayTeamMatches.matchResults.push(result.awayTeamMatch.matches);
-            resultOfCountingAwayTeamMatches.results.push(result.awayTeamMatch.result);
-        }  
-
-        resultOfCountingHomeTeamMatches.scoredGoalsAverage = resultOfCountingHomeTeamMatches.scoredGoals / count;
-        resultOfCountingHomeTeamMatches.concededGoalsAverage = resultOfCountingHomeTeamMatches.concededGoals / count;
-        resultOfCountingAwayTeamMatches.scoredGoalsAverage = resultOfCountingAwayTeamMatches.scoredGoals / count;
-        resultOfCountingAwayTeamMatches.concededGoalsAverage = resultOfCountingAwayTeamMatches.concededGoals / count;
+            resultOfCountingAwayTeamMatches.matchResults.push(result.awayTeamMatch.result);
+        }                      
 
         return {
             toCountHomeMatchesReslult: resultOfCountingHomeTeamMatches,
@@ -1259,10 +1293,6 @@ const resultOfMatchesBothTeams = (matches, order) => {
         homeTeamMatch: {
             currentTeam_score: homeTeamMatchCurrentTeam_score,
             anotherTeam_score: homeTeamMatchAnotherTeam_score,
-            matches: {
-                current: homeTeamMatchCurrentTeam_score,
-                another: homeTeamMatchAnotherTeam_score,
-            },
             result: homeTeamMatchCurrentTeam_score > homeTeamMatchAnotherTeam_score
                     ? (
                         'výhra'
@@ -1275,10 +1305,6 @@ const resultOfMatchesBothTeams = (matches, order) => {
         awayTeamMatch: {
             currentTeam_score: awayTeamMatchCurrentTeam_score,
             anotherTeam_score: awayTeamMatchAnotherTeam_score,
-            matches: {
-                current: awayTeamMatchCurrentTeam_score,
-                another: awayTeamMatchAnotherTeam_score,
-            },
             result: awayTeamMatchCurrentTeam_score > awayTeamMatchAnotherTeam_score
                     ? (
                         'výhra'
