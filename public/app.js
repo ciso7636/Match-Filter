@@ -1,7 +1,5 @@
 'use strict';
 
-var allMatchesStatistics = [];
-
 var colors = {
     BgRed: "\x1b[31m%s\x1b[0m",
     BgGreen: "\x1b[32m%s\x1b[0m",
@@ -30,23 +28,34 @@ window.onload = function () {
 };
 
 $(function(){
-    const allLinks = document.querySelectorAll('#btable .trow8 td:last-child > a:first-child');
-    $('h1.header').text('Cick to load ' + allLinks.length + ' matches')
+    const allLinks = document.querySelectorAll('#btable .trow8 td:last-child > a:first-child'); 
+    let allMatchesStatistics = getDataFromLocalStorage(allLinks.length) || [];   
+
     $('.load-button').click(function() {
-        let self = this;
-        $(self).addClass('loading');
         $('.row-buttons').hide();
-        $('h1').show();
-        $('h1').text('...loading data');
+        $('.load-button').addClass('loading');
+        $('h1.header').text('...loading data').show();
+
         startProgressBar(allLinks.length);
+
         loadMatchesData(allLinks).then(function (allMatchesData) {
+            setDataToLocalStorage(allLinks.length, JSON.stringify(allMatchesData));
+
             allMatchesStatistics = allMatchesData;
-            $(self).removeClass('loading');
-            $(self).text('Data has been loaded');
+
             $('.row-buttons').show();
-            $('h1').hide();
+            $('.load-button').text('Reload data').removeClass('loading');
+            $('h1.header').text('Data has been loaded');
         })
     })
+
+    if (allMatchesStatistics.length > 0) {
+        $('.row-buttons').show();
+        $('.load-button').text('Reload data');
+        $('h1.header').text("Data for selected day has been loaded.");
+    } else {
+        $('h1.header').text('Cick to load ' + allLinks.length + ' matches');
+    }
 
     $('.overGoalPrediction').click(function() {
         overGoalPrediction(allMatchesStatistics);
@@ -1389,6 +1398,17 @@ function progressBar() {
       }
     }
   }
+
+function setDataToLocalStorage(name, data) {
+    localStorage.setItem(name, data);
+}
+
+function getDataFromLocalStorage(name, data) {
+    let result = localStorage.getItem(name, data);
+    if(result !== ''){
+        return JSON.parse(result);
+    }
+}
 
 function startProgressBar(allLinks) {
     $("#myBar").width(0);
