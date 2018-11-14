@@ -50,7 +50,7 @@ $('html').on('click', '.load-button', function() {
 
     loadMatchesData(allLinks).then(function (allMatchesData) {
         $('.load-button').text(`Reload ${allLinks.length} matches`).removeClass('loading');
-        $('h1.header').text('Data has been saved');
+        $('h1.header').text('Data saved');
         $('.row-buttons').show();
 
         setDataToLocalStorage(allLinks.length, JSON.stringify(allMatchesData));
