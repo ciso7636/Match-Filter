@@ -1,6 +1,7 @@
 body{
     background-color: #1b1c1d;
 }
+
 #myProgress {
   width: 450px;
   margin: auto;
@@ -56,6 +57,7 @@ body{
   .masthead h1.ui.header {
     margin-bottom: 0.5em;
     font-weight: normal;
+    display: none;
   }
   .masthead h2 {
     font-size: 1.7em;

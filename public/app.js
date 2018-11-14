@@ -18,7 +18,7 @@ let hightScore = {
     johnHaighs_Under25_koeficient: 47,
     johnHaighs_Under25_koeficient_under: 67,
     vincent_Scale_koeficient: 3.5,
-    vincent_Scale_koeficient_under: 2.5
+    vincent_Scale_koeficient_under: 1.5
 };
 
 /* 
@@ -29,12 +29,12 @@ $(function(){
     allMatchesStatistics = getDataFromLocalStorage(allLinks.length) || [];   
 
     if (allMatchesStatistics.length > 0) {
-        $('h1.header').text("Data for selected day has been loaded.");
-        $('.load-button').show().text(`Reload ${allLinks.length} matches`);
+        $('.load-button').show().text(`Reload ${allLinks.length} matches`).removeClass('loading');
+        $('h1.header').text("Data for selected day has been loaded.").show();
         $('.row-buttons').show();
     } else {
-        $('h1.header').text(`Cick to load ${allLinks.length} matches`);
-        $('.load-button').show();
+        $('.load-button').show().text('Load matches').removeClass('loading');
+        $('h1.header').text(`Cick to load ${allLinks.length} matches`).show();
     }  
 })
 
@@ -49,16 +49,15 @@ $('html').on('click', '.load-button', function() {
     startProgressBar(allLinks.length);
 
     loadMatchesData(allLinks).then(function (allMatchesData) {
+        $('.load-button').text(`Reload ${allLinks.length} matches`).removeClass('loading');
+        $('h1.header').text('Data has been loaded');
+        $('.row-buttons').show();
+
         setDataToLocalStorage(allLinks.length, JSON.stringify(allMatchesData));
 
         allMatchesStatistics = allMatchesData;
-
-        $('h1.header').text('Data has been loaded');
-        $('.load-button').text(`Reload ${allLinks} matches`).removeClass('loading');
-        $('.row-buttons').show();
-
     })
-})
+});
 
 $('html').on('click', '.overGoalPrediction', function() {
     overGoalPrediction(allMatchesStatistics);
@@ -81,33 +80,39 @@ $('html').on('click', '.awayTeamWinPrediction', function() {
     Handle Functions
 */ 
 function overGoalPrediction(allMatchesStatistics){
+    let count = 0;
     for (let matchStats of allMatchesStatistics) {
 
         if (matchStats instanceof Object === false) continue;
 
-        if (matchStats.Domaci.cisteKontoDoma >= 35 || matchStats.Hostia.cisteKontoVonku >= 32) {
-            continue;
+        switch (true) {
+            case matchStats.Domaci.cisteKontoDoma >= 35 || matchStats.Hostia.cisteKontoVonku >= 32:
+                continue;
+            case matchStats.Hostia.cisteKontoVonku >= 40 && Math.abs(matchStats.Hostia.cisteKontoVonku - matchStats.Domaci.cisteKontoDoma) < 15:
+                continue;
+            case matchStats.Hostia.cisteKontoVonku >= 45 && Math.abs(matchStats.Hostia.cisteKontoVonku - matchStats.Domaci.cisteKontoDoma) < 20:
+                continue;
+            case matchStats.Hostia.cisteKontoVonku >= 50 && Math.abs(matchStats.Hostia.cisteKontoVonku - matchStats.Domaci.cisteKontoDoma) < 25:
+                continue;
         }
-        if (matchStats.Hostia.cisteKontoVonku >= 40 && Math.abs(matchStats.Hostia.cisteKontoVonku - matchStats.Domaci.cisteKontoDoma) < 15) {
-            continue;
-        }
-        if (matchStats.Hostia.cisteKontoVonku >= 45 && Math.abs(matchStats.Hostia.cisteKontoVonku - matchStats.Domaci.cisteKontoDoma) < 20) {
-            continue;
-        }
-        if (matchStats.Hostia.cisteKontoVonku >= 50 && Math.abs(matchStats.Hostia.cisteKontoVonku - matchStats.Domaci.cisteKontoDoma) < 25) {
+
+        if (matchStats.filterDataBy_Yuvalfra  < hightScore.yuvalfra_Average_koeficient) {
             continue;
         }
 
-        if(matchStats.filterDataBy_Yuvalfra  >= hightScore.yuvalfra_Average_koeficient){
+        if (matchStats.filterDataBy_JohnHaighsTable  > hightScore.johnHaighs_Under25_koeficient) {
             continue;
         }
 
-        if(matchStats.filterDataBy_johnHaighsTable  <= hightScore.johnHaighs_Under25_koeficient){
+        if (matchStats.filterDataBy_Vincent < hightScore.vincent_Scale_koeficient_under) {
             continue;
         }
 
         returnDataToConsoleLog('OverGoal', matchStats)
+
+        count++;
     }
+    console.log(`Počet výsledkov: ${count}`)
 }
 
 
@@ -679,13 +684,13 @@ function hasTableSufficientNumberOfRows(rows) {
     return false;
 }
 
-const consoleConditionHighlighting = (props, conditions, text, percent) => {
+const consoleConditionHighlighting = (props, conditions, text, bold, percent) => {
     if(conditions[0]){
-        console.log(text + props + (percent ? percent : ''), 'background: green; color: white; display: block;')
+        console.log(text + (Array.isArray(props) ? props[0] + ' / '+ props[1] : props) + (percent ? percent : ''), `${bold === true ? 'font-weight: bold' : 'font-weight: normal'}; background: green; color: white; display: block;`)
     } else if (conditions[1]) {
-        console.log(text + props + (percent ? percent : ''), 'background: yellow; color: black; display: block;')
+        console.log(text + (Array.isArray(props) ? props[0] + ' / '+ props[1] : props) + (percent ? percent : ''), `${bold === true ? 'font-weight: bold' : 'font-weight: normal'}; background: yellow; color: black; display: block;`)
     } else {
-        console.log(text + props + (percent ? percent : ''), 'background: red; color: white; display: block;')
+        console.log(text + (Array.isArray(props) ? props[0] + ' / '+ props[1] : props) + (percent ? percent : ''), `${bold === true ? 'font-weight: bold' : 'font-weight: normal'}; background: red; color: white; display: block;`)
     }
 };
 
@@ -700,23 +705,25 @@ const returnDataToConsoleLog = (type, matchStats) => {
         filterDataBy_johnHaighsTable: {min: 47, max: 60},
     }
 
-    console.log('Liga:' + matchStats.Liga);
-    console.log('Zápas:' + matchStats.Domaci.nazovTimu + ' vs ' + matchStats.Hostia.nazovTimu);
+    console.log('Liga:  ' + matchStats.Liga);
+    console.log('Zápas: ' + matchStats.Domaci.nazovTimu + ' vs ' + matchStats.Hostia.nazovTimu);
     console.log('Domáci tím pozícia v tabuľke:    ' + matchStats.Domaci.pozicia + ' / ' + matchStats.Domaci.pocetTimov)
     console.log('Hosťujúci tím pozícia v tabuľke: ' + matchStats.Hostia.pozicia + ' / ' + matchStats.Hostia.pocetTimov)
-    console.log('Domáci tím je favorit?:          ' + matchStats.homeTeamFavorits);
-    console.log('Hosťujúci tím je favorit?:       ' + matchStats.awayTeamFavorits);
+    console.log('Domáci tím favorit.              ' + matchStats.homeTeamFavorits);
+    console.log('Hosťujúci tím favorit            ' + matchStats.awayTeamFavorits);
 
     consoleConditionHighlighting(
         matchStats.Domaci.cisteKontoDoma,
         [matchStats.Domaci.cisteKontoDoma <= predictionType.domaciCisteKontoDoma.min, matchStats.Domaci.cisteKontoDoma > predictionType.domaciCisteKontoDoma.min && matchStats.Domaci.cisteKontoDoma < predictionType.domaciCisteKontoDoma.max],
         "%c Čisté konto domáci tím doma:          ",
+        false,
         "%",
     );
     consoleConditionHighlighting(
         matchStats.Hostia.cisteKontoVonku,
         [matchStats.Domaci.cisteKontoDoma <= predictionType.hostiaCisteKontoVonku.min, matchStats.Domaci.cisteKontoDoma > predictionType.hostiaCisteKontoVonku.min && matchStats.Domaci.cisteKontoDoma < predictionType.hostiaCisteKontoVonku.max],
         "%c Čisté konto hosťujúci tím vonku:      ",
+        false,
         "%",
     );
 
@@ -727,32 +734,37 @@ const returnDataToConsoleLog = (type, matchStats) => {
         matchStats.filterDataBy_Vincent,
         [matchStats.filterDataBy_Vincent >= predictionType.filterDataBy_Vincent.max, matchStats.filterDataBy_Vincent > 0 && matchStats.filterDataBy_Vincent < predictionType.filterDataBy_Vincent.max],
         '%c probabilityBy_Vincent:                ',
+        false,
     );
 
     consoleConditionHighlighting(
         matchStats.filterDataBy_Yuvalfra,
         [matchStats.filterDataBy_Yuvalfra >= predictionType.filterDataBy_Yuvalfra.max, matchStats.filterDataBy_Yuvalfra > 0 && matchStats.filterDataBy_Yuvalfra < predictionType.filterDataBy_Yuvalfra.max],
         '%c filterDataBy_Yuvalfra:                ',
+        false,
     );
 
     consoleConditionHighlighting(
         matchStats.filterDataBy_JohnHaighsTable,
         [matchStats.filterDataBy_JohnHaighsTable <= predictionType.filterDataBy_johnHaighsTable.min, matchStats.filterDataBy_JohnHaighsTable > predictionType.filterDataBy_johnHaighsTable.min && matchStats.filterDataBy_JohnHaighsTable < predictionType.filterDataBy_johnHaighsTable.max],
         '%c filterDataBy_johnHaighsTable:         ',
+        false,
     );
 
     consoleConditionHighlighting(
-        matchStats.Domaci.streleneGoly_Doma,
+        [matchStats.Domaci.posledne_4_ZapasyDoma.streleneGolyPriemer, matchStats.Domaci.streleneGoly_Doma],
         [matchStats.Domaci.streleneGoly_Doma >= predictionType.domaciStreleneGolyDoma.max, matchStats.Domaci.streleneGoly_Doma >= predictionType.domaciStreleneGolyDoma.min && matchStats.Domaci.streleneGoly_Doma < predictionType.domaciStreleneGolyDoma.max],
         '%c Domáci tím strelené góly Doma 4-match/total:            ',
+        true,
     );
 
     console.log('Hosťujúci tím inkasované góly Vonku 4-match/total: ' + matchStats.Hostia.posledne_4_ZapasyVonku.streleneGolyPriemer + ' / ' + matchStats.Hostia.inkasovaneGoly_Vonku)
 
     consoleConditionHighlighting(
-        matchStats.Hostia.streleneGoly_Vonku,
+        [matchStats.Hostia.posledne_4_ZapasyVonku.streleneGolyPriemer, matchStats.Hostia.streleneGoly_Vonku],
         [matchStats.Hostia.streleneGoly_Vonku >= predictionType.hostiaStreleneGolyVonku.max, matchStats.Hostia.streleneGoly_Vonku >= predictionType.hostiaStreleneGolyVonku.min && matchStats.Hostia.streleneGoly_Vonku < predictionType.hostiaStreleneGolyVonku.max],
         '%c Hosťujúci tím strelené góly Vonku 4-match/total:        ',
+        true,
     );
 
     console.log('Domáci tím inkasované góly Doma 4-match/total:     ' + matchStats.Domaci.posledne_4_ZapasyDoma.inkasovaneGolyPriemer + ' / ' + matchStats.Domaci.inkasovaneGoly_Doma);
