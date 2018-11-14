@@ -4,12 +4,38 @@
 <head>
     <meta charset="utf-8" />
     <title></title>   
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="semantic/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="semantic/semantic-style.css">
+    <script
+        src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+        crossorigin="anonymous">
+    </script>
+    <script src="semantic/semantic.min.js"></script>
     <script src="app.js" type="text/javascript"></script>
 
 </head>
 <body>
- 
+<!-- static HTML -->
+    <div class="ui inverted vertical masthead center aligned segment">
+        <div class="ui text container">
+            <h1 class="ui inverted header"></h1>
+            <div class="ui huge primary button loading load-button"></div>
+        </div>
+        <div id="myProgress">
+            <div id="myBar">0</div>
+        </div>
+        <div class="row row-buttons">
+            <div class="column">
+                <a class="ui primary button overGoalPrediction" tabindex="0">OverGoal</a>
+                <a class="ui default button" tabindex="0">UnderGoal</a>
+                <a class="ui positive button" tabindex="0">HomeWin</a>
+                <a class="ui negative button" tabindex="0">AwayWin</a>
+            </div>
+        </div>
+    </div>
+<!-- static HTML -->
+
 <table id="btable" style="display: none">
     <tbody><tr height="8"><td colspan="22" align="center" valign="middle"><font size="1"> </font></td></tr>
         <tr class="trow2"><td height="30" colspan="10">

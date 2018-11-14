@@ -30,7 +30,7 @@ $(function(){
 
     if (allMatchesStatistics.length > 0) {
         $('.load-button').show().text(`Reload ${allLinks.length} matches`).removeClass('loading');
-        $('h1.header').text("Data for selected day has been loaded.").show();
+        $('h1.header').text("Data is ready").show();
         $('.row-buttons').show();
     } else {
         $('.load-button').show().text('Load matches').removeClass('loading');
@@ -50,7 +50,7 @@ $('html').on('click', '.load-button', function() {
 
     loadMatchesData(allLinks).then(function (allMatchesData) {
         $('.load-button').text(`Reload ${allLinks.length} matches`).removeClass('loading');
-        $('h1.header').text('Data has been loaded');
+        $('h1.header').text('Data has been saved');
         $('.row-buttons').show();
 
         setDataToLocalStorage(allLinks.length, JSON.stringify(allMatchesData));
@@ -105,6 +105,14 @@ function overGoalPrediction(allMatchesStatistics){
         }
 
         if (matchStats.filterDataBy_Vincent < hightScore.vincent_Scale_koeficient_under) {
+            continue;
+        }
+
+        if (matchStats.priemerStrelenéGóly_Domáci_InkasovaneGóly_Hostia < hightScore.average14_koeficient || matchStats.priemerStrelenéGóly_Hostia_InkasovaneGóly_Domáci < hightScore.average23_koeficient) {
+            continue;
+        }
+
+        if (matchStats.priemerStrelenéGóly_posledne4Zapasy_Domáci_InkasovaneGóly_Hostia < hightScore.average14_4last_koeficient || matchStats.priemerStrelenéGóly_posledne4Zapasy_Hostia_InkasovaneGóly_Domáci < hightScore.average23_4last_koeficient) {
             continue;
         }
 
