@@ -4,7 +4,7 @@ body{
 #myProgress {
   width: 450px;
   margin: auto;
-  background-color: #ddd;
+  background-color:#757575;
   border-radius: 5px;
 }
 
@@ -21,6 +21,22 @@ body{
 .hidden.menu {
     display: none;
   }
+.ui.primary.button{
+    background-color:#2e3131;
+}
+
+.ui.primary.button:hover{
+    background-color:#454848;
+}
+
+.ui.primary.button.loading {
+    background-color:#1b1c1d;
+}
+
+.ui.primary.button.loading:hover{
+    background-color:#2e3131;
+}
+
 
   .masthead.segment {
     min-height: 700px;
