@@ -123,6 +123,39 @@ function overGoalPrediction(allMatchesStatistics){
     console.log(`Počet výsledkov: ${count}`)
 }
 
+function underGoalPrediction(allMatchesStatistics){
+    let count = 0;
+    for (let matchStats of allMatchesStatistics) {
+
+        if (matchStats instanceof Object === false) continue;
+
+        switch (true) {
+            case matchStats.Domaci.cisteKontoDoma <= 30 || matchStats.Hostia.cisteKontoVonku <= 30:
+                continue;
+            case Math.abs(matchStats.Domaci.cisteKontoDoma - matchStats.Hostia.cisteKontoVonku) > 40:
+                continue;
+        }
+
+        if (matchStats.filterDataBy_JohnHaighsTable < hightScore.johnHaighs_Under25_koeficient_under) {
+            continue;
+        }
+
+        if (matchStats.filterDataBy_Vincent > hightScore.vincent_Scale_koeficient_under) {
+            continue;
+        }
+
+        if (Math.abs(matchStats.Domaci.posledne_4_Zapasy.streleneGolyPriemer - matchStats.Domaci.streleneGoly_Doma) < 0.3 && matchStats.priemerStrelenéGóly_posledne4Zapasy_Domáci_InkasovaneGóly_Hostia <= hightScore.average14_4last_koeficient) {
+            continue;
+        }
+
+
+        returnDataToConsoleLog('OverGoal', matchStats)
+
+        count++;
+    }
+    console.log(`Počet výsledkov: ${count}`)
+}
+
 
 /* 
     Data Functions
