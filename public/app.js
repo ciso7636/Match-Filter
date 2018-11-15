@@ -77,46 +77,42 @@ $('html').on('click', '.awayTeamWinPrediction', function() {
 
 
 /* 
-    Handle Functions
+    Handle filter Functions
 */ 
 function overGoalPrediction(allMatchesStatistics){
     let count = 0;
-    for (let matchStats of allMatchesStatistics) {
+    for (let stats of allMatchesStatistics) {
 
-        if (matchStats instanceof Object === false) continue;
+        if (stats instanceof Object === false) continue;
 
         switch (true) {
-            case matchStats.Domaci.cisteKontoDoma >= 35 || matchStats.Hostia.cisteKontoVonku >= 32:
-                continue;
-            case matchStats.Hostia.cisteKontoVonku >= 40 && Math.abs(matchStats.Hostia.cisteKontoVonku - matchStats.Domaci.cisteKontoDoma) < 15:
-                continue;
-            case matchStats.Hostia.cisteKontoVonku >= 45 && Math.abs(matchStats.Hostia.cisteKontoVonku - matchStats.Domaci.cisteKontoDoma) < 20:
-                continue;
-            case matchStats.Hostia.cisteKontoVonku >= 50 && Math.abs(matchStats.Hostia.cisteKontoVonku - matchStats.Domaci.cisteKontoDoma) < 25:
+            case stats.Domaci.cisteKontoDoma >= 35 || stats.Hostia.cisteKontoVonku >= 32:
+            case stats.Hostia.cisteKontoVonku >= 40 && Math.abs(stats.Hostia.cisteKontoVonku - stats.Domaci.cisteKontoDoma) < 15:
+            case stats.Hostia.cisteKontoVonku >= 45 && Math.abs(stats.Hostia.cisteKontoVonku - stats.Domaci.cisteKontoDoma) < 20:
+            case stats.Hostia.cisteKontoVonku >= 50 && Math.abs(stats.Hostia.cisteKontoVonku - stats.Domaci.cisteKontoDoma) < 25:
                 continue;
         }
 
-        if (matchStats.filterDataBy_Yuvalfra  < hightScore.yuvalfra_Average_koeficient) {
-            continue;
+        switch (true) {
+            case stats.priemer_StrelenéGólyDomáci_InkasovaneGólyHostia < hightScore.average14_koeficient:
+            case stats.priemer_StrelenéGólyHostia_InkasovaneGólyDomáci < hightScore.average23_koeficient:
+                continue;
         }
 
-        if (matchStats.filterDataBy_JohnHaighsTable  > hightScore.johnHaighs_Under25_koeficient) {
-            continue;
+        switch (true) {
+            case stats.priemer_posledne4Zapasy_StrelenéGólyDomáci_InkasovaneGólyHostia < hightScore.average14_4last_koeficient:
+            case stats.priemer_posledne4Zapasy_StrelenéGólyHostia_InkasovaneGólyDomáci < hightScore.average23_4last_koeficient:
+                continue;
         }
 
-        if (matchStats.filterDataBy_Vincent < hightScore.vincent_Scale_koeficient_under) {
-            continue;
+        switch (true) {
+            case stats.filterDataBy_Yuvalfra < hightScore.yuvalfra_Average_koeficient:
+            case stats.filterDataBy_JohnHaighsTable > hightScore.johnHaighs_Under25_koeficient:
+            case stats.filterDataBy_Vincent < hightScore.vincent_Scale_koeficient_under:
+                continue;
         }
 
-        if (matchStats.priemerStrelenéGóly_Domáci_InkasovaneGóly_Hostia < hightScore.average14_koeficient || matchStats.priemerStrelenéGóly_Hostia_InkasovaneGóly_Domáci < hightScore.average23_koeficient) {
-            continue;
-        }
-
-        if (matchStats.priemerStrelenéGóly_posledne4Zapasy_Domáci_InkasovaneGóly_Hostia < hightScore.average14_4last_koeficient || matchStats.priemerStrelenéGóly_posledne4Zapasy_Hostia_InkasovaneGóly_Domáci < hightScore.average23_4last_koeficient) {
-            continue;
-        }
-
-        returnDataToConsoleLog('OverGoal', matchStats)
+        returnDataToConsoleLog('OverGoal', stats)
 
         count++;
     }
@@ -125,31 +121,31 @@ function overGoalPrediction(allMatchesStatistics){
 
 function underGoalPrediction(allMatchesStatistics){
     let count = 0;
-    for (let matchStats of allMatchesStatistics) {
+    for (let stats of allMatchesStatistics) {
 
-        if (matchStats instanceof Object === false) continue;
+        if (stats instanceof Object === false) continue;
 
         switch (true) {
-            case matchStats.Domaci.cisteKontoDoma <= 30 || matchStats.Hostia.cisteKontoVonku <= 30:
+            case stats.Domaci.cisteKontoDoma <= 30 || stats.Hostia.cisteKontoVonku <= 30:
                 continue;
-            case Math.abs(matchStats.Domaci.cisteKontoDoma - matchStats.Hostia.cisteKontoVonku) > 40:
+            case Math.abs(stats.Domaci.cisteKontoDoma - stats.Hostia.cisteKontoVonku) > 40:
                 continue;
         }
 
-        if (matchStats.filterDataBy_JohnHaighsTable < hightScore.johnHaighs_Under25_koeficient_under) {
+        if (stats.filterDataBy_JohnHaighsTable < hightScore.johnHaighs_Under25_koeficient_under) {
             continue;
         }
 
-        if (matchStats.filterDataBy_Vincent > hightScore.vincent_Scale_koeficient_under) {
+        if (stats.filterDataBy_Vincent > hightScore.vincent_Scale_koeficient_under) {
             continue;
         }
 
-        if (Math.abs(matchStats.Domaci.posledne_4_Zapasy.streleneGolyPriemer - matchStats.Domaci.streleneGoly_Doma) < 0.3 && matchStats.priemerStrelenéGóly_posledne4Zapasy_Domáci_InkasovaneGóly_Hostia <= hightScore.average14_4last_koeficient) {
+        if (Math.abs(stats.Domaci.posledne_4_Zapasy.streleneGolyPriemer - stats.Domaci.streleneGoly_Doma) < 0.3 && stats.priemer_posledne4Zapasy_StrelenéGólyDomáci_InkasovaneGólyHostia <= hightScore.average14_4last_koeficient) {
             continue;
         }
 
 
-        returnDataToConsoleLog('OverGoal', matchStats)
+        returnDataToConsoleLog('OverGoal', stats)
 
         count++;
     }
@@ -241,10 +237,10 @@ function getAllMatchData(matchLink) {
                     filterDataBy_Vincent: filterDataBy_Vincent,
                     homeTeamFavorits: homeTeamFavorits,
                     awayTeamFavorits: awayTeamFavorits,
-                    priemerStrelenéGóly_Domáci_InkasovaneGóly_Hostia: parseFloat(((scoredAndConcededGolas.homeTeamScored_home + scoredAndConcededGolas.awayTeamConceded_away) / 2).toFixed(2)),
-                    priemerStrelenéGóly_posledne4Zapasy_Domáci_InkasovaneGóly_Hostia: parseFloat(((last_4_MatchesCurrentPosition.toCountHomeMatchesReslult.scoredGoalsAverage + last_4_MatchesCurrentPosition.toCountAwayMatchesReslult.concededGoalsAverage) / 2).toFixed(2)),
-                    priemerStrelenéGóly_Hostia_InkasovaneGóly_Domáci: parseFloat(((scoredAndConcededGolas.awayTeamScored_away + scoredAndConcededGolas.homeTeamConceded_home) / 2).toFixed(2)),                                        
-                    priemerStrelenéGóly_posledne4Zapasy_Hostia_InkasovaneGóly_Domáci: parseFloat(((last_4_MatchesCurrentPosition.toCountAwayMatchesReslult.scoredGoalsAverage + last_4_MatchesCurrentPosition.toCountHomeMatchesReslult.concededGoalsAverage) / 2).toFixed(2)),                    
+                    priemer_StrelenéGólyDomáci_InkasovaneGólyHostia: parseFloat(((scoredAndConcededGolas.homeTeamScored_home + scoredAndConcededGolas.awayTeamConceded_away) / 2).toFixed(2)),
+                    priemer_posledne4Zapasy_StrelenéGólyDomáci_InkasovaneGólyHostia: parseFloat(((last_4_MatchesCurrentPosition.toCountHomeMatchesReslult.scoredGoalsAverage + last_4_MatchesCurrentPosition.toCountAwayMatchesReslult.concededGoalsAverage) / 2).toFixed(2)),
+                    priemer_StrelenéGólyHostia_InkasovaneGólyDomáci: parseFloat(((scoredAndConcededGolas.awayTeamScored_away + scoredAndConcededGolas.homeTeamConceded_home) / 2).toFixed(2)),                                        
+                    priemer_posledne4Zapasy_StrelenéGólyHostia_InkasovaneGólyDomáci: parseFloat(((last_4_MatchesCurrentPosition.toCountAwayMatchesReslult.scoredGoalsAverage + last_4_MatchesCurrentPosition.toCountHomeMatchesReslult.concededGoalsAverage) / 2).toFixed(2)),                    
                     Liga: teamNames.league,
                     Domaci: {
                         nazovTimu: teamNames.homeTeam,
@@ -768,8 +764,8 @@ const returnDataToConsoleLog = (type, matchStats) => {
         "%",
     );
 
-    console.log('Average(1)&(4) 4-match/total:    ' + matchStats.priemerStrelenéGóly_posledne4Zapasy_Domáci_InkasovaneGóly_Hostia + ' / ' + matchStats.priemerStrelenéGóly_Domáci_InkasovaneGóly_Hostia)
-    console.log('Average(2)&(3):                  ' + matchStats.priemerStrelenéGóly_Hostia_InkasovaneGóly_Domáci)
+    console.log('Average(1)&(4) 4-match/total:    ' + matchStats.priemer_posledne4Zapasy_StrelenéGólyDomáci_InkasovaneGólyHostia + ' / ' + matchStats.priemer_StrelenéGólyDomáci_InkasovaneGólyHostia)
+    console.log('Average(2)&(3):                  ' + matchStats.priemer_StrelenéGólyHostia_InkasovaneGólyDomáci)
 
     consoleConditionHighlighting(
         matchStats.filterDataBy_Vincent,
