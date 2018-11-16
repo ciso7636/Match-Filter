@@ -46,7 +46,7 @@ $('html').on('click', '.load-button', function() {
     $('.load-button').addClass('loading');
     $('.row-buttons').hide();
 
-    startProgressBar(allLinks.length);
+    showProgressBar(allLinks.length);
 
     loadMatchesData(allLinks).then(function (allMatchesData) {
         $('.load-button').text(`Reload ${allLinks.length} matches`).removeClass('loading');
@@ -893,7 +893,7 @@ function progressBar() {
     }
 }
 
-function startProgressBar(allLinks) {
+function showProgressBar(allLinks) {
     $("#myBar").width(0);
     $("#myBar").text(0 + '/' + allLinks);
     $("#myBar").show();
