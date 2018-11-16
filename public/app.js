@@ -127,23 +127,83 @@ function underGoalPrediction(allMatchesStatistics){
 
         switch (true) {
             case stats.Domaci.cisteKontoDoma <= 30 || stats.Hostia.cisteKontoVonku <= 30:
-                continue;
             case Math.abs(stats.Domaci.cisteKontoDoma - stats.Hostia.cisteKontoVonku) > 40:
                 continue;
         }
 
-        if (stats.filterDataBy_JohnHaighsTable < hightScore.johnHaighs_Under25_koeficient_under) {
+        switch (true) {
+            case stats.filterDataBy_JohnHaighsTable < hightScore.johnHaighs_Under25_koeficient_under:
+            case stats.filterDataBy_Vincent > hightScore.vincent_Scale_koeficient_under:
+            case stats.filterDataBy_Vincent < hightScore.vincent_Scale_koeficient_under:
+                continue;
+        }
+
+        if (Math.abs(stats.Domaci.posledne_4_Zapasy.streleneGolyPriemer - stats.Domaci.streleneGoly_Doma) < 0.3 &&
+            stats.priemer_posledne4Zapasy_StrelenéGólyDomáci_InkasovaneGólyHostia < hightScore.average14_4last_koeficient
+        ) {
             continue;
         }
 
-        if (stats.filterDataBy_Vincent > hightScore.vincent_Scale_koeficient_under) {
+        returnDataToConsoleLog('OverGoal', stats)
+
+        count++;
+    }
+    console.log(`Počet výsledkov: ${count}`)
+}
+
+function homeTeamWinPrediction(allMatchesStatistics){
+    let count = 0;
+    for (let stats of allMatchesStatistics) {
+
+        if (stats instanceof Object === false) continue;
+
+        switch (true) {
+            case stats.homeTeamFavorits === false:
+            case stats.awayTeamFavorits === true:
+                continue;
+        }
+
+        if (stats.Domaci.cisteKontoDoma < 32 && Math.abs(stats.Domaci.cisteKontoDoma - stats.Hostia.cisteKontoVonku) < 10) {
             continue;
         }
 
-        if (Math.abs(stats.Domaci.posledne_4_Zapasy.streleneGolyPriemer - stats.Domaci.streleneGoly_Doma) < 0.3 && stats.priemer_posledne4Zapasy_StrelenéGólyDomáci_InkasovaneGólyHostia <= hightScore.average14_4last_koeficient) {
+        if (stats.priemer_posledne4Zapasy_StrelenéGólyDomáci_InkasovaneGólyHostia < hightScore.average14_4last_koeficient) {
             continue;
         }
 
+        returnDataToConsoleLog('OverGoal', stats)
+
+        count++;
+    }
+    console.log(`Počet výsledkov: ${count}`)
+}
+
+function awayTeamWinPrediction(allMatchesStatistics){
+    let count = 0;
+    for (let stats of allMatchesStatistics) {
+
+        if (stats instanceof Object === false) continue;
+
+        switch (true) {
+            case stats.homeTeamFavorits === true:
+            case stats.awayTeamFavorits === false:
+                continue;
+        }
+
+        if (cleanSheetsHome > 35) {
+            continue;
+        }
+        
+        if (stats.Hostia.posledne_4_Zapasy.streleneGolyPriemer < stats.Hostia.streleneGoly_Vonku) {
+            const checkForm = Math.abs(stats.Hostia.streleneGoly_Vonku * 100 - stats.Hostia.posledne_4_Zapasy.streleneGolyPriemer * 100) / stats.Hostia.streleneGoly_Vonku;
+            if (checkForm >= 15) {
+                continue;
+            }
+        }
+
+        if (stats.priemer_posledne4Zapasy_StrelenéGólyHostia_InkasovaneGólyDomáci < hightScore.average23_4last_koeficient) {
+            continue;
+        }
 
         returnDataToConsoleLog('OverGoal', stats)
 
@@ -746,7 +806,7 @@ const returnDataToConsoleLog = (type, matchStats) => {
     console.log('Zápas: ' + matchStats.Domaci.nazovTimu + ' vs ' + matchStats.Hostia.nazovTimu);
     console.log('Domáci tím pozícia v tabuľke:    ' + matchStats.Domaci.pozicia + ' / ' + matchStats.Domaci.pocetTimov)
     console.log('Hosťujúci tím pozícia v tabuľke: ' + matchStats.Hostia.pozicia + ' / ' + matchStats.Hostia.pocetTimov)
-    console.log('Domáci tím favorit.              ' + matchStats.homeTeamFavorits);
+    console.log('Domáci tím favorit               ' + matchStats.homeTeamFavorits);
     console.log('Hosťujúci tím favorit            ' + matchStats.awayTeamFavorits);
 
     consoleConditionHighlighting(
