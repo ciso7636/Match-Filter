@@ -134,7 +134,6 @@ function underGoalPrediction(allMatchesStatistics){
         switch (true) {
             case stats.filterDataBy_JohnHaighsTable < hightScore.johnHaighs_Under25_koeficient_under:
             case stats.filterDataBy_Vincent > hightScore.vincent_Scale_koeficient_under:
-            case stats.filterDataBy_Vincent < hightScore.vincent_Scale_koeficient_under:
                 continue;
         }
 
@@ -190,7 +189,7 @@ function awayTeamWinPrediction(allMatchesStatistics){
                 continue;
         }
 
-        if (cleanSheetsHome > 35) {
+        if (stats.Domaci.cisteKontoDoma > 35) {
             continue;
         }
         
