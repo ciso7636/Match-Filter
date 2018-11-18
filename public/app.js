@@ -79,6 +79,23 @@ $('html').on('click', '.awayTeamWinPrediction', function() {
 /* 
     Handle filter Functions
 */ 
+function testPrediction(allMatchesStatistics){
+    let count = 0;
+    for (let stats of allMatchesStatistics) {
+
+        if (stats instanceof Object === false) continue;
+
+        if (stats.Domaci.posledne_4_ZapasyDoma.streleneGolyPriemer - stats.Domaci.streleneGoly_Doma < 0.8) {
+            continue;
+        }
+
+        returnDataToConsoleLog('OverGoal', stats)
+
+        count++;
+    }
+    console.log(`Počet výsledkov: ${count}`)
+}
+
 function overGoalPrediction(allMatchesStatistics){
     let count = 0;
     for (let stats of allMatchesStatistics) {
@@ -215,6 +232,26 @@ function awayTeamWinPrediction(allMatchesStatistics){
 /* 
     Data Functions
 */ 
+function setResultsMatchesToLocalStorage(localStorageName, rowMatch){
+    const matchData = getDataFromLocalStorage(localStorageName); 
+    const teamName = getNameOfTeams(null, rowMatch)
+
+    const result = rowMatch.find(b).parent().find('b').parent().text().trim();
+    const homeTeamGoal = parseFloat(result.split('-')[0]);
+    const awayTeamGoal = parseFloat(result.split('-')[1]);
+
+    const resultsMatchesData = {
+        id: teamName.matchName,
+        matchName: teamName.matchName,
+        homeTeam: teamName.homeTeam,
+        awayTeam: teamName.awayTeam,
+        homeTeamGoal: homeTeamGoal,
+        awayTeamGoal: awayTeamGoal,
+    }
+    matchData.filter((match) => match.id === resultsMatchesData.id)
+
+};
+
 function loadMatchesData(allLinks) {
     return new Promise(function (resolvelLoadMatchesData) {
         let allMatchesData = []
@@ -242,6 +279,7 @@ function loadMatchesData(allLinks) {
 };
 
 function getAllMatchData(matchLink) {
+    const rowMatch = $(matchLink).closest('tr');
 
     return new Promise(function (resolve, reject) {
 
@@ -252,7 +290,7 @@ function getAllMatchData(matchLink) {
             getData('GET', 'https://www.soccerstats.com/' + decodeStatsHref).then(function (html) {
                 top.soccerUrl = html.URL;
                 
-                const teamNames = getNameOfTeams(html.URL);
+                const teamNames = getNameOfTeams(html.URL, rowMatch);
                 const positionInTable = getPositionInTable(html);
                 const cleanSheets = getCleanScheets(html.querySelectorAll('.trow3 td'));
                 const scoredAndConcededGolas = getScoredAndConcededGolas(html.querySelectorAll('.trow2 td'));
@@ -291,6 +329,8 @@ function getAllMatchData(matchLink) {
                 );
 
                 resolve({
+                    id: teamNames.matchName,
+                    výsledok: teamNames.result || 'bez výsledku',
                     filterDataBy_Yuvalfra: filterDataBy_Yuvalfra,
                     filterDataBy_JohnHaighsTable: filterDataBy_JohnHaighsTable,
                     filterDataBy_Vincent: filterDataBy_Vincent,
@@ -368,13 +408,31 @@ function getAllMatchData(matchLink) {
     })
 }
 
-const getNameOfTeams = (url) => {
-    const teams = decodeURI(url).split('stats')[decodeURI(url).split('stats').length - 1].split('-vs-');
+const getNameOfTeams = (url, rowMatch) => {
+    rowMatch.find('td').children().parent().remove();
+    let league, homeTeam, awayTeam, result;
+
+    if (rowMatch.find('td').length === 4) {
+        rowMatch.find('td').first().remove();
+        rowMatch.find('td').last().remove();
+        homeTeam = rowMatch.find('td').first().text();
+        awayTeam = rowMatch.find('td').last().text();
+    } else if (rowMatch.find('td').length === 2) {
+        homeTeam = rowMatch.find('td').first().text();
+        awayTeam = rowMatch.find('td').last().text();
+    }
+
+    if (url !== null) {
+        const teams = decodeURI(url).split('stats')[decodeURI(url).split('stats').length - 1].split('-vs-');
+        league = decodeURI(url).split('?')[1].split('=')[1].split('&')[0];
+    }
 
     return{
-        league: decodeURI(url).split('?')[1].split('=')[1].split('&')[0],
-        homeTeam: teams[0].split('2019-')[teams[0].split('2019-').length - 1],
-        awayTeam: teams[1],
+        matchName: league + homeTeam.trim() + awayTeam.trim(),
+        league: league,
+        homeTeam: homeTeam.trim(),
+        awayTeam: awayTeam.trim(),
+        result: result || 'bez výsledku',
     }
 }
 
