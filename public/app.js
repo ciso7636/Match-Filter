@@ -59,6 +59,15 @@ $('html').on('click', '.load-button', function() {
     })
 });
 
+$('html').on('click', '.resultsMatchesToLocalStorage', function() {
+    const localStorageKey = $('.nameOfMatch').val();
+    setResultsMatchesToLocalStorage(allLinks, localStorageKey);
+});
+
+$('html').on('click', '.testingPrediction', function() {
+    testingPrediction(allMatchesStatistics);
+});
+
 $('html').on('click', '.overGoalPrediction', function() {
     overGoalPrediction(allMatchesStatistics);
 });
@@ -79,6 +88,23 @@ $('html').on('click', '.awayTeamWinPrediction', function() {
 /* 
     Handle filter Functions
 */ 
+function testingPrediction(allMatchesStatistics){
+    let count = 0;
+    for (let stats of allMatchesStatistics) {
+
+        if (stats instanceof Object === false) continue;
+
+        if (stats.Domaci.posledne_4_ZapasyDoma.streleneGolyPriemer - stats.Domaci.streleneGoly_Doma < 0.8) {
+            continue;
+        }
+
+        returnDataToConsoleLog(stats, 'overUnder');
+
+        count++;
+    }
+    console.log(`Počet výsledkov: ${count}`)
+}
+
 function overGoalPrediction(allMatchesStatistics){
     let count = 0;
     for (let stats of allMatchesStatistics) {
@@ -112,7 +138,7 @@ function overGoalPrediction(allMatchesStatistics){
                 continue;
         }
 
-        returnDataToConsoleLog('OverGoal', stats)
+        returnDataToConsoleLog(stats, 'overUnder');
 
         count++;
     }
@@ -143,7 +169,7 @@ function underGoalPrediction(allMatchesStatistics){
             continue;
         }
 
-        returnDataToConsoleLog('OverGoal', stats)
+        returnDataToConsoleLog(stats, 'overUnder')
 
         count++;
     }
@@ -170,7 +196,7 @@ function homeTeamWinPrediction(allMatchesStatistics){
             continue;
         }
 
-        returnDataToConsoleLog('OverGoal', stats)
+        returnDataToConsoleLog(stats, 'homeAwayWin');
 
         count++;
     }
@@ -204,7 +230,7 @@ function awayTeamWinPrediction(allMatchesStatistics){
             continue;
         }
 
-        returnDataToConsoleLog('OverGoal', stats)
+        returnDataToConsoleLog(stats, 'homeAwayWin');
 
         count++;
     }
@@ -215,6 +241,49 @@ function awayTeamWinPrediction(allMatchesStatistics){
 /* 
     Data Functions
 */ 
+function setResultsMatchesToLocalStorage(allLinks, localStorageKey){
+    const matchesStats = getDataFromLocalStorage(localStorageKey); 
+
+    if (matchesStats === null) {
+        alert('Key not found');
+        return false;
+    }
+
+    let rowMatch;
+    let statsWithResults = [];
+    for (let i = 0; i < allLinks.length; i++) {
+        rowMatch = $(allLinks[i]).closest('tr');
+        statsWithResults.push(createNewMatchStatsWithResultMatch(matchesStats, rowMatch));
+    }
+
+    setDataToLocalStorage(localStorageKey, JSON.stringify(statsWithResults));
+}
+
+function createNewMatchStatsWithResultMatch(matchesStats, rowMatch){
+    const result = rowMatch.find('b').parent().find('b').parent().text().trim();
+    const homeTeamGoal = parseFloat(result.split('-')[0]);
+    const awayTeamGoal = parseFloat(result.split('-')[1]);
+    const teamName = getNameOfTeams(null, rowMatch);
+
+    const resultsMatchesStats = {
+        id: teamName.matchName,
+        matchName: teamName.matchName,
+        homeTeam: teamName.homeTeam,
+        awayTeam: teamName.awayTeam,
+        homeTeamGoal: homeTeamGoal,
+        awayTeamGoal: awayTeamGoal,
+    }
+    
+    const match = matchesStats.filter((match) => {
+        if (match === null) {
+            return false;
+        }; 
+        return match.id === resultsMatchesStats.id;
+    })[0];
+
+    return match ? Object.assign(match, {výsledok: {skóre: result, gólyDomáci: resultsMatchesStats.homeTeamGoal, gólyHostia: resultsMatchesStats.awayTeamGoal}}) : null;
+};
+
 function loadMatchesData(allLinks) {
     return new Promise(function (resolvelLoadMatchesData) {
         let allMatchesData = []
@@ -242,6 +311,7 @@ function loadMatchesData(allLinks) {
 };
 
 function getAllMatchData(matchLink) {
+    const rowMatch = $(matchLink).closest('tr');
 
     return new Promise(function (resolve, reject) {
 
@@ -252,7 +322,7 @@ function getAllMatchData(matchLink) {
             getData('GET', 'https://www.soccerstats.com/' + decodeStatsHref).then(function (html) {
                 top.soccerUrl = html.URL;
                 
-                const teamNames = getNameOfTeams(html.URL);
+                const teamNames = getNameOfTeams(html.URL, rowMatch);
                 const positionInTable = getPositionInTable(html);
                 const cleanSheets = getCleanScheets(html.querySelectorAll('.trow3 td'));
                 const scoredAndConcededGolas = getScoredAndConcededGolas(html.querySelectorAll('.trow2 td'));
@@ -291,6 +361,12 @@ function getAllMatchData(matchLink) {
                 );
 
                 resolve({
+                    id: teamNames.matchName,
+                    výsledok: {
+                        skóre: 'bez výsledku',
+                        gólyDomáci: null,
+                        gólyHostia: null,
+                    },
                     filterDataBy_Yuvalfra: filterDataBy_Yuvalfra,
                     filterDataBy_JohnHaighsTable: filterDataBy_JohnHaighsTable,
                     filterDataBy_Vincent: filterDataBy_Vincent,
@@ -368,13 +444,30 @@ function getAllMatchData(matchLink) {
     })
 }
 
-const getNameOfTeams = (url) => {
-    const teams = decodeURI(url).split('stats')[decodeURI(url).split('stats').length - 1].split('-vs-');
+const getNameOfTeams = (url, rowMatch) => {
+    rowMatch.find('td').children().parent().remove();
+    let league, homeTeam, awayTeam;
+
+    if (rowMatch.find('td').length === 4) {
+        rowMatch.find('td').first().remove();
+        rowMatch.find('td').last().remove();
+        homeTeam = rowMatch.find('td').first().text();
+        awayTeam = rowMatch.find('td').last().text();
+    } else if (rowMatch.find('td').length === 2) {
+        homeTeam = rowMatch.find('td').first().text();
+        awayTeam = rowMatch.find('td').last().text();
+    }
+
+    if (url !== null) {
+        const teams = decodeURI(url).split('stats')[decodeURI(url).split('stats').length - 1].split('-vs-');
+        league = decodeURI(url).split('?')[1].split('=')[1].split('&')[0];
+    }
 
     return{
-        league: decodeURI(url).split('?')[1].split('=')[1].split('&')[0],
-        homeTeam: teams[0].split('2019-')[teams[0].split('2019-').length - 1],
-        awayTeam: teams[1],
+        matchName: homeTeam.trim() + awayTeam.trim(),
+        league: league,
+        homeTeam: homeTeam.trim(),
+        awayTeam: awayTeam.trim(),
     }
 }
 
@@ -772,7 +865,7 @@ function switchTable(GF) {
 
 function hasTableSufficientNumberOfRows(rows) {
     if (rows.length >= 4 && rows.last().find('td').length === 7) {
-        if (rows.last().find('td:nth-child(2)').text() !== " ") {
+        if (rows.last().find('td:nth-child(2)').text() !== " ") {
             return true;
         }
         return false;
@@ -780,7 +873,7 @@ function hasTableSufficientNumberOfRows(rows) {
     return false;
 }
 
-const consoleConditionHighlighting = (props, conditions, text, bold, percent) => {
+const consoleConditionHighlighting = (props, conditions = [], text, bold, percent) => {
     if(conditions[0]){
         console.log(text + (Array.isArray(props) ? props[0] + ' / '+ props[1] : props) + (percent ? percent : ''), `${bold === true ? 'font-weight: bold' : 'font-weight: normal'}; background: green; color: white; display: block;`)
     } else if (conditions[1]) {
@@ -790,8 +883,9 @@ const consoleConditionHighlighting = (props, conditions, text, bold, percent) =>
     }
 };
 
-const returnDataToConsoleLog = (type, matchStats) => {
+const returnDataToConsoleLog = (matchStats, type) => {
     const predictionType = {
+        vysledokZapasuNastrielaneGoly: {min: 2},
         domaciCisteKontoDoma: {min: 25, max: 40},
         hostiaCisteKontoVonku: {min: 25, max: 40},
         domaciStreleneGolyDoma: {min: 1.2, max: 1.5},
@@ -801,8 +895,8 @@ const returnDataToConsoleLog = (type, matchStats) => {
         filterDataBy_johnHaighsTable: {min: 47, max: 60},
     }
 
-    console.log('Liga:  ' + matchStats.Liga);
-    console.log('Zápas: ' + matchStats.Domaci.nazovTimu + ' vs ' + matchStats.Hostia.nazovTimu);
+    console.log('Liga:     ' + matchStats.Liga);
+    console.log('Zápas:    ' + matchStats.Domaci.nazovTimu + ' vs ' + matchStats.Hostia.nazovTimu);
     console.log('Domáci tím pozícia v tabuľke:    ' + matchStats.Domaci.pozicia + ' / ' + matchStats.Domaci.pocetTimov)
     console.log('Hosťujúci tím pozícia v tabuľke: ' + matchStats.Hostia.pozicia + ' / ' + matchStats.Hostia.pocetTimov)
     console.log('Domáci tím favorit               ' + matchStats.homeTeamFavorits);
@@ -864,6 +958,28 @@ const returnDataToConsoleLog = (type, matchStats) => {
     );
 
     console.log('Domáci tím inkasované góly Doma 4-match/total:     ' + matchStats.Domaci.posledne_4_ZapasyDoma.inkasovaneGolyPriemer + ' / ' + matchStats.Domaci.inkasovaneGoly_Doma);
+    console.log('-  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -');
+    if (type === 'overUnder') {
+        consoleConditionHighlighting(
+            matchStats.výsledok.skóre,
+            [
+                (matchStats.výsledok.gólyDomáci + matchStats.výsledok.gólyHostia) > predictionType.vysledokZapasuNastrielaneGoly.min,
+                (matchStats.výsledok.gólyDomáci + matchStats.výsledok.gólyHostia) === predictionType.vysledokZapasuNastrielaneGoly.min,
+            ],
+            "%c Výsledok: ",
+            true,
+        );
+    } else if (type === 'homeAwayWin') {
+        consoleConditionHighlighting(
+            matchStats.výsledok.skóre,
+            [
+                matchStats.výsledok.gólyDomáci > matchStats.výsledok.gólyHostia,
+                matchStats.výsledok.gólyDomáci === matchStats.výsledok.gólyHostia,
+            ],
+            "%c Výsledok: ",
+            true,
+        );
+    }
     console.log('==================================================================================================================================================================================');
 }       
 
