@@ -104,7 +104,11 @@ function testingPrediction(allMatchesStatistics){
         count++;
         winPridiction += (stats.výsledok.over_1_5 === true || stats.výsledok.over_1_5 === true) ? 1 : 0;
     }
-    console.log(`Počet výsledkov: ${count}, Výherných: ${winPridiction}, Úspešnosť: ${(winPridiction / count).toFixed(2) * 100}%`);
+    if (count > 0) {
+        console.log(`Počet zápasov: ${count}, Výherných: ${winPridiction}, Úspešnosť: ${(winPridiction / count).toFixed(2) * 100}%`);
+    } else {
+        console.log(`Nenašli sa žiadne zápasy!`);
+    }
 }
 
 function overGoalPrediction(allMatchesStatistics){
@@ -146,7 +150,11 @@ function overGoalPrediction(allMatchesStatistics){
         count++;
         winPridiction += (stats.výsledok.over_1_5 === true || stats.výsledok.over_1_5 === true) ? 1 : 0;
     }
-    console.log(`Počet výsledkov: ${count}, Výherných: ${winPridiction}, Úspešnosť: ${(winPridiction / count).toFixed(2) * 100}%`);
+    if (count > 0) {
+        console.log(`Počet zápasov: ${count}, Výherných: ${winPridiction}, Úspešnosť: ${(winPridiction / count).toFixed(2) * 100}%`);
+    } else {
+        console.log(`Nenašli sa žiadne zápasy!`);
+    }
 }
 
 function underGoalPrediction(allMatchesStatistics){
@@ -179,7 +187,11 @@ function underGoalPrediction(allMatchesStatistics){
         count++;
         winPridiction += (stats.výsledok.under_3_5 === true || stats.výsledok.under_3_5 === true) ? 1 : 0;
     }
-    console.log(`Počet výsledkov: ${count}, Výherných: ${winPridiction}, Úspešnosť: ${(winPridiction / count).toFixed(2) * 100}%`);
+    if (count > 0) {
+        console.log(`Počet zápasov: ${count}, Výherných: ${winPridiction}, Úspešnosť: ${(winPridiction / count).toFixed(2) * 100}%`);
+    } else {
+        console.log(`Nenašli sa žiadne zápasy!`);
+    }
 }
 
 function homeTeamWinPrediction(allMatchesStatistics){
@@ -208,7 +220,11 @@ function homeTeamWinPrediction(allMatchesStatistics){
         count++;
         winPridiction += (stats.výsledok.vyhral === 'domaci' || stats.výsledok.vyhral === 'remiza') ? 1 : 0;
     }
-    console.log(`Počet výsledkov: ${count}, Výherných: ${winPridiction}, Úspešnosť: ${(winPridiction / count).toFixed(2) * 100}%`)
+    if (count > 0) {
+        console.log(`Počet zápasov: ${count}, Výherných: ${winPridiction}, Úspešnosť: ${(winPridiction / count).toFixed(2) * 100}%`);
+    } else {
+        console.log(`Nenašli sa žiadne zápasy!`);
+    }
 }
 
 function awayTeamWinPrediction(allMatchesStatistics){
@@ -244,7 +260,11 @@ function awayTeamWinPrediction(allMatchesStatistics){
         count++;
         winPridiction += (stats.výsledok.vyhral === 'host' || stats.výsledok.vyhral === 'remiza') ? 1 : 0;
     }
-    console.log(`Počet výsledkov: ${count}, Výherných: ${winPridiction}, Úspešnosť: ${(winPridiction / count).toFixed(2) * 100}%`)
+    if (count > 0) {
+        console.log(`Počet zápasov: ${count}, Výherných: ${winPridiction}, Úspešnosť: ${(winPridiction / count).toFixed(2) * 100}%`);
+    } else {
+        console.log(`Nenašli sa žiadne zápasy!`);
+    }
 }
 
 
