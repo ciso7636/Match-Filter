@@ -90,6 +90,7 @@ $('html').on('click', '.awayTeamWinPrediction', function() {
 */ 
 function testingPrediction(allMatchesStatistics){
     let count = 0;
+    let winPridiction = 0;
     for (let stats of allMatchesStatistics) {
 
         if (stats instanceof Object === false) continue;
@@ -101,12 +102,14 @@ function testingPrediction(allMatchesStatistics){
         returnDataToConsoleLog(stats, 'overUnder');
 
         count++;
+        winPridiction += (stats.výsledok.over_1_5 === true || stats.výsledok.over_1_5 === true) ? 1 : 0;
     }
-    console.log(`Počet výsledkov: ${count}`)
+    console.log(`Počet výsledkov: ${count}, Výherných: ${winPridiction}, Úspešnosť: ${(winPridiction / count).toFixed(2) * 100}%`);
 }
 
 function overGoalPrediction(allMatchesStatistics){
     let count = 0;
+    let winPridiction = 0;
     for (let stats of allMatchesStatistics) {
 
         if (stats instanceof Object === false) continue;
@@ -141,12 +144,14 @@ function overGoalPrediction(allMatchesStatistics){
         returnDataToConsoleLog(stats, 'overUnder');
 
         count++;
+        winPridiction += (stats.výsledok.over_1_5 === true || stats.výsledok.over_1_5 === true) ? 1 : 0;
     }
-    console.log(`Počet výsledkov: ${count}`)
+    console.log(`Počet výsledkov: ${count}, Výherných: ${winPridiction}, Úspešnosť: ${(winPridiction / count).toFixed(2) * 100}%`);
 }
 
 function underGoalPrediction(allMatchesStatistics){
     let count = 0;
+    let winPridiction = 0;
     for (let stats of allMatchesStatistics) {
 
         if (stats instanceof Object === false) continue;
@@ -172,12 +177,14 @@ function underGoalPrediction(allMatchesStatistics){
         returnDataToConsoleLog(stats, 'overUnder')
 
         count++;
+        winPridiction += (stats.výsledok.under_3_5 === true || stats.výsledok.under_3_5 === true) ? 1 : 0;
     }
-    console.log(`Počet výsledkov: ${count}`)
+    console.log(`Počet výsledkov: ${count}, Výherných: ${winPridiction}, Úspešnosť: ${(winPridiction / count).toFixed(2) * 100}%`);
 }
 
 function homeTeamWinPrediction(allMatchesStatistics){
     let count = 0;
+    let winPridiction = 0;
     for (let stats of allMatchesStatistics) {
 
         if (stats instanceof Object === false) continue;
@@ -199,12 +206,14 @@ function homeTeamWinPrediction(allMatchesStatistics){
         returnDataToConsoleLog(stats, 'homeAwayWin');
 
         count++;
+        winPridiction += (stats.výsledok.vyhral === 'domaci' || stats.výsledok.vyhral === 'remiza') ? 1 : 0;
     }
-    console.log(`Počet výsledkov: ${count}`)
+    console.log(`Počet výsledkov: ${count}, Výherných: ${winPridiction}, Úspešnosť: ${(winPridiction / count).toFixed(2) * 100}%`)
 }
 
 function awayTeamWinPrediction(allMatchesStatistics){
     let count = 0;
+    let winPridiction = 0;
     for (let stats of allMatchesStatistics) {
 
         if (stats instanceof Object === false) continue;
@@ -233,8 +242,9 @@ function awayTeamWinPrediction(allMatchesStatistics){
         returnDataToConsoleLog(stats, 'homeAwayWin');
 
         count++;
+        winPridiction += (stats.výsledok.vyhral === 'host' || stats.výsledok.vyhral === 'remiza') ? 1 : 0;
     }
-    console.log(`Počet výsledkov: ${count}`)
+    console.log(`Počet výsledkov: ${count}, Výherných: ${winPridiction}, Úspešnosť: ${(winPridiction / count).toFixed(2) * 100}%`)
 }
 
 
@@ -272,6 +282,19 @@ function createNewMatchStatsWithResultMatch(matchesStats, rowMatch){
         awayTeam: teamName.awayTeam,
         homeTeamGoal: homeTeamGoal,
         awayTeamGoal: awayTeamGoal,
+        over_1_5: (homeTeamGoal + awayTeamGoal) > 1.5 ? true : false,
+        over_2_5: (homeTeamGoal + awayTeamGoal) > 2.5 ? true : false,
+        under_2_5: (homeTeamGoal + awayTeamGoal) < 2.5 ? true : false,
+        under_3_5: (homeTeamGoal + awayTeamGoal) < 3.5 ? true : false,
+    }
+
+    let vyhral = '';
+    if (resultsMatchesStats.homeTeamGoal > resultsMatchesStats.awayTeamGoal) {
+        vyhral = 'domaci';
+    } else if (resultsMatchesStats.homeTeamGoal === resultsMatchesStats.awayTeamGoal) {
+        vyhral = 'remiza';
+    } else if (resultsMatchesStats.homeTeamGoal < resultsMatchesStats.awayTeamGoal) {
+        vyhral = 'host';
     }
     
     const match = matchesStats.filter((match) => {
@@ -281,7 +304,22 @@ function createNewMatchStatsWithResultMatch(matchesStats, rowMatch){
         return match.id === resultsMatchesStats.id;
     })[0];
 
-    return match ? Object.assign(match, {výsledok: {skóre: result, gólyDomáci: resultsMatchesStats.homeTeamGoal, gólyHostia: resultsMatchesStats.awayTeamGoal}}) : null;
+    return (
+        match !== undefined 
+            ? (
+                Object.assign(match, {výsledok: {
+                    skóre: result,
+                    gólyDomáci: resultsMatchesStats.homeTeamGoal, 
+                    gólyHostia: resultsMatchesStats.awayTeamGoal,
+                    vyhral: vyhral,
+                    over_1_5: resultsMatchesStats.over_1_5,
+                    over_2_5: resultsMatchesStats.over_2_5,
+                    under_2_5: resultsMatchesStats.under_2_5,
+                    under_3_5: resultsMatchesStats.under_3_5,
+                }})
+            )
+            : null
+    )
 };
 
 function loadMatchesData(allLinks) {
@@ -366,6 +404,11 @@ function getAllMatchData(matchLink) {
                         skóre: 'bez výsledku',
                         gólyDomáci: null,
                         gólyHostia: null,
+                        vyhral: '',
+                        over_1_5: null,
+                        over_2_5: null,
+                        under_2_5: null,
+                        under_3_5: null,
                     },
                     filterDataBy_Yuvalfra: filterDataBy_Yuvalfra,
                     filterDataBy_JohnHaighsTable: filterDataBy_JohnHaighsTable,
