@@ -88,7 +88,11 @@ $('html').on('click', '.awayTeamWinPrediction', function() {
 /* 
     Handle filter Functions
 */ 
+<<<<<<< HEAD
 function testingPrediction(allMatchesStatistics){
+=======
+function testPrediction(allMatchesStatistics){
+>>>>>>> 896cb9d64b74d3a0036497b8b19efcc714f208bf
     let count = 0;
     for (let stats of allMatchesStatistics) {
 
@@ -98,7 +102,11 @@ function testingPrediction(allMatchesStatistics){
             continue;
         }
 
+<<<<<<< HEAD
         returnDataToConsoleLog(stats, 'overUnder');
+=======
+        returnDataToConsoleLog('OverGoal', stats)
+>>>>>>> 896cb9d64b74d3a0036497b8b19efcc714f208bf
 
         count++;
     }
@@ -241,6 +249,7 @@ function awayTeamWinPrediction(allMatchesStatistics){
 /* 
     Data Functions
 */ 
+<<<<<<< HEAD
 function setResultsMatchesToLocalStorage(allLinks, localStorageKey){
     const matchesStats = getDataFromLocalStorage(localStorageKey); 
 
@@ -266,6 +275,17 @@ function createNewMatchStatsWithResultMatch(matchesStats, rowMatch){
     const teamName = getNameOfTeams(null, rowMatch);
 
     const resultsMatchesStats = {
+=======
+function setResultsMatchesToLocalStorage(localStorageName, rowMatch){
+    const matchData = getDataFromLocalStorage(localStorageName); 
+    const teamName = getNameOfTeams(null, rowMatch)
+
+    const result = rowMatch.find(b).parent().find('b').parent().text().trim();
+    const homeTeamGoal = parseFloat(result.split('-')[0]);
+    const awayTeamGoal = parseFloat(result.split('-')[1]);
+
+    const resultsMatchesData = {
+>>>>>>> 896cb9d64b74d3a0036497b8b19efcc714f208bf
         id: teamName.matchName,
         matchName: teamName.matchName,
         homeTeam: teamName.homeTeam,
@@ -273,6 +293,7 @@ function createNewMatchStatsWithResultMatch(matchesStats, rowMatch){
         homeTeamGoal: homeTeamGoal,
         awayTeamGoal: awayTeamGoal,
     }
+<<<<<<< HEAD
     
     const match = matchesStats.filter((match) => {
         if (match === null) {
@@ -282,6 +303,10 @@ function createNewMatchStatsWithResultMatch(matchesStats, rowMatch){
     })[0];
 
     return match ? Object.assign(match, {výsledok: {skóre: result, gólyDomáci: resultsMatchesStats.homeTeamGoal, gólyHostia: resultsMatchesStats.awayTeamGoal}}) : null;
+=======
+    matchData.filter((match) => match.id === resultsMatchesData.id)
+
+>>>>>>> 896cb9d64b74d3a0036497b8b19efcc714f208bf
 };
 
 function loadMatchesData(allLinks) {
@@ -362,11 +387,15 @@ function getAllMatchData(matchLink) {
 
                 resolve({
                     id: teamNames.matchName,
+<<<<<<< HEAD
                     výsledok: {
                         skóre: 'bez výsledku',
                         gólyDomáci: null,
                         gólyHostia: null,
                     },
+=======
+                    výsledok: teamNames.result || 'bez výsledku',
+>>>>>>> 896cb9d64b74d3a0036497b8b19efcc714f208bf
                     filterDataBy_Yuvalfra: filterDataBy_Yuvalfra,
                     filterDataBy_JohnHaighsTable: filterDataBy_JohnHaighsTable,
                     filterDataBy_Vincent: filterDataBy_Vincent,
@@ -446,7 +475,11 @@ function getAllMatchData(matchLink) {
 
 const getNameOfTeams = (url, rowMatch) => {
     rowMatch.find('td').children().parent().remove();
+<<<<<<< HEAD
     let league, homeTeam, awayTeam;
+=======
+    let league, homeTeam, awayTeam, result;
+>>>>>>> 896cb9d64b74d3a0036497b8b19efcc714f208bf
 
     if (rowMatch.find('td').length === 4) {
         rowMatch.find('td').first().remove();
@@ -464,10 +497,18 @@ const getNameOfTeams = (url, rowMatch) => {
     }
 
     return{
+<<<<<<< HEAD
         matchName: homeTeam.trim() + awayTeam.trim(),
         league: league,
         homeTeam: homeTeam.trim(),
         awayTeam: awayTeam.trim(),
+=======
+        matchName: league + homeTeam.trim() + awayTeam.trim(),
+        league: league,
+        homeTeam: homeTeam.trim(),
+        awayTeam: awayTeam.trim(),
+        result: result || 'bez výsledku',
+>>>>>>> 896cb9d64b74d3a0036497b8b19efcc714f208bf
     }
 }
 
