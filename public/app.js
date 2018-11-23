@@ -91,6 +91,7 @@ $('html').on('click', '.awayTeamWinPrediction', function() {
 function testingPrediction(allMatchesStatistics){
     let count = 0;
     let winPridiction = 0;
+    let win = 0;
     for (let stats of allMatchesStatistics) {
 
         if (stats instanceof Object === false) continue;
@@ -103,9 +104,11 @@ function testingPrediction(allMatchesStatistics){
 
         count++;
         winPridiction += (stats.výsledok.over_1_5 === true || stats.výsledok.over_1_5 === true) ? 1 : 0;
+        win += stats.výsledok.over_2_5 === true ? 1 : 0;
     }
     if (count > 0) {
         console.log(`Počet zápasov: ${count}, Výherných: ${winPridiction}, Úspešnosť: ${(winPridiction / count).toFixed(2) * 100}%`);
+        console.log(`Počet výherných s vysokým kurzom: ${win}, Úspešnosť: ${(win / count).toFixed(2) * 100}%`);
     } else {
         console.log(`Nenašli sa žiadne zápasy!`);
     }
@@ -114,6 +117,7 @@ function testingPrediction(allMatchesStatistics){
 function overGoalPrediction(allMatchesStatistics){
     let count = 0;
     let winPridiction = 0;
+    let win = 0;
     for (let stats of allMatchesStatistics) {
 
         if (stats instanceof Object === false) continue;
@@ -149,9 +153,11 @@ function overGoalPrediction(allMatchesStatistics){
 
         count++;
         winPridiction += (stats.výsledok.over_1_5 === true || stats.výsledok.over_1_5 === true) ? 1 : 0;
+        win += stats.výsledok.over_2_5 === true ? 1 : 0;
     }
     if (count > 0) {
         console.log(`Počet zápasov: ${count}, Výherných: ${winPridiction}, Úspešnosť: ${(winPridiction / count).toFixed(2) * 100}%`);
+        console.log(`Počet výherných s vysokým kurzom: ${win}, Úspešnosť: ${(win / count).toFixed(2) * 100}%`);
     } else {
         console.log(`Nenašli sa žiadne zápasy!`);
     }
@@ -160,6 +166,7 @@ function overGoalPrediction(allMatchesStatistics){
 function underGoalPrediction(allMatchesStatistics){
     let count = 0;
     let winPridiction = 0;
+    let win = 0;
     for (let stats of allMatchesStatistics) {
 
         if (stats instanceof Object === false) continue;
@@ -186,9 +193,11 @@ function underGoalPrediction(allMatchesStatistics){
 
         count++;
         winPridiction += (stats.výsledok.under_3_5 === true || stats.výsledok.under_3_5 === true) ? 1 : 0;
+        win += stats.výsledok.under_2_5 === true ? 1 : 0;
     }
     if (count > 0) {
         console.log(`Počet zápasov: ${count}, Výherných: ${winPridiction}, Úspešnosť: ${(winPridiction / count).toFixed(2) * 100}%`);
+        console.log(`Počet výherných s vysokým kurzom: ${win}, Úspešnosť: ${(win / count).toFixed(2) * 100}%`);
     } else {
         console.log(`Nenašli sa žiadne zápasy!`);
     }
@@ -197,6 +206,7 @@ function underGoalPrediction(allMatchesStatistics){
 function homeTeamWinPrediction(allMatchesStatistics){
     let count = 0;
     let winPridiction = 0;
+    let win = 0;
     for (let stats of allMatchesStatistics) {
 
         if (stats instanceof Object === false) continue;
@@ -219,9 +229,11 @@ function homeTeamWinPrediction(allMatchesStatistics){
 
         count++;
         winPridiction += (stats.výsledok.vyhral === 'domaci' || stats.výsledok.vyhral === 'remiza') ? 1 : 0;
+        win += stats.výsledok.vyhral === 'domaci' ? 1 : 0;
     }
     if (count > 0) {
         console.log(`Počet zápasov: ${count}, Výherných: ${winPridiction}, Úspešnosť: ${(winPridiction / count).toFixed(2) * 100}%`);
+        console.log(`Počet výherných s vysokým kurzom: ${win}, Úspešnosť: ${(win / count).toFixed(2) * 100}%`);
     } else {
         console.log(`Nenašli sa žiadne zápasy!`);
     }
@@ -230,6 +242,7 @@ function homeTeamWinPrediction(allMatchesStatistics){
 function awayTeamWinPrediction(allMatchesStatistics){
     let count = 0;
     let winPridiction = 0;
+    let win = 0;
     for (let stats of allMatchesStatistics) {
 
         if (stats instanceof Object === false) continue;
@@ -259,9 +272,11 @@ function awayTeamWinPrediction(allMatchesStatistics){
 
         count++;
         winPridiction += (stats.výsledok.vyhral === 'host' || stats.výsledok.vyhral === 'remiza') ? 1 : 0;
+        win += stats.výsledok.vyhral === 'host' ? 1 : 0;
     }
     if (count > 0) {
         console.log(`Počet zápasov: ${count}, Výherných: ${winPridiction}, Úspešnosť: ${(winPridiction / count).toFixed(2) * 100}%`);
+        console.log(`Počet výherných s vysokým kurzom: ${win}, Úspešnosť: ${(win / count).toFixed(2) * 100}%`);
     } else {
         console.log(`Nenašli sa žiadne zápasy!`);
     }
