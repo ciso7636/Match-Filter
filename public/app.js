@@ -59,6 +59,12 @@ $('html').on('click', '.load-button', function() {
     })
 });
 
+$('html').on('click', '.setToLocalStorage', function() {
+    const data = $(this).closest('.form').find('textarea').val();
+    const name = $(this).closest('.form').find('input').val();
+    setDataToLocalStorage(name, data);
+});
+
 $('html').on('click', '.resultsMatchesToLocalStorage', function() {
     const localStorageKey = $('.nameOfMatch').val();
     setResultsMatchesToLocalStorage(allLinks, localStorageKey);
