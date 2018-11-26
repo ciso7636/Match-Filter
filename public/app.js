@@ -10,15 +10,15 @@ let colors = {
 
 let hightScore = {
     index: 0,
-    yuvalfra_Average_koeficient: 2.5,
+    yuvalfra_Average_koeficient: 2,
     average14_koeficient: 1.4,
     average23_koeficient: 1.25,
     average14_4last_koeficient: 1.3,
     average23_4last_koeficient: 1.2,
-    johnHaighs_Under25_koeficient: 47,
+    johnHaighs_Under25_koeficient: 33,
     johnHaighs_Under25_koeficient_under: 67,
-    vincent_Scale_koeficient: 3.5,
-    vincent_Scale_koeficient_under: 1.5
+    vincent_Scale_koeficient: 1.5,
+    vincent_Scale_koeficient_under: 2.5
 };
 
 /* 
@@ -113,8 +113,8 @@ function testingPrediction(allMatchesStatistics){
         win += stats.výsledok.over_2_5 === true ? 1 : 0;
     }
     if (count > 0) {
-        console.log(`Počet zápasov: ${count}, Výherných: ${winPridiction}, Úspešnosť: ${(winPridiction / count).toFixed(2) * 100}%`);
-        console.log(`Počet výherných s vysokým kurzom: ${win}, Úspešnosť: ${(win / count).toFixed(2) * 100}%`);
+        console.log(`Počet zápasov: ${count}, Výherných: ${winPridiction}, Úspešnosť: ${(winPridiction / count).toFixed(2) * 100}%, Min. zisk: ${calculateProfit(count, winPridiction, 3, 2, 100)}€`);
+        console.log(`Presné tipy:   ${win}, Úspešnosť: ${(win / count).toFixed(2) * 100}%`);
     } else {
         console.log(`Nenašli sa žiadne zápasy!`);
     }
@@ -128,29 +128,36 @@ function overGoalPrediction(allMatchesStatistics){
 
         if (stats instanceof Object === false) continue;
 
-        switch (true) {
-            case stats.Domaci.cisteKontoDoma >= 35 || stats.Hostia.cisteKontoVonku >= 32:
-            case stats.Hostia.cisteKontoVonku >= 40 && Math.abs(stats.Hostia.cisteKontoVonku - stats.Domaci.cisteKontoDoma) < 15:
-            case stats.Hostia.cisteKontoVonku >= 45 && Math.abs(stats.Hostia.cisteKontoVonku - stats.Domaci.cisteKontoDoma) < 20:
-            case stats.Hostia.cisteKontoVonku >= 50 && Math.abs(stats.Hostia.cisteKontoVonku - stats.Domaci.cisteKontoDoma) < 25:
-                continue;
+        if (stats.Domaci.posledne_4_ZapasyDoma.streleneGolyPriemer - stats.Domaci.streleneGoly_Doma < 0.55) {
+            continue;
+        }
+        if (stats.Domaci.streleneGoly_Doma < 1.2) {
+            continue;
         }
 
-        switch (true) {
-            case stats.priemer_StrelenéGólyDomáci_InkasovaneGólyHostia < hightScore.average14_koeficient:
-            case stats.priemer_StrelenéGólyHostia_InkasovaneGólyDomáci < hightScore.average23_koeficient:
-                continue;
-        }
+        // switch (true) {
+        //     case stats.Domaci.cisteKontoDoma >= 35 || stats.Hostia.cisteKontoVonku >= 32:
+        //     case stats.Hostia.cisteKontoVonku >= 40 && Math.abs(stats.Hostia.cisteKontoVonku - stats.Domaci.cisteKontoDoma) < 15:
+        //     case stats.Hostia.cisteKontoVonku >= 45 && Math.abs(stats.Hostia.cisteKontoVonku - stats.Domaci.cisteKontoDoma) < 20:
+        //     case stats.Hostia.cisteKontoVonku >= 50 && Math.abs(stats.Hostia.cisteKontoVonku - stats.Domaci.cisteKontoDoma) < 25:
+        //         continue;
+        // }
+
+        // switch (true) {
+        //     case stats.priemer_StrelenéGólyDomáci_InkasovaneGólyHostia < hightScore.average14_koeficient:
+        //     case stats.priemer_StrelenéGólyHostia_InkasovaneGólyDomáci < hightScore.average23_koeficient:
+        //         continue;
+        // }
+
+        // switch (true) {
+        //     case stats.priemer_posledne4Zapasy_StrelenéGólyDomáci_InkasovaneGólyHostia < hightScore.average14_4last_koeficient:
+        //     case stats.priemer_posledne4Zapasy_StrelenéGólyHostia_InkasovaneGólyDomáci < hightScore.average23_4last_koeficient:
+        //         continue;
+        // }
 
         switch (true) {
-            case stats.priemer_posledne4Zapasy_StrelenéGólyDomáci_InkasovaneGólyHostia < hightScore.average14_4last_koeficient:
-            case stats.priemer_posledne4Zapasy_StrelenéGólyHostia_InkasovaneGólyDomáci < hightScore.average23_4last_koeficient:
-                continue;
-        }
-
-        switch (true) {
-            case stats.filterDataBy_Yuvalfra < hightScore.yuvalfra_Average_koeficient:
-            case stats.filterDataBy_JohnHaighsTable > hightScore.johnHaighs_Under25_koeficient:
+            //case stats.filterDataBy_Yuvalfra < hightScore.yuvalfra_Average_koeficient:
+            //case stats.filterDataBy_JohnHaighsTable > hightScore.johnHaighs_Under25_koeficient:
             case stats.filterDataBy_Vincent < hightScore.vincent_Scale_koeficient_under:
                 continue;
         }
@@ -162,8 +169,8 @@ function overGoalPrediction(allMatchesStatistics){
         win += stats.výsledok.over_2_5 === true ? 1 : 0;
     }
     if (count > 0) {
-        console.log(`Počet zápasov: ${count}, Výherných: ${winPridiction}, Úspešnosť: ${(winPridiction / count).toFixed(2) * 100}%`);
-        console.log(`Počet výherných s vysokým kurzom: ${win}, Úspešnosť: ${(win / count).toFixed(2) * 100}%`);
+        console.log(`Počet zápasov: ${count}, Výherných: ${winPridiction}, Úspešnosť: ${(winPridiction / count).toFixed(2) * 100}%, Min. zisk: ${calculateProfit(count, winPridiction, 3, 2, 100)}€`);
+        console.log(`Presné tipy:   ${win}, Úspešnosť: ${(win / count).toFixed(2) * 100}%`);
     } else {
         console.log(`Nenašli sa žiadne zápasy!`);
     }
@@ -202,8 +209,8 @@ function underGoalPrediction(allMatchesStatistics){
         win += stats.výsledok.under_2_5 === true ? 1 : 0;
     }
     if (count > 0) {
-        console.log(`Počet zápasov: ${count}, Výherných: ${winPridiction}, Úspešnosť: ${(winPridiction / count).toFixed(2) * 100}%`);
-        console.log(`Počet výherných s vysokým kurzom: ${win}, Úspešnosť: ${(win / count).toFixed(2) * 100}%`);
+        console.log(`Počet zápasov: ${count}, Výherných: ${winPridiction}, Úspešnosť: ${(winPridiction / count).toFixed(2) * 100}%, Min. zisk: ${calculateProfit(count, winPridiction, 3, 2, 100)}€`);
+        console.log(`Presné tipy:   ${win}, Úspešnosť: ${(win / count).toFixed(2) * 100}%`);
     } else {
         console.log(`Nenašli sa žiadne zápasy!`);
     }
@@ -238,8 +245,8 @@ function homeTeamWinPrediction(allMatchesStatistics){
         win += stats.výsledok.vyhral === 'domaci' ? 1 : 0;
     }
     if (count > 0) {
-        console.log(`Počet zápasov: ${count}, Výherných: ${winPridiction}, Úspešnosť: ${(winPridiction / count).toFixed(2) * 100}%`);
-        console.log(`Počet výherných s vysokým kurzom: ${win}, Úspešnosť: ${(win / count).toFixed(2) * 100}%`);
+        console.log(`Počet zápasov: ${count}, Výherných: ${winPridiction}, Úspešnosť: ${(winPridiction / count).toFixed(2) * 100}%, Min. zisk: ${calculateProfit(count, winPridiction, 3, 2, 100)}€`);
+        console.log(`Presné tipy:   ${win}, Úspešnosť: ${(win / count).toFixed(2) * 100}%`);
     } else {
         console.log(`Nenašli sa žiadne zápasy!`);
     }
@@ -249,6 +256,7 @@ function awayTeamWinPrediction(allMatchesStatistics){
     let count = 0;
     let winPridiction = 0;
     let win = 0;
+    let draw = 0;
     for (let stats of allMatchesStatistics) {
 
         if (stats instanceof Object === false) continue;
@@ -279,10 +287,12 @@ function awayTeamWinPrediction(allMatchesStatistics){
         count++;
         winPridiction += (stats.výsledok.vyhral === 'host' || stats.výsledok.vyhral === 'remiza') ? 1 : 0;
         win += stats.výsledok.vyhral === 'host' ? 1 : 0;
+        draw += stats.výsledok.vyhral === 'remiza' ? 1 : 0;
     }
     if (count > 0) {
-        console.log(`Počet zápasov: ${count}, Výherných: ${winPridiction}, Úspešnosť: ${(winPridiction / count).toFixed(2) * 100}%`);
-        console.log(`Počet výherných s vysokým kurzom: ${win}, Úspešnosť: ${(win / count).toFixed(2) * 100}%`);
+        console.log(`Počet zápasov: ${count}, Výherných: ${winPridiction}, Úspešnosť: ${(winPridiction / count).toFixed(2) * 100}%, Min. zisk: ${calculateProfit(count, winPridiction, 3, 2, 100)}€`);
+        console.log(`Presné tipy:   ${win}, Úspešnosť: ${(win / count).toFixed(2) * 100}%`);
+        console.log(`Remízy:        ${draw}, Úspešnosť: ${(draw / count).toFixed(2) * 100}%,               Min. zisk: ${calculateProfit(count, draw, 1, 3.1, 100)}€`);
     } else {
         console.log(`Nenašli sa žiadne zápasy!`);
     }
@@ -779,6 +789,32 @@ function awayTeamFavorits_Filter(homeTeam_homeGF, awayTeam_awayGF, homeTeam_home
 /* 
     Hellper Functions
 */ 
+
+
+const calculateProfit = (count, win, numMatchesOnTicket, course, bet) => {
+    let numTickets, lossMatches;
+
+    if (count / numMatchesOnTicket < 2) {
+        numTickets = Math.ceil(count / numMatchesOnTicket); 
+        lossMatches = (count - win);
+    } else if (Math.round(count / numMatchesOnTicket) > (count / numMatchesOnTicket)) {
+        numTickets = Math.ceil(count / numMatchesOnTicket);
+        lossMatches = (count - win);
+    } else if  (Math.round(count / numMatchesOnTicket) < (count / numMatchesOnTicket)) {
+        numTickets = Math.floor(count / numMatchesOnTicket);
+        lossMatches = ((numTickets * numMatchesOnTicket) - win) < 0 ? 0 : ((numTickets * numMatchesOnTicket) - win);
+    } else {
+        numTickets = count / numMatchesOnTicket; 
+        lossMatches = count - win;
+    }
+    const numWinTickets = numTickets - lossMatches;
+
+    const deposit = numTickets * bet;
+    const profit = (numWinTickets * course) * bet;
+
+    return profit > 0 ? Math.round(profit - deposit) : - deposit;
+}
+
 const countResultsOfMatchesBothTeams = (matches, count) => {
     let resultOfCountingHomeTeamMatches = {
         scoredGoals: 0,
@@ -816,8 +852,8 @@ const countResultsOfMatchesBothTeams = (matches, count) => {
         resultOfCountingAwayTeamMatches.concededGoalsAverage = resultOfCountingAwayTeamMatches.concededGoals / count;
 
         return {
-            toCountHomeMatchesReslult: resultOfCountingHomeTeamMatches,
-            toCountAwayMatchesReslult: resultOfCountingAwayTeamMatches,
+            toCountHomeMatchesReslult: resultOfCountingHomeTeamMatches ? resultOfCountingHomeTeamMatches : {},
+            toCountAwayMatchesReslult: resultOfCountingAwayTeamMatches ? resultOfCountingAwayTeamMatches : {},
         }
     } 
     return null
