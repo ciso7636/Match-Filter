@@ -267,7 +267,7 @@ function awayTeamWinPrediction(allMatchesStatistics){
                 continue;
         }
 
-        if (stats.Domaci.cisteKontoDoma > 35) {
+        if (stats.Domaci.cisteKontoDoma > 30) {
             continue;
         }
         
@@ -371,7 +371,7 @@ function createNewMatchStatsWithResultMatch(matchesStats, rowMatch){
             )
             : null
     )
-};
+}
 
 function loadMatchesData(allLinks) {
     return new Promise(function (resolvelLoadMatchesData) {
@@ -397,7 +397,7 @@ function loadMatchesData(allLinks) {
             ));
         };
     });
-};
+}
 
 function getAllMatchData(matchLink) {
     const rowMatch = $(matchLink).closest('tr');
@@ -789,8 +789,6 @@ function awayTeamFavorits_Filter(homeTeam_homeGF, awayTeam_awayGF, homeTeam_home
 /* 
     Hellper Functions
 */ 
-
-
 const calculateProfit = (count, win, numMatchesOnTicket, course, bet) => {
     let numTickets, lossMatches;
 
@@ -1001,7 +999,7 @@ const consoleConditionHighlighting = (props, conditions = [], text, bold, percen
     } else {
         console.log(text + (Array.isArray(props) ? props[0] + ' / '+ props[1] : props) + (percent ? percent : ''), `${bold === true ? 'font-weight: bold' : 'font-weight: normal'}; background: red; color: white; display: block;`)
     }
-};
+}
 
 const returnDataToConsoleLog = (matchStats, type) => {
     const predictionType = {
