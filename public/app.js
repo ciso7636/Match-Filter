@@ -807,8 +807,8 @@ const calculateProfit = (count, win, numMatchesOnTicket, course, bet) => {
         numTickets = count / numMatchesOnTicket; 
         lossMatches = count - win;
     }
-    const numWinTickets = numTickets - lossMatches;
 
+    const numWinTickets = numTickets - lossMatches;
     const deposit = numTickets * bet;
     const profit = (numWinTickets * course) * bet;
 
