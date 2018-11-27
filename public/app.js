@@ -123,7 +123,9 @@ function testingPrediction(allMatchesStatistics){
 function overGoalPrediction(allMatchesStatistics){
     let count = 0;
     let winPridiction = 0;
-    let win = 0;
+    let win25 = 0;
+    let win35 = 0;
+    let win45 = 0;
     for (let stats of allMatchesStatistics) {
 
         if (stats instanceof Object === false) continue;
@@ -166,11 +168,15 @@ function overGoalPrediction(allMatchesStatistics){
 
         count++;
         winPridiction += (stats.výsledok.over_1_5 === true || stats.výsledok.over_1_5 === true) ? 1 : 0;
-        win += stats.výsledok.over_2_5 === true ? 1 : 0;
+        win25 += stats.výsledok.over_2_5 === true ? 1 : 0;
+        win35 += (stats.výsledok.gólyDomáci + stats.výsledok.gólyHostia) > 3 === true ? 1 : 0;
+        win45 += (stats.výsledok.gólyDomáci + stats.výsledok.gólyHostia) > 4 === true ? 1 : 0;
     }
     if (count > 0) {
         console.log(`Počet zápasov: ${count}, Výherných: ${winPridiction}, Úspešnosť: ${(winPridiction / count).toFixed(2) * 100}%, Min. zisk: ${calculateProfit(count, winPridiction, 3, 2, 100)}€`);
-        console.log(`Presné tipy:   ${win}, Úspešnosť: ${(win / count).toFixed(2) * 100}%`);
+        console.log(`Presné tipy:   ${win25}, Úspešnosť: ${(win25 / count).toFixed(2) * 100}%`);
+        console.log(`Over_3.5:      ${win35}, Úspešnosť: ${(win35 / count).toFixed(2) * 100}%`);
+        console.log(`Over_4.5:      ${win45}, Úspešnosť: ${(win45 / count).toFixed(2) * 100}%`);
     } else {
         console.log(`Nenašli sa žiadne zápasy!`);
     }
