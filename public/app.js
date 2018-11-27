@@ -160,7 +160,7 @@ function overGoalPrediction(allMatchesStatistics){
         switch (true) {
             //case stats.filterDataBy_Yuvalfra < hightScore.yuvalfra_Average_koeficient:
             //case stats.filterDataBy_JohnHaighsTable > hightScore.johnHaighs_Under25_koeficient:
-            case stats.filterDataBy_Vincent < hightScore.vincent_Scale_koeficient_under:
+            case stats.filterDataBy_Vincent < hightScore.vincent_Scale_koeficient:
                 continue;
         }
 
