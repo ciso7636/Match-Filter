@@ -322,6 +322,7 @@ function handleWeekStats(input, button){
         if (weekStats) {
             $('h1.header').text('Week' + week + ' has been loaded');
             $('.row-buttons').show();
+            $(input).val('');
             allMatchesStatistics = weekStats;
         } else {
             alert('Week not found.');
