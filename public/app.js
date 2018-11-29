@@ -245,13 +245,22 @@ function homeTeamWinPrediction(allMatchesStatistics){
                 continue;
         }
 
-        if (stats.Domaci.cisteKontoDoma < 32 && Math.abs(stats.Domaci.cisteKontoDoma - stats.Hostia.cisteKontoVonku) < 10) {
+        // if (stats.Domaci.cisteKontoDoma < 10 && Math.abs(stats.Domaci.cisteKontoDoma - stats.Hostia.cisteKontoVonku) < 10) {
+        //     continue;
+        // }
+
+        // if (stats.priemer_posledne4Zapasy_StrelenéGólyDomáci_InkasovaneGólyHostia < hightScore.average14_4last_koeficient) {
+        //     continue;
+        // }
+
+        //93%
+        if (stats.Hostia.posledne_4_ZapasyVonku.streleneGolyPriemer > stats.Hostia.streleneGoly_Vonku) {
             continue;
         }
 
-        if (stats.priemer_posledne4Zapasy_StrelenéGólyDomáci_InkasovaneGólyHostia < hightScore.average14_4last_koeficient) {
-            continue;
-        }
+        // if (stats.Hostia.posledne_4_ZapasyVonku.inkasovaneGolyPriemer < stats.Hostia.inkasovaneGoly_Vonku) {
+        //     continue;
+        // }
 
         returnDataToConsoleLog(stats, 'homeAwayWin');
 
@@ -1116,7 +1125,7 @@ const returnDataToConsoleLog = (matchStats, type) => {
         true,
     );
 
-    console.log('Hosťujúci tím inkasované góly Vonku 4-match/total: ' + matchStats.Hostia.posledne_4_ZapasyVonku.streleneGolyPriemer + ' / ' + matchStats.Hostia.inkasovaneGoly_Vonku)
+    console.log('Hosťujúci tím inkasované góly Vonku 4-match/total: ' + matchStats.Hostia.posledne_4_ZapasyVonku.inkasovaneGolyPriemer + ' / ' + matchStats.Hostia.inkasovaneGoly_Vonku)
 
     consoleConditionHighlighting(
         [matchStats.Hostia.posledne_4_ZapasyVonku.streleneGolyPriemer, matchStats.Hostia.streleneGoly_Vonku],
