@@ -63,21 +63,15 @@ $('html').on('click', '.load-button', function() {
     })
 });
 
-$('html').on('click', '.getWeekStats', function() {
-    const self = this;
-    const week = $(self).closest('.action').find('input').val();
-    $(self).addClass('loading');
+$('html').on('click', '.getWeekStats .button', function() {
+    handleWeekStats('.getWeekStats input', '.getWeekStats .button');
+});
 
-    getWeekStats(week).then(function (weekStats) {
-        $(self).removeClass('loading');
-        if (weekStats) {
-            $('h1.header').text('Week' + week + ' has been loaded');
-            $('.row-buttons').show();
-            allMatchesStatistics = weekStats;
-        } else {
-            alert('Week not found.');
-        }
-    });
+$('html').on('keypress', '.getWeekStats input', function(e) {
+    var keycode = (e.keyCode ? e.keyCode : e.which);
+    if (keycode == '13') {
+        handleWeekStats('.getWeekStats input', '.getWeekStats .button')
+    }
 });
 
 $('html').on('click', '.resultsMatchesToLocalStorage', function() {
@@ -107,7 +101,7 @@ $('html').on('click', '.awayTeamWinPrediction', function() {
 
 
 /* 
-    Handle filter Functions
+    Handle Functions
 */ 
 function testingPrediction(allMatchesStatistics){
     let count = 0;
@@ -317,6 +311,22 @@ function awayTeamWinPrediction(allMatchesStatistics){
     } else {
         console.log(`Nenašli sa žiadne zápasy!`);
     }
+}
+
+function handleWeekStats(input, button){
+    const week = $(input).val();
+    $(button).addClass('loading');
+
+    getWeekStats(week).then(function (weekStats) {
+        $(button).removeClass('loading');
+        if (weekStats) {
+            $('h1.header').text('Week' + week + ' has been loaded');
+            $('.row-buttons').show();
+            allMatchesStatistics = weekStats;
+        } else {
+            alert('Week not found.');
+        }
+    });
 }
 
 
