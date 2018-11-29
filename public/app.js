@@ -25,17 +25,21 @@ let hightScore = {
     Init APP
 */ 
 $(function(){
-    allLinks = document.querySelectorAll('#btable .trow8 td:last-child > a:first-child'); 
-    allMatchesStatistics = getDataFromLocalStorage(allLinks.length) || [];   
-
-    if (allMatchesStatistics.length > 0) {
-        $('.load-button').show().text(`Reload ${allLinks.length} matches`).removeClass('loading');
-        $('h1.header').text("Data is ready").show();
-        $('.row-buttons').show();
+    if ($('#index').length) {
+        $('h1.header').text(`Load week stats`).show();
     } else {
-        $('.load-button').show().text('Load matches').removeClass('loading');
-        $('h1.header').text(`Cick to load ${allLinks.length} matches`).show();
-    }  
+        allLinks = document.querySelectorAll('#btable .trow8 td:last-child > a:first-child'); 
+        allMatchesStatistics = getDataFromLocalStorage(allLinks.length) || [];   
+    
+        if (allMatchesStatistics.length > 0) {
+            $('.load-button').show().text(`Reload ${allLinks.length} matches`).removeClass('loading');
+            $('h1.header').text("Data is ready").show();
+            $('.row-buttons').show();
+        } else {
+            $('.load-button').show().text('Load matches').removeClass('loading');
+            $('h1.header').text(`Cick to load ${allLinks.length} matches`).show();
+        }  
+    }
 })
 
 /* 
@@ -59,10 +63,21 @@ $('html').on('click', '.load-button', function() {
     })
 });
 
-$('html').on('click', '.setToLocalStorage', function() {
-    const data = $(this).closest('.form').find('textarea').val();
-    const name = $(this).closest('.form').find('input').val();
-    setDataToLocalStorage(name, data);
+$('html').on('click', '.getWeekStats', function() {
+    const self = this;
+    const week = $(self).closest('.action').find('input').val();
+    $(self).addClass('loading');
+
+    getWeekStats(week).then(function (weekStats) {
+        $(self).removeClass('loading');
+        if (weekStats) {
+            $('h1.header').text('Week' + week + ' has been loaded');
+            $('.row-buttons').show();
+            allMatchesStatistics = weekStats;
+        } else {
+            alert('Week not found.');
+        }
+    });
 });
 
 $('html').on('click', '.resultsMatchesToLocalStorage', function() {
@@ -404,6 +419,24 @@ function loadMatchesData(allLinks) {
         };
     });
 }
+
+const getWeekStats = (week) => {
+    let url = document.location.href.split('/');
+    url.splice(url.length - 2, 2);
+    let newUrl = url.join('/');
+
+    return new Promise(function (resolve, reject) {
+        getData('GET', newUrl + '/data/week' + week +'.json', 'json').then(function (stats) {
+                resolve(stats); 
+            }).catch(function (err) {
+                console.log(err);
+                resolve();
+                if (err.status === 404) {
+                    console.log(err);
+                }
+            });
+        });
+};
 
 function getAllMatchData(matchLink) {
     const rowMatch = $(matchLink).closest('tr');
@@ -1144,13 +1177,13 @@ function moveProgressBar(i, multiple, allLinks) {
     $("#myBar").text(i * 1 + '/' + allLinks);
 }
 
-function getData(method, url) {
+function getData(method, url, type = 'document') {
     return new Promise(function (resolve, reject) {
         var xhr = new XMLHttpRequest();
         xhr.open(method, url);
-        xhr.responseType = "document";
+        xhr.responseType = type;
         xhr.onload = function () {
-            if (this.status >= 200 && this.status < 300) {
+            if ((this.status >= 200 && this.status < 300) || this.status === 0) {
                 hightScore.index++;
                 xhr.response.index = hightScore.index;
                 resolve(xhr.response);
