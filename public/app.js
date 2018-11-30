@@ -64,13 +64,13 @@ $('html').on('click', '.load-button', function() {
 });
 
 $('html').on('click', '.getWeekStats .button', function() {
-    handleWeekStats('.getWeekStats input', '.getWeekStats .button');
+    handleGetWeekStats('.getWeekStats input', '.getWeekStats .button');
 });
 
 $('html').on('keypress', '.getWeekStats input', function(e) {
     var keycode = (e.keyCode ? e.keyCode : e.which);
     if (keycode == '13') {
-        handleWeekStats('.getWeekStats input', '.getWeekStats .button')
+        handleGetWeekStats('.getWeekStats input', '.getWeekStats .button')
     }
 });
 
@@ -111,7 +111,7 @@ function testingPrediction(allMatchesStatistics){
 
         if (stats instanceof Object === false) continue;
 
-        if (stats.Domaci.posledne_4_ZapasyDoma.streleneGolyPriemer - stats.Domaci.streleneGoly_Doma < 0.8) {
+        if (stats.Domaci.posledne_4_ZapasyDoma.streleneGolyPriemer - stats.Domaci.streleneGoly_Doma < 0.85) {
             continue;
         }
 
@@ -139,37 +139,34 @@ function overGoalPrediction(allMatchesStatistics){
 
         if (stats instanceof Object === false) continue;
 
-        if (stats.Domaci.posledne_4_ZapasyDoma.streleneGolyPriemer - stats.Domaci.streleneGoly_Doma < 0.55) {
+        if (stats.Domaci.streleneGoly_Doma < 1.8) {
             continue;
         }
-        if (stats.Domaci.streleneGoly_Doma < 1.2) {
-            continue;
-        }
-
-        // switch (true) {
-        //     case stats.Domaci.cisteKontoDoma >= 35 || stats.Hostia.cisteKontoVonku >= 32:
-        //     case stats.Hostia.cisteKontoVonku >= 40 && Math.abs(stats.Hostia.cisteKontoVonku - stats.Domaci.cisteKontoDoma) < 15:
-        //     case stats.Hostia.cisteKontoVonku >= 45 && Math.abs(stats.Hostia.cisteKontoVonku - stats.Domaci.cisteKontoDoma) < 20:
-        //     case stats.Hostia.cisteKontoVonku >= 50 && Math.abs(stats.Hostia.cisteKontoVonku - stats.Domaci.cisteKontoDoma) < 25:
-        //         continue;
-        // }
-
-        // switch (true) {
-        //     case stats.priemer_StrelenéGólyDomáci_InkasovaneGólyHostia < hightScore.average14_koeficient:
-        //     case stats.priemer_StrelenéGólyHostia_InkasovaneGólyDomáci < hightScore.average23_koeficient:
-        //         continue;
-        // }
-
-        // switch (true) {
-        //     case stats.priemer_posledne4Zapasy_StrelenéGólyDomáci_InkasovaneGólyHostia < hightScore.average14_4last_koeficient:
-        //     case stats.priemer_posledne4Zapasy_StrelenéGólyHostia_InkasovaneGólyDomáci < hightScore.average23_4last_koeficient:
-        //         continue;
-        // }
 
         switch (true) {
-            //case stats.filterDataBy_Yuvalfra < hightScore.yuvalfra_Average_koeficient:
-            //case stats.filterDataBy_JohnHaighsTable > hightScore.johnHaighs_Under25_koeficient:
-            case stats.filterDataBy_Vincent < hightScore.vincent_Scale_koeficient:
+            case stats.Domaci.cisteKontoDoma >= 35 || stats.Hostia.cisteKontoVonku >= 32:
+            case stats.Hostia.cisteKontoVonku >= 40 && Math.abs(stats.Hostia.cisteKontoVonku - stats.Domaci.cisteKontoDoma) < 15:
+            case stats.Hostia.cisteKontoVonku >= 45 && Math.abs(stats.Hostia.cisteKontoVonku - stats.Domaci.cisteKontoDoma) < 20:
+            case stats.Hostia.cisteKontoVonku >= 50 && Math.abs(stats.Hostia.cisteKontoVonku - stats.Domaci.cisteKontoDoma) < 25:
+                continue;
+        }
+
+        switch (true) {
+            case stats.priemer_StrelenéGólyDomáci_InkasovaneGólyHostia < 1.4:
+            case stats.priemer_StrelenéGólyHostia_InkasovaneGólyDomáci < 1.25:
+                continue;
+        }
+
+        switch (true) {
+            case stats.priemer_posledne4Zapasy_StrelenéGólyDomáci_InkasovaneGólyHostia < 1.3:
+            case stats.priemer_posledne4Zapasy_StrelenéGólyHostia_InkasovaneGólyDomáci < 1.2:
+                continue;
+        }
+
+        switch (true) {
+            case stats.filterDataBy_Yuvalfra < 2:
+            case stats.filterDataBy_JohnHaighsTable > 33:
+            case stats.filterDataBy_Vincent < 1.5:
                 continue;
         }
 
@@ -183,7 +180,7 @@ function overGoalPrediction(allMatchesStatistics){
     }
     if (count > 0) {
         console.log(`Počet zápasov: ${count}, Výherných: ${winPridiction}, Úspešnosť: ${(winPridiction / count).toFixed(2) * 100}%, Min. zisk: ${calculateProfit(count, winPridiction, 3, 2, 100)}€`);
-        console.log(`Presné tipy:   ${win25}, Úspešnosť: ${(win25 / count).toFixed(2) * 100}%`);
+        console.log(`Over_2.5:      ${win25}, Úspešnosť: ${(win25 / count).toFixed(2) * 100}%, Min. zisk: ${calculateProfit(count, win25, 2, 2, 100)}€`);
         console.log(`Over_3.5:      ${win35}, Úspešnosť: ${(win35 / count).toFixed(2) * 100}%`);
         console.log(`Over_4.5:      ${win45}, Úspešnosť: ${(win45 / count).toFixed(2) * 100}%`);
     } else {
@@ -205,16 +202,17 @@ function underGoalPrediction(allMatchesStatistics){
                 continue;
         }
 
-        switch (true) {
-            case stats.filterDataBy_JohnHaighsTable < hightScore.johnHaighs_Under25_koeficient_under:
-            case stats.filterDataBy_Vincent > hightScore.vincent_Scale_koeficient_under:
-                continue;
-        }
-
         if (Math.abs(stats.Domaci.posledne_4_Zapasy.streleneGolyPriemer - stats.Domaci.streleneGoly_Doma) < 0.3 &&
-            stats.priemer_posledne4Zapasy_StrelenéGólyDomáci_InkasovaneGólyHostia < hightScore.average14_4last_koeficient
+            stats.priemer_posledne4Zapasy_StrelenéGólyDomáci_InkasovaneGólyHostia < 1.3
         ) {
             continue;
+        }
+
+        switch (true) {
+            case stats.filterDataBy_Yuvalfra > 1.8:
+            case stats.filterDataBy_JohnHaighsTable < 68:
+            case stats.filterDataBy_Vincent > 1:
+                continue;
         }
 
         returnDataToConsoleLog(stats, 'overUnder')
@@ -225,7 +223,7 @@ function underGoalPrediction(allMatchesStatistics){
     }
     if (count > 0) {
         console.log(`Počet zápasov: ${count}, Výherných: ${winPridiction}, Úspešnosť: ${(winPridiction / count).toFixed(2) * 100}%, Min. zisk: ${calculateProfit(count, winPridiction, 3, 2, 100)}€`);
-        console.log(`Presné tipy:   ${win}, Úspešnosť: ${(win / count).toFixed(2) * 100}%`);
+        console.log(`Under_2.5:     ${win}, Úspešnosť: ${(win / count).toFixed(2) * 100}%, Min. zisk: ${calculateProfit(count, win, 2, 2, 100)}€`);
     } else {
         console.log(`Nenašli sa žiadne zápasy!`);
     }
@@ -322,7 +320,7 @@ function awayTeamWinPrediction(allMatchesStatistics){
     }
 }
 
-function handleWeekStats(input, button){
+function handleGetWeekStats(input, button){
     const week = $(input).val();
     $(button).addClass('loading');
 
