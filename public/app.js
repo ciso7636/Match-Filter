@@ -370,7 +370,7 @@ function handleGetWeekStats(input, button){
             console.log(`underGoalPrediction: ${weekProfit.underGoalPrediction}`);
             console.log(`homeTeamWinPrediction: ${weekProfit.homeTeamWinPrediction}`);
             console.log(`awayTeamWinPrediction: ${weekProfit.awayTeamWinPrediction}`);
-
+            console.log(`Spolu: ${weekProfit.testingPrediction + weekProfit.overGoalPrediction + weekProfit.underGoalPrediction + weekProfit.homeTeamWinPrediction + weekProfit.awayTeamWinPrediction}`);
         } else {
             alert('Week not found.');
         }
