@@ -34,7 +34,7 @@ let hightScore = {
 */ 
 $(function(){
     if ($('#index').length) {
-        $('h1.header').text(`Load week stats`).show();
+        $('h1.header').text(`Load stats`).show();
     } else {
         allLinks = document.querySelectorAll('#btable .trow8 td:last-child > a:first-child'); 
         allMatchesStatistics = getDataFromLocalStorage(allLinks.length) || [];   
@@ -72,13 +72,13 @@ $('html').on('click', '.load-button', function() {
 });
 
 $('html').on('click', '.getWeekStats .button', function() {
-    handleGetWeekStats('.getWeekStats input', '.getWeekStats .button');
+    handleGetWeekStats('.getWeekStats input', '.getWeekStats select', '.getWeekStats .button');
 });
 
 $('html').on('keypress', '.getWeekStats input', function(e) {
     var keycode = (e.keyCode ? e.keyCode : e.which);
     if (keycode == '13') {
-        handleGetWeekStats('.getWeekStats input', '.getWeekStats .button')
+        handleGetWeekStats('.getWeekStats input', '.getWeekStats select', '.getWeekStats .button')
     }
 });
 
@@ -119,7 +119,7 @@ function testingPrediction(allMatchesStatistics, writeToConsole){
 
         if (stats instanceof Object === false) continue;
 
-        if (stats.Domaci.posledne_4_ZapasyDoma.streleneGolyPriemer - stats.Domaci.streleneGoly_Doma < 0.85) {
+        if (stats.Domaci.posledne_4_ZapasyDoma.streleneGolyPriemer - stats.Domaci.streleneGoly_Doma < 1.06) {
             continue;
         }
 
@@ -354,11 +354,12 @@ function awayTeamWinPrediction(allMatchesStatistics, writeToConsole){
     }
 }
 
-function handleGetWeekStats(input, button){
-    const week = $(input).val();
+function handleGetWeekStats(input, select, button){
+    const name = $(input).val();
+    const selector = $(select).val();
     $(button).addClass('loading');
 
-    getWeekStats(week).then(function (weekStats) {
+    getWeekStats(name, selector).then(function (weekStats) {
         $(button).removeClass('loading');
         if (weekStats) {
             allMatchesStatistics = weekStats;
@@ -369,7 +370,10 @@ function handleGetWeekStats(input, button){
             homeTeamWinPrediction(allMatchesStatistics, false);
             awayTeamWinPrediction(allMatchesStatistics, false);
 
-            $('h1.header').text('Week' + week + ' has been loaded');
+            selector === 'weeks/week'
+                ? $('h1.header').text('Week' + name + ' has been loaded')
+                : $('h1.header').text('Month' + name + ' has been loaded')
+
             $('.row-buttons').show();
             $(input).val('');
             console.log(`testingPrediction: ${weekProfit.testingPrediction}`);
@@ -377,7 +381,9 @@ function handleGetWeekStats(input, button){
             console.log(`underGoalPrediction: ${weekProfit.underGoalPrediction}`);
             console.log(`homeTeamWinPrediction: ${weekProfit.homeTeamWinPrediction}`);
             console.log(`awayTeamWinPrediction: ${weekProfit.awayTeamWinPrediction}`);
-            console.log(`Spolu: ${weekProfit.totalProfit}€`);
+            console.log(`počet zápasov: ${allMatchesStatistics.length}`);
+            console.log(`Celkový profit: ${weekProfit.totalProfit}€`);
+            console.log(`- - - - - - - - - - - - - - - - - - - - - - - - - -`);
         } else {
             alert('Week not found.');
         }
@@ -485,13 +491,13 @@ function loadMatchesData(allLinks) {
     });
 }
 
-const getWeekStats = (week) => {
+const getWeekStats = (name, selector) => {
     let url = document.location.href.split('/');
     url.splice(url.length - 2, 2);
     let newUrl = url.join('/');
 
     return new Promise(function (resolve, reject) {
-        getData('GET', newUrl + '/data/week' + week +'.json', 'json').then(function (stats) {
+        getData('GET', newUrl + '/data/'+ selector + name +'.json', 'json').then(function (stats) {
                 resolve(stats); 
             }).catch(function (err) {
                 console.log(err);
