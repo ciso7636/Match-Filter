@@ -2,6 +2,7 @@
 
 let allMatchesStatistics, allLinks;
 let weekProfit = {
+    filteredMatches: 0,
     testingPrediction: 0,
     over15GoalPrediction: 0,
     over35GoalPrediction: 0,
@@ -142,6 +143,7 @@ function testingPrediction(allMatchesStatistics, writeToConsole){
         
         weekProfit.testingPrediction =`${calculateProfit(count, winPridiction, 3, 2, 100)}€, ${winPridiction} z ${count}, ${(winPridiction / count).toFixed(2) * 100}%`;   
         weekProfit.totalProfit += calculateProfit(count, winPridiction, 3, 2, 100);
+        weekProfit.filteredMatches += count;
     } else {
         console.log(`Nenašli sa žiadne zápasy!`);
     }
@@ -207,6 +209,7 @@ function overGoalPrediction(allMatchesStatistics, writeToConsole){
         weekProfit.over15GoalPrediction = `${calculateProfit(count, winPridiction, 3, 2, 100)}€, ${winPridiction} z ${count}, ${(winPridiction / count).toFixed(2) * 100}%`;
         weekProfit.over35GoalPrediction = `${calculateProfit(count, win35, 1, 2.75, 100)}€, ${win35} z ${count}, ${(win35 / count).toFixed(2) * 100}%`;
         weekProfit.totalProfit += (calculateProfit(count, winPridiction, 3, 2, 100) + calculateProfit(count, win35, 1, 2.75, 100));
+        weekProfit.filteredMatches += count;
     } else {
         console.log(`Nenašli sa žiadne zápasy!`);
     }
@@ -260,6 +263,7 @@ function underGoalPrediction(allMatchesStatistics, writeToConsole){
         weekProfit.under35GoalPrediction = `${calculateProfit(count, winPridiction, 3, 2, 100)}€, ${winPridiction} z ${count}, ${(winPridiction / count).toFixed(2) * 100}%`;        
         weekProfit.under15GoalPrediction = `${calculateProfit(count, win15, 1, 2.8, 100)}€, ${win15} z ${count}, ${(win15 / count).toFixed(2) * 100}%`;        
         weekProfit.totalProfit += (calculateProfit(count, winPridiction, 3, 2, 100) + calculateProfit(count, win15, 1, 2.8, 100));
+        weekProfit.filteredMatches += count;
     } else {
         console.log(`Nenašli sa žiadne zápasy!`);
     }
@@ -309,7 +313,8 @@ function homeTeamWinPrediction(allMatchesStatistics, writeToConsole){
         }
         
         weekProfit.homeTeamWinPrediction = `${calculateProfit(count, winPridiction, 3, 2, 100)}€, ${winPridiction} z ${count}, ${(winPridiction / count).toFixed(2) * 100}%`;        
-        weekProfit.totalProfit += calculateProfit(count, winPridiction, 3, 2, 100);        
+        weekProfit.totalProfit += calculateProfit(count, winPridiction, 3, 2, 100);
+        weekProfit.filteredMatches += count;
     } else {
         console.log(`Nenašli sa žiadne zápasy!`);
     }
@@ -361,7 +366,8 @@ function awayTeamWinPrediction(allMatchesStatistics, writeToConsole){
         }
 
         weekProfit.awayTeamWinPrediction = `${calculateProfit(count, winPridiction, 3, 2, 100)}€, ${winPridiction} z ${count}, ${(winPridiction / count).toFixed(2) * 100}%`;                
-        weekProfit.totalProfit += calculateProfit(count, winPridiction, 3, 2, 100);    
+        weekProfit.totalProfit += calculateProfit(count, winPridiction, 3, 2, 100);
+        weekProfit.filteredMatches += count;
     } else {
         console.log(`Nenašli sa žiadne zápasy!`);
     }
@@ -377,6 +383,7 @@ function handleGetWeekStats(input, select, button){
         if (weekStats) {
             allMatchesStatistics = weekStats;
             weekProfit.totalProfit = 0;
+            weekProfit.filteredMatches = 0;
             testingPrediction(allMatchesStatistics, false);
             overGoalPrediction(allMatchesStatistics, false);
             underGoalPrediction(allMatchesStatistics, false);
@@ -396,7 +403,7 @@ function handleGetWeekStats(input, select, button){
             console.log(`under15GoalPrediction: ${weekProfit.under15GoalPrediction}`);
             console.log(`homeTeamWinPrediction: ${weekProfit.homeTeamWinPrediction}`);
             console.log(`awayTeamWinPrediction: ${weekProfit.awayTeamWinPrediction}`);
-            console.log(`počet zápasov:    ${allMatchesStatistics.length}`);
+            console.log(`Počet zápasov:    ${weekProfit.filteredMatches} z ${allMatchesStatistics.length}`);
             console.log(`Celkový profit:   ${weekProfit.totalProfit}€`);
             console.log(`- - - - - - - - - - - - - - - - - - - - - - - - - -`);
         } else {
