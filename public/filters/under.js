@@ -14,7 +14,7 @@ if (Math.abs(stats.Domaci.posledne_4_Zapasy.streleneGolyPriemer - stats.Domaci.s
 }
 
 switch (true) {
-    case stats.filterDataBy_Yuvalfra > 2.2: // 1.8 = 100% - under1.5 / 75% - under2.5, | | | | 1.5 = 100% - under1.5 / 100% - under2.5
+    case stats.filterDataBy_Yuvalfra > 2.2: // 1.9 = 100% - under1.5 / 75% - under2.5, | | | | 1.5 = 100% - under1.5 / 100% - under2.5
     case stats.filterDataBy_JohnHaighsTable < 68:
     case stats.filterDataBy_Vincent > 1:
         continue;
