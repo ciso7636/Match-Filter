@@ -1,6 +1,95 @@
 'use strict';
 
 let allMatchesStatistics, allLinks;
+
+// Data structure
+let teamNames = {
+    matchName: '',
+    league: '',
+    homeTeam: '',
+    awayTeam: '',
+}
+
+let positionInTable = {
+    home: '',
+    away: '',
+    all: NaN,
+}
+
+let cleanSheets = {
+    cleanSheetsHome_Home: NaN,
+    cleanSheetsAway_Away: NaN,
+}
+
+let scoredAndConcededGolas = {
+    homeTeamScored: NaN,
+    homeTeamScored_home: NaN,
+    homeTeamConceded: NaN,
+    homeTeamConceded_home: NaN,
+    awayTeamScored: NaN,
+    awayTeamScored_away: NaN,
+    awayTeamConceded: NaN,
+    awayTeamConceded_away: NaN,
+}
+
+let last_4_AllMatches = {
+    toCountHomeMatchesReslult: {
+        scoredGoals: NaN,
+        scoredGoalsAverage: NaN,
+        concededGoals: NaN,
+        concededGoalsAverage: NaN,
+        matchResults: [
+            {another: NaN, current: NaN},
+            {another: NaN, current: NaN},
+            {another: NaN, current: NaN},
+            {another: NaN, current: NaN},
+        ],
+        results: ['', '', '', ''],
+    },
+    toCountAwayMatchesReslult: {
+        scoredGoals: NaN,
+        scoredGoalsAverage: NaN,
+        concededGoals: NaN,
+        concededGoalsAverage: NaN,
+        matchResults: [
+            {another: NaN, current: NaN},
+            {another: NaN, current: NaN},
+            {another: NaN, current: NaN},
+            {another: NaN, current: NaN},
+        ],
+        results: ['', '', '', ''],
+    },
+}
+
+let last_4_MatchesCurrentPosition = {
+    toCountHomeMatchesReslult: {
+        scoredGoals: NaN,
+        scoredGoalsAverage: NaN,
+        concededGoals: NaN,
+        concededGoalsAverage: NaN,
+        matchResults: [
+            {another: NaN, current: NaN},
+            {another: NaN, current: NaN},
+            {another: NaN, current: NaN},
+            {another: NaN, current: NaN},
+        ],
+        results: ['', '', '', ''],
+    },
+    toCountAwayMatchesReslult: {
+        scoredGoals: NaN,
+        scoredGoalsAverage: NaN,
+        concededGoals: NaN,
+        concededGoalsAverage: NaN,
+        matchResults: [
+            {another: NaN, current: NaN},
+            {another: NaN, current: NaN},
+            {another: NaN, current: NaN},
+            {another: NaN, current: NaN},
+        ],
+        results: ['', '', '', ''],
+    },
+}
+
 let weekProfit = {
     filteredMatches: 0,
     testingPrediction: 0,
@@ -39,7 +128,8 @@ $(function(){
     if ($('#index').length) {
         $('h1.header').text(`Load stats`).show();
     } else {
-        allLinks = document.querySelectorAll('#btable .trow8 td:last-child > a:first-child'); 
+        //allLinks = document.querySelectorAll('#btable .trow8 td:last-child > a:first-child'); 
+        allLinks = document.querySelectorAll('tbody .table-main__tt a');
         allMatchesStatistics = getDataFromLocalStorage(allLinks.length) || [];   
     
         if (allMatchesStatistics.length > 0) {
@@ -540,19 +630,25 @@ function getAllMatchData(matchLink) {
         const decodeStatsHref = decodeURI(statsHref);
 
         if (statsHref != null) {
-            getData('GET', 'https://www.soccerstats.com/' + decodeStatsHref).then(function (html) {
-                top.soccerUrl = html.URL;
+            //getData('GET', 'https://www.soccerstats.com/' + decodeStatsHref).then(function (html) {
+            getData('GET', 'https://www.betexplorer.com/' + decodeStatsHref).then(function (html) {
                 
-                const teamNames = getNameOfTeams(html.URL, rowMatch);
-                const positionInTable = getPositionInTable(html);
-                const cleanSheets = getCleanScheets(html.querySelectorAll('.trow3 td'));
-                const scoredAndConcededGolas = getScoredAndConcededGolas(html.querySelectorAll('.trow2 td'));
+                top.soccerUrl = html.URL;
 
-                const lastMatchesTables = $(html).contents().find('.six.columns table tr td span a').closest('table').prev()
-                const lastAllMatchesTable_Rows = $(lastMatchesTables[0]).find('tr');
-                const lastMatchesCurrentPositionTable_Rows = $(lastMatchesTables[1]).find('tr');
-                const last_4_AllMatches = hasTableSufficientNumberOfRows(lastAllMatchesTable_Rows) ? countResultsOfMatchesBothTeams(lastAllMatchesTable_Rows, 4) : null;
-                const last_4_MatchesCurrentPosition = hasTableSufficientNumberOfRows(lastMatchesCurrentPositionTable_Rows) ? countResultsOfMatchesBothTeams(lastMatchesCurrentPositionTable_Rows, 4) : null;
+                if (true) {
+                    //teamNames = getNameOfTeams(html.URL, rowMatch);
+                    teamNames = getNameOfTeams_betexplorer(html);
+                    //positionInTable = getPositionInTable(html);
+                    positionInTable = getPositionInTable_betexplorer(html, teamNames.homeTeam, teamNames.awayTeam);
+                    cleanSheets = getCleanScheets(html.querySelectorAll('.trow3 td'));
+                    scoredAndConcededGolas = getScoredAndConcededGolas(html.querySelectorAll('.trow2 td'));
+    
+                    const lastMatchesTables = $(html).contents().find('.six.columns table tr td span a').closest('table').prev()
+                    const lastAllMatchesTable_Rows = $(lastMatchesTables[0]).find('tr');
+                    const lastMatchesCurrentPositionTable_Rows = $(lastMatchesTables[1]).find('tr');
+                    last_4_AllMatches = hasTableSufficientNumberOfRows(lastAllMatchesTable_Rows) ? countResultsOfMatchesBothTeams(lastAllMatchesTable_Rows, 4) : null;
+                    last_4_MatchesCurrentPosition = hasTableSufficientNumberOfRows(lastMatchesCurrentPositionTable_Rows) ? countResultsOfMatchesBothTeams(lastMatchesCurrentPositionTable_Rows, 4) : null;
+                }
 
                 const filterDataBy_Yuvalfra = yuvalfra_Strategy(
                     scoredAndConcededGolas.homeTeamScored_home,
@@ -585,8 +681,8 @@ function getAllMatchData(matchLink) {
                     id: teamNames.matchName,
                     výsledok: {
                         skóre: 'bez výsledku',
-                        gólyDomáci: null,
-                        gólyHostia: null,
+                        gólyDomáci: NaN,
+                        gólyHostia: NaN,
                         vyhral: '',
                         over_1_5: null,
                         over_2_5: null,
@@ -697,6 +793,19 @@ const getNameOfTeams = (url, rowMatch) => {
     }
 }
 
+const getNameOfTeams_betexplorer = (html) => {
+    const league = html.querySelector('h1 a').href.split('soccer')[1];
+    const homeTeam = html.querySelectorAll('h2.list-details__item__title')[0].textContent
+    const awayTeam = html.querySelectorAll('h2.list-details__item__title')[1].textContent
+
+    return{
+        matchName: homeTeam.trim() + awayTeam.trim(),
+        league: league,
+        homeTeam: homeTeam.trim(),
+        awayTeam: awayTeam.trim(),
+    }
+}
+
 function getPositionInTable (html){
     var homeTablePosition = '?';
     var awayTablePosition = '?';
@@ -710,6 +819,27 @@ function getPositionInTable (html){
             homeTablePosition = i - 1
         }
         if(elm.className === 'trow5'){
+            awayTablePosition = i - 1
+        }
+    });
+
+    return {
+        home: homeTablePosition,
+        away: awayTablePosition,
+        all: numOfTeam.length - 2,
+    }
+}
+
+const getPositionInTable_betexplorer = (html, homeTeam, awayTeam) => {
+    var homeTablePosition = '?';
+    var awayTablePosition = '?';
+    const numOfTeam = html.querySelectorAll('.team_name_span');
+    
+    numOfTeam.each(function(i, elm){
+        if(elm.textContent === homeTeam){
+            homeTablePosition = i - 1
+        }
+        if(elm.className === awayTeam){
             awayTablePosition = i - 1
         }
     });
