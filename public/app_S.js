@@ -92,15 +92,15 @@ let last_4_MatchesCurrentPosition = {
 }
 
 let weekProfit = {
+    testingPrediction: {zisk: 0, vyherneZapasy: 0, pocetZapasov: 0, percentualnaUspesnost:''},
+    over15GoalPrediction: {zisk: 0, vyherneZapasy: 0, pocetZapasov: 0, percentualnaUspesnost:''},
+    over35GoalPrediction: {zisk: 0, vyherneZapasy: 0, pocetZapasov: 0, percentualnaUspesnost:''},
+    under35GoalPrediction: {zisk: 0, vyherneZapasy: 0, pocetZapasov: 0, percentualnaUspesnost:''},
+    under15GoalPrediction: {zisk: 0, vyherneZapasy: 0, pocetZapasov: 0, percentualnaUspesnost:''},
+    homeTeamWinPrediction: {zisk: 0, vyherneZapasy: 0, pocetZapasov: 0, percentualnaUspesnost:''},
+    awayTeamWinPrediction_x2: {zisk: 0, vyherneZapasy: 0, pocetZapasov: 0, percentualnaUspesnost:''},
+    awayTeamWinPrediction_2: {zisk: 0, vyherneZapasy: 0, pocetZapasov: 0, percentualnaUspesnost:''},
     filteredMatches: 0,
-    testingPrediction: 0,
-    over15GoalPrediction: 0,
-    over35GoalPrediction: 0,
-    under35GoalPrediction: 0,
-    under15GoalPrediction: 0,
-    homeTeamWinPrediction: 0,
-    awayTeamWinPrediction_x2: 0,
-    awayTeamWinPrediction_2: 0,
     totalProfit: 0,
 }
 
@@ -235,8 +235,10 @@ function testingPrediction(allMatchesStatistics, writeToConsole){
             console.log(`Over_3.5:      ${win35}, Úspešnosť: ${(win35 / count).toFixed(2) * 100}%`);
         }
         
-        weekProfit.testingPrediction =`${calculateProfit(count, winPridiction, 3, 2, 100)}€, ${winPridiction} z ${count}, ${(winPridiction / count).toFixed(2) * 100}%`;   
-        weekProfit.totalProfit += calculateProfit(count, winPridiction, 3, 2, 100);
+        weekProfit.testingPrediction.zisk = calculateProfit(count, winPridiction, 3, 2, 100);        
+        weekProfit.testingPrediction.vyherneZapasy = winPridiction;        
+        weekProfit.testingPrediction.pocetZapasov = count;        
+        weekProfit.testingPrediction.percentualnaUspesnost = `${(winPridiction / count).toFixed(2) * 100}%`;
         weekProfit.filteredMatches += count;
     } else {
         console.log(`Nenašli sa žiadne zápasy!`);
@@ -301,10 +303,16 @@ function overGoalPrediction(allMatchesStatistics, writeToConsole){
             console.log(`Over_3.5:      ${win35}, Úspešnosť: ${(win35 / count).toFixed(2) * 100}%, Min. zisk: ${calculateProfit(count, win35, 1, 2.75, 100)}€`);
             console.log(`Over_4.5:      ${win45}, Úspešnosť: ${(win45 / count).toFixed(2) * 100}%, Min. zisk: ${calculateProfit(count, win45, 1, 5.2, 100)}€`);
         }
+                
+        weekProfit.over15GoalPrediction.zisk = calculateProfit(count, winPridiction, 3, 2, 100);        
+        weekProfit.over15GoalPrediction.vyherneZapasy = winPridiction;        
+        weekProfit.over15GoalPrediction.pocetZapasov = count;        
+        weekProfit.over15GoalPrediction.percentualnaUspesnost = `${(winPridiction / count).toFixed(2) * 100}%`;
         
-        weekProfit.over15GoalPrediction = `${calculateProfit(count, winPridiction, 3, 2, 100)}€, ${winPridiction} z ${count}, ${(winPridiction / count).toFixed(2) * 100}%`;
-        weekProfit.over35GoalPrediction = `${calculateProfit(count, win35, 1, 2.75, 100)}€, ${win35} z ${count}, ${(win35 / count).toFixed(2) * 100}%`;
-        weekProfit.totalProfit += (calculateProfit(count, winPridiction, 3, 2, 100) + calculateProfit(count, win35, 1, 2.75, 100));
+        weekProfit.over35GoalPrediction.zisk = calculateProfit(count, win35, 1, 2.75, 100);        
+        weekProfit.over35GoalPrediction.vyherneZapasy = win35;        
+        weekProfit.over35GoalPrediction.pocetZapasov = count;        
+        weekProfit.over35GoalPrediction.percentualnaUspesnost = `${(win35 / count).toFixed(2) * 100}%`;
         weekProfit.filteredMatches += count;
     } else {
         console.log(`Nenašli sa žiadne zápasy!`);
@@ -358,9 +366,15 @@ function underGoalPrediction(allMatchesStatistics, writeToConsole){
             console.log(`Under_0.5:     ${win05}, Úspešnosť: ${(win05 / count).toFixed(2) * 100}%, Min. zisk: ${calculateProfit(count, win05, 1, 8, 100)}€`);
         }
         
-        weekProfit.under35GoalPrediction = `${calculateProfit(count, winPridiction, 3, 2, 100)}€, ${winPridiction} z ${count}, ${(winPridiction / count).toFixed(2) * 100}%`;        
-        weekProfit.under15GoalPrediction = `${calculateProfit(count, win15, 1, 2.8, 100)}€, ${win15} z ${count}, ${(win15 / count).toFixed(2) * 100}%`;        
-        weekProfit.totalProfit += (calculateProfit(count, winPridiction, 3, 2, 100) + calculateProfit(count, win15, 1, 2.8, 100));
+        weekProfit.under35GoalPrediction.zisk = calculateProfit(count, winPridiction, 3, 2, 100);        
+        weekProfit.under35GoalPrediction.vyherneZapasy = winPridiction;        
+        weekProfit.under35GoalPrediction.pocetZapasov = count;        
+        weekProfit.under35GoalPrediction.percentualnaUspesnost = `${(winPridiction / count).toFixed(2) * 100}%`;
+        
+        weekProfit.under15GoalPrediction.zisk = calculateProfit(count, win15, 1, 2.8, 100);        
+        weekProfit.under15GoalPrediction.vyherneZapasy = win15;        
+        weekProfit.under15GoalPrediction.pocetZapasov = count;        
+        weekProfit.under15GoalPrediction.percentualnaUspesnost = `${(win15 / count).toFixed(2) * 100}%`;
         weekProfit.filteredMatches += count;
     } else {
         console.log(`Nenašli sa žiadne zápasy!`);
@@ -410,8 +424,10 @@ function homeTeamWinPrediction(allMatchesStatistics, writeToConsole){
             console.log(`Presné tipy:   ${win}, Úspešnosť: ${(win / count).toFixed(2) * 100}%`);
         }
         
-        weekProfit.homeTeamWinPrediction = `${calculateProfit(count, winPridiction, 3, 2, 100)}€, ${winPridiction} z ${count}, ${(winPridiction / count).toFixed(2) * 100}%`;        
-        weekProfit.totalProfit += calculateProfit(count, winPridiction, 3, 2, 100);
+        weekProfit.homeTeamWinPrediction.zisk = calculateProfit(count, winPridiction, 3, 2, 100);        
+        weekProfit.homeTeamWinPrediction.vyherneZapasy = winPridiction;        
+        weekProfit.homeTeamWinPrediction.pocetZapasov = count;        
+        weekProfit.homeTeamWinPrediction.percentualnaUspesnost = `${(winPridiction / count).toFixed(2) * 100}%`;
         weekProfit.filteredMatches += count;
     } else {
         console.log(`Nenašli sa žiadne zápasy!`);
@@ -463,9 +479,15 @@ function awayTeamWinPrediction(allMatchesStatistics, writeToConsole){
             console.log(`Remízy:        ${draw}, Úspešnosť: ${(draw / count).toFixed(2) * 100}%,                Min. zisk: ${calculateProfit(count, draw, 1, 3.1, 100)}€`);
         }
 
-        weekProfit.awayTeamWinPrediction_x2 = `${calculateProfit(count, winPridiction, 3, 2, 100)}€, ${winPridiction} z ${count}, ${(winPridiction / count).toFixed(2) * 100}%`;                
-        weekProfit.awayTeamWinPrediction_2 = `${calculateProfit(count, win, 2, 3.25, 100)}€, ${win} z ${count}, ${(win / count).toFixed(2) * 100}%`;                
-        weekProfit.totalProfit += (calculateProfit(count, winPridiction, 3, 2, 100) + calculateProfit(count, win, 2, 3.25, 100));
+        weekProfit.awayTeamWinPrediction_x2.zisk = calculateProfit(count, winPridiction, 3, 2, 100);        
+        weekProfit.awayTeamWinPrediction_x2.vyherneZapasy = winPridiction;        
+        weekProfit.awayTeamWinPrediction_x2.pocetZapasov = count;        
+        weekProfit.awayTeamWinPrediction_x2.percentualnaUspesnost = `${(winPridiction / count).toFixed(2) * 100}%`;
+        
+        weekProfit.awayTeamWinPrediction_2.zisk = calculateProfit(count, win, 2, 3.25, 100);        
+        weekProfit.awayTeamWinPrediction_2.vyherneZapasy = win;        
+        weekProfit.awayTeamWinPrediction_2.pocetZapasov = count;        
+        weekProfit.awayTeamWinPrediction_2.percentualnaUspesnost = `${(win / count).toFixed(2) * 100}%`;
         weekProfit.filteredMatches += count;
     } else {
         console.log(`Nenašli sa žiadne zápasy!`);
@@ -495,17 +517,29 @@ function handleGetWeekStats(input, select, button){
 
             $('.row-buttons').show();
             $(input).val('');
-            console.log(`testingPrediction:     ${weekProfit.testingPrediction}`);
-            console.log(`over15GoalPrediction:  ${weekProfit.over15GoalPrediction}`);
-            console.log(`over35GoalPrediction:  ${weekProfit.over35GoalPrediction}`);
-            console.log(`under35GoalPrediction: ${weekProfit.under35GoalPrediction}`);
-            console.log(`under15GoalPrediction: ${weekProfit.under15GoalPrediction}`);
-            console.log(`homeTeamWinPrediction: ${weekProfit.homeTeamWinPrediction}`);
-            console.log(`awayTeamWinPrediction_x2: ${weekProfit.awayTeamWinPrediction_x2}`);
-            console.log(`awayTeamWinPrediction_2: ${weekProfit.awayTeamWinPrediction_2}`);
-            console.log(`Počet zápasov:    ${weekProfit.filteredMatches} z ${allMatchesStatistics.length}`);
-            console.log(`Celkový profit:   ${weekProfit.totalProfit}€`);
-            console.log(`- - - - - - - - - - - - - - - - - - - - - - - - - -`);
+
+            weekProfit.totalProfit = (
+                weekProfit.testingPrediction.zisk +
+                weekProfit.over15GoalPrediction.zisk +
+                weekProfit.under35GoalPrediction.zisk +
+                weekProfit.homeTeamWinPrediction.zisk +
+                weekProfit.awayTeamWinPrediction_x2.zisk +
+                weekProfit.over35GoalPrediction.zisk +
+                weekProfit.under15GoalPrediction.zisk +
+                weekProfit.awayTeamWinPrediction_2.zisk
+            )
+
+            console.log(`over 1.5 test: ${weekProfit.testingPrediction.percentualnaUspesnost}, ${weekProfit.testingPrediction.vyherneZapasy} z ${weekProfit.testingPrediction.pocetZapasov}, ${weekProfit.testingPrediction.zisk}€`);
+            console.log(`over 1.5:      ${weekProfit.over15GoalPrediction.percentualnaUspesnost}, ${weekProfit.over15GoalPrediction.vyherneZapasy} z ${weekProfit.over15GoalPrediction.pocetZapasov}, ${weekProfit.over15GoalPrediction.zisk}€`);
+            console.log(`under 3.5:     ${weekProfit.under35GoalPrediction.percentualnaUspesnost}, ${weekProfit.under35GoalPrediction.vyherneZapasy} z ${weekProfit.under35GoalPrediction.pocetZapasov}, ${weekProfit.under35GoalPrediction.zisk}€`);
+            console.log(`1x:            ${weekProfit.homeTeamWinPrediction.percentualnaUspesnost}, ${weekProfit.homeTeamWinPrediction.vyherneZapasy} z ${weekProfit.homeTeamWinPrediction.pocetZapasov}, ${weekProfit.homeTeamWinPrediction.zisk}€`);
+            console.log(`x2:            ${weekProfit.awayTeamWinPrediction_x2.percentualnaUspesnost}, ${weekProfit.awayTeamWinPrediction_x2.vyherneZapasy} z ${weekProfit.awayTeamWinPrediction_x2.pocetZapasov}, ${weekProfit.awayTeamWinPrediction_x2.zisk}€`);
+            console.log(`over 3.5:      ${weekProfit.over35GoalPrediction.percentualnaUspesnost}, ${weekProfit.over35GoalPrediction.vyherneZapasy} z ${weekProfit.over35GoalPrediction.pocetZapasov}, ${weekProfit.over35GoalPrediction.zisk}€`);
+            console.log(`under 1.5:     ${weekProfit.under15GoalPrediction.percentualnaUspesnost}, ${weekProfit.under15GoalPrediction.vyherneZapasy} z ${weekProfit.under15GoalPrediction.pocetZapasov}, ${weekProfit.under15GoalPrediction.zisk}€`);
+            console.log(`2:             ${weekProfit.awayTeamWinPrediction_2.percentualnaUspesnost}, ${weekProfit.awayTeamWinPrediction_2.vyherneZapasy} z ${weekProfit.awayTeamWinPrediction_2.pocetZapasov}, ${weekProfit.awayTeamWinPrediction_2.zisk}€`);
+            console.log(`%cPočet zápasov: %c  ${weekProfit.filteredMatches} z ${allMatchesStatistics.length}`, "font-weight: bold", "font-weight: normal");
+            console.log(`%cCelkový profit: %c ${weekProfit.totalProfit}€`, "font-weight: bold", "font-weight: normal");
+            console.log(`- - - - - - - - - - - - - - - - - - - - -`);
         } else {
             alert('Week not found.');
         }
