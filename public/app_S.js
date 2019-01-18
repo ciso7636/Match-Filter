@@ -519,14 +519,14 @@ function handleGetWeekStats(input, select, button){
             $(input).val('');
 
             weekProfit.totalProfit = (
-                weekProfit.testingPrediction.zisk +
-                weekProfit.over15GoalPrediction.zisk +
-                weekProfit.under35GoalPrediction.zisk +
-                weekProfit.homeTeamWinPrediction.zisk +
-                weekProfit.awayTeamWinPrediction_x2.zisk +
-                weekProfit.over35GoalPrediction.zisk +
-                weekProfit.under15GoalPrediction.zisk +
-                weekProfit.awayTeamWinPrediction_2.zisk
+                + weekProfit.testingPrediction.zisk
+                + weekProfit.over15GoalPrediction.zisk
+                + weekProfit.under35GoalPrediction.zisk
+                //+ weekProfit.homeTeamWinPrediction.zisk
+                //+ weekProfit.awayTeamWinPrediction_x2.zisk
+                + weekProfit.over35GoalPrediction.zisk
+                //+ weekProfit.under15GoalPrediction.zisk
+                //+ weekProfit.awayTeamWinPrediction_2.zisk
             )
 
             console.log(`over 1.5 test: ${weekProfit.testingPrediction.percentualnaUspesnost}, ${weekProfit.testingPrediction.vyherneZapasy} z ${weekProfit.testingPrediction.pocetZapasov}, ${weekProfit.testingPrediction.zisk}€`);

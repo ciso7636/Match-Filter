@@ -630,7 +630,7 @@ function getAllMatchData(matchLink) {
         const decodeStatsHref = decodeURI(statsHref);
 
         if (statsHref != null) {
-            getData('GET', 'https://www.betexplorer.com/' + decodeStatsHref).then(function (html) {
+            getData('GET', 'https://www.whoscored.com/Matches/1310236/Betting/Morocco-GNF-1-2018-2019-Raja-Casablanca-MAT-Tetouan').then(function (html) {
                 
                 top.soccerUrl = html.URL;
 
