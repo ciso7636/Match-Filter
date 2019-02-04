@@ -190,6 +190,10 @@ $('html').on('click', '.overGoalPrediction', function() {
     overGoalPrediction(allMatchesStatistics);
 });
 
+$('html').on('click', '.over35GoalPrediction', function() {
+    over35GoalPrediction(allMatchesStatistics);
+});
+
 $('html').on('click', '.underGoalPrediction', function() {
     underGoalPrediction(allMatchesStatistics);
 });
@@ -215,7 +219,7 @@ function testingPrediction(allMatchesStatistics, writeToConsole){
 
         if (stats instanceof Object === false) continue;
 
-        //if (isEuropeLeague(stats.Liga) && stats.CasZapasu > 20) continue;
+        if (isEuropeLeague(stats.Liga) && stats.CasZapasu > 19) continue;
 
         if (stats.Domaci.posledne_4_ZapasyDoma.streleneGolyPriemer - stats.Domaci.streleneGoly_Doma < 1.06) {
             continue;
@@ -255,7 +259,7 @@ function overGoalPrediction(allMatchesStatistics, writeToConsole){
 
         if (stats instanceof Object === false) continue;
 
-        if (isEuropeLeague(stats.Liga) && stats.CasZapasu > 20) continue;
+        if (isEuropeLeague(stats.Liga) && stats.CasZapasu > 19) continue;
 
         if (stats.Domaci.streleneGoly_Doma < 1.8) {
             continue;
@@ -308,7 +312,71 @@ function overGoalPrediction(allMatchesStatistics, writeToConsole){
         weekProfit.over15GoalPrediction.vyherneZapasy = winPridiction;        
         weekProfit.over15GoalPrediction.pocetZapasov = count;        
         weekProfit.over15GoalPrediction.percentualnaUspesnost = `${(winPridiction / count).toFixed(2) * 100}%`;
-        
+        weekProfit.filteredMatches += count;
+    } else {
+        console.log(`Nenašli sa žiadne zápasy!`);
+    }
+}
+
+function over35GoalPrediction(allMatchesStatistics, writeToConsole){
+    let count = 0;
+    let winPridiction = 0;
+    let win25 = 0;
+    let win35 = 0;
+    let win45 = 0;
+    for (let stats of allMatchesStatistics) {
+
+        if (stats instanceof Object === false) continue;
+
+        if (isEuropeLeague(stats.Liga) && stats.CasZapasu > 19) continue;
+
+        if (stats.Domaci.streleneGoly_Doma < 1.8) {
+            continue;
+        }
+
+        switch (true) {
+            case stats.Domaci.cisteKontoDoma >= 35 || stats.Hostia.cisteKontoVonku >= 32:
+            case stats.Hostia.cisteKontoVonku >= 40 && Math.abs(stats.Hostia.cisteKontoVonku - stats.Domaci.cisteKontoDoma) < 15:
+            case stats.Hostia.cisteKontoVonku >= 45 && Math.abs(stats.Hostia.cisteKontoVonku - stats.Domaci.cisteKontoDoma) < 20:
+            case stats.Hostia.cisteKontoVonku >= 50 && Math.abs(stats.Hostia.cisteKontoVonku - stats.Domaci.cisteKontoDoma) < 25:
+                continue;
+        }
+
+        switch (true) {
+            case stats.priemer_StrelenéGólyDomáci_InkasovaneGólyHostia < 1.4:
+            case stats.priemer_StrelenéGólyHostia_InkasovaneGólyDomáci < 1.25:
+                continue;
+        }
+
+        switch (true) {
+            case stats.priemer_posledne4Zapasy_StrelenéGólyDomáci_InkasovaneGólyHostia < 1.3:
+            case stats.priemer_posledne4Zapasy_StrelenéGólyHostia_InkasovaneGólyDomáci < 1.2:
+                continue;
+        }
+
+        switch (true) {
+            case stats.filterDataBy_Yuvalfra < 3.8:
+            case stats.filterDataBy_JohnHaighsTable > 33:
+            case stats.filterDataBy_Vincent < 3:
+                continue;
+        }
+
+        if (writeToConsole !== false) returnDataToConsoleLog(stats, 'overUnder');
+
+        count++;
+        winPridiction += (stats.výsledok.over_1_5 === true || stats.výsledok.over_1_5 === true) ? 1 : 0;
+        win25 += stats.výsledok.over_2_5 === true ? 1 : 0;
+        win35 += (stats.výsledok.gólyDomáci + stats.výsledok.gólyHostia) > 3 === true ? 1 : 0;
+        win45 += (stats.výsledok.gólyDomáci + stats.výsledok.gólyHostia) > 4 === true ? 1 : 0;
+    }
+    if (count > 0) {
+        if (writeToConsole !== false) {
+            console.log(`Počet zápasov: ${count}, Výherných: ${winPridiction}, Úspešnosť: ${(winPridiction / count).toFixed(2) * 100}%, Min. zisk: ${calculateProfit(count, winPridiction, 3, 2, 100)}€`);
+            console.log(`Over_2.5:      ${win25}, Úspešnosť: ${(win25 / count).toFixed(2) * 100}%, Min. zisk: ${calculateProfit(count, win25, 2, 2.7, 100)}€`);
+            console.log(`Over_3.5:      ${win35}, Úspešnosť: ${(win35 / count).toFixed(2) * 100}%, Min. zisk: ${calculateProfit(count, win35, 1, 2.75, 100)}€`);
+            console.log(`Over_4.5:      ${win45}, Úspešnosť: ${(win45 / count).toFixed(2) * 100}%, Min. zisk: ${calculateProfit(count, win45, 1, 5.2, 100)}€`);
+        }
+
         weekProfit.over35GoalPrediction.zisk = calculateProfit(count, win35, 1, 2.75, 100);        
         weekProfit.over35GoalPrediction.vyherneZapasy = win35;        
         weekProfit.over35GoalPrediction.pocetZapasov = count;        
@@ -507,6 +575,7 @@ function handleGetWeekStats(input, select, button){
             weekProfit.filteredMatches = 0;
             testingPrediction(allMatchesStatistics, false);
             overGoalPrediction(allMatchesStatistics, false);
+            over35GoalPrediction(allMatchesStatistics, false);
             underGoalPrediction(allMatchesStatistics, false);
             homeTeamWinPrediction(allMatchesStatistics, false);
             awayTeamWinPrediction(allMatchesStatistics, false);
@@ -522,7 +591,7 @@ function handleGetWeekStats(input, select, button){
                 + weekProfit.testingPrediction.zisk
                 + weekProfit.over15GoalPrediction.zisk
                 + weekProfit.under35GoalPrediction.zisk
-                //+ weekProfit.homeTeamWinPrediction.zisk
+                + weekProfit.homeTeamWinPrediction.zisk
                 //+ weekProfit.awayTeamWinPrediction_x2.zisk
                 + weekProfit.over35GoalPrediction.zisk
                 //+ weekProfit.under15GoalPrediction.zisk
@@ -532,9 +601,9 @@ function handleGetWeekStats(input, select, button){
             console.log(`over 1.5:      ${weekProfit.over15GoalPrediction.percentualnaUspesnost}, ${weekProfit.over15GoalPrediction.vyherneZapasy} z ${weekProfit.over15GoalPrediction.pocetZapasov}, ${weekProfit.over15GoalPrediction.zisk}€`);
             console.log(`under 3.5:     ${weekProfit.under35GoalPrediction.percentualnaUspesnost}, ${weekProfit.under35GoalPrediction.vyherneZapasy} z ${weekProfit.under35GoalPrediction.pocetZapasov}, ${weekProfit.under35GoalPrediction.zisk}€`);
             console.log(`over 3.5:      ${weekProfit.over35GoalPrediction.percentualnaUspesnost}, ${weekProfit.over35GoalPrediction.vyherneZapasy} z ${weekProfit.over35GoalPrediction.pocetZapasov}, ${weekProfit.over35GoalPrediction.zisk}€`);
+            console.log(`1x:            ${weekProfit.homeTeamWinPrediction.percentualnaUspesnost}, ${weekProfit.homeTeamWinPrediction.vyherneZapasy} z ${weekProfit.homeTeamWinPrediction.pocetZapasov}, ${weekProfit.homeTeamWinPrediction.zisk}€`);            
             console.log(`%cCelkový profit: %c ${weekProfit.totalProfit}€`, "font-weight: bold", "font-weight: normal");
-            console.log(`.   .   .   .   .   .   .   .   .   .   .`);
-            console.log(`1x:            ${weekProfit.homeTeamWinPrediction.percentualnaUspesnost}, ${weekProfit.homeTeamWinPrediction.vyherneZapasy} z ${weekProfit.homeTeamWinPrediction.pocetZapasov}, ${weekProfit.homeTeamWinPrediction.zisk}€`);
+
             console.log(`x2:            ${weekProfit.awayTeamWinPrediction_x2.percentualnaUspesnost}, ${weekProfit.awayTeamWinPrediction_x2.vyherneZapasy} z ${weekProfit.awayTeamWinPrediction_x2.pocetZapasov}, ${weekProfit.awayTeamWinPrediction_x2.zisk}€`);
             console.log(`under 1.5:     ${weekProfit.under15GoalPrediction.percentualnaUspesnost}, ${weekProfit.under15GoalPrediction.vyherneZapasy} z ${weekProfit.under15GoalPrediction.pocetZapasov}, ${weekProfit.under15GoalPrediction.zisk}€`);
             console.log(`2:             ${weekProfit.awayTeamWinPrediction_2.percentualnaUspesnost}, ${weekProfit.awayTeamWinPrediction_2.vyherneZapasy} z ${weekProfit.awayTeamWinPrediction_2.pocetZapasov}, ${weekProfit.awayTeamWinPrediction_2.zisk}€`);
@@ -1108,6 +1177,8 @@ const isEuropeLeague = (league) => {
     const europeLeagues = [
         'england',
         'france',
+        'italy',
+        'germany',
     ];
 
     for (var i = 0; i < europeLeagues.length; i++) {

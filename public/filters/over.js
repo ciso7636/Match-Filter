@@ -49,3 +49,11 @@ switch (true) {
     case stats.filterDataBy_Vincent < 1.5:
         continue;
 }
+
+// 60% - over3.5
+switch (true) {
+    case stats.filterDataBy_Yuvalfra < 3.8:
+    case stats.filterDataBy_JohnHaighsTable > 33:
+    case stats.filterDataBy_Vincent < 3:
+        continue;
+}
