@@ -1,0 +1,3941 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>   
+    <link rel="stylesheet" type="text/css" href="semantic/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="semantic/semantic-style.css">
+    <script
+        src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+        crossorigin="anonymous">
+    </script>
+    <script src="semantic/semantic.min.js"></script>
+    <script src="app_S.js" type="text/javascript"></script>
+
+</head>
+<body>
+<!-- static HTML -->
+    <div class="ui inverted vertical masthead center aligned segment">
+        <div class="ui text container">
+            <h1 class="ui inverted header">
+                Cick to load data
+            </h1>
+            <div class="ui huge primary button loading load-button"></div>
+        </div>
+        
+        <!-- <div class="ui form container">
+            <div class="two wide field">
+                <input type='text' placeholder="name"/>
+            </div>
+            <div class=" wide field">
+                <textarea placeholder="JSON" rows="2"></textarea>
+            </div>
+            <div class="ui submit button setToLocalStorage">Set to localStorage</div>
+        </div> -->
+       
+        <div id="myProgress">
+            <div id="myBar">0</div>
+        </div>
+        <div class="row row-buttons">
+            <div class="column">
+                <a class="ui default button testingPrediction" tabindex="0">Test</a>
+                <a class="ui positive button overGoalPrediction" tabindex="0">Over1.5</a>
+                <a class="ui positive button over35GoalPrediction" tabindex="0">Over3.5</a>
+                <a class="ui positive button underGoalPrediction" tabindex="0">Under3.5</a>
+                <a class="ui positive button under15GoalPrediction" tabindex="0">Under1.5</a>
+                <a class="ui positive button homeTeamWinPrediction" tabindex="0">1x</a>
+                <a class="ui positive button awayTeamWinPrediction" tabindex="0">x2</a>
+                <a class="ui positive button awayTeamWinPrediction_2" tabindex="0">2</a>
+            </div>
+        </div>
+    </div>
+<!-- static HTML -->
+
+<table id="btable" style="display: none">
+    <tbody><tr height="8"><td colspan="26" align="center" valign="middle"><font size="1"> </font></td></tr>
+        <tr class="trow2"><td height="30" colspan="12">
+        &nbsp;
+        &nbsp;<a href="leagueview.asp?league=cleague" class="countrylist"><font size="2">Champions League</font></a>
+        </td>
+        <td colspan="12" align="right">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="button" style="background-color:#eeeeee;font-color=white;" href="leagueview.asp?league=cleague"><font color="#666666">Stats</font></a>&nbsp;&nbsp;
+        </td>
+        </tr>
+        
+        <tr class="trow8" height="26">
+        <td align="center"><font color="green"><b></b></font></td>
+        <td align="center"><font color="green" size="1"></font></td>
+        <td align="center"><font size="1"></font></td>
+        <td align="center"><font size="1"></font></td>
+        <td align="center"><font size="1"></font></td>
+        <td><font size="1" color="green">
+        </font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        </font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        </font></td>
+        <td align="center"><font size="1"></font></td>
+        <td>&nbsp;</td>
+        <td align="right">
+        AS Roma
+        </td>
+        <td width="30" align="center">
+        
+        <font size="1" color="gray">21:00</font>
+        
+        </td>
+        <td>
+        FC Porto
+        </td>
+        <td>&nbsp;</td>
+        <td align="center"><font size="1"></font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        </font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        </font></td>
+        <td><font size="1" color="green">
+        </font></td>
+        <td align="center"><font size="1"></font></td>
+        <td align="center"><font size="1"></font></td>
+        <td align="center"><font size="1"></font></td>
+        <td align="center"><font color="green" size="1"></font></td>
+        <td align="center"><font color="green"><b></b></font></td>
+        <td align="center" valign="middle">
+        <a href="leagueview_team.asp?league=cleague&amp;team1id=32&amp;team2id=14" title="AS Roma vs FC Porto" rel="nofollow"><font color="blue" size="1"><u>stats</u></font></a>
+        </td>
+        </tr>
+        
+        <tr class="trow8" height="26">
+        <td align="center"><font color="green"><b></b></font></td>
+        <td align="center"><font color="green" size="1"></font></td>
+        <td align="center"><font size="1"></font></td>
+        <td align="center"><font size="1"></font></td>
+        <td align="center"><font size="1"></font></td>
+        <td><font size="1" color="green">
+        </font></td>
+        <td align="center">
+        <font color="red" size="1">
+        </font></td>
+        <td align="center">
+        <font color="red" size="1">
+        </font></td>
+        <td align="center"><font size="1"></font></td>
+        <td>&nbsp;</td>
+        <td align="right">
+        Manchester Utd
+        </td>
+        <td width="30" align="center">
+        
+        <font size="1" color="gray">21:00</font>
+        
+        </td>
+        <td>
+        Paris SG
+        </td>
+        <td>&nbsp;</td>
+        <td align="center"><font size="1"></font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        </font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        </font></td>
+        <td><font size="1" color="green">
+        </font></td>
+        <td align="center"><font size="1"></font></td>
+        <td align="center"><font size="1"></font></td>
+        <td align="center"><font size="1"></font></td>
+        <td align="center"><font color="green" size="1"></font></td>
+        <td align="center"><font color="green"><b></b></font></td>
+        <td align="center" valign="middle">
+        <a href="leagueview_team.asp?league=cleague&amp;team1id=24&amp;team2id=12" title="Manchester Utd vs Paris SG" rel="nofollow"><font color="blue" size="1"><u>stats</u></font></a>
+        </td>
+        </tr>
+        
+        <tr height="8"><td colspan="26" align="center" valign="middle"><font size="1"> </font></td></tr>
+        <tr class="trow2"><td height="30" colspan="12">
+        &nbsp;
+        &nbsp;<a href="leagueview.asp?league=uefa" class="countrylist"><font size="2">Europa League</font></a>
+        </td>
+        <td colspan="12" align="right">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="button" style="background-color:#eeeeee;font-color=white;" href="leagueview.asp?league=uefa"><font color="#666666">Stats</font></a>&nbsp;&nbsp;
+        </td>
+        </tr>
+        
+        <tr class="trow8" height="26">
+        <td align="center"><font color="green"><b></b></font></td>
+        <td align="center"><font color="green" size="1"></font></td>
+        <td align="center"><font size="1"></font></td>
+        <td align="center"><font size="1"></font></td>
+        <td align="center"><font size="1"></font></td>
+        <td><font size="1" color="green">
+        </font></td>
+        <td align="center">
+        <font color="red" size="1">
+        </font></td>
+        <td align="center">
+        <font color="red" size="1">
+        </font></td>
+        <td align="center"><font size="1"></font></td>
+        <td>&nbsp;</td>
+        <td align="right">
+        Fenerbahce
+        </td>
+        <td width="30" align="center">
+        
+        <font size="1" color="gray">18:55</font>
+        
+        </td>
+        <td>
+        Zenit
+        </td>
+        <td>&nbsp;</td>
+        <td align="center"><font size="1"></font></td>
+        <td align="center">
+        <font color="red" size="1">
+        </font></td>
+        <td align="center">
+        <font color="red" size="1">
+        </font></td>
+        <td><font size="1" color="green">
+        </font></td>
+        <td align="center"><font size="1"></font></td>
+        <td align="center"><font size="1"></font></td>
+        <td align="center"><font size="1"></font></td>
+        <td align="center"><font color="green" size="1"></font></td>
+        <td align="center"><font color="green"><b></b></font></td>
+        <td align="center" valign="middle">
+        <a href="leagueview_team.asp?league=uefa&amp;team1id=15&amp;team2id=11" title="Fenerbahce vs Zenit" rel="nofollow"><font color="blue" size="1"><u>stats</u></font></a>
+        </td>
+        </tr>
+        
+        
+        
+        <tr height="8"><td colspan="26" align="center" valign="middle"><font size="1"> </font></td></tr>
+        <tr class="trow2"><td height="30" colspan="12">
+        &nbsp;<img src="//www.soccerstatistics.com/img/flags/dz.png" width="16" height="11" alt="ALGERIA">
+        &nbsp;<font size="2">Algeria - <font color="gray">Ligue 1</font></font>
+        </td>
+        <td colspan="12" align="right">
+        &nbsp;&nbsp;<font color="gray" size="1">163 matches played out of 240</font>&nbsp;&nbsp;&nbsp;&nbsp;<a class="button" style="background-color:#eeeeee;font-color=white;" href="latest.asp?league=algeria"><font color="#666666">Stats</font></a>&nbsp;&nbsp;&nbsp;&nbsp;
+        </td>
+        </tr>
+        
+        <tr class="trow2" height="24">
+        <td align="center"><font color="gray"><b>P</b></font></td>
+        <td align="center"><font color="gray" size="1">W%</font></td>
+        <td align="center"><font color="gray" size="1">FTS</font></td>
+        <td align="center"><font color="gray" size="1">CS</font></td>
+        <td align="center"><font color="gray" size="1">BTS</font></td>
+        <td align="center"><font color="gray" size="1">GF</font></td>
+        <td align="center"><font color="gray" size="1">TG</font></td>
+        <td align="center"><font color="gray" size="1">2.5+</font></td>
+        <td align="center"><font color="gray" size="1">1.5+</font></td>
+        <td><font color="gray"><b>PPG</b></font></td>
+        <td align="left"><font color="gray" size="1">&nbsp;&lt;= (at home)</font></td>
+        <td></td>
+        <td align="right"><font color="gray" size="1">(away) =&gt;&nbsp;</font></td>
+        <td><font color="gray"><b>PPG</b></font></td>
+        <td align="center"><font color="gray" size="1">1.5+</font></td>
+        <td align="center"><font color="gray" size="1">2.5+</font></td>
+        <td align="center"><font color="gray" size="1">TG</font></td>
+        <td align="center"><font color="gray" size="1">GF</font></td>
+        <td align="center"><font color="gray" size="1">BTS</font></td>
+        <td align="center"><font color="gray" size="1">CS</font></td>
+        <td align="center"><font color="gray" size="1">FTS</font></td>
+        <td align="center"><font color="gray" size="1">W%</font></td>
+        <td align="center"><font color="gray"><b>P</b></font></td>
+        <td width="60"></td>
+        </tr>
+        
+        <tr class="trow8" height="26">
+        <td align="center"><font color="green"><b>10</b></font></td>
+        <td align="center"><font color="green" size="1">20%</font></td>
+        <td align="center"><font size="1">40%</font></td>
+        <td align="center"><font size="1">40%</font></td>
+        <td align="center"><font size="1">40%</font></td>
+        <td><font size="1" color="green">
+        0.60</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        1.50</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        20%</font></td>
+        <td align="center"><font size="1">50%</font></td>
+        <td><font color="gray"><b>1.10</b></font></td>
+        <td align="right">
+        MO Béjaïa
+        </td>
+        <td width="30" align="center">
+        
+        <font size="1" color="gray">17:00</font>
+        
+        </td>
+        <td>
+        CA Bordj Bou A.
+        </td>
+        <td><font color="gray"><b>0.60</b></font></td>
+        <td align="center"><font size="1">50%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        20%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        1.80</font></td>
+        <td><font size="1" color="green">
+        0.50</font></td>
+        <td align="center"><font size="1">40%</font></td>
+        <td align="center"><font size="1">20%</font></td>
+        <td align="center"><font size="1">50%</font></td>
+        <td align="center"><font color="green" size="1">10%</font></td>
+        <td align="center"><font color="green"><b>10</b></font></td>
+        <td align="center" valign="middle">
+        <a href="pmatch.asp?league=algeria&amp;stats=174-6-14-2019-mo-béjaïa-vs-ca-bordj-bou-a."><font color="blue" size="1"><u>stats</u></font></a>
+        &nbsp;&nbsp;<a href="h2h.asp?league=algeria&amp;t1id=6&amp;t2id=14&amp;ly=2019" title="MO Béjaïa vs CA Bordj Bou A." rel="nofollow"><font color="blue" size="1"><u>h2h</u></font></a>
+        </td>
+        </tr>
+        
+        <tr class="trow8" height="26">
+        <td align="center"><font color="green"><b>10</b></font></td>
+        <td align="center"><font color="green" size="1">70%</font></td>
+        <td align="center"><font size="1">20%</font></td>
+        <td align="center"><font size="1">70%</font></td>
+        <td align="center"><font size="1">20%</font></td>
+        <td><font size="1" color="green">
+        1.80</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        2.40</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        50%</font></td>
+        <td align="center"><font size="1">70%</font></td>
+        <td><font color="gray"><b>2.20</b></font></td>
+        <td align="right">
+        Paradou AC
+        </td>
+        <td width="30" align="center">
+        
+        <font size="1" color="gray">17:45</font>
+        
+        </td>
+        <td>
+        CS Constantine
+        </td>
+        <td><font color="gray"><b>1.22</b></font></td>
+        <td align="center"><font size="1">56%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        33%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        1.78</font></td>
+        <td><font size="1" color="green">
+        1.00</font></td>
+        <td align="center"><font size="1">22%</font></td>
+        <td align="center"><font size="1">56%</font></td>
+        <td align="center"><font size="1">44%</font></td>
+        <td align="center"><font color="green" size="1">33%</font></td>
+        <td align="center"><font color="green"><b>9</b></font></td>
+        <td align="center" valign="middle">
+        <a href="pmatch.asp?league=algeria&amp;stats=175-2-3-2019-paradou-ac-vs-cs-constantine"><font color="blue" size="1"><u>stats</u></font></a>
+        &nbsp;&nbsp;<a href="h2h.asp?league=algeria&amp;t1id=2&amp;t2id=3&amp;ly=2019" title="Paradou AC vs CS Constantine" rel="nofollow"><font color="blue" size="1"><u>h2h</u></font></a>
+        </td>
+        </tr>
+        
+        <tr height="8"><td colspan="26" align="center" valign="middle"><font size="1"> </font></td></tr>
+        <tr class="trow2"><td height="30" colspan="12">
+        &nbsp;<img src="//www.soccerstatistics.com/img/flags/ar.png" width="16" height="11" alt="ARGENTINA">
+        &nbsp;<font size="2">Argentina - <font color="gray">Primera Division</font></font>
+        </td>
+        <td colspan="12" align="right">
+        &nbsp;&nbsp;<font color="gray" size="1">229 matches played out of 325</font>&nbsp;&nbsp;&nbsp;&nbsp;<a class="button" style="background-color:#eeeeee;font-color=white;" href="latest.asp?league=argentina"><font color="#666666">Stats</font></a>&nbsp;&nbsp;&nbsp;&nbsp;
+        </td>
+        </tr>
+        
+        <tr class="trow2" height="24">
+        <td align="center"><font color="gray"><b>P</b></font></td>
+        <td align="center"><font color="gray" size="1">W%</font></td>
+        <td align="center"><font color="gray" size="1">FTS</font></td>
+        <td align="center"><font color="gray" size="1">CS</font></td>
+        <td align="center"><font color="gray" size="1">BTS</font></td>
+        <td align="center"><font color="gray" size="1">GF</font></td>
+        <td align="center"><font color="gray" size="1">TG</font></td>
+        <td align="center"><font color="gray" size="1">2.5+</font></td>
+        <td align="center"><font color="gray" size="1">1.5+</font></td>
+        <td><font color="gray"><b>PPG</b></font></td>
+        <td align="left"><font color="gray" size="1">&nbsp;&lt;= (at home)</font></td>
+        <td></td>
+        <td align="right"><font color="gray" size="1">(away) =&gt;&nbsp;</font></td>
+        <td><font color="gray"><b>PPG</b></font></td>
+        <td align="center"><font color="gray" size="1">1.5+</font></td>
+        <td align="center"><font color="gray" size="1">2.5+</font></td>
+        <td align="center"><font color="gray" size="1">TG</font></td>
+        <td align="center"><font color="gray" size="1">GF</font></td>
+        <td align="center"><font color="gray" size="1">BTS</font></td>
+        <td align="center"><font color="gray" size="1">CS</font></td>
+        <td align="center"><font color="gray" size="1">FTS</font></td>
+        <td align="center"><font color="gray" size="1">W%</font></td>
+        <td align="center"><font color="gray"><b>P</b></font></td>
+        <td width="60"></td>
+        </tr>
+        
+        <tr class="trow8" height="26">
+        <td align="center"><font color="green"><b>8</b></font></td>
+        <td align="center"><font color="green" size="1">50%</font></td>
+        <td align="center"><font size="1">12%</font></td>
+        <td align="center"><font size="1">38%</font></td>
+        <td align="center"><font size="1">50%</font></td>
+        <td><font size="1" color="green">
+        1.38</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        2.88</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        50%</font></td>
+        <td align="center"><font size="1">88%</font></td>
+        <td><font color="gray"><b>1.63</b></font></td>
+        <td align="right">
+        Aldosivi
+        </td>
+        <td width="30" align="center">
+        
+        <font size="1" color="gray">01:10</font>
+        
+        </td>
+        <td>
+        San Martin SJ
+        </td>
+        <td><font color="gray"><b>0.67</b></font></td>
+        <td align="center"><font size="1">67%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        33%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        2.22</font></td>
+        <td><font size="1" color="green">
+        0.78</font></td>
+        <td align="center"><font size="1">44%</font></td>
+        <td align="center"><font size="1">22%</font></td>
+        <td align="center"><font size="1">44%</font></td>
+        <td align="center"><font color="green" size="1">11%</font></td>
+        <td align="center"><font color="green"><b>9</b></font></td>
+        <td align="center" valign="middle">
+        <a href="pmatch.asp?league=argentina&amp;stats=222-24-4-2019-aldosivi-vs-san-martin-sj"><font color="blue" size="1"><u>stats</u></font></a>
+        &nbsp;&nbsp;<a href="h2h.asp?league=argentina&amp;t1id=24&amp;t2id=4&amp;ly=2019" title="Aldosivi vs San Martin SJ" rel="nofollow"><font color="blue" size="1"><u>h2h</u></font></a>
+        </td>
+        </tr>
+        
+        <tr height="8"><td colspan="26" align="center" valign="middle"><font size="1"> </font></td></tr>
+        <tr class="trow2"><td height="30" colspan="12">
+        &nbsp;<img src="//www.soccerstatistics.com/img/flags/ar.png" width="16" height="11" alt="ARGENTINA3">
+        &nbsp;<font size="2">Argentina - <font color="gray">Primera B Metro.</font></font>
+        </td>
+        <td colspan="12" align="right">
+        &nbsp;&nbsp;<font color="gray" size="1">222 matches played out of 380</font>&nbsp;&nbsp;&nbsp;&nbsp;<a class="button" style="background-color:#eeeeee;font-color=white;" href="latest.asp?league=argentina3"><font color="#666666">Stats</font></a>&nbsp;&nbsp;&nbsp;&nbsp;
+        </td>
+        </tr>
+        
+        <tr class="trow2" height="24">
+        <td align="center"><font color="gray"><b>P</b></font></td>
+        <td align="center"><font color="gray" size="1">W%</font></td>
+        <td align="center"><font color="gray" size="1">FTS</font></td>
+        <td align="center"><font color="gray" size="1">CS</font></td>
+        <td align="center"><font color="gray" size="1">BTS</font></td>
+        <td align="center"><font color="gray" size="1">GF</font></td>
+        <td align="center"><font color="gray" size="1">TG</font></td>
+        <td align="center"><font color="gray" size="1">2.5+</font></td>
+        <td align="center"><font color="gray" size="1">1.5+</font></td>
+        <td><font color="gray"><b>PPG</b></font></td>
+        <td align="left"><font color="gray" size="1">&nbsp;&lt;= (at home)</font></td>
+        <td></td>
+        <td align="right"><font color="gray" size="1">(away) =&gt;&nbsp;</font></td>
+        <td><font color="gray"><b>PPG</b></font></td>
+        <td align="center"><font color="gray" size="1">1.5+</font></td>
+        <td align="center"><font color="gray" size="1">2.5+</font></td>
+        <td align="center"><font color="gray" size="1">TG</font></td>
+        <td align="center"><font color="gray" size="1">GF</font></td>
+        <td align="center"><font color="gray" size="1">BTS</font></td>
+        <td align="center"><font color="gray" size="1">CS</font></td>
+        <td align="center"><font color="gray" size="1">FTS</font></td>
+        <td align="center"><font color="gray" size="1">W%</font></td>
+        <td align="center"><font color="gray"><b>P</b></font></td>
+        <td width="60"></td>
+        </tr>
+        
+        <tr class="trow8" height="26">
+        <td align="center"><font color="green"><b>11</b></font></td>
+        <td align="center"><font color="green" size="1">45%</font></td>
+        <td align="center"><font size="1">27%</font></td>
+        <td align="center"><font size="1">36%</font></td>
+        <td align="center"><font size="1">36%</font></td>
+        <td><font size="1" color="green">
+        1.55</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        2.64</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        45%</font></td>
+        <td align="center"><font size="1">82%</font></td>
+        <td><font color="gray"><b>1.64</b></font></td>
+        <td align="right">
+        Dep. Riestra
+        </td>
+        <td width="30" align="center">
+        
+        <font size="1" color="gray">21:00</font>
+        
+        </td>
+        <td>
+        Atlanta
+        </td>
+        <td><font color="gray"><b>1.55</b></font></td>
+        <td align="center"><font size="1">55%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        36%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        2.00</font></td>
+        <td><font size="1" color="green">
+        1.27</font></td>
+        <td align="center"><font size="1">36%</font></td>
+        <td align="center"><font size="1">55%</font></td>
+        <td align="center"><font size="1">36%</font></td>
+        <td align="center"><font color="green" size="1">36%</font></td>
+        <td align="center"><font color="green"><b>11</b></font></td>
+        <td align="center" valign="middle">
+        <a href="pmatch.asp?league=argentina3&amp;stats=222-3-9-2019-dep.-riestra-vs-atlanta"><font color="blue" size="1"><u>stats</u></font></a>
+        &nbsp;&nbsp;<a href="h2h.asp?league=argentina3&amp;t1id=3&amp;t2id=9&amp;ly=2019" title="Dep. Riestra vs Atlanta" rel="nofollow"><font color="blue" size="1"><u>h2h</u></font></a>
+        </td>
+        </tr>
+        
+        <tr height="8"><td colspan="26" align="center" valign="middle"><font size="1"> </font></td></tr>
+        <tr class="trow2"><td height="30" colspan="12">
+        &nbsp;<img src="//www.soccerstatistics.com/img/flags/ar.png" width="16" height="11" alt="ARGENTINA4">
+        &nbsp;<font size="2">Argentina - <font color="gray">Primera C</font></font>
+        </td>
+        <td colspan="12" align="right">
+        &nbsp;&nbsp;<font color="gray" size="1">218 matches played out of 380</font>&nbsp;&nbsp;&nbsp;&nbsp;<a class="button" style="background-color:#eeeeee;font-color=white;" href="latest.asp?league=argentina4"><font color="#666666">Stats</font></a>&nbsp;&nbsp;&nbsp;&nbsp;
+        </td>
+        </tr>
+        
+        <tr class="trow2" height="24">
+        <td align="center"><font color="gray"><b>P</b></font></td>
+        <td align="center"><font color="gray" size="1">W%</font></td>
+        <td align="center"><font color="gray" size="1">FTS</font></td>
+        <td align="center"><font color="gray" size="1">CS</font></td>
+        <td align="center"><font color="gray" size="1">BTS</font></td>
+        <td align="center"><font color="gray" size="1">GF</font></td>
+        <td align="center"><font color="gray" size="1">TG</font></td>
+        <td align="center"><font color="gray" size="1">2.5+</font></td>
+        <td align="center"><font color="gray" size="1">1.5+</font></td>
+        <td><font color="gray"><b>PPG</b></font></td>
+        <td align="left"><font color="gray" size="1">&nbsp;&lt;= (at home)</font></td>
+        <td></td>
+        <td align="right"><font color="gray" size="1">(away) =&gt;&nbsp;</font></td>
+        <td><font color="gray"><b>PPG</b></font></td>
+        <td align="center"><font color="gray" size="1">1.5+</font></td>
+        <td align="center"><font color="gray" size="1">2.5+</font></td>
+        <td align="center"><font color="gray" size="1">TG</font></td>
+        <td align="center"><font color="gray" size="1">GF</font></td>
+        <td align="center"><font color="gray" size="1">BTS</font></td>
+        <td align="center"><font color="gray" size="1">CS</font></td>
+        <td align="center"><font color="gray" size="1">FTS</font></td>
+        <td align="center"><font color="gray" size="1">W%</font></td>
+        <td align="center"><font color="gray"><b>P</b></font></td>
+        <td width="60"></td>
+        </tr>
+        
+        <tr class="trow8" height="26">
+        <td align="center"><font color="green"><b>10</b></font></td>
+        <td align="center"><font color="green" size="1">50%</font></td>
+        <td align="center"><font size="1">40%</font></td>
+        <td align="center"><font size="1">40%</font></td>
+        <td align="center"><font size="1">20%</font></td>
+        <td><font size="1" color="green">
+        1.10</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        1.80</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        20%</font></td>
+        <td align="center"><font size="1">40%</font></td>
+        <td><font color="gray"><b>1.60</b></font></td>
+        <td align="right">
+        Dock Sud
+        </td>
+        <td width="30" align="center">
+        
+        <font size="1" color="gray">21:00</font>
+        
+        </td>
+        <td>
+        Deportivo Merlo
+        </td>
+        <td><font color="gray"><b>0.90</b></font></td>
+        <td align="center"><font size="1">40%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        30%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        1.60</font></td>
+        <td><font size="1" color="green">
+        0.60</font></td>
+        <td align="center"><font size="1">30%</font></td>
+        <td align="center"><font size="1">40%</font></td>
+        <td align="center"><font size="1">70%</font></td>
+        <td align="center"><font color="green" size="1">10%</font></td>
+        <td align="center"><font color="green"><b>10</b></font></td>
+        <td align="center" valign="middle">
+        <a href="pmatch.asp?league=argentina4&amp;stats=213-8-17-2019-dock-sud-vs-deportivo-merlo"><font color="blue" size="1"><u>stats</u></font></a>
+        &nbsp;&nbsp;<a href="h2h.asp?league=argentina4&amp;t1id=8&amp;t2id=17&amp;ly=2019" title="Dock Sud vs Deportivo Merlo" rel="nofollow"><font color="blue" size="1"><u>h2h</u></font></a>
+        </td>
+        </tr>
+        
+        <tr height="8"><td colspan="26" align="center" valign="middle"><font size="1"> </font></td></tr>
+        <tr class="trow2"><td height="30" colspan="12">
+        &nbsp;<img src="//www.soccerstatistics.com/img/flags/ar.png" width="16" height="11" alt="ARGENTINA5">
+        &nbsp;<font size="2">Argentina - <font color="gray">Primera D</font></font>
+        </td>
+        <td colspan="12" align="right">
+        &nbsp;&nbsp;<font color="gray" size="1">114 matches played out of 210</font>&nbsp;&nbsp;&nbsp;&nbsp;<a class="button" style="background-color:#eeeeee;font-color=white;" href="latest.asp?league=argentina5"><font color="#666666">Stats</font></a>&nbsp;&nbsp;&nbsp;&nbsp;
+        </td>
+        </tr>
+        
+        <tr class="trow2" height="24">
+        <td align="center"><font color="gray"><b>P</b></font></td>
+        <td align="center"><font color="gray" size="1">W%</font></td>
+        <td align="center"><font color="gray" size="1">FTS</font></td>
+        <td align="center"><font color="gray" size="1">CS</font></td>
+        <td align="center"><font color="gray" size="1">BTS</font></td>
+        <td align="center"><font color="gray" size="1">GF</font></td>
+        <td align="center"><font color="gray" size="1">TG</font></td>
+        <td align="center"><font color="gray" size="1">2.5+</font></td>
+        <td align="center"><font color="gray" size="1">1.5+</font></td>
+        <td><font color="gray"><b>PPG</b></font></td>
+        <td align="left"><font color="gray" size="1">&nbsp;&lt;= (at home)</font></td>
+        <td></td>
+        <td align="right"><font color="gray" size="1">(away) =&gt;&nbsp;</font></td>
+        <td><font color="gray"><b>PPG</b></font></td>
+        <td align="center"><font color="gray" size="1">1.5+</font></td>
+        <td align="center"><font color="gray" size="1">2.5+</font></td>
+        <td align="center"><font color="gray" size="1">TG</font></td>
+        <td align="center"><font color="gray" size="1">GF</font></td>
+        <td align="center"><font color="gray" size="1">BTS</font></td>
+        <td align="center"><font color="gray" size="1">CS</font></td>
+        <td align="center"><font color="gray" size="1">FTS</font></td>
+        <td align="center"><font color="gray" size="1">W%</font></td>
+        <td align="center"><font color="gray"><b>P</b></font></td>
+        <td width="60"></td>
+        </tr>
+        
+        <tr class="trow8" height="26">
+        <td align="center"><font color="green"><b>7</b></font></td>
+        <td align="center"><font color="green" size="1">71%</font></td>
+        <td align="center"><font size="1">14%</font></td>
+        <td align="center"><font size="1">57%</font></td>
+        <td align="center"><font size="1">29%</font></td>
+        <td><font size="1" color="green">
+        1.86</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        2.43</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        29%</font></td>
+        <td align="center"><font size="1">71%</font></td>
+        <td><font color="gray"><b>2.29</b></font></td>
+        <td align="right">
+        Argentino Merlo
+        </td>
+        <td width="30" align="center">
+        
+        <font size="1" color="gray">21:00</font>
+        
+        </td>
+        <td>
+        Atlas
+        </td>
+        <td><font color="gray"><b>1.14</b></font></td>
+        <td align="center"><font size="1">86%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        43%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        2.43</font></td>
+        <td><font size="1" color="green">
+        1.14</font></td>
+        <td align="center"><font size="1">71%</font></td>
+        <td align="center"><font size="1">14%</font></td>
+        <td align="center"><font size="1">14%</font></td>
+        <td align="center"><font color="green" size="1">29%</font></td>
+        <td align="center"><font color="green"><b>7</b></font></td>
+        <td align="center" valign="middle">
+        <a href="pmatch.asp?league=argentina5&amp;stats=111-5-8-2019-argentino-merlo-vs-atlas"><font color="blue" size="1"><u>stats</u></font></a>
+        &nbsp;&nbsp;<a href="h2h.asp?league=argentina5&amp;t1id=5&amp;t2id=8&amp;ly=2019" title="Argentino Merlo vs Atlas" rel="nofollow"><font color="blue" size="1"><u>h2h</u></font></a>
+        </td>
+        </tr>
+        
+        <tr class="trow8" height="26">
+        <td align="center"><font color="green"><b>7</b></font></td>
+        <td align="center"><font color="green" size="1">0%</font></td>
+        <td align="center"><font size="1">43%</font></td>
+        <td align="center"><font size="1">14%</font></td>
+        <td align="center"><font size="1">57%</font></td>
+        <td><font size="1" color="green">
+        0.71</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        2.14</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        43%</font></td>
+        <td align="center"><font size="1">71%</font></td>
+        <td><font color="gray"><b>0.43</b></font></td>
+        <td align="right">
+        CSR Espanol
+        </td>
+        <td width="30" align="center">
+        
+        <font size="1" color="gray">21:00</font>
+        
+        </td>
+        <td>
+        Dep. Paraguayo
+        </td>
+        <td><font color="gray"><b>0.43</b></font></td>
+        <td align="center"><font size="1">43%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        14%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        1.71</font></td>
+        <td><font size="1" color="green">
+        0.14</font></td>
+        <td align="center"><font size="1">0%</font></td>
+        <td align="center"><font size="1">14%</font></td>
+        <td align="center"><font size="1">86%</font></td>
+        <td align="center"><font color="green" size="1">14%</font></td>
+        <td align="center"><font color="green"><b>7</b></font></td>
+        <td align="center" valign="middle">
+        <a href="pmatch.asp?league=argentina5&amp;stats=114-15-2-2019-csr-espanol-vs-dep.-paraguayo"><font color="blue" size="1"><u>stats</u></font></a>
+        &nbsp;&nbsp;<a href="h2h.asp?league=argentina5&amp;t1id=15&amp;t2id=2&amp;ly=2019" title="CSR Espanol vs Dep. Paraguayo" rel="nofollow"><font color="blue" size="1"><u>h2h</u></font></a>
+        </td>
+        </tr>
+        
+        <tr height="8"><td colspan="26" align="center" valign="middle"><font size="1"> </font></td></tr>
+        <tr class="trow2"><td height="30" colspan="12">
+        &nbsp;<img src="//www.soccerstatistics.com/img/flags/co.png" width="16" height="11" alt="COLOMBIA">
+        &nbsp;<font size="2">Colombia - <font color="gray">Primera A - Apertura</font></font>
+        </td>
+        <td colspan="12" align="right">
+        &nbsp;&nbsp;<font color="gray" size="1">38 matches played out of 200</font>&nbsp;&nbsp;&nbsp;&nbsp;<a class="button" style="background-color:#eeeeee;font-color=white;" href="latest.asp?league=colombia"><font color="#666666">Stats</font></a>&nbsp;&nbsp;&nbsp;&nbsp;
+        </td>
+        </tr>
+        
+        <tr class="trow2" height="24">
+        <td align="center"><font color="gray"><b>P</b></font></td>
+        <td align="center"><font color="gray" size="1">W%</font></td>
+        <td align="center"><font color="gray" size="1">FTS</font></td>
+        <td align="center"><font color="gray" size="1">CS</font></td>
+        <td align="center"><font color="gray" size="1">BTS</font></td>
+        <td align="center"><font color="gray" size="1">GF</font></td>
+        <td align="center"><font color="gray" size="1">TG</font></td>
+        <td align="center"><font color="gray" size="1">2.5+</font></td>
+        <td align="center"><font color="gray" size="1">1.5+</font></td>
+        <td><font color="gray"><b>PPG</b></font></td>
+        <td align="left"><font color="gray" size="1">&nbsp;&lt;= (at home)</font></td>
+        <td></td>
+        <td align="right"><font color="gray" size="1">(away) =&gt;&nbsp;</font></td>
+        <td><font color="gray"><b>PPG</b></font></td>
+        <td align="center"><font color="gray" size="1">1.5+</font></td>
+        <td align="center"><font color="gray" size="1">2.5+</font></td>
+        <td align="center"><font color="gray" size="1">TG</font></td>
+        <td align="center"><font color="gray" size="1">GF</font></td>
+        <td align="center"><font color="gray" size="1">BTS</font></td>
+        <td align="center"><font color="gray" size="1">CS</font></td>
+        <td align="center"><font color="gray" size="1">FTS</font></td>
+        <td align="center"><font color="gray" size="1">W%</font></td>
+        <td align="center"><font color="gray"><b>P</b></font></td>
+        <td width="60"></td>
+        </tr>
+        
+        <tr class="trow8" height="26">
+        <td align="center"><font color="green"><b>1</b></font></td>
+        <td align="center"><font color="green" size="1">100%</font></td>
+        <td align="center"><font size="1">0%</font></td>
+        <td align="center"><font size="1">100%</font></td>
+        <td align="center"><font size="1">0%</font></td>
+        <td><font size="1" color="green">
+        1.00</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        1.00</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        0%</font></td>
+        <td align="center"><font size="1">0%</font></td>
+        <td><font color="gray"><b>3.00</b></font></td>
+        <td align="right">
+        Once Caldas
+        </td>
+        <td width="30" align="center">
+        
+        <font size="1" color="gray">02:00</font>
+        
+        </td>
+        <td>
+        Cúcuta Deport.
+        </td>
+        <td><font color="gray"><b>3.00</b></font></td>
+        <td align="center"><font size="1">100%</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        100%</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        3.00</font></td>
+        <td><font size="1" color="green">
+        2.00</font></td>
+        <td align="center"><font size="1">100%</font></td>
+        <td align="center"><font size="1">0%</font></td>
+        <td align="center"><font size="1">0%</font></td>
+        <td align="center"><font color="green" size="1">100%</font></td>
+        <td align="center"><font color="green"><b>1</b></font></td>
+        <td align="center" valign="middle">
+        <a href="pmatch.asp?league=colombia&amp;stats=39-2-3-2018-once-caldas-vs-cúcuta-deport."><font color="blue" size="1"><u>stats</u></font></a>
+        &nbsp;&nbsp;<a href="h2h.asp?league=colombia&amp;t1id=2&amp;t2id=3&amp;ly=2019" title="Once Caldas vs Cúcuta Deport." rel="nofollow"><font color="blue" size="1"><u>h2h</u></font></a>
+        </td>
+        </tr>
+        
+        <tr height="8"><td colspan="26" align="center" valign="middle"><font size="1"> </font></td></tr>
+        <tr class="trow2"><td height="30" colspan="12">
+        &nbsp;<img src="//www.soccerstatistics.com/img/flags/ec.png" width="16" height="11" alt="ECUADOR">
+        &nbsp;<font size="2">Ecuador - <font color="gray">Liga Pro</font></font>
+        </td>
+        <td colspan="12" align="right">
+        &nbsp;&nbsp;<font color="gray" size="1">7 matches played out of 240</font>&nbsp;&nbsp;&nbsp;&nbsp;<a class="button" style="background-color:#eeeeee;font-color=white;" href="latest.asp?league=ecuador"><font color="#666666">Stats</font></a>&nbsp;&nbsp;&nbsp;&nbsp;
+        </td>
+        </tr>
+        
+        <tr class="trow2" height="24">
+        <td align="center"><font color="gray"><b>P</b></font></td>
+        <td align="center"><font color="gray" size="1">W%</font></td>
+        <td align="center"><font color="gray" size="1">FTS</font></td>
+        <td align="center"><font color="gray" size="1">CS</font></td>
+        <td align="center"><font color="gray" size="1">BTS</font></td>
+        <td align="center"><font color="gray" size="1">GF</font></td>
+        <td align="center"><font color="gray" size="1">TG</font></td>
+        <td align="center"><font color="gray" size="1">2.5+</font></td>
+        <td align="center"><font color="gray" size="1">1.5+</font></td>
+        <td><font color="gray"><b>PPG</b></font></td>
+        <td align="left"><font color="gray" size="1">&nbsp;&lt;= (at home)</font></td>
+        <td></td>
+        <td align="right"><font color="gray" size="1">(away) =&gt;&nbsp;</font></td>
+        <td><font color="gray"><b>PPG</b></font></td>
+        <td align="center"><font color="gray" size="1">1.5+</font></td>
+        <td align="center"><font color="gray" size="1">2.5+</font></td>
+        <td align="center"><font color="gray" size="1">TG</font></td>
+        <td align="center"><font color="gray" size="1">GF</font></td>
+        <td align="center"><font color="gray" size="1">BTS</font></td>
+        <td align="center"><font color="gray" size="1">CS</font></td>
+        <td align="center"><font color="gray" size="1">FTS</font></td>
+        <td align="center"><font color="gray" size="1">W%</font></td>
+        <td align="center"><font color="gray"><b>P</b></font></td>
+        <td width="60"></td>
+        </tr>
+        
+        <tr class="trow8" height="26">
+        <td align="center"><font color="green"><b></b></font></td>
+        <td align="center"><font color="green" size="1"></font></td>
+        <td align="center"><font size="1"></font></td>
+        <td align="center"><font size="1"></font></td>
+        <td align="center"><font size="1"></font></td>
+        <td><font size="1" color="green">
+        </font></td>
+        <td align="center">
+        <font color="black" size="1">
+        </font></td>
+        <td align="center">
+        <font color="black" size="1">
+        </font></td>
+        <td align="center"><font size="1"></font></td>
+        <td>&nbsp;</td>
+        <td align="right">
+        América de Quit
+        </td>
+        <td width="30" align="center">
+        
+        <font size="1" color="gray">01:15</font>
+        
+        </td>
+        <td>
+        Mushuc Runa
+        </td>
+        <td>&nbsp;</td>
+        <td align="center"><font size="1"></font></td>
+        <td align="center">
+        <font color="black" size="1">
+        </font></td>
+        <td align="center">
+        <font color="black" size="1">
+        </font></td>
+        <td><font size="1" color="green">
+        </font></td>
+        <td align="center"><font size="1"></font></td>
+        <td align="center"><font size="1"></font></td>
+        <td align="center"><font size="1"></font></td>
+        <td align="center"><font color="green" size="1"></font></td>
+        <td align="center"><font color="green"><b></b></font></td>
+        <td align="center" valign="middle">
+        </td>
+        </tr>
+        
+        <tr height="8"><td colspan="26" align="center" valign="middle"><font size="1"> </font></td></tr>
+        <tr class="trow2"><td height="30" colspan="12">
+        &nbsp;<img src="//www.soccerstatistics.com/img/flags/england.png" width="16" height="11" alt="ENGLAND2">
+        &nbsp;<font size="2">England - <font color="gray">Championship</font></font>
+        </td>
+        <td colspan="12" align="right">
+        &nbsp;&nbsp;<font color="gray" size="1">368 matches played out of 552</font>&nbsp;&nbsp;&nbsp;&nbsp;<a class="button" style="background-color:#eeeeee;font-color=white;" href="latest.asp?league=england2"><font color="#666666">Stats</font></a>&nbsp;&nbsp;&nbsp;&nbsp;
+        </td>
+        </tr>
+        
+        <tr class="trow2" height="24">
+        <td align="center"><font color="gray"><b>P</b></font></td>
+        <td align="center"><font color="gray" size="1">W%</font></td>
+        <td align="center"><font color="gray" size="1">FTS</font></td>
+        <td align="center"><font color="gray" size="1">CS</font></td>
+        <td align="center"><font color="gray" size="1">BTS</font></td>
+        <td align="center"><font color="gray" size="1">GF</font></td>
+        <td align="center"><font color="gray" size="1">TG</font></td>
+        <td align="center"><font color="gray" size="1">2.5+</font></td>
+        <td align="center"><font color="gray" size="1">1.5+</font></td>
+        <td><font color="gray"><b>PPG</b></font></td>
+        <td align="left"><font color="gray" size="1">&nbsp;&lt;= (at home)</font></td>
+        <td></td>
+        <td align="right"><font color="gray" size="1">(away) =&gt;&nbsp;</font></td>
+        <td><font color="gray"><b>PPG</b></font></td>
+        <td align="center"><font color="gray" size="1">1.5+</font></td>
+        <td align="center"><font color="gray" size="1">2.5+</font></td>
+        <td align="center"><font color="gray" size="1">TG</font></td>
+        <td align="center"><font color="gray" size="1">GF</font></td>
+        <td align="center"><font color="gray" size="1">BTS</font></td>
+        <td align="center"><font color="gray" size="1">CS</font></td>
+        <td align="center"><font color="gray" size="1">FTS</font></td>
+        <td align="center"><font color="gray" size="1">W%</font></td>
+        <td align="center"><font color="gray"><b>P</b></font></td>
+        <td width="60"></td>
+        </tr>
+        
+        <tr class="trow8" height="26">
+        <td align="center"><font color="green"><b>15</b></font></td>
+        <td align="center"><font color="green" size="1">40%</font></td>
+        <td align="center"><font size="1">27%</font></td>
+        <td align="center"><font size="1">40%</font></td>
+        <td align="center"><font size="1">53%</font></td>
+        <td><font size="1" color="green">
+        1.60</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        2.53</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        53%</font></td>
+        <td align="center"><font size="1">73%</font></td>
+        <td><font color="gray"><b>1.67</b></font></td>
+        <td align="right">
+        Birmingham City
+        </td>
+        <td width="30" align="center">
+        
+        <font size="1" color="gray">20:45</font>
+        
+        </td>
+        <td>
+        Bolton
+        </td>
+        <td><font color="gray"><b>0.67</b></font></td>
+        <td align="center"><font size="1">73%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        33%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        2.40</font></td>
+        <td><font size="1" color="green">
+        0.67</font></td>
+        <td align="center"><font size="1">40%</font></td>
+        <td align="center"><font size="1">13%</font></td>
+        <td align="center"><font size="1">53%</font></td>
+        <td align="center"><font color="green" size="1">13%</font></td>
+        <td align="center"><font color="green"><b>15</b></font></td>
+        <td align="center" valign="middle">
+        <a href="pmatch.asp?league=england2&amp;stats=373-7-4-2019-birmingham-city-vs-bolton"><font color="blue" size="1"><u>stats</u></font></a>
+        &nbsp;&nbsp;<a href="h2h.asp?league=england2&amp;t1id=7&amp;t2id=4&amp;ly=2019" title="Birmingham City vs Bolton" rel="nofollow"><font color="blue" size="1"><u>h2h</u></font></a>
+        </td>
+        </tr>
+        
+        <tr class="trow8" height="26">
+        <td align="center"><font color="green"><b>15</b></font></td>
+        <td align="center"><font color="green" size="1">47%</font></td>
+        <td align="center"><font size="1">27%</font></td>
+        <td align="center"><font size="1">47%</font></td>
+        <td align="center"><font size="1">33%</font></td>
+        <td><font size="1" color="green">
+        1.53</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        2.40</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        33%</font></td>
+        <td align="center"><font size="1">73%</font></td>
+        <td><font color="gray"><b>1.60</b></font></td>
+        <td align="right">
+        Hull City
+        </td>
+        <td width="30" align="center">
+        
+        <font size="1" color="gray">20:45</font>
+        
+        </td>
+        <td>
+        Rotherham
+        </td>
+        <td><font color="gray"><b>0.33</b></font></td>
+        <td align="center"><font size="1">60%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        33%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        2.20</font></td>
+        <td><font size="1" color="green">
+        0.53</font></td>
+        <td align="center"><font size="1">47%</font></td>
+        <td align="center"><font size="1">13%</font></td>
+        <td align="center"><font size="1">53%</font></td>
+        <td align="center"><font color="green" size="1">0%</font></td>
+        <td align="center"><font color="green"><b>15</b></font></td>
+        <td align="center" valign="middle">
+        <a href="pmatch.asp?league=england2&amp;stats=376-23-14-2019-hull-city-vs-rotherham"><font color="blue" size="1"><u>stats</u></font></a>
+        &nbsp;&nbsp;<a href="h2h.asp?league=england2&amp;t1id=23&amp;t2id=14&amp;ly=2019" title="Hull City vs Rotherham" rel="nofollow"><font color="blue" size="1"><u>h2h</u></font></a>
+        </td>
+        </tr>
+        
+        <tr class="trow8" height="26">
+        <td align="center"><font color="green"><b>15</b></font></td>
+        <td align="center"><font color="green" size="1">40%</font></td>
+        <td align="center"><font size="1">20%</font></td>
+        <td align="center"><font size="1">27%</font></td>
+        <td align="center"><font size="1">60%</font></td>
+        <td><font size="1" color="green">
+        1.33</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        2.53</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        53%</font></td>
+        <td align="center"><font size="1">80%</font></td>
+        <td><font color="gray"><b>1.53</b></font></td>
+        <td align="right">
+        Millwall
+        </td>
+        <td width="30" align="center">
+        
+        <font size="1" color="gray">20:45</font>
+        
+        </td>
+        <td>
+        Sheffield Wed
+        </td>
+        <td><font color="gray"><b>1.13</b></font></td>
+        <td align="center"><font size="1">80%</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        67%</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        2.80</font></td>
+        <td><font size="1" color="green">
+        1.07</font></td>
+        <td align="center"><font size="1">60%</font></td>
+        <td align="center"><font size="1">20%</font></td>
+        <td align="center"><font size="1">27%</font></td>
+        <td align="center"><font color="green" size="1">33%</font></td>
+        <td align="center"><font color="green"><b>15</b></font></td>
+        <td align="center" valign="middle">
+        <a href="pmatch.asp?league=england2&amp;stats=383-17-6-2019-millwall-vs-sheffield-wed"><font color="blue" size="1"><u>stats</u></font></a>
+        &nbsp;&nbsp;<a href="h2h.asp?league=england2&amp;t1id=17&amp;t2id=6&amp;ly=2019" title="Millwall vs Sheffield Wed" rel="nofollow"><font color="blue" size="1"><u>h2h</u></font></a>
+        </td>
+        </tr>
+        
+        <tr class="trow8" height="26">
+        <td align="center"><font color="green"><b>15</b></font></td>
+        <td align="center"><font color="green" size="1">47%</font></td>
+        <td align="center"><font size="1">0%</font></td>
+        <td align="center"><font size="1">13%</font></td>
+        <td align="center"><font size="1">87%</font></td>
+        <td><font size="1" color="green">
+        2.33</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        3.73</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        60%</font></td>
+        <td align="center"><font size="1">100%</font></td>
+        <td><font color="gray"><b>1.73</b></font></td>
+        <td align="right">
+        West Bromwich
+        </td>
+        <td width="30" align="center">
+        
+        <font size="1" color="gray">21:00</font>
+        
+        </td>
+        <td>
+        Nottm Forest
+        </td>
+        <td><font color="gray"><b>1.13</b></font></td>
+        <td align="center"><font size="1">80%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        40%</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        2.87</font></td>
+        <td><font size="1" color="green">
+        1.47</font></td>
+        <td align="center"><font size="1">47%</font></td>
+        <td align="center"><font size="1">33%</font></td>
+        <td align="center"><font size="1">33%</font></td>
+        <td align="center"><font color="green" size="1">20%</font></td>
+        <td align="center"><font color="green"><b>15</b></font></td>
+        <td align="center" valign="middle">
+        <a href="pmatch.asp?league=england2&amp;stats=377-3-12-2019-west-bromwich-vs-nottm-forest"><font color="blue" size="1"><u>stats</u></font></a>
+        &nbsp;&nbsp;<a href="h2h.asp?league=england2&amp;t1id=3&amp;t2id=12&amp;ly=2019" title="West Bromwich vs Nottm Forest" rel="nofollow"><font color="blue" size="1"><u>h2h</u></font></a>
+        </td>
+        </tr>
+        
+        <tr height="8"><td colspan="26" align="center" valign="middle"><font size="1"> </font></td></tr>
+        <tr class="trow2"><td height="30" colspan="12">
+        &nbsp;<img src="//www.soccerstatistics.com/img/flags/england.png" width="16" height="11" alt="ENGLAND3">
+        &nbsp;<font size="2">England - <font color="gray">League One</font></font>
+        </td>
+        <td colspan="12" align="right">
+        &nbsp;&nbsp;<font color="gray" size="1">374 matches played out of 552</font>&nbsp;&nbsp;&nbsp;&nbsp;<a class="button" style="background-color:#eeeeee;font-color=white;" href="latest.asp?league=england3"><font color="#666666">Stats</font></a>&nbsp;&nbsp;&nbsp;&nbsp;
+        </td>
+        </tr>
+        
+        <tr class="trow2" height="24">
+        <td align="center"><font color="gray"><b>P</b></font></td>
+        <td align="center"><font color="gray" size="1">W%</font></td>
+        <td align="center"><font color="gray" size="1">FTS</font></td>
+        <td align="center"><font color="gray" size="1">CS</font></td>
+        <td align="center"><font color="gray" size="1">BTS</font></td>
+        <td align="center"><font color="gray" size="1">GF</font></td>
+        <td align="center"><font color="gray" size="1">TG</font></td>
+        <td align="center"><font color="gray" size="1">2.5+</font></td>
+        <td align="center"><font color="gray" size="1">1.5+</font></td>
+        <td><font color="gray"><b>PPG</b></font></td>
+        <td align="left"><font color="gray" size="1">&nbsp;&lt;= (at home)</font></td>
+        <td></td>
+        <td align="right"><font color="gray" size="1">(away) =&gt;&nbsp;</font></td>
+        <td><font color="gray"><b>PPG</b></font></td>
+        <td align="center"><font color="gray" size="1">1.5+</font></td>
+        <td align="center"><font color="gray" size="1">2.5+</font></td>
+        <td align="center"><font color="gray" size="1">TG</font></td>
+        <td align="center"><font color="gray" size="1">GF</font></td>
+        <td align="center"><font color="gray" size="1">BTS</font></td>
+        <td align="center"><font color="gray" size="1">CS</font></td>
+        <td align="center"><font color="gray" size="1">FTS</font></td>
+        <td align="center"><font color="gray" size="1">W%</font></td>
+        <td align="center"><font color="gray"><b>P</b></font></td>
+        <td width="60"></td>
+        </tr>
+        
+        <tr class="trow8" height="26">
+        <td align="center"><font color="green"><b>15</b></font></td>
+        <td align="center"><font color="green" size="1">53%</font></td>
+        <td align="center"><font size="1">27%</font></td>
+        <td align="center"><font size="1">40%</font></td>
+        <td align="center"><font size="1">47%</font></td>
+        <td><font size="1" color="green">
+        1.93</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        3.00</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        73%</font></td>
+        <td align="center"><font size="1">80%</font></td>
+        <td><font color="gray"><b>1.93</b></font></td>
+        <td align="right">
+        Doncaster
+        </td>
+        <td width="30" align="center">
+        
+        <font size="1" color="gray">20:45</font>
+        
+        </td>
+        <td>
+        Southend Utd
+        </td>
+        <td><font color="gray"><b>1.33</b></font></td>
+        <td align="center"><font size="1">73%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        33%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        2.27</font></td>
+        <td><font size="1" color="green">
+        1.07</font></td>
+        <td align="center"><font size="1">33%</font></td>
+        <td align="center"><font size="1">27%</font></td>
+        <td align="center"><font size="1">40%</font></td>
+        <td align="center"><font color="green" size="1">40%</font></td>
+        <td align="center"><font color="green"><b>15</b></font></td>
+        <td align="center" valign="middle">
+        <a href="pmatch.asp?league=england3&amp;stats=319-12-11-2019-doncaster-vs-southend-utd"><font color="blue" size="1"><u>stats</u></font></a>
+        &nbsp;&nbsp;<a href="h2h.asp?league=england3&amp;t1id=12&amp;t2id=11&amp;ly=2019" title="Doncaster vs Southend Utd" rel="nofollow"><font color="blue" size="1"><u>h2h</u></font></a>
+        </td>
+        </tr>
+        
+        <tr class="trow8" height="26">
+        <td align="center"><font color="green"><b>14</b></font></td>
+        <td align="center"><font color="green" size="1">57%</font></td>
+        <td align="center"><font size="1">0%</font></td>
+        <td align="center"><font size="1">29%</font></td>
+        <td align="center"><font size="1">71%</font></td>
+        <td><font size="1" color="green">
+        1.93</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        2.79</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        50%</font></td>
+        <td align="center"><font size="1">86%</font></td>
+        <td><font color="gray"><b>2.14</b></font></td>
+        <td align="right">
+        Sunderland
+        </td>
+        <td width="30" align="center">
+        
+        <font size="1" color="gray">20:45</font>
+        
+        </td>
+        <td>
+        Blackpool
+        </td>
+        <td><font color="gray"><b>1.43</b></font></td>
+        <td align="center"><font size="1">50%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        29%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        1.71</font></td>
+        <td><font size="1" color="green">
+        0.86</font></td>
+        <td align="center"><font size="1">29%</font></td>
+        <td align="center"><font size="1">57%</font></td>
+        <td align="center"><font size="1">43%</font></td>
+        <td align="center"><font color="green" size="1">36%</font></td>
+        <td align="center"><font color="green"><b>14</b></font></td>
+        <td align="center" valign="middle">
+        <a href="pmatch.asp?league=england3&amp;stats=145-1-14-2019-sunderland-vs-blackpool"><font color="blue" size="1"><u>stats</u></font></a>
+        &nbsp;&nbsp;<a href="h2h.asp?league=england3&amp;t1id=1&amp;t2id=14&amp;ly=2019" title="Sunderland vs Blackpool" rel="nofollow"><font color="blue" size="1"><u>h2h</u></font></a>
+        </td>
+        </tr>
+        
+        <tr class="trow8" height="26">
+        <td align="center"><font color="green"><b>15</b></font></td>
+        <td align="center"><font color="green" size="1">27%</font></td>
+        <td align="center"><font size="1">27%</font></td>
+        <td align="center"><font size="1">13%</font></td>
+        <td align="center"><font size="1">73%</font></td>
+        <td><font size="1" color="green">
+        1.20</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        2.93</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        73%</font></td>
+        <td align="center"><font size="1">80%</font></td>
+        <td><font color="gray"><b>1.07</b></font></td>
+        <td align="right">
+        Walsall
+        </td>
+        <td width="30" align="center">
+        
+        <font size="1" color="gray">20:45</font>
+        
+        </td>
+        <td>
+        Wimbledon
+        </td>
+        <td><font color="gray"><b>0.73</b></font></td>
+        <td align="center"><font size="1">60%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        33%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        1.87</font></td>
+        <td><font size="1" color="green">
+        0.53</font></td>
+        <td align="center"><font size="1">33%</font></td>
+        <td align="center"><font size="1">20%</font></td>
+        <td align="center"><font size="1">53%</font></td>
+        <td align="center"><font color="green" size="1">20%</font></td>
+        <td align="center"><font color="green"><b>15</b></font></td>
+        <td align="center" valign="middle">
+        <a href="pmatch.asp?league=england3&amp;stats=353-9-16-2019-walsall-vs-wimbledon"><font color="blue" size="1"><u>stats</u></font></a>
+        &nbsp;&nbsp;<a href="h2h.asp?league=england3&amp;t1id=9&amp;t2id=16&amp;ly=2019" title="Walsall vs Wimbledon" rel="nofollow"><font color="blue" size="1"><u>h2h</u></font></a>
+        </td>
+        </tr>
+        
+        <tr height="8"><td colspan="26" align="center" valign="middle"><font size="1"> </font></td></tr>
+        <tr class="trow2"><td height="30" colspan="12">
+        &nbsp;<img src="//www.soccerstatistics.com/img/flags/england.png" width="16" height="11" alt="ENGLAND4">
+        &nbsp;<font size="2">England - <font color="gray">League Two</font></font>
+        </td>
+        <td colspan="12" align="right">
+        &nbsp;&nbsp;<font color="gray" size="1">375 matches played out of 552</font>&nbsp;&nbsp;&nbsp;&nbsp;<a class="button" style="background-color:#eeeeee;font-color=white;" href="latest.asp?league=england4"><font color="#666666">Stats</font></a>&nbsp;&nbsp;&nbsp;&nbsp;
+        </td>
+        </tr>
+        
+        <tr class="trow2" height="24">
+        <td align="center"><font color="gray"><b>P</b></font></td>
+        <td align="center"><font color="gray" size="1">W%</font></td>
+        <td align="center"><font color="gray" size="1">FTS</font></td>
+        <td align="center"><font color="gray" size="1">CS</font></td>
+        <td align="center"><font color="gray" size="1">BTS</font></td>
+        <td align="center"><font color="gray" size="1">GF</font></td>
+        <td align="center"><font color="gray" size="1">TG</font></td>
+        <td align="center"><font color="gray" size="1">2.5+</font></td>
+        <td align="center"><font color="gray" size="1">1.5+</font></td>
+        <td><font color="gray"><b>PPG</b></font></td>
+        <td align="left"><font color="gray" size="1">&nbsp;&lt;= (at home)</font></td>
+        <td></td>
+        <td align="right"><font color="gray" size="1">(away) =&gt;&nbsp;</font></td>
+        <td><font color="gray"><b>PPG</b></font></td>
+        <td align="center"><font color="gray" size="1">1.5+</font></td>
+        <td align="center"><font color="gray" size="1">2.5+</font></td>
+        <td align="center"><font color="gray" size="1">TG</font></td>
+        <td align="center"><font color="gray" size="1">GF</font></td>
+        <td align="center"><font color="gray" size="1">BTS</font></td>
+        <td align="center"><font color="gray" size="1">CS</font></td>
+        <td align="center"><font color="gray" size="1">FTS</font></td>
+        <td align="center"><font color="gray" size="1">W%</font></td>
+        <td align="center"><font color="gray"><b>P</b></font></td>
+        <td width="60"></td>
+        </tr>
+        
+        <tr class="trow8" height="26">
+        <td align="center"><font color="green"><b>15</b></font></td>
+        <td align="center"><font color="green" size="1">67%</font></td>
+        <td align="center"><font size="1">27%</font></td>
+        <td align="center"><font size="1">47%</font></td>
+        <td align="center"><font size="1">33%</font></td>
+        <td><font size="1" color="green">
+        1.73</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        2.60</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        47%</font></td>
+        <td align="center"><font size="1">73%</font></td>
+        <td><font color="gray"><b>2.13</b></font></td>
+        <td align="right">
+        Crewe Alexandra
+        </td>
+        <td width="30" align="center">
+        
+        <font size="1" color="gray">20:45</font>
+        
+        </td>
+        <td>
+        Carlisle Utd
+        </td>
+        <td><font color="gray"><b>1.73</b></font></td>
+        <td align="center"><font size="1">73%</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        53%</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        2.67</font></td>
+        <td><font size="1" color="green">
+        1.47</font></td>
+        <td align="center"><font size="1">47%</font></td>
+        <td align="center"><font size="1">33%</font></td>
+        <td align="center"><font size="1">20%</font></td>
+        <td align="center"><font color="green" size="1">53%</font></td>
+        <td align="center"><font color="green"><b>15</b></font></td>
+        <td align="center" valign="middle">
+        <a href="pmatch.asp?league=england4&amp;stats=367-13-20-2019-crewe-alexandra-vs-carlisle-utd"><font color="blue" size="1"><u>stats</u></font></a>
+        &nbsp;&nbsp;<a href="h2h.asp?league=england4&amp;t1id=13&amp;t2id=20&amp;ly=2019" title="Crewe Alexandra vs Carlisle Utd" rel="nofollow"><font color="blue" size="1"><u>h2h</u></font></a>
+        </td>
+        </tr>
+        
+        <tr class="trow8" height="26">
+        <td align="center"><font color="green"><b>15</b></font></td>
+        <td align="center"><font color="green" size="1">60%</font></td>
+        <td align="center"><font size="1">20%</font></td>
+        <td align="center"><font size="1">47%</font></td>
+        <td align="center"><font size="1">47%</font></td>
+        <td><font size="1" color="green">
+        1.53</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        2.87</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        47%</font></td>
+        <td align="center"><font size="1">60%</font></td>
+        <td><font color="gray"><b>2.07</b></font></td>
+        <td align="right">
+        Newport
+        </td>
+        <td width="30" align="center">
+        
+        <font size="1" color="gray">20:45</font>
+        
+        </td>
+        <td>
+        Milton Keynes
+        </td>
+        <td><font color="gray"><b>1.13</b></font></td>
+        <td align="center"><font size="1">80%</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        53%</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        2.93</font></td>
+        <td><font size="1" color="green">
+        1.47</font></td>
+        <td align="center"><font size="1">67%</font></td>
+        <td align="center"><font size="1">27%</font></td>
+        <td align="center"><font size="1">13%</font></td>
+        <td align="center"><font color="green" size="1">27%</font></td>
+        <td align="center"><font color="green"><b>15</b></font></td>
+        <td align="center" valign="middle">
+        <a href="pmatch.asp?league=england4&amp;stats=259-22-8-2019-newport-vs-milton-keynes"><font color="blue" size="1"><u>stats</u></font></a>
+        &nbsp;&nbsp;<a href="h2h.asp?league=england4&amp;t1id=22&amp;t2id=8&amp;ly=2019" title="Newport vs Milton Keynes" rel="nofollow"><font color="blue" size="1"><u>h2h</u></font></a>
+        </td>
+        </tr>
+        
+        <tr class="trow8" height="26">
+        <td align="center"><font color="green"><b>14</b></font></td>
+        <td align="center"><font color="green" size="1">43%</font></td>
+        <td align="center"><font size="1">21%</font></td>
+        <td align="center"><font size="1">21%</font></td>
+        <td align="center"><font size="1">64%</font></td>
+        <td><font size="1" color="green">
+        1.71</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        3.07</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        57%</font></td>
+        <td align="center"><font size="1">79%</font></td>
+        <td><font color="gray"><b>1.50</b></font></td>
+        <td align="right">
+        Oldham
+        </td>
+        <td width="30" align="center">
+        
+        <font size="1" color="gray">20:45</font>
+        
+        </td>
+        <td>
+        Yeovil Town
+        </td>
+        <td><font color="gray"><b>1.13</b></font></td>
+        <td align="center"><font size="1">40%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        40%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        2.07</font></td>
+        <td><font size="1" color="green">
+        1.13</font></td>
+        <td align="center"><font size="1">27%</font></td>
+        <td align="center"><font size="1">47%</font></td>
+        <td align="center"><font size="1">40%</font></td>
+        <td align="center"><font color="green" size="1">33%</font></td>
+        <td align="center"><font color="green"><b>15</b></font></td>
+        <td align="center" valign="middle">
+        <a href="pmatch.asp?league=england4&amp;stats=352-7-2-2019-oldham-vs-yeovil-town"><font color="blue" size="1"><u>stats</u></font></a>
+        &nbsp;&nbsp;<a href="h2h.asp?league=england4&amp;t1id=7&amp;t2id=2&amp;ly=2019" title="Oldham vs Yeovil Town" rel="nofollow"><font color="blue" size="1"><u>h2h</u></font></a>
+        </td>
+        </tr>
+        
+        <tr height="8"><td colspan="26" align="center" valign="middle"><font size="1"> </font></td></tr>
+        <tr class="trow2"><td height="30" colspan="12">
+        &nbsp;<img src="//www.soccerstatistics.com/img/flags/england.png" width="16" height="11" alt="ENGLAND5">
+        &nbsp;<font size="2">England - <font color="gray">National League</font></font>
+        </td>
+        <td colspan="12" align="right">
+        &nbsp;&nbsp;<font color="gray" size="1">380 matches played out of 552</font>&nbsp;&nbsp;&nbsp;&nbsp;<a class="button" style="background-color:#eeeeee;font-color=white;" href="latest.asp?league=england5"><font color="#666666">Stats</font></a>&nbsp;&nbsp;&nbsp;&nbsp;
+        </td>
+        </tr>
+        
+        <tr class="trow2" height="24">
+        <td align="center"><font color="gray"><b>P</b></font></td>
+        <td align="center"><font color="gray" size="1">W%</font></td>
+        <td align="center"><font color="gray" size="1">FTS</font></td>
+        <td align="center"><font color="gray" size="1">CS</font></td>
+        <td align="center"><font color="gray" size="1">BTS</font></td>
+        <td align="center"><font color="gray" size="1">GF</font></td>
+        <td align="center"><font color="gray" size="1">TG</font></td>
+        <td align="center"><font color="gray" size="1">2.5+</font></td>
+        <td align="center"><font color="gray" size="1">1.5+</font></td>
+        <td><font color="gray"><b>PPG</b></font></td>
+        <td align="left"><font color="gray" size="1">&nbsp;&lt;= (at home)</font></td>
+        <td></td>
+        <td align="right"><font color="gray" size="1">(away) =&gt;&nbsp;</font></td>
+        <td><font color="gray"><b>PPG</b></font></td>
+        <td align="center"><font color="gray" size="1">1.5+</font></td>
+        <td align="center"><font color="gray" size="1">2.5+</font></td>
+        <td align="center"><font color="gray" size="1">TG</font></td>
+        <td align="center"><font color="gray" size="1">GF</font></td>
+        <td align="center"><font color="gray" size="1">BTS</font></td>
+        <td align="center"><font color="gray" size="1">CS</font></td>
+        <td align="center"><font color="gray" size="1">FTS</font></td>
+        <td align="center"><font color="gray" size="1">W%</font></td>
+        <td align="center"><font color="gray"><b>P</b></font></td>
+        <td width="60"></td>
+        </tr>
+        
+        <tr class="trow8" height="26">
+        <td align="center"><font color="green"><b>15</b></font></td>
+        <td align="center"><font color="green" size="1">67%</font></td>
+        <td align="center"><font size="1">20%</font></td>
+        <td align="center"><font size="1">60%</font></td>
+        <td align="center"><font size="1">33%</font></td>
+        <td><font size="1" color="green">
+        1.80</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        2.47</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        53%</font></td>
+        <td align="center"><font size="1">80%</font></td>
+        <td><font color="gray"><b>2.20</b></font></td>
+        <td align="right">
+        AFC Fylde
+        </td>
+        <td width="30" align="center">
+        
+        <font size="1" color="gray">20:45</font>
+        
+        </td>
+        <td>
+        Havant &amp; W.
+        </td>
+        <td><font color="gray"><b>0.69</b></font></td>
+        <td align="center"><font size="1">81%</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        69%</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        3.31</font></td>
+        <td><font size="1" color="green">
+        1.13</font></td>
+        <td align="center"><font size="1">56%</font></td>
+        <td align="center"><font size="1">12%</font></td>
+        <td align="center"><font size="1">44%</font></td>
+        <td align="center"><font color="green" size="1">12%</font></td>
+        <td align="center"><font color="green"><b>16</b></font></td>
+        <td align="center" valign="middle">
+        <a href="pmatch.asp?league=england5&amp;stats=377-11-20-2019-afc-fylde-vs-havant-&amp;-w."><font color="blue" size="1"><u>stats</u></font></a>
+        &nbsp;&nbsp;<a href="h2h.asp?league=england5&amp;t1id=11&amp;t2id=20&amp;ly=2019" title="AFC Fylde vs Havant &amp; W." rel="nofollow"><font color="blue" size="1"><u>h2h</u></font></a>
+        </td>
+        </tr>
+        
+        <tr class="trow8" height="26">
+        <td align="center"><font color="green"><b>16</b></font></td>
+        <td align="center"><font color="green" size="1">38%</font></td>
+        <td align="center"><font size="1">50%</font></td>
+        <td align="center"><font size="1">38%</font></td>
+        <td align="center"><font size="1">31%</font></td>
+        <td><font size="1" color="green">
+        0.94</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        2.00</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        31%</font></td>
+        <td align="center"><font size="1">69%</font></td>
+        <td><font color="gray"><b>1.38</b></font></td>
+        <td align="right">
+        Aldershot Town
+        </td>
+        <td width="30" align="center">
+        
+        <font size="1" color="gray">20:45</font>
+        
+        </td>
+        <td>
+        Solihull Moors
+        </td>
+        <td><font color="gray"><b>1.94</b></font></td>
+        <td align="center"><font size="1">81%</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        69%</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        2.81</font></td>
+        <td><font size="1" color="green">
+        1.63</font></td>
+        <td align="center"><font size="1">50%</font></td>
+        <td align="center"><font size="1">31%</font></td>
+        <td align="center"><font size="1">19%</font></td>
+        <td align="center"><font color="green" size="1">62%</font></td>
+        <td align="center"><font color="green"><b>16</b></font></td>
+        <td align="center" valign="middle">
+        <a href="pmatch.asp?league=england5&amp;stats=373-3-10-2019-aldershot-town-vs-solihull-moors"><font color="blue" size="1"><u>stats</u></font></a>
+        &nbsp;&nbsp;<a href="h2h.asp?league=england5&amp;t1id=3&amp;t2id=10&amp;ly=2019" title="Aldershot Town vs Solihull Moors" rel="nofollow"><font color="blue" size="1"><u>h2h</u></font></a>
+        </td>
+        </tr>
+        
+        <tr class="trow8" height="26">
+        <td align="center"><font color="green"><b>14</b></font></td>
+        <td align="center"><font color="green" size="1">29%</font></td>
+        <td align="center"><font size="1">21%</font></td>
+        <td align="center"><font size="1">21%</font></td>
+        <td align="center"><font size="1">57%</font></td>
+        <td><font size="1" color="green">
+        1.07</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        2.43</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        43%</font></td>
+        <td align="center"><font size="1">86%</font></td>
+        <td><font color="gray"><b>1.14</b></font></td>
+        <td align="right">
+        Barnet
+        </td>
+        <td width="30" align="center">
+        
+        <font size="1" color="gray">20:45</font>
+        
+        </td>
+        <td>
+        Chesterfield
+        </td>
+        <td><font color="gray"><b>0.93</b></font></td>
+        <td align="center"><font size="1">79%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        29%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        2.50</font></td>
+        <td><font size="1" color="green">
+        1.14</font></td>
+        <td align="center"><font size="1">71%</font></td>
+        <td align="center"><font size="1">14%</font></td>
+        <td align="center"><font size="1">14%</font></td>
+        <td align="center"><font color="green" size="1">14%</font></td>
+        <td align="center"><font color="green"><b>14</b></font></td>
+        <td align="center" valign="middle">
+        <a href="pmatch.asp?league=england5&amp;stats=268-4-18-2019-barnet-vs-chesterfield"><font color="blue" size="1"><u>stats</u></font></a>
+        &nbsp;&nbsp;<a href="h2h.asp?league=england5&amp;t1id=4&amp;t2id=18&amp;ly=2019" title="Barnet vs Chesterfield" rel="nofollow"><font color="blue" size="1"><u>h2h</u></font></a>
+        </td>
+        </tr>
+        
+        <tr height="8"><td colspan="26" align="center" valign="middle"><font size="1"> </font></td></tr>
+        <tr class="trow2"><td height="30" colspan="12">
+        &nbsp;<img src="//www.soccerstatistics.com/img/flags/england.png" width="16" height="11" alt="ENGLAND6">
+        &nbsp;<font size="2">England - <font color="gray">National L. North</font></font>
+        </td>
+        <td colspan="12" align="right">
+        &nbsp;&nbsp;<font color="gray" size="1">316 matches played out of 462</font>&nbsp;&nbsp;&nbsp;&nbsp;<a class="button" style="background-color:#eeeeee;font-color=white;" href="latest.asp?league=england6"><font color="#666666">Stats</font></a>&nbsp;&nbsp;&nbsp;&nbsp;
+        </td>
+        </tr>
+        
+        <tr class="trow2" height="24">
+        <td align="center"><font color="gray"><b>P</b></font></td>
+        <td align="center"><font color="gray" size="1">W%</font></td>
+        <td align="center"><font color="gray" size="1">FTS</font></td>
+        <td align="center"><font color="gray" size="1">CS</font></td>
+        <td align="center"><font color="gray" size="1">BTS</font></td>
+        <td align="center"><font color="gray" size="1">GF</font></td>
+        <td align="center"><font color="gray" size="1">TG</font></td>
+        <td align="center"><font color="gray" size="1">2.5+</font></td>
+        <td align="center"><font color="gray" size="1">1.5+</font></td>
+        <td><font color="gray"><b>PPG</b></font></td>
+        <td align="left"><font color="gray" size="1">&nbsp;&lt;= (at home)</font></td>
+        <td></td>
+        <td align="right"><font color="gray" size="1">(away) =&gt;&nbsp;</font></td>
+        <td><font color="gray"><b>PPG</b></font></td>
+        <td align="center"><font color="gray" size="1">1.5+</font></td>
+        <td align="center"><font color="gray" size="1">2.5+</font></td>
+        <td align="center"><font color="gray" size="1">TG</font></td>
+        <td align="center"><font color="gray" size="1">GF</font></td>
+        <td align="center"><font color="gray" size="1">BTS</font></td>
+        <td align="center"><font color="gray" size="1">CS</font></td>
+        <td align="center"><font color="gray" size="1">FTS</font></td>
+        <td align="center"><font color="gray" size="1">W%</font></td>
+        <td align="center"><font color="gray"><b>P</b></font></td>
+        <td width="60"></td>
+        </tr>
+        
+        <tr class="trow8" height="26">
+        <td align="center"><font color="green"><b>13</b></font></td>
+        <td align="center"><font color="green" size="1">69%</font></td>
+        <td align="center"><font size="1">8%</font></td>
+        <td align="center"><font size="1">54%</font></td>
+        <td align="center"><font size="1">46%</font></td>
+        <td><font size="1" color="green">
+        2.23</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        3.08</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        62%</font></td>
+        <td align="center"><font size="1">77%</font></td>
+        <td><font color="gray"><b>2.23</b></font></td>
+        <td align="right">
+        Chorley
+        </td>
+        <td width="30" align="center">
+        
+        <font size="1" color="gray">20:45</font>
+        
+        </td>
+        <td>
+        Brackley Town
+        </td>
+        <td><font color="gray"><b>1.23</b></font></td>
+        <td align="center"><font size="1">77%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        46%</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        2.54</font></td>
+        <td><font size="1" color="green">
+        1.38</font></td>
+        <td align="center"><font size="1">69%</font></td>
+        <td align="center"><font size="1">15%</font></td>
+        <td align="center"><font size="1">23%</font></td>
+        <td align="center"><font color="green" size="1">31%</font></td>
+        <td align="center"><font color="green"><b>13</b></font></td>
+        <td align="center" valign="middle">
+        <a href="pmatch.asp?league=england6&amp;stats=281-15-12-2019-chorley-vs-brackley-town"><font color="blue" size="1"><u>stats</u></font></a>
+        &nbsp;&nbsp;<a href="h2h.asp?league=england6&amp;t1id=15&amp;t2id=12&amp;ly=2019" title="Chorley vs Brackley Town" rel="nofollow"><font color="blue" size="1"><u>h2h</u></font></a>
+        </td>
+        </tr>
+        
+        <tr class="trow8" height="26">
+        <td align="center"><font color="green"><b>14</b></font></td>
+        <td align="center"><font color="green" size="1">64%</font></td>
+        <td align="center"><font size="1">14%</font></td>
+        <td align="center"><font size="1">14%</font></td>
+        <td align="center"><font size="1">71%</font></td>
+        <td><font size="1" color="green">
+        1.64</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        2.57</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        50%</font></td>
+        <td align="center"><font size="1">79%</font></td>
+        <td><font color="gray"><b>2.14</b></font></td>
+        <td align="right">
+        Telford Utd
+        </td>
+        <td width="30" align="center">
+        
+        <font size="1" color="gray">20:45</font>
+        
+        </td>
+        <td>
+        Guiseley
+        </td>
+        <td><font color="gray"><b>1.08</b></font></td>
+        <td align="center"><font size="1">62%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        38%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        2.31</font></td>
+        <td><font size="1" color="green">
+        1.00</font></td>
+        <td align="center"><font size="1">54%</font></td>
+        <td align="center"><font size="1">15%</font></td>
+        <td align="center"><font size="1">38%</font></td>
+        <td align="center"><font color="green" size="1">23%</font></td>
+        <td align="center"><font color="green"><b>13</b></font></td>
+        <td align="center" valign="middle">
+        <a href="pmatch.asp?league=england6&amp;stats=309-1-10-2019-telford-utd-vs-guiseley"><font color="blue" size="1"><u>stats</u></font></a>
+        &nbsp;&nbsp;<a href="h2h.asp?league=england6&amp;t1id=1&amp;t2id=10&amp;ly=2019" title="Telford Utd vs Guiseley" rel="nofollow"><font color="blue" size="1"><u>h2h</u></font></a>
+        </td>
+        </tr>
+        
+        <tr height="8"><td colspan="26" align="center" valign="middle"><font size="1"> </font></td></tr>
+        <tr class="trow2"><td height="30" colspan="12">
+        &nbsp;<img src="//www.soccerstatistics.com/img/flags/england.png" width="16" height="11" alt="ENGLAND7">
+        &nbsp;<font size="2">England - <font color="gray">National L. South</font></font>
+        </td>
+        <td colspan="12" align="right">
+        &nbsp;&nbsp;<font color="gray" size="1">316 matches played out of 462</font>&nbsp;&nbsp;&nbsp;&nbsp;<a class="button" style="background-color:#eeeeee;font-color=white;" href="latest.asp?league=england7"><font color="#666666">Stats</font></a>&nbsp;&nbsp;&nbsp;&nbsp;
+        </td>
+        </tr>
+        
+        <tr class="trow2" height="24">
+        <td align="center"><font color="gray"><b>P</b></font></td>
+        <td align="center"><font color="gray" size="1">W%</font></td>
+        <td align="center"><font color="gray" size="1">FTS</font></td>
+        <td align="center"><font color="gray" size="1">CS</font></td>
+        <td align="center"><font color="gray" size="1">BTS</font></td>
+        <td align="center"><font color="gray" size="1">GF</font></td>
+        <td align="center"><font color="gray" size="1">TG</font></td>
+        <td align="center"><font color="gray" size="1">2.5+</font></td>
+        <td align="center"><font color="gray" size="1">1.5+</font></td>
+        <td><font color="gray"><b>PPG</b></font></td>
+        <td align="left"><font color="gray" size="1">&nbsp;&lt;= (at home)</font></td>
+        <td></td>
+        <td align="right"><font color="gray" size="1">(away) =&gt;&nbsp;</font></td>
+        <td><font color="gray"><b>PPG</b></font></td>
+        <td align="center"><font color="gray" size="1">1.5+</font></td>
+        <td align="center"><font color="gray" size="1">2.5+</font></td>
+        <td align="center"><font color="gray" size="1">TG</font></td>
+        <td align="center"><font color="gray" size="1">GF</font></td>
+        <td align="center"><font color="gray" size="1">BTS</font></td>
+        <td align="center"><font color="gray" size="1">CS</font></td>
+        <td align="center"><font color="gray" size="1">FTS</font></td>
+        <td align="center"><font color="gray" size="1">W%</font></td>
+        <td align="center"><font color="gray"><b>P</b></font></td>
+        <td width="60"></td>
+        </tr>
+        
+        <tr class="trow8" height="26">
+        <td align="center"><font color="green"><b>13</b></font></td>
+        <td align="center"><font color="green" size="1">31%</font></td>
+        <td align="center"><font size="1">31%</font></td>
+        <td align="center"><font size="1">15%</font></td>
+        <td align="center"><font size="1">62%</font></td>
+        <td><font size="1" color="green">
+        1.23</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        2.62</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        31%</font></td>
+        <td align="center"><font size="1">77%</font></td>
+        <td><font color="gray"><b>1.31</b></font></td>
+        <td align="right">
+        Hemel Hemps.
+        </td>
+        <td width="30" align="center">
+        
+        <font size="1" color="gray">20:45</font>
+        
+        </td>
+        <td>
+        Torquay Utd
+        </td>
+        <td><font color="gray"><b>1.92</b></font></td>
+        <td align="center"><font size="1">69%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        46%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        2.46</font></td>
+        <td><font size="1" color="green">
+        1.77</font></td>
+        <td align="center"><font size="1">31%</font></td>
+        <td align="center"><font size="1">62%</font></td>
+        <td align="center"><font size="1">31%</font></td>
+        <td align="center"><font color="green" size="1">54%</font></td>
+        <td align="center"><font color="green"><b>13</b></font></td>
+        <td align="center" valign="middle">
+        <a href="pmatch.asp?league=england7&amp;stats=283-9-4-2019-hemel-hemps.-vs-torquay-utd"><font color="blue" size="1"><u>stats</u></font></a>
+        &nbsp;&nbsp;<a href="h2h.asp?league=england7&amp;t1id=9&amp;t2id=4&amp;ly=2019" title="Hemel Hemps. vs Torquay Utd" rel="nofollow"><font color="blue" size="1"><u>h2h</u></font></a>
+        </td>
+        </tr>
+        
+        <tr class="trow8" height="26">
+        <td align="center"><font color="green"><b>13</b></font></td>
+        <td align="center"><font color="green" size="1">54%</font></td>
+        <td align="center"><font size="1">15%</font></td>
+        <td align="center"><font size="1">46%</font></td>
+        <td align="center"><font size="1">46%</font></td>
+        <td><font size="1" color="green">
+        1.69</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        2.54</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        62%</font></td>
+        <td align="center"><font size="1">77%</font></td>
+        <td><font color="gray"><b>1.77</b></font></td>
+        <td align="right">
+        Oxford City
+        </td>
+        <td width="30" align="center">
+        
+        <font size="1" color="gray">20:45</font>
+        
+        </td>
+        <td>
+        Welling Utd
+        </td>
+        <td><font color="gray"><b>0.86</b></font></td>
+        <td align="center"><font size="1">79%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        43%</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        2.57</font></td>
+        <td><font size="1" color="green">
+        1.21</font></td>
+        <td align="center"><font size="1">43%</font></td>
+        <td align="center"><font size="1">21%</font></td>
+        <td align="center"><font size="1">43%</font></td>
+        <td align="center"><font color="green" size="1">21%</font></td>
+        <td align="center"><font color="green"><b>14</b></font></td>
+        <td align="center" valign="middle">
+        <a href="pmatch.asp?league=england7&amp;stats=284-11-21-2019-oxford-city-vs-welling-utd"><font color="blue" size="1"><u>stats</u></font></a>
+        &nbsp;&nbsp;<a href="h2h.asp?league=england7&amp;t1id=11&amp;t2id=21&amp;ly=2019" title="Oxford City vs Welling Utd" rel="nofollow"><font color="blue" size="1"><u>h2h</u></font></a>
+        </td>
+        </tr>
+        
+        <tr class="trow8" height="26">
+        <td align="center"><font color="green"><b>14</b></font></td>
+        <td align="center"><font color="green" size="1">43%</font></td>
+        <td align="center"><font size="1">29%</font></td>
+        <td align="center"><font size="1">43%</font></td>
+        <td align="center"><font size="1">43%</font></td>
+        <td><font size="1" color="green">
+        1.14</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        1.93</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        36%</font></td>
+        <td align="center"><font size="1">57%</font></td>
+        <td><font color="gray"><b>1.57</b></font></td>
+        <td align="right">
+        Slough Town
+        </td>
+        <td width="30" align="center">
+        
+        <font size="1" color="gray">20:45</font>
+        
+        </td>
+        <td>
+        Gloucester City
+        </td>
+        <td><font color="gray"><b>0.71</b></font></td>
+        <td align="center"><font size="1">64%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        36%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        2.00</font></td>
+        <td><font size="1" color="green">
+        0.50</font></td>
+        <td align="center"><font size="1">29%</font></td>
+        <td align="center"><font size="1">21%</font></td>
+        <td align="center"><font size="1">57%</font></td>
+        <td align="center"><font color="green" size="1">21%</font></td>
+        <td align="center"><font color="green"><b>14</b></font></td>
+        <td align="center" valign="middle">
+        <a href="pmatch.asp?league=england7&amp;stats=315-13-6-2019-slough-town-vs-gloucester-city"><font color="blue" size="1"><u>stats</u></font></a>
+        &nbsp;&nbsp;<a href="h2h.asp?league=england7&amp;t1id=13&amp;t2id=6&amp;ly=2019" title="Slough Town vs Gloucester City" rel="nofollow"><font color="blue" size="1"><u>h2h</u></font></a>
+        </td>
+        </tr>
+        
+        <tr height="8"><td colspan="26" align="center" valign="middle"><font size="1"> </font></td></tr>
+        <tr class="trow2"><td height="30" colspan="12">
+        &nbsp;<img src="//www.soccerstatistics.com/img/flags/england.png" width="16" height="11" alt="ENGLAND9">
+        &nbsp;<font size="2">England - <font color="gray">Northern league</font></font>
+        </td>
+        <td colspan="12" align="right">
+        &nbsp;&nbsp;<font color="gray" size="1">316 matches played out of 462</font>&nbsp;&nbsp;&nbsp;&nbsp;<a class="button" style="background-color:#eeeeee;font-color=white;" href="latest.asp?league=england9"><font color="#666666">Stats</font></a>&nbsp;&nbsp;&nbsp;&nbsp;
+        </td>
+        </tr>
+        
+        <tr class="trow2" height="24">
+        <td align="center"><font color="gray"><b>P</b></font></td>
+        <td align="center"><font color="gray" size="1">W%</font></td>
+        <td align="center"><font color="gray" size="1">FTS</font></td>
+        <td align="center"><font color="gray" size="1">CS</font></td>
+        <td align="center"><font color="gray" size="1">BTS</font></td>
+        <td align="center"><font color="gray" size="1">GF</font></td>
+        <td align="center"><font color="gray" size="1">TG</font></td>
+        <td align="center"><font color="gray" size="1">2.5+</font></td>
+        <td align="center"><font color="gray" size="1">1.5+</font></td>
+        <td><font color="gray"><b>PPG</b></font></td>
+        <td align="left"><font color="gray" size="1">&nbsp;&lt;= (at home)</font></td>
+        <td></td>
+        <td align="right"><font color="gray" size="1">(away) =&gt;&nbsp;</font></td>
+        <td><font color="gray"><b>PPG</b></font></td>
+        <td align="center"><font color="gray" size="1">1.5+</font></td>
+        <td align="center"><font color="gray" size="1">2.5+</font></td>
+        <td align="center"><font color="gray" size="1">TG</font></td>
+        <td align="center"><font color="gray" size="1">GF</font></td>
+        <td align="center"><font color="gray" size="1">BTS</font></td>
+        <td align="center"><font color="gray" size="1">CS</font></td>
+        <td align="center"><font color="gray" size="1">FTS</font></td>
+        <td align="center"><font color="gray" size="1">W%</font></td>
+        <td align="center"><font color="gray"><b>P</b></font></td>
+        <td width="60"></td>
+        </tr>
+        
+        <tr class="trow8" height="26">
+        <td align="center"><font color="green"><b>14</b></font></td>
+        <td align="center"><font color="green" size="1">50%</font></td>
+        <td align="center"><font size="1">14%</font></td>
+        <td align="center"><font size="1">21%</font></td>
+        <td align="center"><font size="1">71%</font></td>
+        <td><font size="1" color="green">
+        2.29</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        3.71</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        79%</font></td>
+        <td align="center"><font size="1">93%</font></td>
+        <td><font color="gray"><b>1.79</b></font></td>
+        <td align="right">
+        Bamber Bridge
+        </td>
+        <td width="30" align="center">
+        
+        <font size="1" color="gray">20:45</font>
+        
+        </td>
+        <td>
+        Lancaster City
+        </td>
+        <td><font color="gray"><b>1.00</b></font></td>
+        <td align="center"><font size="1">87%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        47%</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        2.87</font></td>
+        <td><font size="1" color="green">
+        1.00</font></td>
+        <td align="center"><font size="1">60%</font></td>
+        <td align="center"><font size="1">13%</font></td>
+        <td align="center"><font size="1">27%</font></td>
+        <td align="center"><font color="green" size="1">27%</font></td>
+        <td align="center"><font color="green"><b>15</b></font></td>
+        <td align="center" valign="middle">
+        <a href="pmatch.asp?league=england9&amp;stats=232-2-10-2019-bamber-bridge-vs-lancaster-city"><font color="blue" size="1"><u>stats</u></font></a>
+        &nbsp;&nbsp;<a href="h2h.asp?league=england9&amp;t1id=2&amp;t2id=10&amp;ly=2019" title="Bamber Bridge vs Lancaster City" rel="nofollow"><font color="blue" size="1"><u>h2h</u></font></a>
+        </td>
+        </tr>
+        
+        <tr class="trow8" height="26">
+        <td align="center"><font color="green"><b>14</b></font></td>
+        <td align="center"><font color="green" size="1">50%</font></td>
+        <td align="center"><font size="1">14%</font></td>
+        <td align="center"><font size="1">21%</font></td>
+        <td align="center"><font size="1">71%</font></td>
+        <td><font size="1" color="green">
+        1.93</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        3.29</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        57%</font></td>
+        <td align="center"><font size="1">79%</font></td>
+        <td><font color="gray"><b>1.71</b></font></td>
+        <td align="right">
+        Gainsborough
+        </td>
+        <td width="30" align="center">
+        
+        <font size="1" color="gray">20:45</font>
+        
+        </td>
+        <td>
+        Farsley Celtic
+        </td>
+        <td><font color="gray"><b>2.15</b></font></td>
+        <td align="center"><font size="1">77%</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        69%</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        3.38</font></td>
+        <td><font size="1" color="green">
+        2.23</font></td>
+        <td align="center"><font size="1">62%</font></td>
+        <td align="center"><font size="1">31%</font></td>
+        <td align="center"><font size="1">8%</font></td>
+        <td align="center"><font color="green" size="1">69%</font></td>
+        <td align="center"><font color="green"><b>13</b></font></td>
+        <td align="center" valign="middle">
+        <a href="pmatch.asp?league=england9&amp;stats=234-12-18-2019-gainsborough-vs-farsley-celtic"><font color="blue" size="1"><u>stats</u></font></a>
+        &nbsp;&nbsp;<a href="h2h.asp?league=england9&amp;t1id=12&amp;t2id=18&amp;ly=2019" title="Gainsborough vs Farsley Celtic" rel="nofollow"><font color="blue" size="1"><u>h2h</u></font></a>
+        </td>
+        </tr>
+        
+        <tr class="trow8" height="26">
+        <td align="center"><font color="green"><b>15</b></font></td>
+        <td align="center"><font color="green" size="1">33%</font></td>
+        <td align="center"><font size="1">33%</font></td>
+        <td align="center"><font size="1">13%</font></td>
+        <td align="center"><font size="1">53%</font></td>
+        <td><font size="1" color="green">
+        1.00</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        2.67</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        47%</font></td>
+        <td align="center"><font size="1">80%</font></td>
+        <td><font color="gray"><b>1.13</b></font></td>
+        <td align="right">
+        Grantham Town
+        </td>
+        <td width="30" align="center">
+        
+        <font size="1" color="gray">20:45</font>
+        
+        </td>
+        <td>
+        South Shields
+        </td>
+        <td><font color="gray"><b>1.43</b></font></td>
+        <td align="center"><font size="1">71%</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        57%</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        2.57</font></td>
+        <td><font size="1" color="green">
+        1.14</font></td>
+        <td align="center"><font size="1">36%</font></td>
+        <td align="center"><font size="1">43%</font></td>
+        <td align="center"><font size="1">29%</font></td>
+        <td align="center"><font color="green" size="1">43%</font></td>
+        <td align="center"><font color="green"><b>14</b></font></td>
+        <td align="center" valign="middle">
+        <a href="pmatch.asp?league=england9&amp;stats=335-1-13-2019-grantham-town-vs-south-shields"><font color="blue" size="1"><u>stats</u></font></a>
+        &nbsp;&nbsp;<a href="h2h.asp?league=england9&amp;t1id=1&amp;t2id=13&amp;ly=2019" title="Grantham Town vs South Shields" rel="nofollow"><font color="blue" size="1"><u>h2h</u></font></a>
+        </td>
+        </tr>
+        
+        <tr height="8"><td colspan="26" align="center" valign="middle"><font size="1"> </font></td></tr>
+        <tr class="trow2"><td height="30" colspan="12">
+        &nbsp;<img src="//www.soccerstatistics.com/img/flags/england.png" width="16" height="11" alt="ENGLAND10">
+        &nbsp;<font size="2">England - <font color="gray">Southern Central</font></font>
+        </td>
+        <td colspan="12" align="right">
+        &nbsp;&nbsp;<font color="gray" size="1">316 matches played out of 462</font>&nbsp;&nbsp;&nbsp;&nbsp;<a class="button" style="background-color:#eeeeee;font-color=white;" href="latest.asp?league=england10"><font color="#666666">Stats</font></a>&nbsp;&nbsp;&nbsp;&nbsp;
+        </td>
+        </tr>
+        
+        <tr class="trow2" height="24">
+        <td align="center"><font color="gray"><b>P</b></font></td>
+        <td align="center"><font color="gray" size="1">W%</font></td>
+        <td align="center"><font color="gray" size="1">FTS</font></td>
+        <td align="center"><font color="gray" size="1">CS</font></td>
+        <td align="center"><font color="gray" size="1">BTS</font></td>
+        <td align="center"><font color="gray" size="1">GF</font></td>
+        <td align="center"><font color="gray" size="1">TG</font></td>
+        <td align="center"><font color="gray" size="1">2.5+</font></td>
+        <td align="center"><font color="gray" size="1">1.5+</font></td>
+        <td><font color="gray"><b>PPG</b></font></td>
+        <td align="left"><font color="gray" size="1">&nbsp;&lt;= (at home)</font></td>
+        <td></td>
+        <td align="right"><font color="gray" size="1">(away) =&gt;&nbsp;</font></td>
+        <td><font color="gray"><b>PPG</b></font></td>
+        <td align="center"><font color="gray" size="1">1.5+</font></td>
+        <td align="center"><font color="gray" size="1">2.5+</font></td>
+        <td align="center"><font color="gray" size="1">TG</font></td>
+        <td align="center"><font color="gray" size="1">GF</font></td>
+        <td align="center"><font color="gray" size="1">BTS</font></td>
+        <td align="center"><font color="gray" size="1">CS</font></td>
+        <td align="center"><font color="gray" size="1">FTS</font></td>
+        <td align="center"><font color="gray" size="1">W%</font></td>
+        <td align="center"><font color="gray"><b>P</b></font></td>
+        <td width="60"></td>
+        </tr>
+        
+        <tr class="trow8" height="26">
+        <td align="center"><font color="green"><b>14</b></font></td>
+        <td align="center"><font color="green" size="1">64%</font></td>
+        <td align="center"><font size="1">21%</font></td>
+        <td align="center"><font size="1">36%</font></td>
+        <td align="center"><font size="1">57%</font></td>
+        <td><font size="1" color="green">
+        1.57</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        2.57</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        57%</font></td>
+        <td align="center"><font size="1">71%</font></td>
+        <td><font color="gray"><b>2.07</b></font></td>
+        <td align="right">
+        Stratford Town
+        </td>
+        <td width="30" align="center">
+        
+        <font size="1" color="gray">20:45</font>
+        
+        </td>
+        <td>
+        Coalville Town
+        </td>
+        <td><font color="gray"><b>1.64</b></font></td>
+        <td align="center"><font size="1">91%</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        73%</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        3.91</font></td>
+        <td><font size="1" color="green">
+        2.00</font></td>
+        <td align="center"><font size="1">64%</font></td>
+        <td align="center"><font size="1">18%</font></td>
+        <td align="center"><font size="1">18%</font></td>
+        <td align="center"><font color="green" size="1">55%</font></td>
+        <td align="center"><font color="green"><b>11</b></font></td>
+        <td align="center" valign="middle">
+        <a href="pmatch.asp?league=england10&amp;stats=99-21-16-2019-stratford-town-vs-coalville-town"><font color="blue" size="1"><u>stats</u></font></a>
+        &nbsp;&nbsp;<a href="h2h.asp?league=england10&amp;t1id=21&amp;t2id=16&amp;ly=2019" title="Stratford Town vs Coalville Town" rel="nofollow"><font color="blue" size="1"><u>h2h</u></font></a>
+        </td>
+        </tr>
+        
+        <tr height="8"><td colspan="26" align="center" valign="middle"><font size="1"> </font></td></tr>
+        <tr class="trow2"><td height="30" colspan="12">
+        &nbsp;<img src="//www.soccerstatistics.com/img/flags/england.png" width="16" height="11" alt="ENGLAND11">
+        &nbsp;<font size="2">England - <font color="gray">Southern South</font></font>
+        </td>
+        <td colspan="12" align="right">
+        &nbsp;&nbsp;<font color="gray" size="1">309 matches played out of 462</font>&nbsp;&nbsp;&nbsp;&nbsp;<a class="button" style="background-color:#eeeeee;font-color=white;" href="latest.asp?league=england11"><font color="#666666">Stats</font></a>&nbsp;&nbsp;&nbsp;&nbsp;
+        </td>
+        </tr>
+        
+        <tr class="trow2" height="24">
+        <td align="center"><font color="gray"><b>P</b></font></td>
+        <td align="center"><font color="gray" size="1">W%</font></td>
+        <td align="center"><font color="gray" size="1">FTS</font></td>
+        <td align="center"><font color="gray" size="1">CS</font></td>
+        <td align="center"><font color="gray" size="1">BTS</font></td>
+        <td align="center"><font color="gray" size="1">GF</font></td>
+        <td align="center"><font color="gray" size="1">TG</font></td>
+        <td align="center"><font color="gray" size="1">2.5+</font></td>
+        <td align="center"><font color="gray" size="1">1.5+</font></td>
+        <td><font color="gray"><b>PPG</b></font></td>
+        <td align="left"><font color="gray" size="1">&nbsp;&lt;= (at home)</font></td>
+        <td></td>
+        <td align="right"><font color="gray" size="1">(away) =&gt;&nbsp;</font></td>
+        <td><font color="gray"><b>PPG</b></font></td>
+        <td align="center"><font color="gray" size="1">1.5+</font></td>
+        <td align="center"><font color="gray" size="1">2.5+</font></td>
+        <td align="center"><font color="gray" size="1">TG</font></td>
+        <td align="center"><font color="gray" size="1">GF</font></td>
+        <td align="center"><font color="gray" size="1">BTS</font></td>
+        <td align="center"><font color="gray" size="1">CS</font></td>
+        <td align="center"><font color="gray" size="1">FTS</font></td>
+        <td align="center"><font color="gray" size="1">W%</font></td>
+        <td align="center"><font color="gray"><b>P</b></font></td>
+        <td width="60"></td>
+        </tr>
+        
+        <tr class="trow8" height="26">
+        <td align="center"><font color="green"><b>14</b></font></td>
+        <td align="center"><font color="green" size="1">14%</font></td>
+        <td align="center"><font size="1">57%</font></td>
+        <td align="center"><font size="1">7%</font></td>
+        <td align="center"><font size="1">43%</font></td>
+        <td><font size="1" color="green">
+        0.71</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        2.86</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        57%</font></td>
+        <td align="center"><font size="1">79%</font></td>
+        <td><font color="gray"><b>0.71</b></font></td>
+        <td align="right">
+        Dorchester
+        </td>
+        <td width="30" align="center">
+        
+        <font size="1" color="gray">20:45</font>
+        
+        </td>
+        <td>
+        Frome Town
+        </td>
+        <td><font color="gray"><b>0.71</b></font></td>
+        <td align="center"><font size="1">86%</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        86%</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        3.43</font></td>
+        <td><font size="1" color="green">
+        1.36</font></td>
+        <td align="center"><font size="1">64%</font></td>
+        <td align="center"><font size="1">14%</font></td>
+        <td align="center"><font size="1">21%</font></td>
+        <td align="center"><font color="green" size="1">21%</font></td>
+        <td align="center"><font color="green"><b>14</b></font></td>
+        <td align="center" valign="middle">
+        <a href="pmatch.asp?league=england11&amp;stats=278-5-9-2019-dorchester-vs-frome-town"><font color="blue" size="1"><u>stats</u></font></a>
+        &nbsp;&nbsp;<a href="h2h.asp?league=england11&amp;t1id=5&amp;t2id=9&amp;ly=2019" title="Dorchester vs Frome Town" rel="nofollow"><font color="blue" size="1"><u>h2h</u></font></a>
+        </td>
+        </tr>
+        
+        <tr class="trow8" height="26">
+        <td align="center"><font color="green"><b>13</b></font></td>
+        <td align="center"><font color="green" size="1">46%</font></td>
+        <td align="center"><font size="1">15%</font></td>
+        <td align="center"><font size="1">23%</font></td>
+        <td align="center"><font size="1">62%</font></td>
+        <td><font size="1" color="green">
+        1.77</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        3.08</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        54%</font></td>
+        <td align="center"><font size="1">77%</font></td>
+        <td><font color="gray"><b>1.62</b></font></td>
+        <td align="right">
+        Merthyr
+        </td>
+        <td width="30" align="center">
+        
+        <font size="1" color="gray">20:45</font>
+        
+        </td>
+        <td>
+        Weymouth
+        </td>
+        <td><font color="gray"><b>2.08</b></font></td>
+        <td align="center"><font size="1">92%</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        77%</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        4.38</font></td>
+        <td><font size="1" color="green">
+        2.69</font></td>
+        <td align="center"><font size="1">77%</font></td>
+        <td align="center"><font size="1">23%</font></td>
+        <td align="center"><font size="1">0%</font></td>
+        <td align="center"><font color="green" size="1">62%</font></td>
+        <td align="center"><font color="green"><b>13</b></font></td>
+        <td align="center" valign="middle">
+        <a href="pmatch.asp?league=england11&amp;stats=183-4-14-2019-merthyr-vs-weymouth"><font color="blue" size="1"><u>stats</u></font></a>
+        &nbsp;&nbsp;<a href="h2h.asp?league=england11&amp;t1id=4&amp;t2id=14&amp;ly=2019" title="Merthyr vs Weymouth" rel="nofollow"><font color="blue" size="1"><u>h2h</u></font></a>
+        </td>
+        </tr>
+        
+        <tr class="trow8" height="26">
+        <td align="center"><font color="green"><b>14</b></font></td>
+        <td align="center"><font color="green" size="1">29%</font></td>
+        <td align="center"><font size="1">21%</font></td>
+        <td align="center"><font size="1">29%</font></td>
+        <td align="center"><font size="1">57%</font></td>
+        <td><font size="1" color="green">
+        1.86</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        3.64</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        64%</font></td>
+        <td align="center"><font size="1">79%</font></td>
+        <td><font color="gray"><b>1.21</b></font></td>
+        <td align="right">
+        Poole Town
+        </td>
+        <td width="30" align="center">
+        
+        <font size="1" color="gray">20:45</font>
+        
+        </td>
+        <td>
+        Tiverton Town
+        </td>
+        <td><font color="gray"><b>1.00</b></font></td>
+        <td align="center"><font size="1">92%</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        77%</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        3.46</font></td>
+        <td><font size="1" color="green">
+        1.54</font></td>
+        <td align="center"><font size="1">85%</font></td>
+        <td align="center"><font size="1">15%</font></td>
+        <td align="center"><font size="1">0%</font></td>
+        <td align="center"><font color="green" size="1">23%</font></td>
+        <td align="center"><font color="green"><b>13</b></font></td>
+        <td align="center" valign="middle">
+        <a href="pmatch.asp?league=england11&amp;stats=151-15-18-2019-poole-town-vs-tiverton-town"><font color="blue" size="1"><u>stats</u></font></a>
+        &nbsp;&nbsp;<a href="h2h.asp?league=england11&amp;t1id=15&amp;t2id=18&amp;ly=2019" title="Poole Town vs Tiverton Town" rel="nofollow"><font color="blue" size="1"><u>h2h</u></font></a>
+        </td>
+        </tr>
+        
+        <tr height="8"><td colspan="26" align="center" valign="middle"><font size="1"> </font></td></tr>
+        <tr class="trow2"><td height="30" colspan="12">
+        &nbsp;<img src="//www.soccerstatistics.com/img/flags/de.png" width="16" height="11" alt="GERMANY3">
+        &nbsp;<font size="2">Germany - <font color="gray">3. Liga</font></font>
+        </td>
+        <td colspan="12" align="right">
+        &nbsp;&nbsp;<font color="gray" size="1">226 matches played out of 380</font>&nbsp;&nbsp;&nbsp;&nbsp;<a class="button" style="background-color:#eeeeee;font-color=white;" href="latest.asp?league=germany3"><font color="#666666">Stats</font></a>&nbsp;&nbsp;&nbsp;&nbsp;
+        </td>
+        </tr>
+        
+        <tr class="trow2" height="24">
+        <td align="center"><font color="gray"><b>P</b></font></td>
+        <td align="center"><font color="gray" size="1">W%</font></td>
+        <td align="center"><font color="gray" size="1">FTS</font></td>
+        <td align="center"><font color="gray" size="1">CS</font></td>
+        <td align="center"><font color="gray" size="1">BTS</font></td>
+        <td align="center"><font color="gray" size="1">GF</font></td>
+        <td align="center"><font color="gray" size="1">TG</font></td>
+        <td align="center"><font color="gray" size="1">2.5+</font></td>
+        <td align="center"><font color="gray" size="1">1.5+</font></td>
+        <td><font color="gray"><b>PPG</b></font></td>
+        <td align="left"><font color="gray" size="1">&nbsp;&lt;= (at home)</font></td>
+        <td></td>
+        <td align="right"><font color="gray" size="1">(away) =&gt;&nbsp;</font></td>
+        <td><font color="gray"><b>PPG</b></font></td>
+        <td align="center"><font color="gray" size="1">1.5+</font></td>
+        <td align="center"><font color="gray" size="1">2.5+</font></td>
+        <td align="center"><font color="gray" size="1">TG</font></td>
+        <td align="center"><font color="gray" size="1">GF</font></td>
+        <td align="center"><font color="gray" size="1">BTS</font></td>
+        <td align="center"><font color="gray" size="1">CS</font></td>
+        <td align="center"><font color="gray" size="1">FTS</font></td>
+        <td align="center"><font color="gray" size="1">W%</font></td>
+        <td align="center"><font color="gray"><b>P</b></font></td>
+        <td width="60"></td>
+        </tr>
+        
+        <tr class="trow8" height="26">
+        <td align="center"><font color="green"><b>10</b></font></td>
+        <td align="center"><font color="green" size="1">30%</font></td>
+        <td align="center"><font size="1">20%</font></td>
+        <td align="center"><font size="1">30%</font></td>
+        <td align="center"><font size="1">50%</font></td>
+        <td><font size="1" color="green">
+        1.40</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        2.50</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        40%</font></td>
+        <td align="center"><font size="1">70%</font></td>
+        <td><font color="gray"><b>1.30</b></font></td>
+        <td align="right">
+        Zwickau
+        </td>
+        <td width="30" align="center">
+        
+        <font size="1" color="gray">19:00</font>
+        
+        </td>
+        <td>
+        Karlsruher SC
+        </td>
+        <td><font color="gray"><b>2.00</b></font></td>
+        <td align="center"><font size="1">55%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        36%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        2.00</font></td>
+        <td><font size="1" color="green">
+        1.36</font></td>
+        <td align="center"><font size="1">45%</font></td>
+        <td align="center"><font size="1">45%</font></td>
+        <td align="center"><font size="1">27%</font></td>
+        <td align="center"><font color="green" size="1">55%</font></td>
+        <td align="center"><font color="green"><b>11</b></font></td>
+        <td align="center" valign="middle">
+        <a href="pmatch.asp?league=germany3&amp;stats=147-16-12-2019-zwickau-vs-karlsruher-sc"><font color="blue" size="1"><u>stats</u></font></a>
+        &nbsp;&nbsp;<a href="h2h.asp?league=germany3&amp;t1id=16&amp;t2id=12&amp;ly=2019" title="Zwickau vs Karlsruher SC" rel="nofollow"><font color="blue" size="1"><u>h2h</u></font></a>
+        </td>
+        </tr>
+        
+        <tr height="8"><td colspan="26" align="center" valign="middle"><font size="1"> </font></td></tr>
+        <tr class="trow2"><td height="30" colspan="12">
+        &nbsp;<img src="//www.soccerstatistics.com/img/flags/it.png" width="16" height="11" alt="ITALY4">
+        &nbsp;<font size="2">Italy - <font color="gray">Serie C - Group B</font></font>
+        </td>
+        <td colspan="12" align="right">
+        &nbsp;&nbsp;<font color="gray" size="1">248 matches played out of 380</font>&nbsp;&nbsp;&nbsp;&nbsp;<a class="button" style="background-color:#eeeeee;font-color=white;" href="latest.asp?league=italy4"><font color="#666666">Stats</font></a>&nbsp;&nbsp;&nbsp;&nbsp;
+        </td>
+        </tr>
+        
+        <tr class="trow2" height="24">
+        <td align="center"><font color="gray"><b>P</b></font></td>
+        <td align="center"><font color="gray" size="1">W%</font></td>
+        <td align="center"><font color="gray" size="1">FTS</font></td>
+        <td align="center"><font color="gray" size="1">CS</font></td>
+        <td align="center"><font color="gray" size="1">BTS</font></td>
+        <td align="center"><font color="gray" size="1">GF</font></td>
+        <td align="center"><font color="gray" size="1">TG</font></td>
+        <td align="center"><font color="gray" size="1">2.5+</font></td>
+        <td align="center"><font color="gray" size="1">1.5+</font></td>
+        <td><font color="gray"><b>PPG</b></font></td>
+        <td align="left"><font color="gray" size="1">&nbsp;&lt;= (at home)</font></td>
+        <td></td>
+        <td align="right"><font color="gray" size="1">(away) =&gt;&nbsp;</font></td>
+        <td><font color="gray"><b>PPG</b></font></td>
+        <td align="center"><font color="gray" size="1">1.5+</font></td>
+        <td align="center"><font color="gray" size="1">2.5+</font></td>
+        <td align="center"><font color="gray" size="1">TG</font></td>
+        <td align="center"><font color="gray" size="1">GF</font></td>
+        <td align="center"><font color="gray" size="1">BTS</font></td>
+        <td align="center"><font color="gray" size="1">CS</font></td>
+        <td align="center"><font color="gray" size="1">FTS</font></td>
+        <td align="center"><font color="gray" size="1">W%</font></td>
+        <td align="center"><font color="gray"><b>P</b></font></td>
+        <td width="60"></td>
+        </tr>
+        
+        <tr class="trow8" height="26">
+        <td align="center"><font color="green"><b>12</b></font></td>
+        <td align="center"><font color="green" size="1">17%</font></td>
+        <td align="center"><font size="1">42%</font></td>
+        <td align="center"><font size="1">33%</font></td>
+        <td align="center"><font size="1">42%</font></td>
+        <td><font size="1" color="green">
+        0.75</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        1.92</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        25%</font></td>
+        <td align="center"><font size="1">58%</font></td>
+        <td><font color="gray"><b>0.83</b></font></td>
+        <td align="right">
+        AlbinoLeffe
+        </td>
+        <td width="30" align="center">
+        
+        <font size="1" color="gray">18:30</font>
+        
+        </td>
+        <td>
+        Ternana
+        </td>
+        <td><font color="gray"><b>1.18</b></font></td>
+        <td align="center"><font size="1">64%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        36%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        2.36</font></td>
+        <td><font size="1" color="green">
+        1.27</font></td>
+        <td align="center"><font size="1">55%</font></td>
+        <td align="center"><font size="1">36%</font></td>
+        <td align="center"><font size="1">27%</font></td>
+        <td align="center"><font color="green" size="1">27%</font></td>
+        <td align="center"><font color="green"><b>11</b></font></td>
+        <td align="center" valign="middle">
+        <a href="pmatch.asp?league=italy4&amp;stats=251-14-19-2019-albinoleffe-vs-ternana"><font color="blue" size="1"><u>stats</u></font></a>
+        &nbsp;&nbsp;<a href="h2h.asp?league=italy4&amp;t1id=14&amp;t2id=19&amp;ly=2019" title="AlbinoLeffe vs Ternana" rel="nofollow"><font color="blue" size="1"><u>h2h</u></font></a>
+        </td>
+        </tr>
+        
+        <tr class="trow8" height="26">
+        <td align="center"><font color="green"><b>12</b></font></td>
+        <td align="center"><font color="green" size="1">58%</font></td>
+        <td align="center"><font size="1">33%</font></td>
+        <td align="center"><font size="1">67%</font></td>
+        <td align="center"><font size="1">17%</font></td>
+        <td><font size="1" color="green">
+        1.00</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        1.42</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        8%</font></td>
+        <td align="center"><font size="1">50%</font></td>
+        <td><font color="gray"><b>2.00</b></font></td>
+        <td align="right">
+        Fermana
+        </td>
+        <td width="30" align="center">
+        
+        <font size="1" color="gray">18:30</font>
+        
+        </td>
+        <td>
+        Gubbio
+        </td>
+        <td><font color="gray"><b>0.75</b></font></td>
+        <td align="center"><font size="1">75%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        50%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        2.42</font></td>
+        <td><font size="1" color="green">
+        0.92</font></td>
+        <td align="center"><font size="1">58%</font></td>
+        <td align="center"><font size="1">8%</font></td>
+        <td align="center"><font size="1">33%</font></td>
+        <td align="center"><font color="green" size="1">17%</font></td>
+        <td align="center"><font color="green"><b>12</b></font></td>
+        <td align="center" valign="middle">
+        <a href="pmatch.asp?league=italy4&amp;stats=253-1-3-2019-fermana-vs-gubbio"><font color="blue" size="1"><u>stats</u></font></a>
+        &nbsp;&nbsp;<a href="h2h.asp?league=italy4&amp;t1id=1&amp;t2id=3&amp;ly=2019" title="Fermana vs Gubbio" rel="nofollow"><font color="blue" size="1"><u>h2h</u></font></a>
+        </td>
+        </tr>
+        
+        <tr class="trow8" height="26">
+        <td align="center"><font color="green"><b>13</b></font></td>
+        <td align="center"><font color="green" size="1">62%</font></td>
+        <td align="center"><font size="1">8%</font></td>
+        <td align="center"><font size="1">38%</font></td>
+        <td align="center"><font size="1">54%</font></td>
+        <td><font size="1" color="green">
+        1.31</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        2.15</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        46%</font></td>
+        <td align="center"><font size="1">62%</font></td>
+        <td><font color="gray"><b>2.00</b></font></td>
+        <td align="right">
+        Pordenone
+        </td>
+        <td width="30" align="center">
+        
+        <font size="1" color="gray">18:30</font>
+        
+        </td>
+        <td>
+        Vis Pesaro
+        </td>
+        <td><font color="gray"><b>1.50</b></font></td>
+        <td align="center"><font size="1">58%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        8%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        1.58</font></td>
+        <td><font size="1" color="green">
+        0.92</font></td>
+        <td align="center"><font size="1">25%</font></td>
+        <td align="center"><font size="1">50%</font></td>
+        <td align="center"><font size="1">33%</font></td>
+        <td align="center"><font color="green" size="1">42%</font></td>
+        <td align="center"><font color="green"><b>12</b></font></td>
+        <td align="center" valign="middle">
+        <a href="pmatch.asp?league=italy4&amp;stats=256-15-18-2019-pordenone-vs-vis-pesaro"><font color="blue" size="1"><u>stats</u></font></a>
+        &nbsp;&nbsp;<a href="h2h.asp?league=italy4&amp;t1id=15&amp;t2id=18&amp;ly=2019" title="Pordenone vs Vis Pesaro" rel="nofollow"><font color="blue" size="1"><u>h2h</u></font></a>
+        </td>
+        </tr>
+        
+        <tr class="trow8" height="26">
+        <td align="center"><font color="green"><b>12</b></font></td>
+        <td align="center"><font color="green" size="1">50%</font></td>
+        <td align="center"><font size="1">33%</font></td>
+        <td align="center"><font size="1">50%</font></td>
+        <td align="center"><font size="1">25%</font></td>
+        <td><font size="1" color="green">
+        1.00</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        1.75</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        17%</font></td>
+        <td align="center"><font size="1">42%</font></td>
+        <td><font color="gray"><b>1.75</b></font></td>
+        <td align="right">
+        Ravenna
+        </td>
+        <td width="30" align="center">
+        
+        <font size="1" color="gray">18:30</font>
+        
+        </td>
+        <td>
+        Giana Erminio
+        </td>
+        <td><font color="gray"><b>0.92</b></font></td>
+        <td align="center"><font size="1">62%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        38%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        2.31</font></td>
+        <td><font size="1" color="green">
+        0.85</font></td>
+        <td align="center"><font size="1">38%</font></td>
+        <td align="center"><font size="1">31%</font></td>
+        <td align="center"><font size="1">46%</font></td>
+        <td align="center"><font color="green" size="1">15%</font></td>
+        <td align="center"><font color="green"><b>13</b></font></td>
+        <td align="center" valign="middle">
+        <a href="pmatch.asp?league=italy4&amp;stats=257-4-10-2019-ravenna-vs-giana-erminio"><font color="blue" size="1"><u>stats</u></font></a>
+        &nbsp;&nbsp;<a href="h2h.asp?league=italy4&amp;t1id=4&amp;t2id=10&amp;ly=2019" title="Ravenna vs Giana Erminio" rel="nofollow"><font color="blue" size="1"><u>h2h</u></font></a>
+        </td>
+        </tr>
+        
+        <tr class="trow8" height="26">
+        <td align="center"><font color="green"><b>12</b></font></td>
+        <td align="center"><font color="green" size="1">33%</font></td>
+        <td align="center"><font size="1">42%</font></td>
+        <td align="center"><font size="1">17%</font></td>
+        <td align="center"><font size="1">42%</font></td>
+        <td><font size="1" color="green">
+        1.17</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        2.92</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        50%</font></td>
+        <td align="center"><font size="1">83%</font></td>
+        <td><font color="gray"><b>1.00</b></font></td>
+        <td align="right">
+        Virtus Verona
+        </td>
+        <td width="30" align="center">
+        
+        <font size="1" color="gray">18:30</font>
+        
+        </td>
+        <td>
+        Renate
+        </td>
+        <td><font color="gray"><b>1.17</b></font></td>
+        <td align="center"><font size="1">58%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        17%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        1.75</font></td>
+        <td><font size="1" color="green">
+        0.83</font></td>
+        <td align="center"><font size="1">42%</font></td>
+        <td align="center"><font size="1">33%</font></td>
+        <td align="center"><font size="1">33%</font></td>
+        <td align="center"><font color="green" size="1">25%</font></td>
+        <td align="center"><font color="green"><b>12</b></font></td>
+        <td align="center" valign="middle">
+        <a href="pmatch.asp?league=italy4&amp;stats=260-2-6-2019-virtus-verona-vs-renate"><font color="blue" size="1"><u>stats</u></font></a>
+        &nbsp;&nbsp;<a href="h2h.asp?league=italy4&amp;t1id=2&amp;t2id=6&amp;ly=2019" title="Virtus Verona vs Renate" rel="nofollow"><font color="blue" size="1"><u>h2h</u></font></a>
+        </td>
+        </tr>
+        
+        <tr class="trow8" height="26">
+        <td align="center"><font color="green"><b>12</b></font></td>
+        <td align="center"><font color="green" size="1">17%</font></td>
+        <td align="center"><font size="1">50%</font></td>
+        <td align="center"><font size="1">33%</font></td>
+        <td align="center"><font size="1">33%</font></td>
+        <td><font size="1" color="green">
+        0.50</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        1.50</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        8%</font></td>
+        <td align="center"><font size="1">58%</font></td>
+        <td><font color="gray"><b>1.00</b></font></td>
+        <td align="right">
+        Fano
+        </td>
+        <td width="30" align="center">
+        
+        <font size="1" color="gray">20:30</font>
+        
+        </td>
+        <td>
+        Teramo
+        </td>
+        <td><font color="gray"><b>0.67</b></font></td>
+        <td align="center"><font size="1">67%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        25%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        1.83</font></td>
+        <td><font size="1" color="green">
+        0.58</font></td>
+        <td align="center"><font size="1">50%</font></td>
+        <td align="center"><font size="1">25%</font></td>
+        <td align="center"><font size="1">42%</font></td>
+        <td align="center"><font color="green" size="1">8%</font></td>
+        <td align="center"><font color="green"><b>12</b></font></td>
+        <td align="center" valign="middle">
+        <a href="pmatch.asp?league=italy4&amp;stats=252-16-12-2019-fano-vs-teramo"><font color="blue" size="1"><u>stats</u></font></a>
+        &nbsp;&nbsp;<a href="h2h.asp?league=italy4&amp;t1id=16&amp;t2id=12&amp;ly=2019" title="Fano vs Teramo" rel="nofollow"><font color="blue" size="1"><u>h2h</u></font></a>
+        </td>
+        </tr>
+        
+        <tr class="trow8" height="26">
+        <td align="center"><font color="green"><b>12</b></font></td>
+        <td align="center"><font color="green" size="1">50%</font></td>
+        <td align="center"><font size="1">25%</font></td>
+        <td align="center"><font size="1">50%</font></td>
+        <td align="center"><font size="1">50%</font></td>
+        <td><font size="1" color="green">
+        1.58</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        2.17</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        42%</font></td>
+        <td align="center"><font size="1">58%</font></td>
+        <td><font color="gray"><b>2.00</b></font></td>
+        <td align="right">
+        Imolese
+        </td>
+        <td width="30" align="center">
+        
+        <font size="1" color="gray">20:30</font>
+        
+        </td>
+        <td>
+        Sambenedettese
+        </td>
+        <td><font color="gray"><b>0.82</b></font></td>
+        <td align="center"><font size="1">64%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        27%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        1.82</font></td>
+        <td><font size="1" color="green">
+        0.73</font></td>
+        <td align="center"><font size="1">55%</font></td>
+        <td align="center"><font size="1">27%</font></td>
+        <td align="center"><font size="1">45%</font></td>
+        <td align="center"><font color="green" size="1">9%</font></td>
+        <td align="center"><font color="green"><b>11</b></font></td>
+        <td align="center" valign="middle">
+        <a href="pmatch.asp?league=italy4&amp;stats=254-13-5-2019-imolese-vs-sambenedettese"><font color="blue" size="1"><u>stats</u></font></a>
+        &nbsp;&nbsp;<a href="h2h.asp?league=italy4&amp;t1id=13&amp;t2id=5&amp;ly=2019" title="Imolese vs Sambenedettese" rel="nofollow"><font color="blue" size="1"><u>h2h</u></font></a>
+        </td>
+        </tr>
+        
+        <tr class="trow8" height="26">
+        <td align="center"><font color="green"><b>13</b></font></td>
+        <td align="center"><font color="green" size="1">46%</font></td>
+        <td align="center"><font size="1">15%</font></td>
+        <td align="center"><font size="1">31%</font></td>
+        <td align="center"><font size="1">54%</font></td>
+        <td><font size="1" color="green">
+        1.23</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        2.31</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        31%</font></td>
+        <td align="center"><font size="1">69%</font></td>
+        <td><font color="gray"><b>1.69</b></font></td>
+        <td align="right">
+        Monza
+        </td>
+        <td width="30" align="center">
+        
+        <font size="1" color="gray">20:30</font>
+        
+        </td>
+        <td>
+        Bassano Virtus
+        </td>
+        <td><font color="gray"><b>1.42</b></font></td>
+        <td align="center"><font size="1">75%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        25%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        1.83</font></td>
+        <td><font size="1" color="green">
+        1.00</font></td>
+        <td align="center"><font size="1">42%</font></td>
+        <td align="center"><font size="1">42%</font></td>
+        <td align="center"><font size="1">33%</font></td>
+        <td align="center"><font color="green" size="1">33%</font></td>
+        <td align="center"><font color="green"><b>12</b></font></td>
+        <td align="center" valign="middle">
+        <a href="pmatch.asp?league=italy4&amp;stats=255-7-9-2019-monza-vs-bassano-virtus"><font color="blue" size="1"><u>stats</u></font></a>
+        &nbsp;&nbsp;<a href="h2h.asp?league=italy4&amp;t1id=7&amp;t2id=9&amp;ly=2019" title="Monza vs Bassano Virtus" rel="nofollow"><font color="blue" size="1"><u>h2h</u></font></a>
+        </td>
+        </tr>
+        
+        <tr class="trow8" height="26">
+        <td align="center"><font color="green"><b>11</b></font></td>
+        <td align="center"><font color="green" size="1">45%</font></td>
+        <td align="center"><font size="1">27%</font></td>
+        <td align="center"><font size="1">55%</font></td>
+        <td align="center"><font size="1">45%</font></td>
+        <td><font size="1" color="green">
+        1.18</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        1.82</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        27%</font></td>
+        <td align="center"><font size="1">55%</font></td>
+        <td><font color="gray"><b>1.91</b></font></td>
+        <td align="right">
+        Rimini
+        </td>
+        <td width="30" align="center">
+        
+        <font size="1" color="gray">20:30</font>
+        
+        </td>
+        <td>
+        FeralpiSalo
+        </td>
+        <td><font color="gray"><b>1.38</b></font></td>
+        <td align="center"><font size="1">69%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        38%</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        2.54</font></td>
+        <td><font size="1" color="green">
+        1.23</font></td>
+        <td align="center"><font size="1">54%</font></td>
+        <td align="center"><font size="1">8%</font></td>
+        <td align="center"><font size="1">38%</font></td>
+        <td align="center"><font color="green" size="1">38%</font></td>
+        <td align="center"><font color="green"><b>13</b></font></td>
+        <td align="center" valign="middle">
+        <a href="pmatch.asp?league=italy4&amp;stats=258-20-8-2019-rimini-vs-feralpisalo"><font color="blue" size="1"><u>stats</u></font></a>
+        &nbsp;&nbsp;<a href="h2h.asp?league=italy4&amp;t1id=20&amp;t2id=8&amp;ly=2019" title="Rimini vs FeralpiSalo" rel="nofollow"><font color="blue" size="1"><u>h2h</u></font></a>
+        </td>
+        </tr>
+        
+        <tr class="trow8" height="26">
+        <td align="center"><font color="green"><b>13</b></font></td>
+        <td align="center"><font color="green" size="1">62%</font></td>
+        <td align="center"><font size="1">8%</font></td>
+        <td align="center"><font size="1">46%</font></td>
+        <td align="center"><font size="1">46%</font></td>
+        <td><font size="1" color="green">
+        1.77</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        2.38</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        31%</font></td>
+        <td align="center"><font size="1">85%</font></td>
+        <td><font color="gray"><b>2.15</b></font></td>
+        <td align="right">
+        Triestina
+        </td>
+        <td width="30" align="center">
+        
+        <font size="1" color="gray">20:30</font>
+        
+        </td>
+        <td>
+        Sudtirol
+        </td>
+        <td><font color="gray"><b>1.54</b></font></td>
+        <td align="center"><font size="1">46%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        31%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        2.08</font></td>
+        <td><font size="1" color="green">
+        1.23</font></td>
+        <td align="center"><font size="1">31%</font></td>
+        <td align="center"><font size="1">54%</font></td>
+        <td align="center"><font size="1">46%</font></td>
+        <td align="center"><font color="green" size="1">38%</font></td>
+        <td align="center"><font color="green"><b>13</b></font></td>
+        <td align="center" valign="middle">
+        <a href="pmatch.asp?league=italy4&amp;stats=259-17-11-2019-triestina-vs-sudtirol"><font color="blue" size="1"><u>stats</u></font></a>
+        &nbsp;&nbsp;<a href="h2h.asp?league=italy4&amp;t1id=17&amp;t2id=11&amp;ly=2019" title="Triestina vs Sudtirol" rel="nofollow"><font color="blue" size="1"><u>h2h</u></font></a>
+        </td>
+        </tr>
+        
+        <tr height="8"><td colspan="26" align="center" valign="middle"><font size="1"> </font></td></tr>
+        <tr class="trow2"><td height="30" colspan="12">
+        &nbsp;<img src="//www.soccerstatistics.com/img/flags/jm.png" width="16" height="11" alt="JAMAICA">
+        &nbsp;<font size="2">Jamaica - <font color="gray">Premier League</font></font>
+        </td>
+        <td colspan="12" align="right">
+        &nbsp;&nbsp;<font color="gray" size="1">155 matches played out of 197</font>&nbsp;&nbsp;&nbsp;&nbsp;<a class="button" style="background-color:#eeeeee;font-color=white;" href="latest.asp?league=jamaica"><font color="#666666">Stats</font></a>&nbsp;&nbsp;&nbsp;&nbsp;
+        </td>
+        </tr>
+        
+        <tr class="trow2" height="24">
+        <td align="center"><font color="gray"><b>P</b></font></td>
+        <td align="center"><font color="gray" size="1">W%</font></td>
+        <td align="center"><font color="gray" size="1">FTS</font></td>
+        <td align="center"><font color="gray" size="1">CS</font></td>
+        <td align="center"><font color="gray" size="1">BTS</font></td>
+        <td align="center"><font color="gray" size="1">GF</font></td>
+        <td align="center"><font color="gray" size="1">TG</font></td>
+        <td align="center"><font color="gray" size="1">2.5+</font></td>
+        <td align="center"><font color="gray" size="1">1.5+</font></td>
+        <td><font color="gray"><b>PPG</b></font></td>
+        <td align="left"><font color="gray" size="1">&nbsp;&lt;= (at home)</font></td>
+        <td></td>
+        <td align="right"><font color="gray" size="1">(away) =&gt;&nbsp;</font></td>
+        <td><font color="gray"><b>PPG</b></font></td>
+        <td align="center"><font color="gray" size="1">1.5+</font></td>
+        <td align="center"><font color="gray" size="1">2.5+</font></td>
+        <td align="center"><font color="gray" size="1">TG</font></td>
+        <td align="center"><font color="gray" size="1">GF</font></td>
+        <td align="center"><font color="gray" size="1">BTS</font></td>
+        <td align="center"><font color="gray" size="1">CS</font></td>
+        <td align="center"><font color="gray" size="1">FTS</font></td>
+        <td align="center"><font color="gray" size="1">W%</font></td>
+        <td align="center"><font color="gray"><b>P</b></font></td>
+        <td width="60"></td>
+        </tr>
+        
+        <tr class="trow8" height="26">
+        <td align="center"><font color="green"><b>12</b></font></td>
+        <td align="center"><font color="green" size="1">42%</font></td>
+        <td align="center"><font size="1">17%</font></td>
+        <td align="center"><font size="1">42%</font></td>
+        <td align="center"><font size="1">50%</font></td>
+        <td><font size="1" color="green">
+        1.42</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        2.17</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        33%</font></td>
+        <td align="center"><font size="1">67%</font></td>
+        <td><font color="gray"><b>1.75</b></font></td>
+        <td align="right">
+        Waterhouse
+        </td>
+        <td width="30" align="center">
+        
+        <font size="1" color="gray">02:35</font>
+        
+        </td>
+        <td>
+        Humble Lions
+        </td>
+        <td><font color="gray"><b>0.92</b></font></td>
+        <td align="center"><font size="1">67%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        42%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        2.08</font></td>
+        <td><font size="1" color="green">
+        0.83</font></td>
+        <td align="center"><font size="1">50%</font></td>
+        <td align="center"><font size="1">25%</font></td>
+        <td align="center"><font size="1">42%</font></td>
+        <td align="center"><font color="green" size="1">17%</font></td>
+        <td align="center"><font color="green"><b>12</b></font></td>
+        <td align="center" valign="middle">
+        <a href="pmatch.asp?league=jamaica&amp;stats=90-9-8-2019-waterhouse-vs-humble-lions"><font color="blue" size="1"><u>stats</u></font></a>
+        &nbsp;&nbsp;<a href="h2h.asp?league=jamaica&amp;t1id=9&amp;t2id=8&amp;ly=2019" title="Waterhouse vs Humble Lions" rel="nofollow"><font color="blue" size="1"><u>h2h</u></font></a>
+        </td>
+        </tr>
+        
+        <tr height="8"><td colspan="26" align="center" valign="middle"><font size="1"> </font></td></tr>
+        <tr class="trow2"><td height="30" colspan="12">
+        &nbsp;<img src="//www.soccerstatistics.com/img/flags/pl.png" width="16" height="11" alt="POLAND6">
+        &nbsp;<font size="2">Poland - <font color="gray">3. Liga - Gr. 3</font></font>
+        </td>
+        <td colspan="12" align="right">
+        &nbsp;&nbsp;<font color="gray" size="1">153 matches played out of 306</font>&nbsp;&nbsp;&nbsp;&nbsp;<a class="button" style="background-color:#eeeeee;font-color=white;" href="latest.asp?league=poland6"><font color="#666666">Stats</font></a>&nbsp;&nbsp;&nbsp;&nbsp;
+        </td>
+        </tr>
+        
+        <tr class="trow2" height="24">
+        <td align="center"><font color="gray"><b>P</b></font></td>
+        <td align="center"><font color="gray" size="1">W%</font></td>
+        <td align="center"><font color="gray" size="1">FTS</font></td>
+        <td align="center"><font color="gray" size="1">CS</font></td>
+        <td align="center"><font color="gray" size="1">BTS</font></td>
+        <td align="center"><font color="gray" size="1">GF</font></td>
+        <td align="center"><font color="gray" size="1">TG</font></td>
+        <td align="center"><font color="gray" size="1">2.5+</font></td>
+        <td align="center"><font color="gray" size="1">1.5+</font></td>
+        <td><font color="gray"><b>PPG</b></font></td>
+        <td align="left"><font color="gray" size="1">&nbsp;&lt;= (at home)</font></td>
+        <td></td>
+        <td align="right"><font color="gray" size="1">(away) =&gt;&nbsp;</font></td>
+        <td><font color="gray"><b>PPG</b></font></td>
+        <td align="center"><font color="gray" size="1">1.5+</font></td>
+        <td align="center"><font color="gray" size="1">2.5+</font></td>
+        <td align="center"><font color="gray" size="1">TG</font></td>
+        <td align="center"><font color="gray" size="1">GF</font></td>
+        <td align="center"><font color="gray" size="1">BTS</font></td>
+        <td align="center"><font color="gray" size="1">CS</font></td>
+        <td align="center"><font color="gray" size="1">FTS</font></td>
+        <td align="center"><font color="gray" size="1">W%</font></td>
+        <td align="center"><font color="gray"><b>P</b></font></td>
+        <td width="60"></td>
+        </tr>
+        
+        <tr class="trow8" height="26">
+        <td align="center"><font color="green"><b>9</b></font></td>
+        <td align="center"><font color="green" size="1">11%</font></td>
+        <td align="center"><font size="1">22%</font></td>
+        <td align="center"><font size="1">0%</font></td>
+        <td align="center"><font size="1">78%</font></td>
+        <td><font size="1" color="green">
+        1.00</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        3.22</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        89%</font></td>
+        <td align="center"><font size="1">89%</font></td>
+        <td><font color="gray"><b>0.33</b></font></td>
+        <td align="right">
+        L. Dzierzoniow
+        </td>
+        <td width="30" align="center">
+        
+        <font size="1" color="gray">17:00</font>
+        
+        </td>
+        <td>
+        Warta Gorzow
+        </td>
+        <td><font color="gray"><b>0.75</b></font></td>
+        <td align="center"><font size="1">50%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        38%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        2.00</font></td>
+        <td><font size="1" color="green">
+        0.63</font></td>
+        <td align="center"><font size="1">38%</font></td>
+        <td align="center"><font size="1">12%</font></td>
+        <td align="center"><font size="1">50%</font></td>
+        <td align="center"><font color="green" size="1">25%</font></td>
+        <td align="center"><font color="green"><b>8</b></font></td>
+        <td align="center" valign="middle">
+        <a href="pmatch.asp?league=poland6&amp;stats=241-15-5-2019-l.-dzierzoniow-vs-warta-gorzow"><font color="blue" size="1"><u>stats</u></font></a>
+        &nbsp;&nbsp;<a href="h2h.asp?league=poland6&amp;t1id=15&amp;t2id=5&amp;ly=2019" title="L. Dzierzoniow vs Warta Gorzow" rel="nofollow"><font color="blue" size="1"><u>h2h</u></font></a>
+        </td>
+        </tr>
+        
+        <tr class="trow8" height="26">
+        <td align="center"><font color="green"><b>8</b></font></td>
+        <td align="center"><font color="green" size="1">38%</font></td>
+        <td align="center"><font size="1">38%</font></td>
+        <td align="center"><font size="1">38%</font></td>
+        <td align="center"><font size="1">38%</font></td>
+        <td><font size="1" color="green">
+        1.63</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        2.75</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        50%</font></td>
+        <td align="center"><font size="1">62%</font></td>
+        <td><font color="gray"><b>1.38</b></font></td>
+        <td align="right">
+        Miedz Legnica B
+        </td>
+        <td width="30" align="center">
+        
+        <font size="1" color="gray">17:00</font>
+        
+        </td>
+        <td>
+        Kluczbork
+        </td>
+        <td><font color="gray"><b>1.00</b></font></td>
+        <td align="center"><font size="1">90%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        40%</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        2.60</font></td>
+        <td><font size="1" color="green">
+        0.80</font></td>
+        <td align="center"><font size="1">60%</font></td>
+        <td align="center"><font size="1">10%</font></td>
+        <td align="center"><font size="1">30%</font></td>
+        <td align="center"><font color="green" size="1">20%</font></td>
+        <td align="center"><font color="green"><b>10</b></font></td>
+        <td align="center" valign="middle">
+        <a href="pmatch.asp?league=poland6&amp;stats=236-12-8-2019-miedz-legnica-b-vs-kluczbork"><font color="blue" size="1"><u>stats</u></font></a>
+        &nbsp;&nbsp;<a href="h2h.asp?league=poland6&amp;t1id=12&amp;t2id=8&amp;ly=2019" title="Miedz Legnica B vs Kluczbork" rel="nofollow"><font color="blue" size="1"><u>h2h</u></font></a>
+        </td>
+        </tr>
+        
+        <tr class="trow8" height="26">
+        <td align="center"><font color="green"><b>9</b></font></td>
+        <td align="center"><font color="green" size="1">100%</font></td>
+        <td align="center"><font size="1">0%</font></td>
+        <td align="center"><font size="1">0%</font></td>
+        <td align="center"><font size="1">100%</font></td>
+        <td><font size="1" color="green">
+        3.22</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        4.44</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        100%</font></td>
+        <td align="center"><font size="1">100%</font></td>
+        <td><font color="gray"><b>3.00</b></font></td>
+        <td align="right">
+        Polkowice
+        </td>
+        <td width="30" align="center">
+        
+        <font size="1" color="gray">17:00</font>
+        
+        </td>
+        <td>
+        Piast Zmigrod
+        </td>
+        <td><font color="gray"><b>1.00</b></font></td>
+        <td align="center"><font size="1">88%</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        62%</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        3.13</font></td>
+        <td><font size="1" color="green">
+        1.25</font></td>
+        <td align="center"><font size="1">75%</font></td>
+        <td align="center"><font size="1">0%</font></td>
+        <td align="center"><font size="1">25%</font></td>
+        <td align="center"><font color="green" size="1">25%</font></td>
+        <td align="center"><font color="green"><b>8</b></font></td>
+        <td align="center" valign="middle">
+        <a href="pmatch.asp?league=poland6&amp;stats=242-13-7-2019-polkowice-vs-piast-zmigrod"><font color="blue" size="1"><u>stats</u></font></a>
+        &nbsp;&nbsp;<a href="h2h.asp?league=poland6&amp;t1id=13&amp;t2id=7&amp;ly=2019" title="Polkowice vs Piast Zmigrod" rel="nofollow"><font color="blue" size="1"><u>h2h</u></font></a>
+        </td>
+        </tr>
+        
+        <tr class="trow8" height="26">
+        <td align="center"><font color="green"><b>9</b></font></td>
+        <td align="center"><font color="green" size="1">44%</font></td>
+        <td align="center"><font size="1">44%</font></td>
+        <td align="center"><font size="1">22%</font></td>
+        <td align="center"><font size="1">33%</font></td>
+        <td><font size="1" color="green">
+        1.56</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        3.33</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        67%</font></td>
+        <td align="center"><font size="1">89%</font></td>
+        <td><font color="gray"><b>1.44</b></font></td>
+        <td align="right">
+        R. Zdzieszowice
+        </td>
+        <td width="30" align="center">
+        
+        <font size="1" color="gray">17:00</font>
+        
+        </td>
+        <td>
+        Gac Olawa
+        </td>
+        <td><font color="gray"><b>0.63</b></font></td>
+        <td align="center"><font size="1">62%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        50%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        2.13</font></td>
+        <td><font size="1" color="green">
+        0.75</font></td>
+        <td align="center"><font size="1">62%</font></td>
+        <td align="center"><font size="1">12%</font></td>
+        <td align="center"><font size="1">38%</font></td>
+        <td align="center"><font color="green" size="1">12%</font></td>
+        <td align="center"><font color="green"><b>8</b></font></td>
+        <td align="center" valign="middle">
+        <a href="pmatch.asp?league=poland6&amp;stats=240-17-3-2019-r.-zdzieszowice-vs-gac-olawa"><font color="blue" size="1"><u>stats</u></font></a>
+        &nbsp;&nbsp;<a href="h2h.asp?league=poland6&amp;t1id=17&amp;t2id=3&amp;ly=2019" title="R. Zdzieszowice vs Gac Olawa" rel="nofollow"><font color="blue" size="1"><u>h2h</u></font></a>
+        </td>
+        </tr>
+        
+        <tr class="trow8" height="26">
+        <td align="center"><font color="green"><b>8</b></font></td>
+        <td align="center"><font color="green" size="1">50%</font></td>
+        <td align="center"><font size="1">12%</font></td>
+        <td align="center"><font size="1">12%</font></td>
+        <td align="center"><font size="1">75%</font></td>
+        <td><font size="1" color="green">
+        1.75</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        3.38</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        62%</font></td>
+        <td align="center"><font size="1">88%</font></td>
+        <td><font color="gray"><b>1.75</b></font></td>
+        <td align="right">
+        Ruch Radzionkow
+        </td>
+        <td width="30" align="center">
+        
+        <font size="1" color="gray">17:00</font>
+        
+        </td>
+        <td>
+        Agroplon Glusz.
+        </td>
+        <td><font color="gray"><b>0.38</b></font></td>
+        <td align="center"><font size="1">88%</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        62%</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        3.63</font></td>
+        <td><font size="1" color="green">
+        1.00</font></td>
+        <td align="center"><font size="1">62%</font></td>
+        <td align="center"><font size="1">12%</font></td>
+        <td align="center"><font size="1">38%</font></td>
+        <td align="center"><font color="green" size="1">0%</font></td>
+        <td align="center"><font color="green"><b>8</b></font></td>
+        <td align="center" valign="middle">
+        <a href="pmatch.asp?league=poland6&amp;stats=243-11-9-2019-ruch-radzionkow-vs-agroplon-glusz."><font color="blue" size="1"><u>stats</u></font></a>
+        &nbsp;&nbsp;<a href="h2h.asp?league=poland6&amp;t1id=11&amp;t2id=9&amp;ly=2019" title="Ruch Radzionkow vs Agroplon Glusz." rel="nofollow"><font color="blue" size="1"><u>h2h</u></font></a>
+        </td>
+        </tr>
+        
+        <tr class="trow8" height="26">
+        <td align="center"><font color="green"><b>8</b></font></td>
+        <td align="center"><font color="green" size="1">88%</font></td>
+        <td align="center"><font size="1">0%</font></td>
+        <td align="center"><font size="1">38%</font></td>
+        <td align="center"><font size="1">62%</font></td>
+        <td><font size="1" color="green">
+        2.50</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        3.25</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        75%</font></td>
+        <td align="center"><font size="1">88%</font></td>
+        <td><font color="gray"><b>2.75</b></font></td>
+        <td align="right">
+        Sleza Wroclaw
+        </td>
+        <td width="30" align="center">
+        
+        <font size="1" color="gray">17:00</font>
+        
+        </td>
+        <td>
+        Rekord Bielsko
+        </td>
+        <td><font color="gray"><b>1.00</b></font></td>
+        <td align="center"><font size="1">86%</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        71%</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        3.57</font></td>
+        <td><font size="1" color="green">
+        1.29</font></td>
+        <td align="center"><font size="1">57%</font></td>
+        <td align="center"><font size="1">29%</font></td>
+        <td align="center"><font size="1">29%</font></td>
+        <td align="center"><font color="green" size="1">29%</font></td>
+        <td align="center"><font color="green"><b>7</b></font></td>
+        <td align="center" valign="middle">
+        <a href="pmatch.asp?league=poland6&amp;stats=239-18-1-2019-sleza-wroclaw-vs-rekord-bielsko"><font color="blue" size="1"><u>stats</u></font></a>
+        &nbsp;&nbsp;<a href="h2h.asp?league=poland6&amp;t1id=18&amp;t2id=1&amp;ly=2019" title="Sleza Wroclaw vs Rekord Bielsko" rel="nofollow"><font color="blue" size="1"><u>h2h</u></font></a>
+        </td>
+        </tr>
+        
+        <tr class="trow8" height="26">
+        <td align="center"><font color="green"><b>8</b></font></td>
+        <td align="center"><font color="green" size="1">38%</font></td>
+        <td align="center"><font size="1">12%</font></td>
+        <td align="center"><font size="1">38%</font></td>
+        <td align="center"><font size="1">50%</font></td>
+        <td><font size="1" color="green">
+        1.88</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        3.50</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        62%</font></td>
+        <td align="center"><font size="1">75%</font></td>
+        <td><font color="gray"><b>1.13</b></font></td>
+        <td align="right">
+        Stal Brzeg
+        </td>
+        <td width="30" align="center">
+        
+        <font size="1" color="gray">17:00</font>
+        
+        </td>
+        <td>
+        Pawl. Slaskie
+        </td>
+        <td><font color="gray"><b>1.56</b></font></td>
+        <td align="center"><font size="1">78%</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        67%</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        3.11</font></td>
+        <td><font size="1" color="green">
+        2.00</font></td>
+        <td align="center"><font size="1">44%</font></td>
+        <td align="center"><font size="1">33%</font></td>
+        <td align="center"><font size="1">33%</font></td>
+        <td align="center"><font color="green" size="1">44%</font></td>
+        <td align="center"><font color="green"><b>9</b></font></td>
+        <td align="center" valign="middle">
+        <a href="pmatch.asp?league=poland6&amp;stats=181-16-2-2019-stal-brzeg-vs-pawl.-slaskie"><font color="blue" size="1"><u>stats</u></font></a>
+        &nbsp;&nbsp;<a href="h2h.asp?league=poland6&amp;t1id=16&amp;t2id=2&amp;ly=2019" title="Stal Brzeg vs Pawl. Slaskie" rel="nofollow"><font color="blue" size="1"><u>h2h</u></font></a>
+        </td>
+        </tr>
+        
+        <tr class="trow8" height="26">
+        <td align="center"><font color="green"><b>8</b></font></td>
+        <td align="center"><font color="green" size="1">88%</font></td>
+        <td align="center"><font size="1">0%</font></td>
+        <td align="center"><font size="1">62%</font></td>
+        <td align="center"><font size="1">38%</font></td>
+        <td><font size="1" color="green">
+        2.63</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        3.25</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        62%</font></td>
+        <td align="center"><font size="1">75%</font></td>
+        <td><font color="gray"><b>2.75</b></font></td>
+        <td align="right">
+        Zagl. Lubin B
+        </td>
+        <td width="30" align="center">
+        
+        <font size="1" color="gray">17:00</font>
+        
+        </td>
+        <td>
+        Stilon Gorzow
+        </td>
+        <td><font color="gray"><b>0.11</b></font></td>
+        <td align="center"><font size="1">100%</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        89%</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        4.11</font></td>
+        <td><font size="1" color="green">
+        0.89</font></td>
+        <td align="center"><font size="1">67%</font></td>
+        <td align="center"><font size="1">0%</font></td>
+        <td align="center"><font size="1">33%</font></td>
+        <td align="center"><font color="green" size="1">0%</font></td>
+        <td align="center"><font color="green"><b>9</b></font></td>
+        <td align="center" valign="middle">
+        <a href="pmatch.asp?league=poland6&amp;stats=237-14-6-2019-zagl.-lubin-b-vs-stilon-gorzow"><font color="blue" size="1"><u>stats</u></font></a>
+        &nbsp;&nbsp;<a href="h2h.asp?league=poland6&amp;t1id=14&amp;t2id=6&amp;ly=2019" title="Zagl. Lubin B vs Stilon Gorzow" rel="nofollow"><font color="blue" size="1"><u>h2h</u></font></a>
+        </td>
+        </tr>
+        
+        <tr height="8"><td colspan="26" align="center" valign="middle"><font size="1"> </font></td></tr>
+        <tr class="trow2"><td height="30" colspan="12">
+        &nbsp;<img src="//www.soccerstatistics.com/img/flags/sa.png" width="16" height="11" alt="SAUDIARABIA">
+        &nbsp;<font size="2">Saudi Arabia - <font color="gray">Professional League</font></font>
+        </td>
+        <td colspan="12" align="right">
+        &nbsp;&nbsp;<font color="gray" size="1">152 matches played out of 240</font>&nbsp;&nbsp;&nbsp;&nbsp;<a class="button" style="background-color:#eeeeee;font-color=white;" href="latest.asp?league=saudiarabia"><font color="#666666">Stats</font></a>&nbsp;&nbsp;&nbsp;&nbsp;
+        </td>
+        </tr>
+        
+        <tr class="trow2" height="24">
+        <td align="center"><font color="gray"><b>P</b></font></td>
+        <td align="center"><font color="gray" size="1">W%</font></td>
+        <td align="center"><font color="gray" size="1">FTS</font></td>
+        <td align="center"><font color="gray" size="1">CS</font></td>
+        <td align="center"><font color="gray" size="1">BTS</font></td>
+        <td align="center"><font color="gray" size="1">GF</font></td>
+        <td align="center"><font color="gray" size="1">TG</font></td>
+        <td align="center"><font color="gray" size="1">2.5+</font></td>
+        <td align="center"><font color="gray" size="1">1.5+</font></td>
+        <td><font color="gray"><b>PPG</b></font></td>
+        <td align="left"><font color="gray" size="1">&nbsp;&lt;= (at home)</font></td>
+        <td></td>
+        <td align="right"><font color="gray" size="1">(away) =&gt;&nbsp;</font></td>
+        <td><font color="gray"><b>PPG</b></font></td>
+        <td align="center"><font color="gray" size="1">1.5+</font></td>
+        <td align="center"><font color="gray" size="1">2.5+</font></td>
+        <td align="center"><font color="gray" size="1">TG</font></td>
+        <td align="center"><font color="gray" size="1">GF</font></td>
+        <td align="center"><font color="gray" size="1">BTS</font></td>
+        <td align="center"><font color="gray" size="1">CS</font></td>
+        <td align="center"><font color="gray" size="1">FTS</font></td>
+        <td align="center"><font color="gray" size="1">W%</font></td>
+        <td align="center"><font color="gray"><b>P</b></font></td>
+        <td width="60"></td>
+        </tr>
+        
+        <tr class="trow8" height="26">
+        <td align="center"><font color="green"><b>9</b></font></td>
+        <td align="center"><font color="green" size="1">67%</font></td>
+        <td align="center"><font size="1">0%</font></td>
+        <td align="center"><font size="1">11%</font></td>
+        <td align="center"><font size="1">89%</font></td>
+        <td><font size="1" color="green">
+        2.56</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        3.89</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        78%</font></td>
+        <td align="center"><font size="1">89%</font></td>
+        <td><font color="gray"><b>2.22</b></font></td>
+        <td align="right">
+        Al Hilal Riyadh
+        </td>
+        <td width="30" align="center">
+        
+        <font size="1" color="gray">16:10</font>
+        
+        </td>
+        <td>
+        Al Qadisiya
+        </td>
+        <td><font color="gray"><b>1.00</b></font></td>
+        <td align="center"><font size="1">100%</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        67%</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        3.22</font></td>
+        <td><font size="1" color="green">
+        1.44</font></td>
+        <td align="center"><font size="1">56%</font></td>
+        <td align="center"><font size="1">22%</font></td>
+        <td align="center"><font size="1">22%</font></td>
+        <td align="center"><font color="green" size="1">33%</font></td>
+        <td align="center"><font color="green"><b>9</b></font></td>
+        <td align="center" valign="middle">
+        <a href="pmatch.asp?league=saudiarabia&amp;stats=153-9-7-2019-al-hilal-riyadh-vs-al-qadisiya"><font color="blue" size="1"><u>stats</u></font></a>
+        &nbsp;&nbsp;<a href="h2h.asp?league=saudiarabia&amp;t1id=9&amp;t2id=7&amp;ly=2019" title="Al Hilal Riyadh vs Al Qadisiya" rel="nofollow"><font color="blue" size="1"><u>h2h</u></font></a>
+        </td>
+        </tr>
+        
+        <tr class="trow8" height="26">
+        <td align="center"><font color="green"><b>9</b></font></td>
+        <td align="center"><font color="green" size="1">56%</font></td>
+        <td align="center"><font size="1">22%</font></td>
+        <td align="center"><font size="1">33%</font></td>
+        <td align="center"><font size="1">44%</font></td>
+        <td><font size="1" color="green">
+        2.00</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        2.78</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        22%</font></td>
+        <td align="center"><font size="1">89%</font></td>
+        <td><font color="gray"><b>1.89</b></font></td>
+        <td align="right">
+        Al Ahli SC
+        </td>
+        <td width="30" align="center">
+        
+        <font size="1" color="gray">18:20</font>
+        
+        </td>
+        <td>
+        Al Nasr Riyadh
+        </td>
+        <td><font color="gray"><b>1.90</b></font></td>
+        <td align="center"><font size="1">90%</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        70%</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        2.80</font></td>
+        <td><font size="1" color="green">
+        1.70</font></td>
+        <td align="center"><font size="1">70%</font></td>
+        <td align="center"><font size="1">30%</font></td>
+        <td align="center"><font size="1">10%</font></td>
+        <td align="center"><font color="green" size="1">50%</font></td>
+        <td align="center"><font color="green"><b>10</b></font></td>
+        <td align="center" valign="middle">
+        <a href="pmatch.asp?league=saudiarabia&amp;stats=144-5-16-2019-al-ahli-sc-vs-al-nasr-riyadh"><font color="blue" size="1"><u>stats</u></font></a>
+        &nbsp;&nbsp;<a href="h2h.asp?league=saudiarabia&amp;t1id=5&amp;t2id=16&amp;ly=2019" title="Al Ahli SC vs Al Nasr Riyadh" rel="nofollow"><font color="blue" size="1"><u>h2h</u></font></a>
+        </td>
+        </tr>
+        
+        <tr height="8"><td colspan="26" align="center" valign="middle"><font size="1"> </font></td></tr>
+        <tr class="trow2"><td height="30" colspan="12">
+        &nbsp;<img src="//www.soccerstatistics.com/img/flags/scotland.png" width="16" height="11" alt="SCOTLAND3">
+        &nbsp;<font size="2">Scotland - <font color="gray">League One</font></font>
+        </td>
+        <td colspan="12" align="right">
+        &nbsp;&nbsp;<font color="gray" size="1">114 matches played out of 180</font>&nbsp;&nbsp;&nbsp;&nbsp;<a class="button" style="background-color:#eeeeee;font-color=white;" href="latest.asp?league=scotland3"><font color="#666666">Stats</font></a>&nbsp;&nbsp;&nbsp;&nbsp;
+        </td>
+        </tr>
+        
+        <tr class="trow2" height="24">
+        <td align="center"><font color="gray"><b>P</b></font></td>
+        <td align="center"><font color="gray" size="1">W%</font></td>
+        <td align="center"><font color="gray" size="1">FTS</font></td>
+        <td align="center"><font color="gray" size="1">CS</font></td>
+        <td align="center"><font color="gray" size="1">BTS</font></td>
+        <td align="center"><font color="gray" size="1">GF</font></td>
+        <td align="center"><font color="gray" size="1">TG</font></td>
+        <td align="center"><font color="gray" size="1">2.5+</font></td>
+        <td align="center"><font color="gray" size="1">1.5+</font></td>
+        <td><font color="gray"><b>PPG</b></font></td>
+        <td align="left"><font color="gray" size="1">&nbsp;&lt;= (at home)</font></td>
+        <td></td>
+        <td align="right"><font color="gray" size="1">(away) =&gt;&nbsp;</font></td>
+        <td><font color="gray"><b>PPG</b></font></td>
+        <td align="center"><font color="gray" size="1">1.5+</font></td>
+        <td align="center"><font color="gray" size="1">2.5+</font></td>
+        <td align="center"><font color="gray" size="1">TG</font></td>
+        <td align="center"><font color="gray" size="1">GF</font></td>
+        <td align="center"><font color="gray" size="1">BTS</font></td>
+        <td align="center"><font color="gray" size="1">CS</font></td>
+        <td align="center"><font color="gray" size="1">FTS</font></td>
+        <td align="center"><font color="gray" size="1">W%</font></td>
+        <td align="center"><font color="gray"><b>P</b></font></td>
+        <td width="60"></td>
+        </tr>
+        
+        <tr class="trow8" height="26">
+        <td align="center"><font color="green"><b>11</b></font></td>
+        <td align="center"><font color="green" size="1">73%</font></td>
+        <td align="center"><font size="1">18%</font></td>
+        <td align="center"><font size="1">27%</font></td>
+        <td align="center"><font size="1">55%</font></td>
+        <td><font size="1" color="green">
+        2.09</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        3.18</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        55%</font></td>
+        <td align="center"><font size="1">82%</font></td>
+        <td><font color="gray"><b>2.27</b></font></td>
+        <td align="right">
+        Arbroath
+        </td>
+        <td width="30" align="center">
+        
+        <font size="1" color="gray">20:45</font>
+        
+        </td>
+        <td>
+        Stranraer
+        </td>
+        <td><font color="gray"><b>0.91</b></font></td>
+        <td align="center"><font size="1">82%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        45%</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        2.55</font></td>
+        <td><font size="1" color="green">
+        1.00</font></td>
+        <td align="center"><font size="1">55%</font></td>
+        <td align="center"><font size="1">27%</font></td>
+        <td align="center"><font size="1">27%</font></td>
+        <td align="center"><font color="green" size="1">18%</font></td>
+        <td align="center"><font color="green"><b>11</b></font></td>
+        <td align="center" valign="middle">
+        <a href="pmatch.asp?league=scotland3&amp;stats=116-6-9-2019-arbroath-vs-stranraer"><font color="blue" size="1"><u>stats</u></font></a>
+        &nbsp;&nbsp;<a href="h2h.asp?league=scotland3&amp;t1id=6&amp;t2id=9&amp;ly=2019" title="Arbroath vs Stranraer" rel="nofollow"><font color="blue" size="1"><u>h2h</u></font></a>
+        </td>
+        </tr>
+        
+        <tr height="8"><td colspan="26" align="center" valign="middle"><font size="1"> </font></td></tr>
+        <tr class="trow2"><td height="30" colspan="12">
+        &nbsp;<img src="//www.soccerstatistics.com/img/flags/scotland.png" width="16" height="11" alt="SCOTLAND4">
+        &nbsp;<font size="2">Scotland - <font color="gray">League Two</font></font>
+        </td>
+        <td colspan="12" align="right">
+        &nbsp;&nbsp;<font color="gray" size="1">111 matches played out of 180</font>&nbsp;&nbsp;&nbsp;&nbsp;<a class="button" style="background-color:#eeeeee;font-color=white;" href="latest.asp?league=scotland4"><font color="#666666">Stats</font></a>&nbsp;&nbsp;&nbsp;&nbsp;
+        </td>
+        </tr>
+        
+        <tr class="trow2" height="24">
+        <td align="center"><font color="gray"><b>P</b></font></td>
+        <td align="center"><font color="gray" size="1">W%</font></td>
+        <td align="center"><font color="gray" size="1">FTS</font></td>
+        <td align="center"><font color="gray" size="1">CS</font></td>
+        <td align="center"><font color="gray" size="1">BTS</font></td>
+        <td align="center"><font color="gray" size="1">GF</font></td>
+        <td align="center"><font color="gray" size="1">TG</font></td>
+        <td align="center"><font color="gray" size="1">2.5+</font></td>
+        <td align="center"><font color="gray" size="1">1.5+</font></td>
+        <td><font color="gray"><b>PPG</b></font></td>
+        <td align="left"><font color="gray" size="1">&nbsp;&lt;= (at home)</font></td>
+        <td></td>
+        <td align="right"><font color="gray" size="1">(away) =&gt;&nbsp;</font></td>
+        <td><font color="gray"><b>PPG</b></font></td>
+        <td align="center"><font color="gray" size="1">1.5+</font></td>
+        <td align="center"><font color="gray" size="1">2.5+</font></td>
+        <td align="center"><font color="gray" size="1">TG</font></td>
+        <td align="center"><font color="gray" size="1">GF</font></td>
+        <td align="center"><font color="gray" size="1">BTS</font></td>
+        <td align="center"><font color="gray" size="1">CS</font></td>
+        <td align="center"><font color="gray" size="1">FTS</font></td>
+        <td align="center"><font color="gray" size="1">W%</font></td>
+        <td align="center"><font color="gray"><b>P</b></font></td>
+        <td width="60"></td>
+        </tr>
+        
+        <tr class="trow8" height="26">
+        <td align="center"><font color="green"><b>10</b></font></td>
+        <td align="center"><font color="green" size="1">50%</font></td>
+        <td align="center"><font size="1">30%</font></td>
+        <td align="center"><font size="1">20%</font></td>
+        <td align="center"><font size="1">50%</font></td>
+        <td><font size="1" color="green">
+        1.50</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        2.80</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        60%</font></td>
+        <td align="center"><font size="1">80%</font></td>
+        <td><font color="gray"><b>1.60</b></font></td>
+        <td align="right">
+        Stirling Albion
+        </td>
+        <td width="30" align="center">
+        
+        <font size="1" color="gray">20:45</font>
+        
+        </td>
+        <td>
+        Albion Rovers
+        </td>
+        <td><font color="gray"><b>0.20</b></font></td>
+        <td align="center"><font size="1">90%</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        60%</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        3.20</font></td>
+        <td><font size="1" color="green">
+        0.80</font></td>
+        <td align="center"><font size="1">60%</font></td>
+        <td align="center"><font size="1">0%</font></td>
+        <td align="center"><font size="1">40%</font></td>
+        <td align="center"><font color="green" size="1">0%</font></td>
+        <td align="center"><font color="green"><b>10</b></font></td>
+        <td align="center" valign="middle">
+        <a href="pmatch.asp?league=scotland4&amp;stats=80-4-8-2019-stirling-albion-vs-albion-rovers"><font color="blue" size="1"><u>stats</u></font></a>
+        &nbsp;&nbsp;<a href="h2h.asp?league=scotland4&amp;t1id=4&amp;t2id=8&amp;ly=2019" title="Stirling Albion vs Albion Rovers" rel="nofollow"><font color="blue" size="1"><u>h2h</u></font></a>
+        </td>
+        </tr>
+        
+        <tr height="8"><td colspan="26" align="center" valign="middle"><font size="1"> </font></td></tr>
+        <tr class="trow2"><td height="30" colspan="12">
+        &nbsp;<img src="//www.soccerstatistics.com/img/flags/ae.png" width="16" height="11" alt="UAE">
+        &nbsp;<font size="2">UAE - <font color="gray">Pro League</font></font>
+        </td>
+        <td colspan="12" align="right">
+        &nbsp;&nbsp;<font color="gray" size="1">98 matches played out of 182</font>&nbsp;&nbsp;&nbsp;&nbsp;<a class="button" style="background-color:#eeeeee;font-color=white;" href="latest.asp?league=uae"><font color="#666666">Stats</font></a>&nbsp;&nbsp;&nbsp;&nbsp;
+        </td>
+        </tr>
+        
+        <tr class="trow2" height="24">
+        <td align="center"><font color="gray"><b>P</b></font></td>
+        <td align="center"><font color="gray" size="1">W%</font></td>
+        <td align="center"><font color="gray" size="1">FTS</font></td>
+        <td align="center"><font color="gray" size="1">CS</font></td>
+        <td align="center"><font color="gray" size="1">BTS</font></td>
+        <td align="center"><font color="gray" size="1">GF</font></td>
+        <td align="center"><font color="gray" size="1">TG</font></td>
+        <td align="center"><font color="gray" size="1">2.5+</font></td>
+        <td align="center"><font color="gray" size="1">1.5+</font></td>
+        <td><font color="gray"><b>PPG</b></font></td>
+        <td align="left"><font color="gray" size="1">&nbsp;&lt;= (at home)</font></td>
+        <td></td>
+        <td align="right"><font color="gray" size="1">(away) =&gt;&nbsp;</font></td>
+        <td><font color="gray"><b>PPG</b></font></td>
+        <td align="center"><font color="gray" size="1">1.5+</font></td>
+        <td align="center"><font color="gray" size="1">2.5+</font></td>
+        <td align="center"><font color="gray" size="1">TG</font></td>
+        <td align="center"><font color="gray" size="1">GF</font></td>
+        <td align="center"><font color="gray" size="1">BTS</font></td>
+        <td align="center"><font color="gray" size="1">CS</font></td>
+        <td align="center"><font color="gray" size="1">FTS</font></td>
+        <td align="center"><font color="gray" size="1">W%</font></td>
+        <td align="center"><font color="gray"><b>P</b></font></td>
+        <td width="60"></td>
+        </tr>
+        
+        <tr class="trow8" height="26">
+        <td align="center"><font color="green"><b>6</b></font></td>
+        <td align="center"><font color="green" size="1">50%</font></td>
+        <td align="center"><font size="1">17%</font></td>
+        <td align="center"><font size="1">17%</font></td>
+        <td align="center"><font size="1">67%</font></td>
+        <td><font size="1" color="green">
+        2.17</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        4.17</font></td>
+        <td align="center">
+        <font color="blue" size="1">
+        83%</font></td>
+        <td align="center"><font size="1">100%</font></td>
+        <td><font color="gray"><b>1.50</b></font></td>
+        <td align="right">
+        Al Wasl Dubai
+        </td>
+        <td width="30" align="center">
+        
+        <font size="1" color="gray">17:00</font>
+        
+        </td>
+        <td>
+        Bani Yas
+        </td>
+        <td><font color="gray"><b>0.50</b></font></td>
+        <td align="center"><font size="1">83%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        50%</font></td>
+        <td align="center">
+        <font color="red" size="1">
+        2.33</font></td>
+        <td><font size="1" color="green">
+        0.83</font></td>
+        <td align="center"><font size="1">67%</font></td>
+        <td align="center"><font size="1">17%</font></td>
+        <td align="center"><font size="1">33%</font></td>
+        <td align="center"><font color="green" size="1">0%</font></td>
+        <td align="center"><font color="green"><b>6</b></font></td>
+        <td align="center" valign="middle">
+        <a href="pmatch.asp?league=uae&amp;stats=105-5-8-2019-al-wasl-dubai-vs-bani-yas"><font color="blue" size="1"><u>stats</u></font></a>
+        &nbsp;&nbsp;<a href="h2h.asp?league=uae&amp;t1id=5&amp;t2id=8&amp;ly=2019" title="Al Wasl Dubai vs Bani Yas" rel="nofollow"><font color="blue" size="1"><u>h2h</u></font></a>
+        </td>
+        </tr>
+        
+        </tbody>
+</table>
+</body>
+</html>
