@@ -491,12 +491,12 @@ function under15GoalPrediction(allMatchesStatistics, writeToConsole){
         if (isEuropeLeague(stats.Liga) && stats.CasZapasu < 21) continue;
 
         switch (true) {
-            case stats.Domaci.cisteKontoDoma <= 30 || stats.Hostia.cisteKontoVonku <= 30:
-            case Math.abs(stats.Domaci.cisteKontoDoma - stats.Hostia.cisteKontoVonku) > 40:
+            case stats.Domaci.cisteKontoDoma <= 38 || stats.Hostia.cisteKontoVonku <= 38:
+            //case Math.abs(stats.Domaci.cisteKontoDoma - stats.Hostia.cisteKontoVonku) > 40:
                 continue;
         }
 
-        if (Math.abs(stats.Domaci.posledne_4_Zapasy.streleneGolyPriemer - stats.Domaci.streleneGoly_Doma) < 0.3 &&
+        if (Math.abs(stats.Domaci.posledne_4_Zapasy.streleneGolyPriemer - stats.Domaci.streleneGoly_Doma) < 0.25 &&
             stats.priemer_posledne4Zapasy_StrelenéGólyDomáci_InkasovaneGólyHostia < 1.3
         ) {
             continue;
@@ -1338,6 +1338,17 @@ const isEuropeLeague = (league) => {
         'france',
         'italy',
         'germany',
+        // 'austria',
+        // 'belgium',
+        // 'denmark',
+        // 'finland',
+        // 'greece',
+        // 'netherlands',
+        // 'norway',
+        // 'poland',
+        // 'sweden',
+        // 'switzerland',
+        // 'spain',
     ];
 
     for (var i = 0; i < europeLeagues.length; i++) {
