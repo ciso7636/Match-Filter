@@ -142,6 +142,7 @@ $(function(){
             $('.load-button').show().text(`Reload ${allLinks.length} matches`).removeClass('loading');
             $('h1.header').text("Data is ready").show();
             $('.row-buttons').show();
+            $('.row-buttons .ui.button').css('font-weight','300');
         } else {
             $('.load-button').show().text('Load matches').removeClass('loading');
             $('h1.header').text(`Cick to load ${allLinks.length} matches`).show();
@@ -232,10 +233,19 @@ function testingPrediction(allMatchesStatistics, writeToConsole){
         if (stats instanceof Object === false) continue;
 
         if (isEuropeLeague(stats.Liga) && stats.CasZapasu > 19) continue;
+        if (filteringNotPossibleBettingLeague(stats.Liga)) continue;
 
-        if (stats.Domaci.posledne_4_ZapasyDoma.streleneGolyPriemer - stats.Domaci.streleneGoly_Doma < 1.06) {
+        if (stats.Domaci.posledne_4_ZapasyDoma.streleneGolyPriemer - stats.Domaci.streleneGoly_Doma < 0.2) {
             continue;
         }
+
+        switch (true) {
+            case stats.priemer_StrelenéGólyDomáci_InkasovaneGólyHostia < 1.5:
+            case stats.priemer_StrelenéGólyHostia_InkasovaneGólyDomáci < 1.5:
+                continue;
+        }
+
+        if (stats.Domaci.cisteKontoDoma >= 19 || stats.Hostia.cisteKontoVonku >= 19) continue;
 
         if (writeToConsole !== false) returnDataToConsoleLog(stats, 'overUnder');
 
@@ -273,6 +283,7 @@ function overGoalPrediction(allMatchesStatistics, writeToConsole){
         if (stats instanceof Object === false) continue;
 
         if (isEuropeLeague(stats.Liga) && stats.CasZapasu > 19) continue;
+        if (filteringNotPossibleBettingLeague(stats.Liga)) continue;
 
         if (stats.Domaci.streleneGoly_Doma < 1.8) {
             continue;
@@ -345,35 +356,24 @@ function over35GoalPrediction(allMatchesStatistics, writeToConsole){
         if (stats instanceof Object === false) continue;
 
         if (isEuropeLeague(stats.Liga) && stats.CasZapasu > 19) continue;
+        if (filteringNotPossibleBettingLeague(stats.Liga)) continue;
 
-        if (stats.Domaci.streleneGoly_Doma < 1.8) {
+        if (stats.Domaci.posledne_4_ZapasyDoma.streleneGolyPriemer - stats.Domaci.streleneGoly_Doma < 0.2) {
             continue;
         }
 
         switch (true) {
-            case stats.Domaci.cisteKontoDoma >= 35 || stats.Hostia.cisteKontoVonku >= 32:
-            case stats.Hostia.cisteKontoVonku >= 40 && Math.abs(stats.Hostia.cisteKontoVonku - stats.Domaci.cisteKontoDoma) < 15:
-            case stats.Hostia.cisteKontoVonku >= 45 && Math.abs(stats.Hostia.cisteKontoVonku - stats.Domaci.cisteKontoDoma) < 20:
-            case stats.Hostia.cisteKontoVonku >= 50 && Math.abs(stats.Hostia.cisteKontoVonku - stats.Domaci.cisteKontoDoma) < 25:
+            case stats.priemer_StrelenéGólyDomáci_InkasovaneGólyHostia < 1.5:
+            case stats.priemer_StrelenéGólyHostia_InkasovaneGólyDomáci < 1.5:
                 continue;
         }
 
-        switch (true) {
-            case stats.priemer_StrelenéGólyDomáci_InkasovaneGólyHostia < 1.4:
-            case stats.priemer_StrelenéGólyHostia_InkasovaneGólyDomáci < 1.25:
-                continue;
-        }
+        if (stats.Domaci.cisteKontoDoma >= 19 || stats.Hostia.cisteKontoVonku >= 19) continue;
 
         switch (true) {
-            case stats.priemer_posledne4Zapasy_StrelenéGólyDomáci_InkasovaneGólyHostia < 1.3:
-            case stats.priemer_posledne4Zapasy_StrelenéGólyHostia_InkasovaneGólyDomáci < 1.2:
-                continue;
-        }
-
-        switch (true) {
-            case stats.filterDataBy_Yuvalfra < 3.8:
-            case stats.filterDataBy_JohnHaighsTable > 33:
-            case stats.filterDataBy_Vincent < 3:
+            case stats.filterDataBy_Yuvalfra < 3.35:
+            // case stats.filterDataBy_JohnHaighsTable > 33:
+            // case stats.filterDataBy_Vincent < 1.5:
                 continue;
         }
 
@@ -428,6 +428,7 @@ function underGoalPrediction(allMatchesStatistics, writeToConsole){
         if (stats instanceof Object === false) continue;
 
         if (isEuropeLeague(stats.Liga) && stats.CasZapasu < 21) continue;
+        if (filteringNotPossibleBettingLeague(stats.Liga)) continue;
 
         switch (true) {
             case stats.Domaci.cisteKontoDoma <= 30 || stats.Hostia.cisteKontoVonku <= 30:
@@ -489,6 +490,7 @@ function under15GoalPrediction(allMatchesStatistics, writeToConsole){
         if (stats instanceof Object === false) continue;
 
         if (isEuropeLeague(stats.Liga) && stats.CasZapasu < 21) continue;
+        if (filteringNotPossibleBettingLeague(stats.Liga)) continue;
 
         switch (true) {
             case stats.Domaci.cisteKontoDoma <= 38 || stats.Hostia.cisteKontoVonku <= 38:
@@ -558,6 +560,8 @@ function homeTeamWinPrediction(allMatchesStatistics, writeToConsole){
 
         if (stats instanceof Object === false) continue;
 
+        if (filteringNotPossibleBettingLeague(stats.Liga)) continue;
+
         switch (true) {
             case stats.homeTeamFavorits === false:
             case stats.awayTeamFavorits === true:
@@ -612,6 +616,8 @@ function awayTeamWinPrediction(allMatchesStatistics, writeToConsole){
 
         if (stats instanceof Object === false) continue;
 
+        if (filteringNotPossibleBettingLeague(stats.Liga)) continue;
+
         switch (true) {
             case stats.homeTeamFavorits === true:
             case stats.awayTeamFavorits === false:
@@ -665,6 +671,8 @@ function awayTeamWinPrediction_2(allMatchesStatistics, writeToConsole){
     for (let stats of allMatchesStatistics) {
 
         if (stats instanceof Object === false) continue;
+
+        if (filteringNotPossibleBettingLeague(stats.Liga)) continue;
 
         switch (true) {
             case stats.homeTeamFavorits === true:
@@ -741,7 +749,7 @@ function handleGetWeekStats(input, select, button){
 
             weekProfit.totalProfit = (
            //     + weekProfit.testingPrediction.zisk
-           //     + weekProfit.over15GoalPrediction.zisk
+                + weekProfit.over15GoalPrediction.zisk
                 + weekProfit.over35GoalPrediction.zisk
                 + weekProfit.over45GoalPrediction.zisk
                 + weekProfit.over55GoalPrediction.zisk
@@ -753,6 +761,7 @@ function handleGetWeekStats(input, select, button){
                 + weekProfit.awayTeamWinPrediction_2.zisk
                 + weekProfit.drawPrediction.zisk
             )
+            console.log(`over 1.5: %c   ${weekProfit.over15GoalPrediction.percentualnaUspesnost}, ${weekProfit.over15GoalPrediction.vyherneZapasy} z ${weekProfit.over15GoalPrediction.pocetZapasov}, ${weekProfit.over15GoalPrediction.zisk}€`, `${(weekProfit.over15GoalPrediction.vyherneZapasy / weekProfit.over15GoalPrediction.pocetZapasov * 100) > 87 ? 'background: green; color: white;' : 'background: red; color: white;'}`);
             console.log(`over 3.5: %c   ${weekProfit.over35GoalPrediction.percentualnaUspesnost}, ${weekProfit.over35GoalPrediction.vyherneZapasy} z ${weekProfit.over35GoalPrediction.pocetZapasov}, ${weekProfit.over35GoalPrediction.zisk}€`, `${(weekProfit.over35GoalPrediction.vyherneZapasy / weekProfit.over35GoalPrediction.pocetZapasov * 100) > 44 ? 'background: green; color: white;' : 'background: red; color: white;'}`);
             console.log(`over 4.5: %c   ${weekProfit.over45GoalPrediction.percentualnaUspesnost}, ${weekProfit.over45GoalPrediction.vyherneZapasy} z ${weekProfit.over45GoalPrediction.pocetZapasov}, ${weekProfit.over45GoalPrediction.zisk}€`, `${(weekProfit.over45GoalPrediction.vyherneZapasy / weekProfit.over45GoalPrediction.pocetZapasov * 100) > 22 ? 'background: green; color: white;' : 'background: red; color: white;'}`);
             console.log(`over 5.5: %c   ${weekProfit.over55GoalPrediction.percentualnaUspesnost}, ${weekProfit.over55GoalPrediction.vyherneZapasy} z ${weekProfit.over55GoalPrediction.pocetZapasov}, ${weekProfit.over55GoalPrediction.zisk}€`, `${(weekProfit.over55GoalPrediction.vyherneZapasy / weekProfit.over55GoalPrediction.pocetZapasov * 100) > 15 ? 'background: green; color: white;' : 'background: red; color: white;'}`);
@@ -766,7 +775,6 @@ function handleGetWeekStats(input, select, button){
             console.log(`%cCelkový profit: %c ${weekProfit.totalProfit}€`, "font-weight: bold", "font-weight: normal");
             console.log(`%cPočet zápasov: %c  ${weekProfit.filteredMatches} z ${allMatchesStatistics.length}`, "font-weight: bold", "font-weight: normal");            
             console.log(`over 1.5 test: ${weekProfit.testingPrediction.percentualnaUspesnost}, ${weekProfit.testingPrediction.vyherneZapasy} z ${weekProfit.testingPrediction.pocetZapasov}, ${weekProfit.testingPrediction.zisk}€`);
-            console.log(`over 1.5:      ${weekProfit.over15GoalPrediction.percentualnaUspesnost}, ${weekProfit.over15GoalPrediction.vyherneZapasy} z ${weekProfit.over15GoalPrediction.pocetZapasov}, ${weekProfit.over15GoalPrediction.zisk}€`);
             console.log(`- - - - - - - - - - - - - - - - - - - - -`);
         } else {
             alert('Week not found.');
@@ -1353,6 +1361,40 @@ const isEuropeLeague = (league) => {
 
     for (var i = 0; i < europeLeagues.length; i++) {
         if (league.indexOf(europeLeagues[i]) === -1) {
+            result = false;
+        } else {
+            result = true;
+            break;
+        }
+    }
+
+    return result;
+}
+
+const filteringNotPossibleBettingLeague = (league) => {
+    let result;
+    const leagues = [
+        'england9','england10','england11','england12','england13',
+        //'france',
+        //'italy',
+        'germany11','germany12','germany13','germany14','germany15','germany16','germany17','germany18','germany19','germany20','germany21','germany22',
+        'argentina4','argentina5','argentina3',
+        'austria4',
+        'turkey4','turkey5','turkey6','turkey7',
+        'brazil6','brazil7','brazil8',
+        // 'denmark',
+        // 'finland',
+        // 'greece',
+        'netherlands4','netherlands5',
+        // 'norway',
+        'poland4','poland5',
+        // 'sweden',
+        // 'switzerland',
+        'spain8','spain9','spain10',
+    ];
+
+    for (var i = 0; i < leagues.length; i++) {
+        if (league !== leagues[i]) {
             result = false;
         } else {
             result = true;

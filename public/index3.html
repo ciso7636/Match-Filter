@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>   
+    <link rel="stylesheet" type="text/css" href="semantic/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="semantic/semantic-style.css">
+    <script
+        src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+        crossorigin="anonymous">
+    </script>
+    <script src="semantic/semantic.min.js"></script>
+    <script src="app_S.js" type="text/javascript"></script>
+
+</head>
+<body>
+<!-- static HTML -->
+    <div class="ui inverted vertical masthead center aligned segment">
+        <div class="ui text container">
+            <h1 class="ui inverted header">
+                Cick to load data
+            </h1>
+            <div class="ui huge primary button loading load-button"></div>
+        </div>
+        
+        <!-- <div class="ui form container">
+            <div class="two wide field">
+                <input type='text' placeholder="name"/>
+            </div>
+            <div class=" wide field">
+                <textarea placeholder="JSON" rows="2"></textarea>
+            </div>
+            <div class="ui submit button setToLocalStorage">Set to localStorage</div>
+        </div> -->
+       
+        <div id="myProgress">
+            <div id="myBar">0</div>
+        </div>
+        <div class="row row-buttons">
+            <div class="column">
+                <a class="ui default button testingPrediction" tabindex="0">Test<br>88%</a>
+                <a class="ui positive button overGoalPrediction" tabindex="0">Over1.5<br>88%</a>
+                <a class="ui positive button over35GoalPrediction" tabindex="0">Over3.5/4.5/5.5<br>51%/37%/27%</a>
+                <a class="ui positive button underGoalPrediction" tabindex="0">Under3.5<br>91%</a>
+                <a class="ui positive button under15GoalPrediction" tabindex="0">Under1.5/0.5/Draw<br>47%/19%/36%</a>
+                <a class="ui positive button homeTeamWinPrediction" tabindex="0">1x<br>89%</a>
+                <a class="ui positive button awayTeamWinPrediction" tabindex="0">x2<br>88%</a>
+                <a class="ui positive button awayTeamWinPrediction_2" tabindex="0">2<br>70%</a>
+            </div>
+        </div>
+    </div>
+<!-- static HTML -->
+
+<table id="btable" style="display: none">
+    
+</table>
+</body>
+</html>
