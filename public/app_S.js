@@ -207,6 +207,10 @@ $('html').on('click', '.under15GoalPrediction', function() {
     under15GoalPrediction(allMatchesStatistics);
 });
 
+$('html').on('click', '.under05GoalPrediction', function() {
+    under05GoalPrediction(allMatchesStatistics);
+});
+
 $('html').on('click', '.homeTeamWinPrediction', function() {
     homeTeamWinPrediction(allMatchesStatistics);
 });
@@ -821,6 +825,7 @@ function handleGetWeekStats(input, select, button){
                 + weekProfit.awayTeamWinPrediction_2.zisk
                 + weekProfit.drawPrediction.zisk
             )
+            console.log(`over 1.5 test: ${weekProfit.testingPrediction.percentualnaUspesnost}, ${weekProfit.testingPrediction.vyherneZapasy} z ${weekProfit.testingPrediction.pocetZapasov}, ${weekProfit.testingPrediction.zisk}€`);
             console.log(`over 1.5: %c   ${weekProfit.over15GoalPrediction.percentualnaUspesnost}, ${weekProfit.over15GoalPrediction.vyherneZapasy} z ${weekProfit.over15GoalPrediction.pocetZapasov}, ${weekProfit.over15GoalPrediction.zisk}€`, `${(weekProfit.over15GoalPrediction.vyherneZapasy / weekProfit.over15GoalPrediction.pocetZapasov * 100) > 87 ? 'background: green; color: white;' : 'background: red; color: white;'}`);
             console.log(`over 3.5: %c   ${weekProfit.over35GoalPrediction.percentualnaUspesnost}, ${weekProfit.over35GoalPrediction.vyherneZapasy} z ${weekProfit.over35GoalPrediction.pocetZapasov}, ${weekProfit.over35GoalPrediction.zisk}€`, `${(weekProfit.over35GoalPrediction.vyherneZapasy / weekProfit.over35GoalPrediction.pocetZapasov * 100) > 44 ? 'background: green; color: white;' : 'background: red; color: white;'}`);
             console.log(`over 4.5: %c   ${weekProfit.over45GoalPrediction.percentualnaUspesnost}, ${weekProfit.over45GoalPrediction.vyherneZapasy} z ${weekProfit.over45GoalPrediction.pocetZapasov}, ${weekProfit.over45GoalPrediction.zisk}€`, `${(weekProfit.over45GoalPrediction.vyherneZapasy / weekProfit.over45GoalPrediction.pocetZapasov * 100) > 22 ? 'background: green; color: white;' : 'background: red; color: white;'}`);
@@ -834,7 +839,7 @@ function handleGetWeekStats(input, select, button){
             console.log(`x:   %c        ${weekProfit.drawPrediction.percentualnaUspesnost}, ${weekProfit.drawPrediction.vyherneZapasy} z ${weekProfit.drawPrediction.pocetZapasov}, ${weekProfit.drawPrediction.zisk}€`, `${(weekProfit.drawPrediction.vyherneZapasy / weekProfit.drawPrediction.pocetZapasov * 100) > 29 ? 'background: green; color: white;' : 'background: red; color: white;'}`);            
             console.log(`%cCelkový profit: %c ${weekProfit.totalProfit}€`, "font-weight: bold", "font-weight: normal");
             console.log(`%cPočet zápasov: %c  ${weekProfit.filteredMatches} z ${allMatchesStatistics.length}`, "font-weight: bold", "font-weight: normal");            
-            console.log(`over 1.5 test: ${weekProfit.testingPrediction.percentualnaUspesnost}, ${weekProfit.testingPrediction.vyherneZapasy} z ${weekProfit.testingPrediction.pocetZapasov}, ${weekProfit.testingPrediction.zisk}€`);
+            console.log(`%cPriem. kurzy:%c 1X - 1.17| over1.5 - 1.22| under3.5 - 1.22| X2 - 1.26| 2 - 1.85| over3.5 - 2.7| under1.5 - 2.75| draw - 3.2| over4.5 - 5| under0.5 - 6.5| over5.5 - 7.2`, "font-weight: bold", "font-weight: normal");                        
             console.log(`- - - - - - - - - - - - - - - - - - - - -`);
         } else {
             alert('Week not found.');
