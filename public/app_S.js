@@ -102,6 +102,7 @@ let weekProfit = {
     under05GoalPrediction: {zisk: 0, vyherneZapasy: 0, pocetZapasov: 0, percentualnaUspesnost:''},
     homeTeamWinPrediction: {zisk: 0, vyherneZapasy: 0, pocetZapasov: 0, percentualnaUspesnost:''},
     homeTeamWinPrediction_1: {zisk: 0, vyherneZapasy: 0, pocetZapasov: 0, percentualnaUspesnost:''},
+    homeTeamWinPrediction_1_outsider: {zisk: 0, vyherneZapasy: 0, pocetZapasov: 0, percentualnaUspesnost:''},
     awayTeamWinPrediction_x2: {zisk: 0, vyherneZapasy: 0, pocetZapasov: 0, percentualnaUspesnost:''},
     awayTeamWinPrediction_2: {zisk: 0, vyherneZapasy: 0, pocetZapasov: 0, percentualnaUspesnost:''},
     drawPrediction: {zisk: 0, vyherneZapasy: 0, pocetZapasov: 0, percentualnaUspesnost:''},
@@ -218,6 +219,10 @@ $('html').on('click', '.homeTeamWinPrediction', function() {
 
 $('html').on('click', '.homeTeamWinPrediction_1', function() {
     homeTeamWinPrediction_1(allMatchesStatistics);
+});
+
+$('html').on('click', '.homeTeamWinPrediction_1_outsider', function() {
+    homeTeamWinPrediction_1_outsider(allMatchesStatistics);
 });
 
 $('html').on('click', '.awayTeamWinPrediction', function() {
@@ -722,6 +727,57 @@ function homeTeamWinPrediction_1(allMatchesStatistics, writeToConsole){
     }
 }
 
+function homeTeamWinPrediction_1_outsider(allMatchesStatistics, writeToConsole){
+    let count = 0;
+    let winPridiction = 0;
+    for (let stats of allMatchesStatistics) {
+
+        if (stats instanceof Object === false) continue;
+
+        if (filteringNotPossibleBettingLeague(stats.Liga)) continue;
+
+        // switch (true) {
+        //     case stats.homeTeamFavorits === false:
+        //     case stats.awayTeamFavorits === true:
+        //         continue;
+        // }
+
+        // if (stats.Domaci.posledne_4_ZapasyDoma.streleneGolyPriemer - stats.Domaci.streleneGoly_Doma < 0) {
+        //     continue;
+        // }
+
+        if (stats.Hostia.posledne_4_ZapasyVonku.streleneGolyPriemer - stats.Hostia.streleneGoly_Vonku > 0.6) {
+            continue;
+        }
+
+        if (stats.Hostia.posledne_4_ZapasyVonku.inkasovaneGolyPriemer - stats.Hostia.inkasovaneGoly_Vonku < 0.98) {
+            continue;
+        }
+
+        if (stats.Domaci.pozicia < stats.Hostia.pozicia) {
+            continue;
+        }
+
+        if (writeToConsole !== false) returnDataToConsoleLog(stats, 'homeAwayWin');
+
+        count++;
+        winPridiction += (stats.výsledok.vyhral === 'domaci') ? 1 : 0;
+    }
+    if (count > 0) {
+        if (writeToConsole !== false) {
+            console.log(`Počet zápasov: ${count}, Výherných: ${winPridiction}, Úspešnosť: ${(winPridiction / count).toFixed(2) * 100}%, Min. zisk: ${calculateProfit(count, winPridiction, 1, 2.5, 100)}€`);
+        }
+        
+        weekProfit.homeTeamWinPrediction_1_outsider.zisk = calculateProfit(count, winPridiction, 1, 2.5, 100);        
+        weekProfit.homeTeamWinPrediction_1_outsider.vyherneZapasy = winPridiction;        
+        weekProfit.homeTeamWinPrediction_1_outsider.pocetZapasov = count;        
+        weekProfit.homeTeamWinPrediction_1_outsider.percentualnaUspesnost = `${(winPridiction / count).toFixed(2) * 100}%`;
+        weekProfit.filteredMatches += count;
+    } else {
+        console.log(`Nenašli sa žiadne zápasy!`);
+    }
+}
+
 function awayTeamWinPrediction(allMatchesStatistics, writeToConsole){
     let count = 0;
     let winPridiction = 0;
@@ -854,6 +910,7 @@ function handleGetWeekStats(input, select, button){
             under05GoalPrediction(allMatchesStatistics, false);
             homeTeamWinPrediction(allMatchesStatistics, false);
             homeTeamWinPrediction_1(allMatchesStatistics, false);
+            homeTeamWinPrediction_1_outsider(allMatchesStatistics, false);
             awayTeamWinPrediction(allMatchesStatistics, false);
             awayTeamWinPrediction_2(allMatchesStatistics, false);
 
@@ -875,6 +932,7 @@ function handleGetWeekStats(input, select, button){
                 + weekProfit.under05GoalPrediction.zisk
                 + weekProfit.homeTeamWinPrediction.zisk
                 + weekProfit.homeTeamWinPrediction_1.zisk
+                + weekProfit.homeTeamWinPrediction_1_outsider.zisk
                 + weekProfit.awayTeamWinPrediction_x2.zisk
                 + weekProfit.awayTeamWinPrediction_2.zisk
                 + weekProfit.drawPrediction.zisk
@@ -888,7 +946,8 @@ function handleGetWeekStats(input, select, button){
             console.log(`under 1.5: %c  ${weekProfit.under15GoalPrediction.percentualnaUspesnost}, ${weekProfit.under15GoalPrediction.vyherneZapasy} z ${weekProfit.under15GoalPrediction.pocetZapasov}, ${weekProfit.under15GoalPrediction.zisk}€`, `${(weekProfit.under15GoalPrediction.vyherneZapasy / weekProfit.under15GoalPrediction.pocetZapasov * 100) > 43 ? 'background: green; color: white;' : 'background: red; color: white;'}`);            
             console.log(`under 0.5: %c  ${weekProfit.under05GoalPrediction.percentualnaUspesnost}, ${weekProfit.under05GoalPrediction.vyherneZapasy} z ${weekProfit.under05GoalPrediction.pocetZapasov}, ${weekProfit.under05GoalPrediction.zisk}€`, `${(weekProfit.under05GoalPrediction.vyherneZapasy / weekProfit.under05GoalPrediction.pocetZapasov * 100) > 15 ? 'background: green; color: white;' : 'background: red; color: white;'}`);            
             console.log(`1x:  %c        ${weekProfit.homeTeamWinPrediction.percentualnaUspesnost}, ${weekProfit.homeTeamWinPrediction.vyherneZapasy} z ${weekProfit.homeTeamWinPrediction.pocetZapasov}, ${weekProfit.homeTeamWinPrediction.zisk}€`, `${(weekProfit.homeTeamWinPrediction.vyherneZapasy / weekProfit.homeTeamWinPrediction.pocetZapasov * 100) > 88 ? 'background: green; color: white;' : 'background: red; color: white;'}`);            
-            console.log(`1:  %c        ${weekProfit.homeTeamWinPrediction_1.percentualnaUspesnost}, ${weekProfit.homeTeamWinPrediction_1.vyherneZapasy} z ${weekProfit.homeTeamWinPrediction_1.pocetZapasov}, ${weekProfit.homeTeamWinPrediction_1.zisk}€`, `${(weekProfit.homeTeamWinPrediction_1.vyherneZapasy / weekProfit.homeTeamWinPrediction_1.pocetZapasov * 100) > 80 ? 'background: green; color: white;' : 'background: red; color: white;'}`);            
+            console.log(`1:  %c         ${weekProfit.homeTeamWinPrediction_1.percentualnaUspesnost}, ${weekProfit.homeTeamWinPrediction_1.vyherneZapasy} z ${weekProfit.homeTeamWinPrediction_1.pocetZapasov}, ${weekProfit.homeTeamWinPrediction_1.zisk}€`, `${(weekProfit.homeTeamWinPrediction_1.vyherneZapasy / weekProfit.homeTeamWinPrediction_1.pocetZapasov * 100) > 80 ? 'background: green; color: white;' : 'background: red; color: white;'}`);            
+            console.log(`1_outsider:  %c${weekProfit.homeTeamWinPrediction_1_outsider.percentualnaUspesnost}, ${weekProfit.homeTeamWinPrediction_1_outsider.vyherneZapasy} z ${weekProfit.homeTeamWinPrediction_1_outsider.pocetZapasov}, ${weekProfit.homeTeamWinPrediction_1_outsider.zisk}€`, `${(weekProfit.homeTeamWinPrediction_1_outsider.vyherneZapasy / weekProfit.homeTeamWinPrediction_1_outsider.pocetZapasov * 100) > 42 ? 'background: green; color: white;' : 'background: red; color: white;'}`);            
             console.log(`x2:  %c        ${weekProfit.awayTeamWinPrediction_x2.percentualnaUspesnost}, ${weekProfit.awayTeamWinPrediction_x2.vyherneZapasy} z ${weekProfit.awayTeamWinPrediction_x2.pocetZapasov}, ${weekProfit.awayTeamWinPrediction_x2.zisk}€`, `${(weekProfit.awayTeamWinPrediction_x2.vyherneZapasy / weekProfit.awayTeamWinPrediction_x2.pocetZapasov * 100) > 87 ? 'background: green; color: white;' : 'background: red; color: white;'}`);            
             console.log(`2:   %c        ${weekProfit.awayTeamWinPrediction_2.percentualnaUspesnost}, ${weekProfit.awayTeamWinPrediction_2.vyherneZapasy} z ${weekProfit.awayTeamWinPrediction_2.pocetZapasov}, ${weekProfit.awayTeamWinPrediction_2.zisk}€`, `${(weekProfit.awayTeamWinPrediction_2.vyherneZapasy / weekProfit.awayTeamWinPrediction_2.pocetZapasov * 100) > 60 ? 'background: green; color: white;' : 'background: red; color: white;'}`);            
             console.log(`x:   %c        ${weekProfit.drawPrediction.percentualnaUspesnost}, ${weekProfit.drawPrediction.vyherneZapasy} z ${weekProfit.drawPrediction.pocetZapasov}, ${weekProfit.drawPrediction.zisk}€`, `${(weekProfit.drawPrediction.vyherneZapasy / weekProfit.drawPrediction.pocetZapasov * 100) > 29 ? 'background: green; color: white;' : 'background: red; color: white;'}`);            
