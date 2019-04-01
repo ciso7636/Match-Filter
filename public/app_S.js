@@ -666,11 +666,11 @@ function homeTeamWinPrediction(allMatchesStatistics, writeToConsole){
     }
     if (count > 0) {
         if (writeToConsole !== false) {
-            console.log(`Počet zápasov: ${count}, Výherných: ${winPridiction}, Úspešnosť: ${(winPridiction / count).toFixed(2) * 100}%, Min. zisk: ${calculateProfit(count, winPridiction, 3, 2, 100)}€`);
+            console.log(`Počet zápasov: ${count}, Výherných: ${winPridiction}, Úspešnosť: ${(winPridiction / count).toFixed(2) * 100}%, Min. zisk: ${calculateProfit(count, winPridiction, 3, 1.55, 100)}€`);
             console.log(`Presné tipy:   ${win}, Úspešnosť: ${(win / count).toFixed(2) * 100}%`);
         }
         
-        weekProfit.homeTeamWinPrediction.zisk = calculateProfit(count, winPridiction, 3, 1.6, 100);        
+        weekProfit.homeTeamWinPrediction.zisk = calculateProfit(count, winPridiction, 3, 1.55, 100);        
         weekProfit.homeTeamWinPrediction.vyherneZapasy = winPridiction;        
         weekProfit.homeTeamWinPrediction.pocetZapasov = count;        
         weekProfit.homeTeamWinPrediction.percentualnaUspesnost = `${(winPridiction / count).toFixed(2) * 100}%`;
@@ -953,7 +953,7 @@ function handleGetWeekStats(input, select, button){
             console.log(`x:   %c        ${weekProfit.drawPrediction.percentualnaUspesnost}, ${weekProfit.drawPrediction.vyherneZapasy} z ${weekProfit.drawPrediction.pocetZapasov}, ${weekProfit.drawPrediction.zisk}€`, `${(weekProfit.drawPrediction.vyherneZapasy / weekProfit.drawPrediction.pocetZapasov * 100) > 29 ? 'background: green; color: white;' : 'background: red; color: white;'}`);            
             console.log(`%cCelkový profit: %c ${weekProfit.totalProfit}€`, "font-weight: bold", "font-weight: normal");
             console.log(`%cPočet zápasov: %c  ${weekProfit.filteredMatches} z ${allMatchesStatistics.length}`, "font-weight: bold", "font-weight: normal");            
-            console.log(`%cPriem. kurzy:%c 1X - 1.17| over1.5 - 1.22| under3.5 - 1.22| X2 - 1.26| 2 - 1.85| over3.5 - 2.7| under1.5 - 2.75| draw - 3.2| over4.5 - 5| under0.5 - 6.5| over5.5 - 7.2`, "font-weight: bold", "font-weight: normal");                        
+            console.log(`%cPriem. kurzy:%c 1X - 1.15| over1.5 - 1.22| under3.5 - 1.22| X2 - 1.26| 1 - 1.35 | 2 - 1.85 | 1_outsider - 2.5 | over3.5 - 2.7| under1.5 - 2.75| draw - 3.2| over4.5 - 5| under0.5 - 6.5| over5.5 - 7.2`, "font-weight: bold", "font-weight: normal");                        
             console.log(`- - - - - - - - - - - - - - - - - - - - -`);
         } else {
             alert('Week not found.');
