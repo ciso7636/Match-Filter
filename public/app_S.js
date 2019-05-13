@@ -1043,7 +1043,9 @@ function loadMatchesData(allLinks) {
         for (let i = 0, p = Promise.resolve(); i < allLinks.length; i++) {
             p = p.then(_ => new Promise(resolveLoop =>
                 getAllMatchData(allLinks[i]).then(function (stats) {
-                    allMatchesData.push(stats);
+                    if (stats !== undefined) {
+                        allMatchesData.push(stats);
+                    }
 
                     resolveLoop();
                     moveProgressBar(i + 1, 100/allLinks.length, allLinks.length);
@@ -1794,9 +1796,15 @@ function switchTable(GF) {
 }
 
 function hasTableSufficientNumberOfRows(rows) {
-    if (rows.length >= 4 && rows.last().find('td').length === 7) {
-        if (rows.last().find('td:nth-child(2)').text() !== " ") {
-            return true;
+    if (rows.length >= 4) {
+        if(rows.last().find('td').length === 7) {
+            if (rows.last().find('td:nth-child(2)').text() !== " ") {
+                return true;
+            }
+        } else if(rows.last().prev().find('td').length === 7) {
+            if (rows.last().find('td:nth-child(2)').text() !== " ") {
+                return true;
+            }
         }
         return false;
     } 
