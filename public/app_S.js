@@ -987,25 +987,25 @@ function setResultsMatchesToLocalStorage(allLinks, localStorageKey){
 }
 
 function createNewMatchStatsWithResultMatch(matchesStats, rowMatch){
-    const result = rowMatch.find('b').parent().find('b').parent().text().trim();
-    const homeTeamGoal = parseFloat(result.split('-')[0]);
-    const awayTeamGoal = parseFloat(result.split('-')[1]);
-    const teamName = getNameOfTeams(null, rowMatch);
+    // const result = rowMatch.find('b').parent().find('b').parent().text().trim();
+    // const homeTeamGoal = parseFloat(result.split('-')[0]);
+    // const awayTeamGoal = parseFloat(result.split('-')[1]);
+    // const teamName = getNameOfTeams(null, rowMatch);
 
-    // const homeTeamName = rowMatch.children().first().text().trim();
-    // const awayTeamName = rowMatch.next().children().first().text().trim();
-    // const homeTeamGoal = parseFloat(rowMatch.find('b').text());
-    // const awayTeamGoal = parseFloat(rowMatch.next().find('b').text());
+    const homeTeamName = rowMatch.children().first().text().trim();
+    const awayTeamName = rowMatch.next().children().first().text().trim();
+    const homeTeamGoal = parseFloat(rowMatch.find('b').text());
+    const awayTeamGoal = parseFloat(rowMatch.next().find('b').text());
 
     const resultsMatchesStats = {
-        id: teamName.matchId,
-        matchId: teamName.matchId,
-        homeTeam: teamName.homeTeam,
-        awayTeam: teamName.awayTeam,
-        // id: homeTeamName + awayTeamName,
-        // matchId: homeTeamName + awayTeamName,
-        // homeTeam: homeTeamName,
-        // awayTeam: awayTeamName,
+        // id: teamName.matchId,
+        // matchId: teamName.matchId,
+        // homeTeam: teamName.homeTeam,
+        // awayTeam: teamName.awayTeam,
+        id: homeTeamName + awayTeamName,
+        matchId: homeTeamName + awayTeamName,
+        homeTeam: homeTeamName,
+        awayTeam: awayTeamName,
         homeTeamGoal: homeTeamGoal,
         awayTeamGoal: awayTeamGoal,
         over_1_5: (homeTeamGoal + awayTeamGoal) > 1.5 ? true : false,
@@ -1034,8 +1034,8 @@ function createNewMatchStatsWithResultMatch(matchesStats, rowMatch){
         match !== undefined 
             ? (
                 Object.assign(match, {výsledok: {
-                    skóre: result,
-                    //skóre: homeTeamGoal + ' - ' + awayTeamGoal,
+                    //skóre: result,
+                    skóre: homeTeamGoal + ' - ' + awayTeamGoal,
                     gólyDomáci: resultsMatchesStats.homeTeamGoal, 
                     gólyHostia: resultsMatchesStats.awayTeamGoal,
                     vyhral: vyhral,
@@ -1264,17 +1264,21 @@ const getNameOfTeams = (url, rowMatch) => {
     let homeTeam, awayTeam, matchTime;
     let league = url !== null ? decodeURI(url).split('?')[1].split('=')[1].split('&')[0] : '';
 
-    if (rowMatch.find('td:not(".a")').length === 4) {
-        rowMatch.find('td:not(".a")').first().addClass('a');
-        rowMatch.find('td:not(".a")').last().addClass('a');
-        matchTime = rowMatch.find('td:not(".a")').first().next().text().trim()
-        homeTeam = rowMatch.find('td:not(".a")').first().text();
-        awayTeam = rowMatch.find('td:not(".a")').last().text();
-    } else if (rowMatch.find('td:not(".a")').length === 2) {
-        matchTime = rowMatch.find('td:not(".a")').first().next().text().trim()
-        homeTeam = rowMatch.find('td:not(".a")').first().text();
-        awayTeam = rowMatch.find('td:not(".a")').last().text();
-    }
+    // if (rowMatch.find('td:not(".a")').length === 4) {
+    //     rowMatch.find('td:not(".a")').first().addClass('a');
+    //     rowMatch.find('td:not(".a")').last().addClass('a');
+    //     matchTime = rowMatch.find('td:not(".a")').first().next().text().trim()
+    //     homeTeam = rowMatch.find('td:not(".a")').first().text();
+    //     awayTeam = rowMatch.find('td:not(".a")').last().text();
+    // } else if (rowMatch.find('td:not(".a")').length === 2) {
+    //     matchTime = rowMatch.find('td:not(".a")').first().next().text().trim()
+    //     homeTeam = rowMatch.find('td:not(".a")').first().text();
+    //     awayTeam = rowMatch.find('td:not(".a")').last().text();
+    // }
+
+    homeTeam = rowMatch.children().first().text().trim();
+    awayTeam = rowMatch.next().children().first().text().trim();
+    matchTime = rowMatch.children().eq(1).text().trim();
 
     if (matchTime !== undefined) {
         let hour = parseInt(matchTime.split(':')[0]);
