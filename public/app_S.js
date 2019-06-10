@@ -992,6 +992,12 @@ function createNewMatchStatsWithResultMatch(matchesStats, rowMatch){
     // const awayTeamGoal = parseFloat(result.split('-')[1]);
     // const teamName = getNameOfTeams(null, rowMatch);
 
+    //vyhladavanie vo vysledkoch starsich ako jeden den
+    // const homeTeamName = rowMatch.children().eq(0).text().trim();
+    // const awayTeamName = rowMatch.children().eq(2).text().trim();
+    // const homeTeamGoal = rowMatch.children().eq(1).text().trim().split(' - ')[0];
+    // const awayTeamGoal = rowMatch.children().eq(1).text().trim().split(' - ')[1];
+
     const homeTeamName = rowMatch.children().first().text().trim();
     const awayTeamName = rowMatch.next().children().first().text().trim();
     const homeTeamGoal = parseFloat(rowMatch.find('b').text());
