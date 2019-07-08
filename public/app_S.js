@@ -266,7 +266,7 @@ function testingPrediction(allMatchesStatistics, writeToConsole){
         count++;
         winPridiction += (stats.výsledok.over_1_5 === true || stats.výsledok.over_1_5 === true) ? 1 : 0;
         win25 += stats.výsledok.over_2_5 === true ? 1 : 0;
-        win35 += (stats.výsledok.gólyDomáci + stats.výsledok.gólyHostia) > 3 === true ? 1 : 0;
+        win35 += (parseInt(stats.výsledok.gólyDomáci) + parseInt(stats.výsledok.gólyHostia)) > 3 === true ? 1 : 0;
     }
     if (count > 0) {
         if (writeToConsole !== false) {
@@ -335,9 +335,9 @@ function overGoalPrediction(allMatchesStatistics, writeToConsole){
         count++;
         winPridiction += (stats.výsledok.over_1_5 === true || stats.výsledok.over_1_5 === true) ? 1 : 0;
         win25 += stats.výsledok.over_2_5 === true ? 1 : 0;
-        win35 += (stats.výsledok.gólyDomáci + stats.výsledok.gólyHostia) > 3 === true ? 1 : 0;
-        win45 += (stats.výsledok.gólyDomáci + stats.výsledok.gólyHostia) > 4 === true ? 1 : 0;
-        win55 += (stats.výsledok.gólyDomáci + stats.výsledok.gólyHostia) > 5 === true ? 1 : 0;
+        win35 += (parseInt(stats.výsledok.gólyDomáci) + parseInt(stats.výsledok.gólyHostia)) > 3 === true ? 1 : 0;
+        win45 += (parseInt(stats.výsledok.gólyDomáci) + parseInt(stats.výsledok.gólyHostia)) > 4 === true ? 1 : 0;
+        win55 += (parseInt(stats.výsledok.gólyDomáci) + parseInt(stats.výsledok.gólyHostia)) > 5 === true ? 1 : 0;
     }
     if (count > 0) {
         if (writeToConsole !== false) {
@@ -396,9 +396,9 @@ function over35GoalPrediction(allMatchesStatistics, writeToConsole){
         count++;
         winPridiction += (stats.výsledok.over_1_5 === true || stats.výsledok.over_1_5 === true) ? 1 : 0;
         win25 += stats.výsledok.over_2_5 === true ? 1 : 0;
-        win35 += (stats.výsledok.gólyDomáci + stats.výsledok.gólyHostia) > 3 === true ? 1 : 0;
-        win45 += (stats.výsledok.gólyDomáci + stats.výsledok.gólyHostia) > 4 === true ? 1 : 0;
-        win55 += (stats.výsledok.gólyDomáci + stats.výsledok.gólyHostia) > 5 === true ? 1 : 0;
+        win35 += (parseInt(stats.výsledok.gólyDomáci) + parseInt(stats.výsledok.gólyHostia)) > 3 === true ? 1 : 0;
+        win45 += (parseInt(stats.výsledok.gólyDomáci) + parseInt(stats.výsledok.gólyHostia)) > 4 === true ? 1 : 0;
+        win55 += (parseInt(stats.výsledok.gólyDomáci) + parseInt(stats.výsledok.gólyHostia)) > 5 === true ? 1 : 0;
     }
     if (count > 0) {
         if (writeToConsole !== false) {
@@ -468,9 +468,9 @@ function underGoalPrediction(allMatchesStatistics, writeToConsole){
         count++;
         winPridiction += (stats.výsledok.under_3_5 === true || stats.výsledok.under_3_5 === true) ? 1 : 0;
         win25 += stats.výsledok.under_2_5 === true ? 1 : 0;
-        win15 += (stats.výsledok.gólyDomáci + stats.výsledok.gólyHostia) < 2 === true ? 1 : 0;
-        win05 += (stats.výsledok.gólyDomáci + stats.výsledok.gólyHostia) < 1 === true ? 1 : 0;
-        draw  += stats.výsledok.gólyDomáci === stats.výsledok.gólyHostia ? 1 : 0;    
+        win15 += (parseInt(stats.výsledok.gólyDomáci) + parseInt(stats.výsledok.gólyHostia)) < 2 === true ? 1 : 0;
+        win05 += (parseInt(stats.výsledok.gólyDomáci) + parseInt(stats.výsledok.gólyHostia)) < 1 === true ? 1 : 0;
+        draw  += parseInt(stats.výsledok.gólyDomáci) === parseInt(stats.výsledok.gólyHostia) ? 1 : 0;    
     }
     if (count > 0) {
         if (writeToConsole !== false) {
@@ -530,9 +530,9 @@ function under15GoalPrediction(allMatchesStatistics, writeToConsole){
         count++;
         winPridiction += (stats.výsledok.under_3_5 === true || stats.výsledok.under_3_5 === true) ? 1 : 0;
         win25 += stats.výsledok.under_2_5 === true ? 1 : 0;
-        win15 += (stats.výsledok.gólyDomáci + stats.výsledok.gólyHostia) < 2 === true ? 1 : 0;
-        win05 += (stats.výsledok.gólyDomáci + stats.výsledok.gólyHostia) < 1 === true ? 1 : 0;
-        draw  += stats.výsledok.gólyDomáci === stats.výsledok.gólyHostia ? 1 : 0;
+        win15 += (parseInt(stats.výsledok.gólyDomáci) + parseInt(stats.výsledok.gólyHostia)) < 2 === true ? 1 : 0;
+        win05 += (parseInt(stats.výsledok.gólyDomáci) + parseInt(stats.výsledok.gólyHostia)) < 1 === true ? 1 : 0;
+        draw  += parseInt(stats.výsledok.gólyDomáci) === parseInt(stats.výsledok.gólyHostia) ? 1 : 0;
     }
     if (count > 0) {
         if (writeToConsole !== false) {
@@ -594,9 +594,9 @@ function under05GoalPrediction(allMatchesStatistics, writeToConsole){
         count++;
         winPridiction += (stats.výsledok.under_3_5 === true || stats.výsledok.under_3_5 === true) ? 1 : 0;
         win25 += stats.výsledok.under_2_5 === true ? 1 : 0;
-        win15 += (stats.výsledok.gólyDomáci + stats.výsledok.gólyHostia) < 2 === true ? 1 : 0;
-        win05 += (stats.výsledok.gólyDomáci + stats.výsledok.gólyHostia) < 1 === true ? 1 : 0;
-        draw  += stats.výsledok.gólyDomáci === stats.výsledok.gólyHostia ? 1 : 0;
+        win15 += (parseInt(stats.výsledok.gólyDomáci) + parseInt(stats.výsledok.gólyHostia)) < 2 === true ? 1 : 0;
+        win05 += (parseInt(stats.výsledok.gólyDomáci) + parseInt(stats.výsledok.gólyHostia)) < 1 === true ? 1 : 0;
+        draw  += parseInt(stats.výsledok.gólyDomáci) === parseInt(stats.výsledok.gólyHostia) ? 1 : 0;
     }
     if (count > 0) {
         if (writeToConsole !== false) {
@@ -993,15 +993,15 @@ function createNewMatchStatsWithResultMatch(matchesStats, rowMatch){
     // const teamName = getNameOfTeams(null, rowMatch);
 
     //vyhladavanie vo vysledkoch starsich ako jeden den
-    const homeTeamName = rowMatch.children().eq(0).text().trim();
-    const awayTeamName = rowMatch.children().eq(2).text().trim();
-    const homeTeamGoal = rowMatch.children().eq(1).text().trim().split(' - ')[0];
-    const awayTeamGoal = rowMatch.children().eq(1).text().trim().split(' - ')[1];
+    // const homeTeamName = rowMatch.children().eq(0).text().trim();
+    // const awayTeamName = rowMatch.children().eq(2).text().trim();
+    // const homeTeamGoal = rowMatch.children().eq(1).text().trim().split(' - ')[0];
+    // const awayTeamGoal = rowMatch.children().eq(1).text().trim().split(' - ')[1];
 
-    // const homeTeamName = rowMatch.children().first().text().trim();
-    // const awayTeamName = rowMatch.next().children().first().text().trim();
-    // const homeTeamGoal = parseFloat(rowMatch.find('b').text());
-    // const awayTeamGoal = parseFloat(rowMatch.next().find('b').text());
+    const homeTeamName = rowMatch.children().first().text().trim();
+    const awayTeamName = rowMatch.next().children().first().text().trim();
+    const homeTeamGoal = parseFloat(rowMatch.find('b').text());
+    const awayTeamGoal = parseFloat(rowMatch.next().find('b').text());
 
     const resultsMatchesStats = {
         // id: teamName.matchId,
@@ -1925,8 +1925,8 @@ const returnDataToConsoleLog = (matchStats, type) => {
         consoleConditionHighlighting(
             matchStats.výsledok.skóre,
             [
-                (matchStats.výsledok.gólyDomáci + matchStats.výsledok.gólyHostia) > predictionType.vysledokZapasuNastrielaneGoly.min,
-                (matchStats.výsledok.gólyDomáci + matchStats.výsledok.gólyHostia) === predictionType.vysledokZapasuNastrielaneGoly.min,
+                (parseInt(matchStats.výsledok.gólyDomáci) + parseInt(matchStats.výsledok.gólyHostia)) > predictionType.vysledokZapasuNastrielaneGoly.min,
+                (parseInt(matchStats.výsledok.gólyDomáci) + parseInt(matchStats.výsledok.gólyHostia)) === predictionType.vysledokZapasuNastrielaneGoly.min,
             ],
             "%c Výsledok: ",
             true,
@@ -1935,8 +1935,8 @@ const returnDataToConsoleLog = (matchStats, type) => {
         consoleConditionHighlighting(
             matchStats.výsledok.skóre,
             [
-                matchStats.výsledok.gólyDomáci > matchStats.výsledok.gólyHostia,
-                matchStats.výsledok.gólyDomáci === matchStats.výsledok.gólyHostia,
+                parseInt(matchStats.výsledok.gólyDomáci) > parseInt(matchStats.výsledok.gólyHostia),
+                parseInt(matchStats.výsledok.gólyDomáci) === parseInt(matchStats.výsledok.gólyHostia),
             ],
             "%c Výsledok: ",
             true,
