@@ -26,7 +26,7 @@ $(function(){
 
     getAllMatchData('http://www.zulubet.com/').then(function (html) {
 
-        const matches = $(html).contents().find('.content_table tr[bgcolor="#EFEFEF"]:not(.prediction_min), .content_table tr[bgcolor="#FFFFFF"]:not(.prediction_min)');
+        const matches = $(html).contents().find('.content_table tr[bgcolor]:not(.prediction_full):not(.prediction_min)');
         for (let i = 0; i < matches.length; i++) { 
             matchData = {
                 matchTime: $(matches[i]).find('td:nth-child(1) script').text(),
