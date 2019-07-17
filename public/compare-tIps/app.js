@@ -20,11 +20,12 @@ $(function(){
         for (let i = 0; i < matches.length; i++) { 
             matchData = {
                 matchTime: $(matches[i]).find('.table-main__tt .table-main__time').text(),
+                league: $(matches[i]).closest('tbody').find('.js-tournament th').text(),
                 homeTeam: $(matches[i]).find('.table-main__tt a').text().split(' - ')[0].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
                 awayTeam: $(matches[i]).find('.table-main__tt a').text().split(' - ')[1].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
-                odds_1: $(matches[i]).find('.table-main__odds').length > 0 && Math.round(parseFloat($(matches[i]).find('.table-main__odds').eq(0).find('a').attr('data-odd')) * 100) / 100,
-                odds_x: $(matches[i]).find('.table-main__odds').length > 0 && Math.round(parseFloat($(matches[i]).find('.table-main__odds').eq(1).find('a').attr('data-odd')) * 100) / 100,
-                odds_2: $(matches[i]).find('.table-main__odds').length > 0 && Math.round(parseFloat($(matches[i]).find('.table-main__odds').eq(2).find('a').attr('data-odd')) * 100) / 100,
+                odds_1: $(matches[i]).find('.table-main__odds').length > 0 ? Math.round(parseFloat($(matches[i]).find('.table-main__odds').eq(0).find('a').attr('data-odd')) * 100) / 100 : '-.--',
+                odds_x: $(matches[i]).find('.table-main__odds').length > 0 ? Math.round(parseFloat($(matches[i]).find('.table-main__odds').eq(1).find('a').attr('data-odd')) * 100) / 100 : '-.--',
+                odds_2: $(matches[i]).find('.table-main__odds').length > 0 ? Math.round(parseFloat($(matches[i]).find('.table-main__odds').eq(2).find('a').attr('data-odd')) * 100) / 100 : '-.--',
             }
 
             allMatchesToday.push(matchData)
@@ -268,6 +269,16 @@ $(function(){
     Bind EventListeners
 */ 
 $('html').on('click', '.load-button1', function() {
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, scibet_MatchData);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, zulubet_MatchData);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, windrawwin_MatchData);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, vitibet_MatchData);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, mybet_MatchData);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, supatips_MatchData);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, footballtips_MatchData);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, sportytrader_MatchData);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, betensured_MatchData);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, olbg_MatchData);
 
     // console.log('- - - - - - - - - - - - -scibet_MatchData- - - - - - - - - - - - - - - -')
     // scibet_MatchData.forEach(match => {
@@ -319,21 +330,11 @@ $('html').on('click', '.load-button1', function() {
     //     match.prediction_1 === true && console.log(match.homeTeam + '   -   ' + match.awayTeam);
     // })
 
-    console.log('- - - - - - - - - - - - -allMatchesTodayFiltered- - - - - - - - - - - - - - - -')
-    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, scibet_MatchData);
-    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, zulubet_MatchData);
-    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, windrawwin_MatchData);
-    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, vitibet_MatchData);
-    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, mybet_MatchData);
-    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, supatips_MatchData);
-    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, footballtips_MatchData);
-    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, sportytrader_MatchData);
-    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, betensured_MatchData);
-    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, olbg_MatchData);
-
     const newArray = allMatchesTodayFiltered.sort((a, b) => (a.found < b.found) ? 1 : -1);
+
+    console.log('Zhoda    Čas    Kurz      Zápas | Liga')
     newArray.forEach(array => {
-        console.log(array.found + '  /  ' + array.homeTeam + ' - ' + array.awayTeam + '  =  ' + array.odds_1);
+        console.log('  ' + array.found + '     ' + array.matchTime + '   ' + array.odds_1 + '      ' + array.homeTeam + ' - ' + array.awayTeam + ' | ' + array.league);
     })
 });
 
@@ -375,6 +376,8 @@ const mergeAllMatchesWithAllFiltredMatchces = (allMatches, filteredMatches) => {
             } else {
                 allMatchesTodayFiltered.push({
                     found: 1,
+                    matchTime: findHomeTeam[0].matchTime,
+                    league: findHomeTeam[0].league,
                     id: findHomeTeam[0].homeTeam + findAwayTeam[0].awayTeam,
                     homeTeam: findHomeTeam[0].homeTeam,
                     awayTeam: findAwayTeam[0].awayTeam,
