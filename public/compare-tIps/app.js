@@ -1,3 +1,5 @@
+let allMatchesToday = [];
+let allMatchesTodayFiltered = [];
 let scibet_MatchData = [];
 let zulubet_MatchData = [];
 let windrawwin_MatchData = [];
@@ -10,6 +12,24 @@ let betensured_MatchData = [];
 let olbg_MatchData = [];
 
 $(function(){
+
+    getAllMatchData('https://www.betexplorer.com/next/soccer/').then(function (html) {
+
+        let matchData;
+        const matches = $(html).contents().find('.table-main tbody .table-main__tt').closest('tr');
+        for (let i = 0; i < matches.length; i++) { 
+            matchData = {
+                matchTime: $(matches[i]).find('.table-main__tt .table-main__time').text(),
+                homeTeam: $(matches[i]).find('.table-main__tt a').text().split(' - ')[0].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
+                awayTeam: $(matches[i]).find('.table-main__tt a').text().split(' - ')[1].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
+                odds_1: $(matches[i]).find('.table-main__odds').length > 0 && Math.round(parseFloat($(matches[i]).find('.table-main__odds').eq(0).find('a').attr('data-odd')) * 100) / 100,
+                odds_x: $(matches[i]).find('.table-main__odds').length > 0 && Math.round(parseFloat($(matches[i]).find('.table-main__odds').eq(1).find('a').attr('data-odd')) * 100) / 100,
+                odds_2: $(matches[i]).find('.table-main__odds').length > 0 && Math.round(parseFloat($(matches[i]).find('.table-main__odds').eq(2).find('a').attr('data-odd')) * 100) / 100,
+            }
+
+            allMatchesToday.push(matchData)
+        }
+    })
 
     getAllMatchData('https://www.scibet.com/').then(function (html) {
 
@@ -28,7 +48,9 @@ $(function(){
                 prediction_2: Math.round(parseFloat($(matches[i]).find('td:nth-child(9) .bar-danger').attr('style').split(':')[1].split('%')[0]) * 100) / 100,
             }
 
-            scibet_MatchData.push(matchData)
+            if (Math.round(parseFloat($(matches[i]).find('td:nth-child(9) .bar-success').attr('style').split(':')[1].split('%')[0]) * 100) / 100 >= 60) {
+                scibet_MatchData.push(matchData)
+            }
         }
     })
 
@@ -49,7 +71,9 @@ $(function(){
                 prediction_2: Math.round(parseFloat($(matches[i]).find('td:nth-child(6)').text()) * 100) / 100,
             }
 
-            zulubet_MatchData.push(matchData)
+            if (Math.round(parseFloat($(matches[i]).find('td:nth-child(4)').text()) * 100) / 100 >= 60) {
+                zulubet_MatchData.push(matchData);
+            }
         }
     })
 
@@ -69,7 +93,9 @@ $(function(){
                 prediction_2: $(matches[i]).find('.wtprd').text() === 'Away Win' ? true : false,
             }
 
-            windrawwin_MatchData.push(matchData)
+            if ($(matches[i]).find('.wtprd').text() === 'Home Win') {
+                windrawwin_MatchData.push(matchData)
+            }
         }
     })
 
@@ -92,7 +118,10 @@ $(function(){
                     prediction_x: Math.round(parseFloat($(matches[i]).find('td:nth-child(6)').text()) * 100) / 100,
                     prediction_2: Math.round(parseFloat($(matches[i]).find('td:nth-child(7)').text()) * 100) / 100,
                 }
-                vitibet_MatchData.push(matchData)
+
+                if (Math.round(parseFloat($(matches[i]).find('td:nth-child(5)').text()) * 100) / 100 >= 60) {
+                    vitibet_MatchData.push(matchData)
+                }
             }
         }
     })
@@ -111,7 +140,9 @@ $(function(){
                 prediction_2: Math.round(parseFloat($(matches[i]).find('td:nth-child(7)').text().split('%')[0]) * 100) / 100,
             }
 
-            mybet_MatchData.push(matchData)
+            if (Math.round(parseFloat($(matches[i]).find('td:nth-child(5)').text().split('%')[0]) * 100) / 100 >= 60) {
+                mybet_MatchData.push(matchData)                
+            }
         }
     })
 
@@ -130,7 +161,9 @@ $(function(){
                 prediction_2x: $(matches[i]).find('td:nth-child(3)').text() === 'X2' ? true : false,
             }
 
-            supatips_MatchData.push(matchData)
+            if ($(matches[i]).find('td:nth-child(3)').text() === '1') {
+                supatips_MatchData.push(matchData)
+            }
         }
     })
 
@@ -152,7 +185,10 @@ $(function(){
                         prediction_x: $(matches[i]).find('.tips-card__name-two').text() === 'Draw' ? true : false,
                         prediction_2: $(matches[i]).find('.tips-card__name-two').text() === 'Away win' ? true : false,
                     }
-                    footballtips_MatchData.push(matchData)
+
+                    if ($(matches[i]).find('.tips-card__name-two').text() === 'Home win') {
+                        footballtips_MatchData.push(matchData)
+                    }
                 }
             }
         }
@@ -174,7 +210,9 @@ $(function(){
                 prediction_2: winnerTeam === awayTeam  ? true : false,
             }
 
-            sportytrader_MatchData.push(matchData)
+            if (winnerTeam === homeTeam) {
+                sportytrader_MatchData.push(matchData)
+            }
         }
     })
 
@@ -193,7 +231,9 @@ $(function(){
                 prediction_2x: $(matches[i]).find('td:nth-child(3)').text() === 'X2' ? true : false,
             }
 
-            betensured_MatchData.push(matchData)
+            if ($(matches[i]).find('td:nth-child(3)').text() === '1') {
+                betensured_MatchData.push(matchData)
+            }
         }
     })
 
@@ -215,7 +255,9 @@ $(function(){
                     prediction_2: winnerTeam === awayTeam  ? true : false,
                 }
 
-                olbg_MatchData.push(matchData)
+                if (winnerTeam === homeTeam) {
+                    olbg_MatchData.push(matchData)
+                }
             }
         }
     })
@@ -277,11 +319,70 @@ $('html').on('click', '.load-button1', function() {
         match.prediction_1 === true && console.log(match.homeTeam + '   -   ' + match.awayTeam);
     })
 
+    console.log('- - - - - - - - - - - - -allMatchesTodayFiltered- - - - - - - - - - - - - - - -')
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, scibet_MatchData);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, zulubet_MatchData);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, windrawwin_MatchData);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, vitibet_MatchData);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, mybet_MatchData);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, supatips_MatchData);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, footballtips_MatchData);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, sportytrader_MatchData);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, betensured_MatchData);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, olbg_MatchData);
+
+    console.log(allMatchesTodayFiltered);
+
+    // allMatchesTodayFiltered.forEach(match => {
+    //     console.log(match.homeTeam + '   -   ' + match.awayTeam);
+    // })
+
 });
 
 $('html').on('click', '.load-button2', function() {
 
 });
+
+const mergeAllMatchesWithAllFiltredMatchces = (allMatches, filteredMatches) => {
+
+    for (let i = 0; i < filteredMatches.length; i++) { 
+        const findHomeTeam = allMatches.filter(match => {
+            if (match.homeTeam.length >= filteredMatches[i].homeTeam.length) {
+                return match.homeTeam.toLowerCase().indexOf(filteredMatches[i].homeTeam.toLowerCase()) !== -1
+            } else {
+                return filteredMatches[i].homeTeam.toLowerCase().indexOf(match.homeTeam.toLowerCase()) !== -1
+            }
+            
+        });
+        const findAwayTeam = allMatches.filter(match => {
+            if (match.awayTeam.length >= filteredMatches[i].awayTeam.length) {
+                return match.awayTeam.toLowerCase().indexOf(filteredMatches[i].awayTeam.toLowerCase()) !== -1
+            } else {
+                return filteredMatches[i].awayTeam.toLowerCase().indexOf(match.awayTeam.toLowerCase()) !== -1
+            }
+        });
+
+        if (findHomeTeam.length > 0 && findAwayTeam.length > 0) {
+            
+            allMatchesTodayFiltered.forEach(match => {
+                if (match.id === findHomeTeam[0].homeTeam + findAwayTeam[0].awayTeam) {
+                    match.found ++; 
+                    return;
+                }
+            })
+            
+            allMatchesTodayFiltered.push({
+                found: 1,
+                id: findHomeTeam[0].homeTeam + findAwayTeam[0].awayTeam,
+                homeTeam: findHomeTeam[0].homeTeam,
+                awayTeam: findAwayTeam[0].awayTeam,
+                odds_1: findHomeTeam[0].odds_1,
+                odds_x: findHomeTeam[0].odds_x,
+                odds_2: findHomeTeam[0].odds_2,
+            })
+        }
+    }
+}
 
 function getData(method, url, type = 'document') {
     return new Promise(function (resolve, reject) {
