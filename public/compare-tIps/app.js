@@ -19,6 +19,7 @@ $(function(){
         const matches = $(html).contents().find('.table-main tbody .table-main__tt').closest('tr');
         for (let i = 0; i < matches.length; i++) { 
             matchData = {
+                website: 'betexplorer',
                 matchTime: $(matches[i]).find('.table-main__tt .table-main__time').text(),
                 league: $(matches[i]).closest('tbody').find('.js-tournament th').text(),
                 homeTeam: $(matches[i]).find('.table-main__tt a').text().split(' - ')[0].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
@@ -38,9 +39,10 @@ $(function(){
         const matches = $(html).contents().find('#content .block .head h2 > a').closest(".block").find('table tr');
         for (let i = 0; i < matches.length; i++) { 
             matchData = {
+                website: 'scibet',
                 matchTime: $(matches[i]).find('td:nth-child(2) span').text(),
-                homeTeam: $(matches[i]).find('td:nth-child(3)').text().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
-                awayTeam: $(matches[i]).find('td:nth-child(5)').text().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
+                homeTeam: $(matches[i]).find('td:nth-child(3)').text().trim().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
+                awayTeam: $(matches[i]).find('td:nth-child(5)').text().trim().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
                 odds_1: Math.round(parseFloat($(matches[i]).find('td:nth-child(6)').text()) * 100) / 100,
                 odds_x: Math.round(parseFloat($(matches[i]).find('td:nth-child(7)').text()) * 100) / 100,
                 odds_2: Math.round(parseFloat($(matches[i]).find('td:nth-child(8)').text()) * 100) / 100,
@@ -61,6 +63,7 @@ $(function(){
         const matches = $(html).contents().find('.content_table tr[bgcolor]:not(.prediction_full):not(.prediction_min)');
         for (let i = 0; i < matches.length; i++) { 
             matchData = {
+                website: 'zulubet',
                 matchTime: $(matches[i]).find('td:nth-child(1) script').text(),
                 homeTeam: $(matches[i]).find('td:nth-child(2)').text().split('-')[0].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
                 awayTeam: $(matches[i]).find('td:nth-child(2)').text().split('-')[1].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
@@ -84,6 +87,7 @@ $(function(){
         const matches = $(html).contents().find('.wttr.mbmt30').find('.wtmo').closest(".wttr.mbmt30");
         for (let i = 0; i < matches.length; i++) { 
             matchData = {
+                website: 'windrawwin',
                 homeTeam: $(matches[i]).find('.wtdesklnk').text().split(' v ')[0].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
                 awayTeam: $(matches[i]).find('.wtdesklnk').text().split(' v ')[1].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
                 odds_1: Math.round(parseFloat($(matches[i]).find('.wtmo > div:nth-child(2)').text()) * 100) / 100,
@@ -113,8 +117,9 @@ $(function(){
             // only today
             if (toDayString === matchDay) {
                 matchData = {
-                    homeTeam: $(matches[i]).find('td:nth-child(3)').text().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
-                    awayTeam: $(matches[i]).find('td:nth-child(4)').text().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
+                    website: 'vitibet',
+                    homeTeam: $(matches[i]).find('td:nth-child(3)').text().trim().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
+                    awayTeam: $(matches[i]).find('td:nth-child(4)').text().trim().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
                     prediction_1: Math.round(parseFloat($(matches[i]).find('td:nth-child(5)').text()) * 100) / 100,
                     prediction_x: Math.round(parseFloat($(matches[i]).find('td:nth-child(6)').text()) * 100) / 100,
                     prediction_2: Math.round(parseFloat($(matches[i]).find('td:nth-child(7)').text()) * 100) / 100,
@@ -133,6 +138,7 @@ $(function(){
         const matches = $(html).contents().find('#events table tr.link');
         for (let i = 0; i < matches.length; i++) { 
             matchData = {
+                website: 'mybet.tips',
                 matchTime: $(matches[i]).find('td:nth-child(1)').text(),
                 homeTeam: $(matches[i]).find('td:nth-child(2)').text().trim().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
                 awayTeam: $(matches[i]).find('td:nth-child(4)').text().trim().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
@@ -153,6 +159,7 @@ $(function(){
         const matches = $(html).contents().find('#yesdraw tbody tr');
         for (let i = 0; i < matches.length; i++) { 
             matchData = {
+                website: 'supatips',
                 homeTeam: $(matches[i]).find('td:nth-child(1)').next().text().split(' vs ')[0].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
                 awayTeam: $(matches[i]).find('td:nth-child(1)').next().text().split(' vs ')[1].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
                 prediction_1: $(matches[i]).find('td:nth-child(3)').text() === '1' ? true : false,
@@ -180,8 +187,9 @@ $(function(){
                 for (let i = 0; i < matches.length; i++) { 
 
                     matchData = {
-                        homeTeam: $(matches[i]).find('.tips-card__name-one').text().split(' v ')[0].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
-                        awayTeam: $(matches[i]).find('.tips-card__name-one').text().split(' v ')[1].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
+                        website: 'footballtips',
+                        homeTeam: $(matches[i]).find('.tips-card__name-one').text().split(' vs ')[0].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
+                        awayTeam: $(matches[i]).find('.tips-card__name-one').text().split(' vs ')[1].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
                         prediction_1: $(matches[i]).find('.tips-card__name-two').text() === 'Home win' ? true : false,
                         prediction_x: $(matches[i]).find('.tips-card__name-two').text() === 'Draw' ? true : false,
                         prediction_2: $(matches[i]).find('.tips-card__name-two').text() === 'Away win' ? true : false,
@@ -204,6 +212,7 @@ $(function(){
             const homeTeam = $(matches[i]).find('.bet-card-vs .bet-card-vs-left').text().trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
             const awayTeam = $(matches[i]).find('.bet-card-vs .bet-card-vs-right').text().trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
             matchData = {
+                website: 'sportytrader',
                 homeTeam: homeTeam,
                 awayTeam: awayTeam,
                 prediction_1: winnerTeam === homeTeam  ? true : false,
@@ -223,6 +232,7 @@ $(function(){
         const matches = $(html).contents().find('.hide-iframe #today-div tr');
         for (let i = 0; i < matches.length; i++) { 
             matchData = {
+                website: 'betensured',
                 homeTeam: $(matches[i]).find('td:nth-child(2)').text().split(' vs ')[0].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
                 awayTeam: $(matches[i]).find('td:nth-child(2)').text().split(' vs ')[1].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
                 prediction_1: $(matches[i]).find('td:nth-child(3)').text() === '1' ? true : false,
@@ -249,6 +259,7 @@ $(function(){
             const awayTeam = $(matches[i]).find('td:nth-child(2) h5').text().split(' v ')[1].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
             if (toDay === 'Today') {
                 matchData = {
+                    website: 'olbg',
                     homeTeam: homeTeam,
                     awayTeam: awayTeam,
                     prediction_1: winnerTeam === homeTeam  ? true : false,
@@ -338,12 +349,7 @@ $('html').on('click', '.load-button1', function() {
     })
 });
 
-$('html').on('click', '.load-button2', function() {
-
-});
-
 const mergeAllMatchesWithAllFiltredMatchces = (allMatches, filteredMatches) => {
-
     for (let i = 0; i < filteredMatches.length; i++) { 
         const findHomeTeam = allMatches.filter(match => {
             if (match.homeTeam.length >= filteredMatches[i].homeTeam.length) {
@@ -373,9 +379,11 @@ const mergeAllMatchesWithAllFiltredMatchces = (allMatches, filteredMatches) => {
             
             if (duplicate !== null) {
                 allMatchesTodayFiltered[duplicate].found ++; 
+                allMatchesTodayFiltered[duplicate].website.push(filteredMatches[i].website); 
             } else {
                 allMatchesTodayFiltered.push({
                     found: 1,
+                    website: [filteredMatches[i].website],
                     matchTime: findHomeTeam[0].matchTime,
                     league: findHomeTeam[0].league,
                     id: findHomeTeam[0].homeTeam + findAwayTeam[0].awayTeam,
