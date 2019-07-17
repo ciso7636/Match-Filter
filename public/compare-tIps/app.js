@@ -269,55 +269,55 @@ $(function(){
 */ 
 $('html').on('click', '.load-button1', function() {
 
-    console.log('- - - - - - - - - - - - -scibet_MatchData- - - - - - - - - - - - - - - -')
-    scibet_MatchData.forEach(match => {
-        match.prediction_1 >= 60 && console.log(match.homeTeam + '   -   ' + match.awayTeam);
-    })
+    // console.log('- - - - - - - - - - - - -scibet_MatchData- - - - - - - - - - - - - - - -')
+    // scibet_MatchData.forEach(match => {
+    //     match.prediction_1 >= 60 && console.log(match.homeTeam + '   -   ' + match.awayTeam);
+    // })
 
-    console.log('- - - - - - - - - - - - -zulubet_MatchData- - - - - - - - - - - - - - - -')
-    zulubet_MatchData.forEach(match => {
-        match.prediction_1 >= 60 && console.log(match.homeTeam + '   -   ' + match.awayTeam);
-    })
+    // console.log('- - - - - - - - - - - - -zulubet_MatchData- - - - - - - - - - - - - - - -')
+    // zulubet_MatchData.forEach(match => {
+    //     match.prediction_1 >= 60 && console.log(match.homeTeam + '   -   ' + match.awayTeam);
+    // })
 
-    console.log('- - - - - - - - - - - - -windrawwin_MatchData- - - - - - - - - - - - - - - -')
-    windrawwin_MatchData.forEach(match => {
-        match.prediction_1 === true && console.log(match.homeTeam + '   -   ' + match.awayTeam);
-    })
+    // console.log('- - - - - - - - - - - - -windrawwin_MatchData- - - - - - - - - - - - - - - -')
+    // windrawwin_MatchData.forEach(match => {
+    //     match.prediction_1 === true && console.log(match.homeTeam + '   -   ' + match.awayTeam);
+    // })
 
-    console.log('- - - - - - - - - - - - -vitibet_MatchData- - - - - - - - - - - - - - - -')
-    vitibet_MatchData.forEach(match => {
-        match.prediction_1 >= 60 && console.log(match.homeTeam + '   -   ' + match.awayTeam);
-    })
+    // console.log('- - - - - - - - - - - - -vitibet_MatchData- - - - - - - - - - - - - - - -')
+    // vitibet_MatchData.forEach(match => {
+    //     match.prediction_1 >= 60 && console.log(match.homeTeam + '   -   ' + match.awayTeam);
+    // })
 
-    console.log('- - - - - - - - - - - - -mybet_MatchData- - - - - - - - - - - - - - - -')
-    mybet_MatchData.forEach(match => {
-        match.prediction_1 >= 60 && console.log(match.homeTeam + '   -   ' + match.awayTeam);
-    })
+    // console.log('- - - - - - - - - - - - -mybet_MatchData- - - - - - - - - - - - - - - -')
+    // mybet_MatchData.forEach(match => {
+    //     match.prediction_1 >= 60 && console.log(match.homeTeam + '   -   ' + match.awayTeam);
+    // })
 
-    console.log('- - - - - - - - - - - - -supatips_MatchData- - - - - - - - - - - - - - - -')
-    supatips_MatchData.forEach(match => {
-        match.prediction_1 === true && console.log(match.homeTeam + '   -   ' + match.awayTeam);
-    })
+    // console.log('- - - - - - - - - - - - -supatips_MatchData- - - - - - - - - - - - - - - -')
+    // supatips_MatchData.forEach(match => {
+    //     match.prediction_1 === true && console.log(match.homeTeam + '   -   ' + match.awayTeam);
+    // })
 
-    console.log('- - - - - - - - - - - - -footballtips_MatchData- - - - - - - - - - - - - - - -')
-    footballtips_MatchData.forEach(match => {
-        match.prediction_1 === true && console.log(match.homeTeam + '   -   ' + match.awayTeam);
-    })
+    // console.log('- - - - - - - - - - - - -footballtips_MatchData- - - - - - - - - - - - - - - -')
+    // footballtips_MatchData.forEach(match => {
+    //     match.prediction_1 === true && console.log(match.homeTeam + '   -   ' + match.awayTeam);
+    // })
 
-    console.log('- - - - - - - - - - - - -sportytrader_MatchData- - - - - - - - - - - - - - - -')
-    sportytrader_MatchData.forEach(match => {
-        match.prediction_1 === true && console.log(match.homeTeam + '   -   ' + match.awayTeam);
-    })
+    // console.log('- - - - - - - - - - - - -sportytrader_MatchData- - - - - - - - - - - - - - - -')
+    // sportytrader_MatchData.forEach(match => {
+    //     match.prediction_1 === true && console.log(match.homeTeam + '   -   ' + match.awayTeam);
+    // })
 
-    console.log('- - - - - - - - - - - - -betensured_MatchData- - - - - - - - - - - - - - - -')
-    betensured_MatchData.forEach(match => {
-        match.prediction_1 === true && console.log(match.homeTeam + '   -   ' + match.awayTeam);
-    })
+    // console.log('- - - - - - - - - - - - -betensured_MatchData- - - - - - - - - - - - - - - -')
+    // betensured_MatchData.forEach(match => {
+    //     match.prediction_1 === true && console.log(match.homeTeam + '   -   ' + match.awayTeam);
+    // })
 
-    console.log('- - - - - - - - - - - - -olbg_MatchData- - - - - - - - - - - - - - - -')
-    olbg_MatchData.forEach(match => {
-        match.prediction_1 === true && console.log(match.homeTeam + '   -   ' + match.awayTeam);
-    })
+    // console.log('- - - - - - - - - - - - -olbg_MatchData- - - - - - - - - - - - - - - -')
+    // olbg_MatchData.forEach(match => {
+    //     match.prediction_1 === true && console.log(match.homeTeam + '   -   ' + match.awayTeam);
+    // })
 
     console.log('- - - - - - - - - - - - -allMatchesTodayFiltered- - - - - - - - - - - - - - - -')
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, scibet_MatchData);
@@ -331,12 +331,10 @@ $('html').on('click', '.load-button1', function() {
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, betensured_MatchData);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, olbg_MatchData);
 
-    console.log(allMatchesTodayFiltered);
-
-    // allMatchesTodayFiltered.forEach(match => {
-    //     console.log(match.homeTeam + '   -   ' + match.awayTeam);
-    // })
-
+    const newArray = allMatchesTodayFiltered.sort((a, b) => (a.found < b.found) ? 1 : -1);
+    newArray.forEach(array => {
+        console.log(array.found + '  /  ' + array.homeTeam + ' - ' + array.awayTeam + '  =  ' + array.odds_1);
+    })
 });
 
 $('html').on('click', '.load-button2', function() {
@@ -364,24 +362,33 @@ const mergeAllMatchesWithAllFiltredMatchces = (allMatches, filteredMatches) => {
 
         if (findHomeTeam.length > 0 && findAwayTeam.length > 0) {
             
-            allMatchesTodayFiltered.forEach(match => {
+            let duplicate = null;
+            allMatchesTodayFiltered.forEach((match, i) => {
                 if (match.id === findHomeTeam[0].homeTeam + findAwayTeam[0].awayTeam) {
-                    match.found ++; 
+                    duplicate = i;
                     return;
                 }
             })
             
-            allMatchesTodayFiltered.push({
-                found: 1,
-                id: findHomeTeam[0].homeTeam + findAwayTeam[0].awayTeam,
-                homeTeam: findHomeTeam[0].homeTeam,
-                awayTeam: findAwayTeam[0].awayTeam,
-                odds_1: findHomeTeam[0].odds_1,
-                odds_x: findHomeTeam[0].odds_x,
-                odds_2: findHomeTeam[0].odds_2,
-            })
+            if (duplicate !== null) {
+                allMatchesTodayFiltered[duplicate].found ++; 
+            } else {
+                allMatchesTodayFiltered.push({
+                    found: 1,
+                    id: findHomeTeam[0].homeTeam + findAwayTeam[0].awayTeam,
+                    homeTeam: findHomeTeam[0].homeTeam,
+                    awayTeam: findAwayTeam[0].awayTeam,
+                    odds_1: findHomeTeam[0].odds_1,
+                    odds_x: findHomeTeam[0].odds_x,
+                    odds_2: findHomeTeam[0].odds_2,
+                })
+            }
         }
     }
+}
+
+function sortNumber(a, b) {
+    return a - b;
 }
 
 function getData(method, url, type = 'document') {
