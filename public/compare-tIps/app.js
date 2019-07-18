@@ -12,6 +12,7 @@ let betensured_MatchData = [];
 let olbg_MatchData = [];
 
 $(function(){
+    $( "#datepicker" ).datepicker({ dateFormat: 'dd.mm.yy' });
 
     getAllMatchData('https://www.betexplorer.com/next/soccer/').then(function (html) {
 
@@ -279,7 +280,30 @@ $(function(){
 /* 
     Bind EventListeners
 */ 
-$('html').on('click', '.load-button1', function() {
+
+$('html').on('click', '.save-button', function() {
+    setDataToLocalStorage(getToDay(), JSON.stringify(allMatchesTodayFiltered));
+});
+
+$('html').on('click', '.set-button', function() {
+    const selectedDay = $('#datepicker').val();
+    const localStorageData = getDataFromLocalStorage(selectedDay);
+
+    if (localStorageData !== null) {
+        const day = selectedDay.split('.')[0];
+        const month = selectedDay.split('.')[1];
+        const year = selectedDay.split('.')[2];
+
+        mergeResultMatchesFromBetexplorer(selectedDay, 'year=' + year + '&month=' + month + '&day=' + day, localStorageData);
+
+    } else {
+        alert('Zvolený dátum neobsahuje žiadne dáta.')
+    }
+});
+
+$('html').on('click', '.load-button', function() {
+    allMatchesTodayFiltered = [];
+
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, scibet_MatchData);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, zulubet_MatchData);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, windrawwin_MatchData);
@@ -383,23 +407,85 @@ const mergeAllMatchesWithAllFiltredMatchces = (allMatches, filteredMatches) => {
             } else {
                 allMatchesTodayFiltered.push({
                     found: 1,
-                    website: [filteredMatches[i].website],
                     matchTime: findHomeTeam[0].matchTime,
-                    league: findHomeTeam[0].league,
-                    id: findHomeTeam[0].homeTeam + findAwayTeam[0].awayTeam,
                     homeTeam: findHomeTeam[0].homeTeam,
                     awayTeam: findAwayTeam[0].awayTeam,
+                    league: findHomeTeam[0].league,
+                    website: [filteredMatches[i].website],
                     odds_1: findHomeTeam[0].odds_1,
                     odds_x: findHomeTeam[0].odds_x,
                     odds_2: findHomeTeam[0].odds_2,
+                    id: findHomeTeam[0].homeTeam + findAwayTeam[0].awayTeam,
                 })
             }
         }
     }
 }
 
+function mergeResultMatchesFromBetexplorer(localStorageName, urlDate, localStorageData) {
+    getAllMatchData('https://www.betexplorer.com/results/soccer/?' + urlDate).then(function (html) {
+        let matchData = [];
+        const matches = $(html).contents().find('.table-main tbody .table-main__tt').closest('tr');
+
+        for (let i = 0; i < matches.length; i++) { 
+            let data = {
+                league: $(matches[i]).closest('tbody').find('.js-tournament th').text(),
+                homeTeam: $(matches[i]).find('.table-main__tt a').text().split(' - ')[0].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
+                awayTeam: $(matches[i]).find('.table-main__tt a').text().split(' - ')[1].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
+                homeTeamGoal: parseFloat($(matches[i]).find('.table-main__result').text().split(':')[0]),
+                awayTeamGoal: parseFloat($(matches[i]).find('.table-main__result').text().split(':')[1]),
+                id: $(matches[i]).find('.table-main__tt a').text().split(' - ')[0].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "") + $(matches[i]).find('.table-main__tt a').text().split(' - ')[1].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
+            }
+
+            matchData.push(data)
+        }
+        
+        localStorageData.forEach(match => {
+            for (let i = 0; i < matchData.length; i++) { 
+
+                if (match.id === matchData[i].id) {
+                    let vyhral = '';
+
+                    if (matchData[i].homeTeamGoal > matchData[i].awayTeamGoal) {
+                        vyhral = 'domaci';
+                    } else if (matchData[i].homeTeamGoal === matchData[i].awayTeamGoal) {
+                        vyhral = 'remiza';
+                    } else if (matchData[i].homeTeamGoal < matchData[i].awayTeamGoal) {
+                        vyhral = 'host';
+                    }
+
+                    Object.assign(match, {reslut: {
+                        skóre: matchData[i].homeTeamGoal + ' - ' + matchData[i].awayTeamGoal,
+                        homeTeamGoal: matchData[i].homeTeamGoal, 
+                        awayTeamGoal: matchData[i].awayTeamGoal,
+                        vyhral: vyhral,
+                    }})
+                }
+            }
+        })
+
+        setDataToLocalStorage(localStorageName, JSON.stringify(localStorageData))
+    })
+}
+
+function getToDay() {
+    const date = new Date;
+    return ('0' + date.getDate()).slice(-2) + '.' + ('0' + (date.getMonth()+1)).slice(-2) + '.' + date.getFullYear();
+}
+
 function sortNumber(a, b) {
     return a - b;
+}
+
+function setDataToLocalStorage(name, data) {
+    localStorage.setItem(name, data);
+}
+
+function getDataFromLocalStorage(name, data) {
+    let result = localStorage.getItem(name, data);
+    if(result !== ''){
+        return JSON.parse(result);
+    }
 }
 
 function getData(method, url, type = 'document') {
