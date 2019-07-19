@@ -319,7 +319,7 @@ $('html').on('click', '.load-button_x', function() {
 
     console.log('Zhoda    Čas    Kurz      Zápas | Liga')
     newArray.forEach(array => {
-        console.log('  ' + array.found + '     ' + array.matchTime + '   ' + array.odds_1 + '      ' + array.homeTeam + ' - ' + array.awayTeam + ' | ' + array.league);
+        console.log('  ' + array.found + '     ' + array.matchTime + '   ' + array.odds_x + '      ' + array.homeTeam + ' - ' + array.awayTeam + ' | ' + array.league);
     })
 });
 
@@ -343,7 +343,7 @@ $('html').on('click', '.load-button_2', function() {
 
     console.log('Zhoda    Čas    Kurz      Zápas | Liga')
     newArray.forEach(array => {
-        console.log('  ' + array.found + '     ' + array.matchTime + '   ' + array.odds_1 + '      ' + array.homeTeam + ' - ' + array.awayTeam + ' | ' + array.league);
+        console.log('  ' + array.found + '     ' + array.matchTime + '   ' + array.odds_2 + '      ' + array.homeTeam + ' - ' + array.awayTeam + ' | ' + array.league);
     })
 });
 
