@@ -25,8 +25,10 @@
                 <div class="column">
                     <div class="ui divider hidden"></div>
                     <div class="ui divider hidden"></div>
-                    <a href="Javascript:;" class="load-button button ui">Read Data</a>
-                    <a href="Javascript:;" class="save-button button ui green">Save Data</a>
+                    <a href="Javascript:;" class="load-button_1 button ui">1</a>
+                    <a href="Javascript:;" class="load-button_x button ui">X</a>
+                    <a href="Javascript:;" class="load-button_2 button ui">2</a>
+                    <a href="Javascript:;" class="save-button button ui green" data-save-type='1'>Save Data</a>
                 </div>
             </div>
 
@@ -35,6 +37,11 @@
                     <div class="ui form">
                         <div class="inline field">
                             <input type="text" id="datepicker" placeholder="date" />
+                            <select class="ui selection dropdown">
+                                <option value='1'>1</option>
+                                <option value='x'>X</option>
+                                <option value='2'>2</option>
+                            </select>
                             <a href="Javascript:;" class="set-button button ui green">Set Result</a>
                         </div>
                     </div>
