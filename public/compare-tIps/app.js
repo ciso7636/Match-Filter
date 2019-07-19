@@ -159,10 +159,13 @@ $(function(){
         let matchData;
         const matches = $(html).contents().find('#yesdraw tbody tr');
         for (let i = 0; i < matches.length; i++) { 
+            let match = $(matches[i]).find('td:nth-child(1)').next().text().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            let hasCorrectName = match.split(' vs ').length === 2 ? true : false;
+
             matchData = {
                 website: 'supatips',
-                homeTeam: $(matches[i]).find('td:nth-child(1)').next().text().split(' vs ')[0].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
-                awayTeam: $(matches[i]).find('td:nth-child(1)').next().text().split(' vs ')[1].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
+                homeTeam: hasCorrectName === true ? match.split(' vs ')[0].trim() : match.split(' ')[0].trim(),
+                awayTeam: hasCorrectName === true ? match.split(' vs ')[1].trim() : match.split(' ')[match.split(' ').length - 1].trim(),
                 prediction_1: $(matches[i]).find('td:nth-child(3)').text() === '1' ? true : false,
                 prediction_1x: $(matches[i]).find('td:nth-child(3)').text() === '1X' ? true : false,
                 prediction_x: $(matches[i]).find('td:nth-child(3)').text() === 'X' ? true : false,
@@ -189,8 +192,8 @@ $(function(){
 
                     matchData = {
                         website: 'footballtips',
-                        homeTeam: $(matches[i]).find('.tips-card__name-one').text().split(' vs ')[0].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
-                        awayTeam: $(matches[i]).find('.tips-card__name-one').text().split(' vs ')[1].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
+                        homeTeam: $(matches[i]).find('.tips-card__name-one').text().split(' v ')[0].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
+                        awayTeam: $(matches[i]).find('.tips-card__name-one').text().split(' v ')[1].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
                         prediction_1: $(matches[i]).find('.tips-card__name-two').text() === 'Home win' ? true : false,
                         prediction_x: $(matches[i]).find('.tips-card__name-two').text() === 'Draw' ? true : false,
                         prediction_2: $(matches[i]).find('.tips-card__name-two').text() === 'Away win' ? true : false,
@@ -314,56 +317,6 @@ $('html').on('click', '.load-button', function() {
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, sportytrader_MatchData);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, betensured_MatchData);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, olbg_MatchData);
-
-    // console.log('- - - - - - - - - - - - -scibet_MatchData- - - - - - - - - - - - - - - -')
-    // scibet_MatchData.forEach(match => {
-    //     match.prediction_1 >= 60 && console.log(match.homeTeam + '   -   ' + match.awayTeam);
-    // })
-
-    // console.log('- - - - - - - - - - - - -zulubet_MatchData- - - - - - - - - - - - - - - -')
-    // zulubet_MatchData.forEach(match => {
-    //     match.prediction_1 >= 60 && console.log(match.homeTeam + '   -   ' + match.awayTeam);
-    // })
-
-    // console.log('- - - - - - - - - - - - -windrawwin_MatchData- - - - - - - - - - - - - - - -')
-    // windrawwin_MatchData.forEach(match => {
-    //     match.prediction_1 === true && console.log(match.homeTeam + '   -   ' + match.awayTeam);
-    // })
-
-    // console.log('- - - - - - - - - - - - -vitibet_MatchData- - - - - - - - - - - - - - - -')
-    // vitibet_MatchData.forEach(match => {
-    //     match.prediction_1 >= 60 && console.log(match.homeTeam + '   -   ' + match.awayTeam);
-    // })
-
-    // console.log('- - - - - - - - - - - - -mybet_MatchData- - - - - - - - - - - - - - - -')
-    // mybet_MatchData.forEach(match => {
-    //     match.prediction_1 >= 60 && console.log(match.homeTeam + '   -   ' + match.awayTeam);
-    // })
-
-    // console.log('- - - - - - - - - - - - -supatips_MatchData- - - - - - - - - - - - - - - -')
-    // supatips_MatchData.forEach(match => {
-    //     match.prediction_1 === true && console.log(match.homeTeam + '   -   ' + match.awayTeam);
-    // })
-
-    // console.log('- - - - - - - - - - - - -footballtips_MatchData- - - - - - - - - - - - - - - -')
-    // footballtips_MatchData.forEach(match => {
-    //     match.prediction_1 === true && console.log(match.homeTeam + '   -   ' + match.awayTeam);
-    // })
-
-    // console.log('- - - - - - - - - - - - -sportytrader_MatchData- - - - - - - - - - - - - - - -')
-    // sportytrader_MatchData.forEach(match => {
-    //     match.prediction_1 === true && console.log(match.homeTeam + '   -   ' + match.awayTeam);
-    // })
-
-    // console.log('- - - - - - - - - - - - -betensured_MatchData- - - - - - - - - - - - - - - -')
-    // betensured_MatchData.forEach(match => {
-    //     match.prediction_1 === true && console.log(match.homeTeam + '   -   ' + match.awayTeam);
-    // })
-
-    // console.log('- - - - - - - - - - - - -olbg_MatchData- - - - - - - - - - - - - - - -')
-    // olbg_MatchData.forEach(match => {
-    //     match.prediction_1 === true && console.log(match.homeTeam + '   -   ' + match.awayTeam);
-    // })
 
     const newArray = allMatchesTodayFiltered.sort((a, b) => (a.found < b.found) ? 1 : -1);
 
