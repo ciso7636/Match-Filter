@@ -10,6 +10,18 @@ let footballtips_MatchData = [];
 let sportytrader_MatchData = [];
 let betensured_MatchData = [];
 let olbg_MatchData = [];
+let siteStats = [
+    {site: 'olbg', url: 'https://www.olbg.com/betting-tips/Football/1', matches: 0, correctPrediction: 0},
+    {site: 'betensured', url: 'https://www.betensured.com/home', matches: 0, correctPrediction: 0},
+    {site: 'sportytrader', url: 'https://www.sportytrader.com/en/betting-tips/football/', matches: 0, correctPrediction: 0},
+    {site: 'footballtips', url: 'https://www.footballtips.com/accumulator-tips/', matches: 0, correctPrediction: 0},
+    {site: 'supatips', url: 'https://www.supatips.com/', matches: 0, correctPrediction: 0},
+    {site: 'mybet.tips', url: 'https://mybet.tips/soccer/predictions/', matches: 0, correctPrediction: 0},
+    {site: 'vitibet', url: 'http://www.vitibet.com/freevitibettips.php', matches: 0, correctPrediction: 0},
+    {site: 'windrawwin', url: 'https://www.windrawwin.com/predictions/today/simple/all-games/all-stakes/all-venues/', matches: 0, correctPrediction: 0},
+    {site: 'zulubet', url: 'http://www.zulubet.com/', matches: 0, correctPrediction: 0},
+    {site: 'scibet', url: 'https://www.scibet.com/', matches: 0, correctPrediction: 0},
+]
 
 $(function(){
     $( "#datepicker" ).datepicker({ dateFormat: 'dd.mm.yy' });
@@ -172,10 +184,12 @@ $(function(){
                 
                 for (let i = 0; i < matches.length; i++) { 
 
+                    const match = $(matches[i]).find('.tips-card__name-one').text().split(' v ').length === 2 ? $(matches[i]).find('.tips-card__name-one').text().split(' v ') : $(matches[i]).find('.tips-card__name-one').text().split(' vs ');
+
                     matchData = {
                         website: 'footballtips',
-                        homeTeam: $(matches[i]).find('.tips-card__name-one').text().split(' v ')[0].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
-                        awayTeam: $(matches[i]).find('.tips-card__name-one').text().split(' v ')[1].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
+                        homeTeam: match[0].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
+                        awayTeam: match[1].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
                         prediction_1: $(matches[i]).find('.tips-card__name-two').text() === 'Home win' ? true : false,
                         prediction_x: $(matches[i]).find('.tips-card__name-two').text() === 'Draw' ? true : false,
                         prediction_2: $(matches[i]).find('.tips-card__name-two').text() === 'Away win' ? true : false,
@@ -258,6 +272,109 @@ $('html').on('click', '.save-button', function() {
     setDataToLocalStorage(getToDay() + '_' + $(this).data('save-type') , JSON.stringify(allMatchesTodayFiltered));
 });
 
+$('html').on('click', '.stats-button_1', function() {
+    const month = '07';
+    resetSiteStats();
+
+    for (let i = 0; i < 30; i++) { 
+        const name = i + '.' + month + '.' + '2019'
+        const localStorageData = getDataFromLocalStorage(name + '_' + '1');
+
+        if (localStorageData !== null) {
+            localStorageData.forEach(data => {
+                const result = data.result || data.reslut;
+
+                if (result !== undefined) {
+                    data.website.forEach(website => {
+
+                        for (let i = 0; i < siteStats.length; i++) { 
+                            if (siteStats[i].site === website) {
+                                siteStats[i].matches++
+
+                                if (result.vyhral === 'domaci') {
+                                    siteStats[i].correctPrediction++
+                                }
+                            }
+                        }
+                    })
+                }
+            })
+        }
+    }
+    
+    writeSiteStats(siteStats);
+    setDataToLocalStorage('SiteStats_1', JSON.stringify(siteStats))
+});
+
+$('html').on('click', '.stats-button_x', function() {
+    const month = '07';
+    resetSiteStats();
+
+    for (let i = 0; i < 30; i++) { 
+        const name = i + '.' + month + '.' + '2019'
+        const localStorageData = getDataFromLocalStorage(name + '_' + 'x');
+        if (localStorageData !== null) {
+            
+            localStorageData.forEach(data => {
+                const result = data.result || data.reslut;
+
+                if (result !== undefined) {
+                    data.website.forEach(website => {
+
+                        for (let i = 0; i < siteStats.length; i++) { 
+                            if (siteStats[i].site === website) {
+                                siteStats[i].matches++
+                                if (result.vyhral === 'remiza') {
+                                    siteStats[i].correctPrediction++
+                                }
+                            }
+                        }
+                    })
+                }
+            })
+        }
+    }
+
+    writeSiteStats(siteStats);
+    setDataToLocalStorage('SiteStats_x', JSON.stringify(siteStats))
+});
+
+$('html').on('click', '.stats-button_2', function() {
+    const month = '07';
+    resetSiteStats();
+
+    for (let i = 0; i < 30; i++) { 
+        const name = i + '.' + month + '.' + '2019'
+        const localStorageData = getDataFromLocalStorage(name + '_' + '2');
+        if (localStorageData !== null) {
+            localStorageData.forEach(data => {
+                const result = data.result || data.reslut;
+
+                if (result !== undefined) {
+                    data.website.forEach(website => {
+
+                        for (let i = 0; i < siteStats.length; i++) { 
+                            if (siteStats[i].site === website) {
+                                siteStats[i].matches++
+                                if (result.vyhral === 'host') {
+                                    siteStats[i].correctPrediction++
+                                }
+                            }
+                        }
+                    })
+                }
+            })
+        }
+    }
+
+    writeSiteStats(siteStats);
+    setDataToLocalStorage('SiteStats_2', JSON.stringify(siteStats))
+});
+
+$('html').on('click', '.stats-button_reset', function() {
+    resetWrittenSiteStats();
+});
+
 $('html').on('click', '.set-button', function() {
     const selectedDay = $('#datepicker').val();
     const selectedType = $('.dropdown').val();
@@ -295,7 +412,7 @@ $('html').on('click', '.load-button_1', function() {
 
     console.log('Zhoda    Čas    Kurz      Zápas | Liga')
     newArray.forEach(array => {
-        console.log('  ' + array.found + '     ' + array.matchTime + '   ' + array.odds_1 + '      ' + array.homeTeam + ' - ' + array.awayTeam + ' | ' + array.league);
+        console.log('  ' + array.found + '     ' + array.matchTime + '   ' + array.odds_1 + '      ' + array.homeTeam + ' - ' + array.awayTeam + ' | ' + array.league + '                                 ' + array.website);
     })
 });
 
@@ -319,7 +436,7 @@ $('html').on('click', '.load-button_x', function() {
 
     console.log('Zhoda    Čas    Kurz      Zápas | Liga')
     newArray.forEach(array => {
-        console.log('  ' + array.found + '     ' + array.matchTime + '   ' + array.odds_x + '      ' + array.homeTeam + ' - ' + array.awayTeam + ' | ' + array.league);
+        console.log('  ' + array.found + '     ' + array.matchTime + '   ' + array.odds_x + '      ' + array.homeTeam + ' - ' + array.awayTeam + ' | ' + array.league + '                                 ' + array.website);
     })
 });
 
@@ -343,7 +460,7 @@ $('html').on('click', '.load-button_2', function() {
 
     console.log('Zhoda    Čas    Kurz      Zápas | Liga')
     newArray.forEach(array => {
-        console.log('  ' + array.found + '     ' + array.matchTime + '   ' + array.odds_2 + '      ' + array.homeTeam + ' - ' + array.awayTeam + ' | ' + array.league);
+        console.log('  ' + array.found + '     ' + array.matchTime + '   ' + array.odds_2 + '      ' + array.homeTeam + ' - ' + array.awayTeam + ' | ' + array.league + '                                 ' + array.website);
     })
 });
 
@@ -431,7 +548,7 @@ function mergeResultMatchesFromBetexplorer(localStorageName, urlDate, localStora
                         vyhral = 'host';
                     }
 
-                    Object.assign(match, {reslut: {
+                    Object.assign(match, {result: {
                         skóre: matchData[i].homeTeamGoal + ' - ' + matchData[i].awayTeamGoal,
                         homeTeamGoal: matchData[i].homeTeamGoal, 
                         awayTeamGoal: matchData[i].awayTeamGoal,
@@ -450,8 +567,42 @@ function getToDay() {
     return ('0' + date.getDate()).slice(-2) + '.' + ('0' + (date.getMonth()+1)).slice(-2) + '.' + date.getFullYear();
 }
 
-function sortNumber(a, b) {
-    return a - b;
+function resetSiteStats() {
+    siteStats = [
+        {site: 'olbg', url: 'https://www.olbg.com/betting-tips/Football/1', matches: 0, correctPrediction: 0},
+        {site: 'betensured', url: 'https://www.betensured.com/home', matches: 0, correctPrediction: 0},
+        {site: 'sportytrader', url: 'https://www.sportytrader.com/en/betting-tips/football/', matches: 0, correctPrediction: 0},
+        {site: 'footballtips', url: 'https://www.footballtips.com/accumulator-tips/', matches: 0, correctPrediction: 0},
+        {site: 'supatips', url: 'https://www.supatips.com/', matches: 0, correctPrediction: 0},
+        {site: 'mybet.tips', url: 'https://mybet.tips/soccer/predictions/', matches: 0, correctPrediction: 0},
+        {site: 'vitibet', url: 'http://www.vitibet.com/freevitibettips.php', matches: 0, correctPrediction: 0},
+        {site: 'windrawwin', url: 'https://www.windrawwin.com/predictions/today/simple/all-games/all-stakes/all-venues/', matches: 0, correctPrediction: 0},
+        {site: 'zulubet', url: 'http://www.zulubet.com/', matches: 0, correctPrediction: 0},
+        {site: 'scibet', url: 'https://www.scibet.com/', matches: 0, correctPrediction: 0},
+    ]
+}
+
+function resetWrittenSiteStats() {
+    resetSiteStats();
+    $('.stats').empty();
+    console.clear();
+}
+
+function writeSiteStats(stats) {
+    stats.sort((a, b) => (mathRound((a.correctPrediction / a.matches) * 100) < mathRound((b.correctPrediction / b.matches) * 100)) ? 1 : -1)
+
+    stats.forEach(data => {
+        $('.stats').append(`<a href=${data.url} target="_blank" class="label ui small">${data.site} - ${mathRound((data.correctPrediction / data.matches) * 100)}</a>`)
+        console.log(`${mathRound((data.correctPrediction / data.matches) * 100)}%  ${data.site} (${data.correctPrediction} z ${data.matches})`);
+    })
+}
+
+function mathRound(num) {
+    if (isNaN(num)) {
+        return 0;
+    } else {
+        return Math.round(parseFloat(num) * 100 / 100)
+    }
 }
 
 function setDataToLocalStorage(name, data) {
