@@ -10,7 +10,22 @@ let footballtips_MatchData = [];
 let sportytrader_MatchData = [];
 let betensured_MatchData = [];
 let olbg_MatchData = [];
+let freesupertips_MatchData = [];
+let forebet_MatchData = [];
+let predictz_MatchData = [];
+let statarea_MatchData = [];
+let bettingtips1x2_MatchData = [];
+let footballpredictionsNet_MatchData = [];
+let footballpredictionsCom_MatchData = [];
+
 let siteStats = [
+    {site: 'footballpredictionsCom', url: 'https://footballpredictions.com/footballpredictions/', matches: 0, correctPrediction: 0},
+    {site: 'footballpredictionsNet', url: 'https://footballpredictions.net/football-predictions-free-betting-tips', matches: 0, correctPrediction: 0},
+    {site: 'bettingtips1x2', url: 'https://bettingtips1x2.com/', matches: 0, correctPrediction: 0},
+    {site: 'statarea', url: 'https://www.statarea.com/predictions', matches: 0, correctPrediction: 0},
+    {site: 'predictz', url: 'https://www.predictz.com/predictions/', matches: 0, correctPrediction: 0},
+    {site: 'forebet', url: 'https://www.forebet.com/en/football-tips-and-predictions-for-today', matches: 0, correctPrediction: 0},
+    {site: 'freesupertips', url: 'https://www.freesupertips.com/accumulator-tips/', matches: 0, correctPrediction: 0},
     {site: 'olbg', url: 'https://www.olbg.com/betting-tips/Football/1', matches: 0, correctPrediction: 0},
     {site: 'betensured', url: 'https://www.betensured.com/home', matches: 0, correctPrediction: 0},
     {site: 'sportytrader', url: 'https://www.sportytrader.com/en/betting-tips/football/', matches: 0, correctPrediction: 0},
@@ -43,6 +58,171 @@ $(function(){
             }
 
             allMatchesToday.push(matchData)
+        }
+    })
+
+    getAllMatchData('https://www.freesupertips.com/accumulator-tips/').then(function (html) {
+
+        let matchData;
+        const matches = $(html).contents().find('.TipBetslip__legs .TipBetslip__leg .TipBetslip__row');
+
+        for (let i = 0; i < matches.length; i++) { 
+            const winTeam = $(matches[i]).find('.TipBetslip__market').text().split('to Win');
+
+            if (winTeam.length > 1) {
+                let loseTeam = $(matches[i]).find('.TipBetslip__outcome').text();
+                let homeTeam;
+                let awayTeam;
+                let prediction_1;
+                let prediction_2;
+
+                if (loseTeam.split(' at ').length > 1) {
+                    homeTeam = loseTeam.split(' at ')[1];
+                    awayTeam = winTeam[0];
+                    prediction_1 = false;
+                    prediction_2 = true;
+                } else {
+                    homeTeam = winTeam[0];
+                    awayTeam = loseTeam.split(' v ').length > 1 ? loseTeam.split(' v ')[1] : loseTeam.split(' vs ')[1];
+                    prediction_1 = true;
+                    prediction_2 = false;
+                }
+
+                matchData = {
+                    website: 'freesupertips',
+                    matchTime: $(matches[i]).find('.TipBetslip__meta').text().split('i')[0].trim(),
+                    homeTeam: homeTeam.trim().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
+                    awayTeam: awayTeam.trim().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
+                    prediction_1: prediction_1,
+                    prediction_x: false,
+                    prediction_2: prediction_2,
+                }
+                freesupertips_MatchData.push(matchData);
+            }
+        }
+    })
+
+    getAllMatchData('https://www.forebet.com/en/football-tips-and-predictions-for-today').then(function (html) {
+
+        let matchData;
+        const matches = $(html).contents().find('.schema tr .tnms').closest('tr');
+        for (let i = 0; i < matches.length; i++) { 
+            matchData = {
+                website: 'forebet',
+                matchTime: $(matches[i]).find('.tnms time').text(),
+                homeTeam: $(matches[i]).find('.tnms .homeTeam').text().trim().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
+                awayTeam: $(matches[i]).find('.tnms .awayTeam').text().trim().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
+                prediction_1: Math.round(parseFloat($(matches[i]).find('.predict').prev().prev().prev().text().trim()) * 100) / 100 >= 60 ? true : false,
+                prediction_x: Math.round(parseFloat($(matches[i]).find('.predict').prev().prev().text().trim()) * 100) / 100 >= 60 ? true : false,
+                prediction_2: Math.round(parseFloat($(matches[i]).find('.predict').prev().text().trim()) * 100) / 100 >= 60 ? true : false,
+            }
+            forebet_MatchData.push(matchData);
+        }
+    })
+
+    getAllMatchData('https://www.predictz.com/predictions/').then(function (html) {
+
+        let matchData;
+        const matches = $(html).contents().find('.pttr.ptcnt');
+        for (let i = 0; i < matches.length; i++) { 
+            matchData = {
+                website: 'predictz',
+                homeTeam: $(matches[i]).find('.pttd.ptgame').text().split(' v ')[0].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
+                awayTeam: $(matches[i]).find('.pttd.ptgame').text().split(' v ')[1].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
+                prediction_1: $(matches[i]).find('.ngreen.ptpredboxsml').length ? true : false,
+                prediction_x: $(matches[i]).find('.nyellow.ptpredboxsml').length ? true : false,
+                prediction_2: $(matches[i]).find('.nred.ptpredboxsml').length ? true : false,
+            }
+            predictz_MatchData.push(matchData);
+        }
+    })
+
+    getAllMatchData('https://bettingtips1x2.com/').then(function (html) {
+
+        let matchData;
+        const matches = $(html).contents().find('table.results').eq(1).find('tr');
+        for (let i = 0; i < matches.length; i++) { 
+
+            if ($(matches[i]).find('td').length > 0) {
+                const homeTeamGoal = parseFloat($(matches[i]).find('td').eq(7).text().split(':')[0]);
+                const awayTeamGoal = parseFloat($(matches[i]).find('td').eq(7).text().split(':')[1]);
+
+                matchData = {
+                    website: 'bettingtips1x2',
+                    matchTime: $(matches[i]).find('td').eq(2).text(),
+                    homeTeam: $(matches[i]).find('td').eq(3).text().split(' - ')[0].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
+                    awayTeam: $(matches[i]).find('td').eq(3).text().split(' - ')[1].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
+                    prediction_1: (homeTeamGoal > awayTeamGoal && homeTeamGoal - awayTeamGoal >= 3) ? true : false,
+                    prediction_x: (homeTeamGoal === awayTeamGoal && homeTeamGoal + awayTeamGoal === 0) ? true : false,
+                    prediction_2: (homeTeamGoal < awayTeamGoal && awayTeamGoal - homeTeamGoal >= 3) ? true : false,
+                }
+                bettingtips1x2_MatchData.push(matchData);
+            }
+        }
+    })
+
+    getAllMatchData('https://www.statarea.com/predictions').then(function (html) {
+
+        let matchData;
+        const matches = $(html).contents().find('.competition .body .match');
+        for (let i = 0; i < matches.length; i++) { 
+            matchData = {
+                website: 'statarea',
+                matchTime: $(matches[i]).find('.date').text(),
+                homeTeam: $(matches[i]).find('.hostteam .name').text().trim().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
+                awayTeam: $(matches[i]).find('.guestteam .name').text().trim().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
+                prediction_1: Math.round(parseFloat($(matches[i]).find('.inforow .coefrow > .coefbox').eq(0).text()) * 100) / 100 >= 60 ? true : false,
+                prediction_x: Math.round(parseFloat($(matches[i]).find('.inforow .coefrow > .coefbox').eq(1).text()) * 100) / 100 >= 60 ? true : false,
+                prediction_2: Math.round(parseFloat($(matches[i]).find('.inforow .coefrow > .coefbox').eq(2).text()) * 100) / 100 >= 60 ? true : false,
+            }
+            statarea_MatchData.push(matchData);
+        }
+    })
+
+    getAllMatchData('https://footballpredictions.net/football-predictions-free-betting-tips').then(function (html) {
+
+        let matchData;
+        const matches = $(html).contents().find('.competition-match .blue-card-outer-outer');
+        for (let i = 0; i < matches.length; i++) { 
+            const homeTeam =  $(matches[i]).find('.home-team .team-label').text().trim();
+            const awayTeam =  $(matches[i]).find('.away-team .team-label').text().trim();
+            const prediction = $(matches[i]).find('.prediction')[0].innerText.split('Prediction:')[1];
+
+            matchData = {
+                website: 'footballpredictionsNet',
+                homeTeam: homeTeam.normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
+                awayTeam: awayTeam.normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
+                prediction_1: prediction.split('to win')[0].trim() === homeTeam ? true : false,
+                prediction_x: prediction.trim() === 'Draw' ? true : false,
+                prediction_2: prediction.split('to win')[0].trim() === awayTeam ? true : false,
+            }
+            footballpredictionsNet_MatchData.push(matchData);
+        }
+    })
+
+    getAllMatchData('https://footballpredictions.com/footballpredictions/').then(function (html) {
+
+        let matchData;
+        const matches = $(html).contents().find('.acc-content.active .base-box');
+
+        for (let i = 0; i < matches.length; i++) { 
+            const date = $(matches[i]).find('.prediction .bp-details > p').eq(2).find('strong').eq(0).text().split('/');
+
+            if (date[0] + '.' + date[1] + '.' + date[2] === getToDay()) {
+                const homeTeamGoal = parseFloat($(matches[i]).find('.predictionbox strong').text().split('-')[0].trim());
+                const awayTeamGoal = parseFloat($(matches[i]).find('.predictionbox strong').text().split('-')[1].trim());
+
+                matchData = {
+                    website: 'footballpredictionsCom',
+                    homeTeam: $(matches[i]).find('.predtitle h2').text().split(' vs ')[0].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
+                    awayTeam: $(matches[i]).find('.predtitle h2').text().split(' vs ')[1].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
+                    prediction_1: homeTeamGoal > awayTeamGoal ? true : false,
+                    prediction_x: homeTeamGoal === awayTeamGoal ? true : false,
+                    prediction_2: homeTeamGoal < awayTeamGoal ? true : false,
+                }
+                footballpredictionsCom_MatchData.push(matchData);
+            }
+
         }
     })
 
@@ -261,7 +441,6 @@ $(function(){
             }
         }
     })
-
 })
 
 /* 
@@ -273,32 +452,36 @@ $('html').on('click', '.save-button', function() {
 });
 
 $('html').on('click', '.stats-button_1', function() {
-    const month = '07';
     resetSiteStats();
 
-    for (let i = 0; i < 30; i++) { 
-        const name = i + '.' + month + '.' + '2019'
-        const localStorageData = getDataFromLocalStorage(name + '_' + '1');
+    for (let y = 1; y <= 12; y++) {
+        const month = y >= 10 ? y : '0' + y;
 
-        if (localStorageData !== null) {
-            localStorageData.forEach(data => {
-                const result = data.result || data.reslut;
-
-                if (result !== undefined) {
-                    data.website.forEach(website => {
-
-                        for (let i = 0; i < siteStats.length; i++) { 
-                            if (siteStats[i].site === website) {
-                                siteStats[i].matches++
-
-                                if (result.vyhral === 'domaci') {
-                                    siteStats[i].correctPrediction++
+        for (let i = 1; i <= 31; i++) { 
+            const day = i >= 10 ? i : '0' + i;
+            const name = day + '.' + month + '.' + '2019'
+            const localStorageData = getDataFromLocalStorage(name + '_' + '1');
+    
+            if (localStorageData !== null) {
+                localStorageData.forEach(data => {
+                    const result = data.result || data.reslut;
+    
+                    if (result !== undefined) {
+                        data.website.forEach(website => {
+    
+                            for (let i = 0; i < siteStats.length; i++) { 
+                                if (siteStats[i].site === website) {
+                                    siteStats[i].matches++
+    
+                                    if (result.vyhral === 'domaci') {
+                                        siteStats[i].correctPrediction++
+                                    }
                                 }
                             }
-                        }
-                    })
-                }
-            })
+                        })
+                    }
+                })
+            }
         }
     }
     
@@ -307,63 +490,72 @@ $('html').on('click', '.stats-button_1', function() {
 });
 
 $('html').on('click', '.stats-button_x', function() {
-    const month = '07';
     resetSiteStats();
 
-    for (let i = 0; i < 30; i++) { 
-        const name = i + '.' + month + '.' + '2019'
-        const localStorageData = getDataFromLocalStorage(name + '_' + 'x');
-        if (localStorageData !== null) {
-            
-            localStorageData.forEach(data => {
-                const result = data.result || data.reslut;
+    for (let y = 1; y <= 12; y++) {
+        const month = y >= 10 ? y : '0' + y;
 
-                if (result !== undefined) {
-                    data.website.forEach(website => {
+        for (let i = 1; i <= 31; i++) { 
+            const day = i >= 10 ? i : '0' + i;
+            const name = day + '.' + month + '.' + '2019'
+            const localStorageData = getDataFromLocalStorage(name + '_' + 'x');
 
-                        for (let i = 0; i < siteStats.length; i++) { 
-                            if (siteStats[i].site === website) {
-                                siteStats[i].matches++
-                                if (result.vyhral === 'remiza') {
-                                    siteStats[i].correctPrediction++
+            if (localStorageData !== null) {
+                
+                localStorageData.forEach(data => {
+                    const result = data.result || data.reslut;
+
+                    if (result !== undefined) {
+                        data.website.forEach(website => {
+
+                            for (let i = 0; i < siteStats.length; i++) { 
+                                if (siteStats[i].site === website) {
+                                    siteStats[i].matches++
+                                    if (result.vyhral === 'remiza') {
+                                        siteStats[i].correctPrediction++
+                                    }
                                 }
                             }
-                        }
-                    })
-                }
-            })
+                        })
+                    }
+                })
+            }
         }
     }
-
     writeSiteStats(siteStats);
     setDataToLocalStorage('SiteStats_x', JSON.stringify(siteStats))
 });
 
 $('html').on('click', '.stats-button_2', function() {
-    const month = '07';
     resetSiteStats();
 
-    for (let i = 0; i < 30; i++) { 
-        const name = i + '.' + month + '.' + '2019'
-        const localStorageData = getDataFromLocalStorage(name + '_' + '2');
-        if (localStorageData !== null) {
-            localStorageData.forEach(data => {
-                const result = data.result || data.reslut;
+    for (let y = 1; y <= 12; y++) {
+        const month = y >= 10 ? y : '0' + y;
 
-                if (result !== undefined) {
-                    data.website.forEach(website => {
+        for (let i = 1; i <= 31; i++) { 
+            const day = i >= 10 ? i : '0' + i;
+            const name = day + '.' + month + '.' + '2019'
+            const localStorageData = getDataFromLocalStorage(name + '_' + '2');
 
-                        for (let i = 0; i < siteStats.length; i++) { 
-                            if (siteStats[i].site === website) {
-                                siteStats[i].matches++
-                                if (result.vyhral === 'host') {
-                                    siteStats[i].correctPrediction++
+            if (localStorageData !== null) {
+                localStorageData.forEach(data => {
+                    const result = data.result || data.reslut;
+
+                    if (result !== undefined) {
+                        data.website.forEach(website => {
+
+                            for (let i = 0; i < siteStats.length; i++) { 
+                                if (siteStats[i].site === website) {
+                                    siteStats[i].matches++
+                                    if (result.vyhral === 'host') {
+                                        siteStats[i].correctPrediction++
+                                    }
                                 }
                             }
-                        }
-                    })
-                }
-            })
+                        })
+                    }
+                })
+            }
         }
     }
 
@@ -395,7 +587,14 @@ $('html').on('click', '.set-button', function() {
 $('html').on('click', '.load-button_1', function() {
     allMatchesTodayFiltered = [];
 
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, predictz_MatchData, 'prediction_1', true);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, scibet_MatchData, 'prediction_1', true);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, statarea_MatchData, 'prediction_1', true);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, forebet_MatchData, 'prediction_1', true);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, freesupertips_MatchData, 'prediction_1', true);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, bettingtips1x2_MatchData, 'prediction_1', true);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, footballpredictionsCom_MatchData, 'prediction_1', true);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, footballpredictionsNet_MatchData, 'prediction_1', true);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, zulubet_MatchData, 'prediction_1', true);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, windrawwin_MatchData, 'prediction_1', true);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, vitibet_MatchData, 'prediction_1', true);
@@ -419,7 +618,13 @@ $('html').on('click', '.load-button_1', function() {
 $('html').on('click', '.load-button_x', function() {
     allMatchesTodayFiltered = [];
 
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, predictz_MatchData, 'prediction_x', true);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, scibet_MatchData, 'prediction_x', true);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, statarea_MatchData, 'prediction_x', true);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, forebet_MatchData, 'prediction_x', true);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, bettingtips1x2_MatchData, 'prediction_x', true);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, footballpredictionsCom_MatchData, 'prediction_x', true);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, footballpredictionsNet_MatchData, 'prediction_x', true);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, zulubet_MatchData, 'prediction_x', true);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, windrawwin_MatchData, 'prediction_x', true);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, vitibet_MatchData, 'prediction_x', true);
@@ -443,7 +648,14 @@ $('html').on('click', '.load-button_x', function() {
 $('html').on('click', '.load-button_2', function() {
     allMatchesTodayFiltered = [];
 
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, predictz_MatchData, 'prediction_2', true);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, statarea_MatchData, 'prediction_2', true);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, scibet_MatchData, 'prediction_2', true);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, forebet_MatchData, 'prediction_2', true);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, freesupertips_MatchData, 'prediction_2', true);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, bettingtips1x2_MatchData, 'prediction_2', true);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, footballpredictionsCom_MatchData, 'prediction_2', true);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, footballpredictionsNet_MatchData, 'prediction_2', true);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, zulubet_MatchData, 'prediction_2', true);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, windrawwin_MatchData, 'prediction_2', true);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, vitibet_MatchData, 'prediction_2', true);
@@ -569,6 +781,13 @@ function getToDay() {
 
 function resetSiteStats() {
     siteStats = [
+        {site: 'footballpredictionsCom', url: 'https://footballpredictions.com/footballpredictions/', matches: 0, correctPrediction: 0},
+        {site: 'footballpredictions', url: 'https://footballpredictions.net/football-predictions-free-betting-tips', matches: 0, correctPrediction: 0},
+        {site: 'bettingtips1x2', url: 'https://bettingtips1x2.com/', matches: 0, correctPrediction: 0},
+        {site: 'statarea', url: 'https://www.statarea.com/predictions', matches: 0, correctPrediction: 0},
+        {site: 'predictz', url: 'https://www.predictz.com/predictions/', matches: 0, correctPrediction: 0},
+        {site: 'forebet', url: 'https://www.forebet.com/en/football-tips-and-predictions-for-today', matches: 0, correctPrediction: 0},
+        {site: 'freesupertips', url: 'https://www.freesupertips.com/accumulator-tips/', matches: 0, correctPrediction: 0},
         {site: 'olbg', url: 'https://www.olbg.com/betting-tips/Football/1', matches: 0, correctPrediction: 0},
         {site: 'betensured', url: 'https://www.betensured.com/home', matches: 0, correctPrediction: 0},
         {site: 'sportytrader', url: 'https://www.sportytrader.com/en/betting-tips/football/', matches: 0, correctPrediction: 0},

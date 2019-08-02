@@ -966,7 +966,7 @@ function handleGetWeekStats(input, select, button){
     Data Functions
 */ 
 function setResultsMatchesToLocalStorage(allLinks, localStorageKey){
-    const matchesStats = getDataFromLocalStorage(localStorageKey); 
+    const matchesStats = getDataFromLocalStorage(localStorageKey);
 
     if (matchesStats === null) {
         alert('Key not found');
@@ -1596,22 +1596,22 @@ const filteringNotPossibleBettingLeague = (league) => {
     let result;
     const leagues = [
         'england9','england10','england11','england12','england13',
-        //'france',
-        //'italy',
+        'france9','france10','france11','france12','france13','france14','france15',
+        'italy10','italy11','italy12','italy13','italy14','italy15','italy16',
         'germany11','germany12','germany13','germany14','germany15','germany16','germany17','germany18','germany19','germany20','germany21','germany22',
         'argentina4','argentina5','argentina3',
-        'austria4',
+        'austria5','austria6','austria7','austria8','austria9','austria10',
         'turkey4','turkey5','turkey6','turkey7',
         'brazil6','brazil7','brazil8',
-        // 'denmark',
-        // 'finland',
-        // 'greece',
-        'netherlands4','netherlands5',
-        // 'norway',
-        'poland4','poland5',
-        // 'sweden',
-        // 'switzerland',
-        'spain8','spain9','spain10',
+        'denmark6','denmark7','denmark8','denmark9','denmark10',
+        'greece6','greece7','greece8','greece9','greece10',
+        'netherlands4','netherlands5','netherlands6',
+        'norway6','norway7','norway8','norway9','norway10','norway11',
+        'poland4','poland5','poland7','poland8',
+        'sweden7','sweden8','sweden9','sweden10','sweden11','sweden12','sweden13',
+        'finland7','finland8','finland9','finland10','finland11','finland12','finland13',
+        'switzerland5', 'switzerland6','switzerland7','switzerlan8',
+        'spain8','spain9','spain10','spain11','spain12','spain13','spain14',
     ];
 
     for (var i = 0; i < leagues.length; i++) {

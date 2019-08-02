@@ -1,0 +1,4375 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>   
+    <link rel="stylesheet" type="text/css" href="semantic/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="semantic/semantic-style.css">
+    <script
+        src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+        crossorigin="anonymous">
+    </script>
+    <script src="semantic/semantic.min.js"></script>
+    <script src="app_S.js" type="text/javascript"></script>
+
+</head>
+<body>
+<!-- static HTML -->
+    <div class="ui inverted vertical masthead center aligned segment">
+        <div class="ui text container">
+            <h1 class="ui inverted header">
+                Cick to load data
+            </h1>
+            <div class="ui huge primary button loading load-button"></div>
+        </div>
+        
+        <!-- <div class="ui form container">
+            <div class="two wide field">
+                <input type='text' placeholder="name"/>
+            </div>
+            <div class=" wide field">
+                <textarea placeholder="JSON" rows="2"></textarea>
+            </div>
+            <div class="ui submit button setToLocalStorage">Set to localStorage</div>
+        </div> -->
+       
+        <div id="myProgress">
+            <div id="myBar">0</div>
+        </div>
+        <div class="row row-buttons">
+            <div class="column">
+                <a class="ui default button testingPrediction" tabindex="0">Test<br>86%</a>
+                <a class="ui positive button overGoalPrediction" tabindex="0">Over1.5<br>89%</a>
+                <a class="ui positive button over35GoalPrediction" tabindex="0">Over3.5/4.5/5.5<br>50%/34%/23%</a>
+                <a class="ui positive button underGoalPrediction" tabindex="0">Under3.5<br>84%</a>
+                <a class="ui positive button under15GoalPrediction" tabindex="0">Under1.5<br>46%</a>
+                <a class="ui positive button under05GoalPrediction" tabindex="0">Under0.5/Draw<br>16%/36%</a>
+                <a class="ui positive button homeTeamWinPrediction_1" tabindex="0">1<br>75%</a>
+                <a class="ui positive button homeTeamWinPrediction_1_outsider" tabindex="0">1_outsider<br>41%</a>
+                <a class="ui positive button homeTeamWinPrediction" tabindex="0">1x<br>88%</a>
+                <a class="ui positive button awayTeamWinPrediction_2" tabindex="0">2<br>73%</a>
+                <a class="ui positive button awayTeamWinPrediction" tabindex="0">x2<br>82%</a>
+            </div>
+        </div>
+    </div>
+<!-- static HTML -->
+
+<table id="btable" style="display: none">
+    <tbody><tr height="10"><td colspan="18" align="center" valign="middle"><font size="1">&nbsp;</font></td></tr>
+        <tr class="trow2" height="40"><td colspan="7">
+        &nbsp;<img src="//www.soccerstatistics.com/img/flags/bo.png" width="16" height="11" alt="BOLIVIA2">
+        &nbsp;<font size="2">Bolivia - <font color="gray">Primera Div. - Clausura</font></font>&nbsp;&nbsp;&nbsp;<a class="button" style="background-color:#eeeeee;font-color=white;" href="latest.asp?league=bolivia2"><font color="#666666">Stats</font></a>
+        </td>
+        <td colspan="11" align="right">
+        
+        &nbsp;&nbsp;<font color="gray" size="1">22 matches played out of 182</font>&nbsp;&nbsp;
+        
+        </td>
+        </tr>
+        
+        <tr class="trow2" height="24">
+        <td width="110"></td>
+        <td width="55"></td>
+        <td width="50"></td>
+        <td class="sgray">P</td>
+        <td class="sgray">W%</td>
+        
+        <td class="sgray">FTS</td>
+        <td class="sgray">CS</td>
+        <td class="sgray">BTS</td>
+        
+        <td class="sgray">TG</td>
+        
+        <td class="sgray">GF</td>
+        <td class="sgray">GA</td>
+        <td class="sgray">1.5+</td>
+        
+        <td class="sgray">2.5+</td>
+        
+        <td class="sgray">3.5+</td>
+        
+        <td colspan="2"><font color="gray">Points Per Game</font></td>
+        
+        <td width="25"></td>
+        <td width="25"></td>
+        </tr>
+        
+        <tr class="trow8" height="18">
+        <td align="right">
+        Aurora
+        </td>
+        
+        <td align="center" valign="middle">
+        <b>2</b>
+        </td>
+        
+        
+        <td></td>
+        <td class="sgray"></td>
+        <td class="sgreen"></td>
+        
+        <td class="sblack"></td>
+        <td class="sblack"></td>
+        <td class="sblack"></td>
+        
+        <td class="sblue"></td>
+        
+        <td class="sgreen"></td>
+        <td class="sred"></td>
+        <td class="sblack"></td>
+        
+        <td class="sblue"></td>
+        
+        <td class="sblack"></td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td>&nbsp;</td>
+        <td rowspan="2" colspan="2" align="center" valign="middle">
+        <a class="button" style="background-color:#dddddd;font-color=white;" href="round_details.asp?league=bolivia2&amp;mrevid=m17&amp;st1=10&amp;st2=12"><font size="1" color="#666666">analysis</font></a>
+        </td>
+        
+        </tr>
+        <tr class="trow8" height="18">
+        <td align="right">
+        The Strongest
+        </td>
+        
+        <td align="center" valign="middle">
+        <b>2</b>
+        </td>
+        
+        <td></td>
+        <td class="sgray"></td>
+        <td class="sgreen"></td>
+        
+        <td class="sblack"></td>
+        <td class="sblack"></td>
+        <td class="sblack"></td>
+        
+        <td class="sred"></td>
+        
+        <td class="sgreen"></td>
+        <td class="sred"></td>
+        <td class="sblack"></td>
+        
+        <td class="sred"></td>
+        
+        <td class="sblack"></td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td>&nbsp;</td>
+        </tr>
+        <tr height="10"><td colspan="17"></td></tr>
+        
+        <tr height="10"><td colspan="18" align="center" valign="middle"><font size="1">&nbsp;</font></td></tr>
+        <tr class="trow2" height="40"><td colspan="7">
+        &nbsp;<img src="//www.soccerstatistics.com/img/flags/ca.png" width="16" height="11" alt="CANADA">
+        &nbsp;<font size="2">Canada - <font color="gray">Premier League</font></font>&nbsp;&nbsp;&nbsp;<a class="button" style="background-color:#eeeeee;font-color=white;" href="latest.asp?league=canada"><font color="#666666">Stats</font></a>
+        </td>
+        <td colspan="11" align="right">
+        
+        &nbsp;&nbsp;<font color="gray" size="1">52 matches played out of 98</font>&nbsp;&nbsp;
+        
+        </td>
+        </tr>
+        
+        <tr class="trow2" height="24">
+        <td width="110"></td>
+        <td width="55"></td>
+        <td width="50"></td>
+        <td class="sgray">P</td>
+        <td class="sgray">W%</td>
+        
+        <td class="sgray">FTS</td>
+        <td class="sgray">CS</td>
+        <td class="sgray">BTS</td>
+        
+        <td class="sgray">TG</td>
+        
+        <td class="sgray">GF</td>
+        <td class="sgray">GA</td>
+        <td class="sgray">1.5+</td>
+        
+        <td class="sgray">2.5+</td>
+        
+        <td class="sgray">3.5+</td>
+        
+        <td colspan="2"><font color="gray">Points Per Game</font></td>
+        
+        <td width="25"></td>
+        <td width="25"></td>
+        </tr>
+        
+        <tr class="trow8" height="18">
+        <td align="right">
+        Valour
+        </td>
+        
+        <td align="center" valign="middle">
+        <b>2</b>
+        </td>
+        
+        
+        <td></td>
+        <td class="sgray"></td>
+        <td class="sgreen"></td>
+        
+        <td class="sblack"></td>
+        <td class="sblack"></td>
+        <td class="sblack"></td>
+        
+        <td class="sblue"></td>
+        
+        <td class="sgreen"></td>
+        <td class="sred"></td>
+        <td class="sblack"></td>
+        
+        <td class="sblue"></td>
+        
+        <td class="sblack"></td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td>&nbsp;</td>
+        <td rowspan="2" colspan="2" align="center" valign="middle">
+        <a class="button" style="background-color:#dddddd;font-color=white;" href="round_details.asp?league=canada&amp;mrevid=m52&amp;st1=5&amp;st2=3"><font size="1" color="#666666">analysis</font></a>
+        </td>
+        
+        </tr>
+        <tr class="trow8" height="18">
+        <td align="right">
+        Pacific FC
+        </td>
+        
+        <td align="center" valign="middle">
+        <b>2</b>
+        </td>
+        
+        <td></td>
+        <td class="sgray"></td>
+        <td class="sgreen"></td>
+        
+        <td class="sblack"></td>
+        <td class="sblack"></td>
+        <td class="sblack"></td>
+        
+        <td class="sred"></td>
+        
+        <td class="sgreen"></td>
+        <td class="sred"></td>
+        <td class="sblack"></td>
+        
+        <td class="sblue"></td>
+        
+        <td class="sblack"></td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td>&nbsp;</td>
+        </tr>
+        <tr height="10"><td colspan="17"></td></tr>
+        
+        <tr class="trow8" height="18">
+        <td align="right">
+        Edmonton
+        </td>
+        
+        <td align="center" valign="middle">
+        <b>2</b>
+        </td>
+        
+        
+        <td></td>
+        <td class="sgray"></td>
+        <td class="sgreen"></td>
+        
+        <td class="sblack"></td>
+        <td class="sblack"></td>
+        <td class="sblack"></td>
+        
+        <td class="sred"></td>
+        
+        <td class="sgreen"></td>
+        <td class="sred"></td>
+        <td class="sblack"></td>
+        
+        <td class="sred"></td>
+        
+        <td class="sblack"></td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td>&nbsp;</td>
+        <td rowspan="2" colspan="2" align="center" valign="middle">
+        <a class="button" style="background-color:#dddddd;font-color=white;" href="round_details.asp?league=canada&amp;mrevid=m53&amp;st1=7&amp;st2=4"><font size="1" color="#666666">analysis</font></a>
+        </td>
+        
+        </tr>
+        <tr class="trow8" height="18">
+        <td align="right">
+        HFX Wanderers
+        </td>
+        
+        <td align="center" valign="middle">
+        <b>0</b>
+        </td>
+        
+        <td></td>
+        <td class="sgray"></td>
+        <td class="sgreen"></td>
+        
+        <td class="sblack"></td>
+        <td class="sblack"></td>
+        <td class="sblack"></td>
+        
+        <td class="sred"></td>
+        
+        <td class="sgreen"></td>
+        <td class="sred"></td>
+        <td class="sblack"></td>
+        
+        <td class="sred"></td>
+        
+        <td class="sblack"></td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td>&nbsp;</td>
+        </tr>
+        <tr height="10"><td colspan="17"></td></tr>
+        
+        <tr height="10"><td colspan="18" align="center" valign="middle"><font size="1">&nbsp;</font></td></tr>
+        <tr class="trow2" height="40"><td colspan="7">
+        &nbsp;
+        &nbsp;<font size="2">Copa Libertadores</font>&nbsp;&nbsp;&nbsp;<a class="button" style="background-color:#eeeeee;font-color=white;" href="leagueview.asp?league=copalibertadores"><font color="#666666">Stats</font></a>
+        </td>
+        <td colspan="11" align="right">
+        &nbsp;&nbsp;
+        </td>
+        </tr>
+        
+        <tr class="trow8" height="18">
+        <td align="right">
+        Boca Juniors
+        </td>
+        
+        <td align="center" valign="middle">
+        <b>2</b>
+        </td>
+        
+        
+        <td></td>
+        <td class="sgray"></td>
+        <td class="sgreen"></td>
+        
+        <td class="sblack"></td>
+        <td class="sblack"></td>
+        <td class="sblack"></td>
+        
+        <td class="sblue"></td>
+        
+        <td class="sgreen"></td>
+        <td class="sred"></td>
+        <td class="sblack"></td>
+        
+        <td class="sblue"></td>
+        
+        <td class="sblack"></td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td>&nbsp;</td>
+        <td rowspan="2" colspan="2" align="center" valign="middle"></td>
+        
+        </tr>
+        <tr class="trow8" height="18">
+        <td align="right">
+        Atletico PR
+        </td>
+        
+        <td align="center" valign="middle">
+        <b>0</b>
+        </td>
+        
+        <td></td>
+        <td class="sgray"></td>
+        <td class="sgreen"></td>
+        
+        <td class="sblack"></td>
+        <td class="sblack"></td>
+        <td class="sblack"></td>
+        
+        <td class="sblue"></td>
+        
+        <td class="sgreen"></td>
+        <td class="sred"></td>
+        <td class="sblack"></td>
+        
+        <td class="sred"></td>
+        
+        <td class="sblack"></td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td>&nbsp;</td>
+        </tr>
+        <tr height="10"><td colspan="17"></td></tr>
+        
+        <tr class="trow8" height="18">
+        <td align="right">
+        Flamengo
+        </td>
+        
+        <td rowspan="2" align="center" valign="middle">
+        <font size="1" color="gray">02:30</font>
+        </td>
+        
+        
+        <td></td>
+        <td class="sgray"></td>
+        <td class="sgreen"></td>
+        
+        <td class="sblack"></td>
+        <td class="sblack"></td>
+        <td class="sblack"></td>
+        
+        <td class="sblue"></td>
+        
+        <td class="sgreen"></td>
+        <td class="sred"></td>
+        <td class="sblack"></td>
+        
+        <td class="sblue"></td>
+        
+        <td class="sblack"></td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td>&nbsp;</td>
+        <td rowspan="2" colspan="2" align="center" valign="middle"><a class="button" style="background-color:#AAAAAA;font-color=white;" href="leagueview_team.asp?league=copalibertadores&amp;team1id=11&amp;team2id=5" title="Flamengo vs Emelec"><font color="#f8f8f8">Stats</font></a></td>
+        
+        </tr>
+        <tr class="trow8" height="18">
+        <td align="right">
+        Emelec
+        </td>
+        
+        <td></td>
+        <td class="sgray"></td>
+        <td class="sgreen"></td>
+        
+        <td class="sblack"></td>
+        <td class="sblack"></td>
+        <td class="sblack"></td>
+        
+        <td class="sred"></td>
+        
+        <td class="sgreen"></td>
+        <td class="sred"></td>
+        <td class="sblack"></td>
+        
+        <td class="sblue"></td>
+        
+        <td class="sblack"></td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td>&nbsp;</td>
+        </tr>
+        <tr height="10"><td colspan="17"></td></tr>
+        
+        <tr height="10"><td colspan="18" align="center" valign="middle"><font size="1">&nbsp;</font></td></tr>
+        <tr class="trow2" height="40"><td colspan="7">
+        &nbsp;<img src="//www.soccerstatistics.com/img/flags/fi.png" width="16" height="11" alt="FINLAND4">
+        &nbsp;<font size="2">Finland - <font color="gray">Kakkonen Group B</font></font>&nbsp;&nbsp;&nbsp;<a class="button" style="background-color:#eeeeee;font-color=white;" href="latest.asp?league=finland4"><font color="#666666">Stats</font></a>
+        </td>
+        <td colspan="11" align="right">
+        
+        &nbsp;&nbsp;<font color="gray" size="1">78 matches played out of 132</font>&nbsp;&nbsp;
+        
+        </td>
+        </tr>
+        
+        <tr class="trow2" height="24">
+        <td width="110"></td>
+        <td width="55"></td>
+        <td width="50"></td>
+        <td class="sgray">P</td>
+        <td class="sgray">W%</td>
+        
+        <td class="sgray">FTS</td>
+        <td class="sgray">CS</td>
+        <td class="sgray">BTS</td>
+        
+        <td class="sgray">TG</td>
+        
+        <td class="sgray">GF</td>
+        <td class="sgray">GA</td>
+        <td class="sgray">1.5+</td>
+        
+        <td class="sgray">2.5+</td>
+        
+        <td class="sgray">3.5+</td>
+        
+        <td colspan="2"><font color="gray">Points Per Game</font></td>
+        
+        <td width="25"></td>
+        <td width="25"></td>
+        </tr>
+        
+        <tr class="trow8" height="18">
+        <td align="right">
+        Honka Akatemia
+        </td>
+        
+        <td rowspan="2" align="center" valign="middle">
+        <font size="1" color="gray">17:30</font>
+        </td>
+        
+        
+        <td class="sgray">(home)</td>
+        <td class="sgray">6</td>
+        <td class="sgreen">33%</td>
+        
+        <td class="sblack">0%</td>
+        <td class="sblack">0%</td>
+        <td class="sblack">100%</td>
+        
+        <td class="sblue">3.17</td>
+        
+        <td class="sgreen">1.50</td>
+        <td class="sred">1.67</td>
+        <td class="sblack">100%</td>
+        
+        <td class="sblue">83%</td>
+        
+        <td class="sblack">33%</td>
+        
+        <td align="left" width="50">
+        <div class="graphwideindex"><div style="width:21.87px;" class="bargray"></div></div>
+        
+        </td>
+        <td><font color="gray"><b>1.33</b></font></td>
+        <td rowspan="2" colspan="2" align="center" valign="middle">
+        <a class="button" style="background-color:#AAAAAA;font-color=white;" href="pmatch.asp?league=finland4&amp;stats=79-1-12-2019-honka-akatemia-fc-espoo"><font color="#f8f8f8">Stats</font></a>
+        </td>
+        
+        </tr>
+        <tr class="trow8" height="18">
+        <td align="right">
+        FC Espoo
+        </td>
+        
+        <td class="sgray">(away)</td>
+        <td class="sgray">7</td>
+        <td class="sgreen">43%</td>
+        
+        <td class="sblack">29%</td>
+        <td class="sblack">43%</td>
+        <td class="sblack">57%</td>
+        
+        <td class="sred">2.43</td>
+        
+        <td class="sgreen">1.43</td>
+        <td class="sred">1.00</td>
+        <td class="sblack">57%</td>
+        
+        <td class="sblue">57%</td>
+        
+        <td class="sblack">29%</td>
+        
+        <td align="left" width="50">
+        <div class="graphwideindex"><div style="width:25.77px;" class="bargray"></div></div>
+        
+        </td>
+        <td><font color="gray"><b>1.57</b></font></td>
+        </tr>
+        <tr height="10"><td colspan="17"></td></tr>
+        
+        <tr height="10"><td colspan="18" align="center" valign="middle"><font size="1">&nbsp;</font></td></tr>
+        <tr class="trow2" height="40"><td colspan="7">
+        &nbsp;<img src="//www.soccerstatistics.com/img/flags/fi.png" width="16" height="11" alt="FINLAND5">
+        &nbsp;<font size="2">Finland - <font color="gray">Kakkonen Group C</font></font>&nbsp;&nbsp;&nbsp;<a class="button" style="background-color:#eeeeee;font-color=white;" href="latest.asp?league=finland5"><font color="#666666">Stats</font></a>
+        </td>
+        <td colspan="11" align="right">
+        
+        &nbsp;&nbsp;<font color="gray" size="1">77 matches played out of 132</font>&nbsp;&nbsp;
+        
+        </td>
+        </tr>
+        
+        <tr class="trow2" height="24">
+        <td width="110"></td>
+        <td width="55"></td>
+        <td width="50"></td>
+        <td class="sgray">P</td>
+        <td class="sgray">W%</td>
+        
+        <td class="sgray">FTS</td>
+        <td class="sgray">CS</td>
+        <td class="sgray">BTS</td>
+        
+        <td class="sgray">TG</td>
+        
+        <td class="sgray">GF</td>
+        <td class="sgray">GA</td>
+        <td class="sgray">1.5+</td>
+        
+        <td class="sgray">2.5+</td>
+        
+        <td class="sgray">3.5+</td>
+        
+        <td colspan="2"><font color="gray">Points Per Game</font></td>
+        
+        <td width="25"></td>
+        <td width="25"></td>
+        </tr>
+        
+        <tr class="trow8" height="18">
+        <td align="right">
+        SJK Akatemia
+        </td>
+        
+        <td rowspan="2" align="center" valign="middle">
+        <font size="1" color="gray">17:30</font>
+        </td>
+        
+        
+        <td class="sgray">(home)</td>
+        <td class="sgray">7</td>
+        <td class="sgreen">86%</td>
+        
+        <td class="sblack">14%</td>
+        <td class="sblack">57%</td>
+        <td class="sblack">43%</td>
+        
+        <td class="sblue">3.29</td>
+        
+        <td class="sgreen">2.86</td>
+        <td class="sred">0.43</td>
+        <td class="sblack">86%</td>
+        
+        <td class="sblue">86%</td>
+        
+        <td class="sblack">43%</td>
+        
+        <td align="left" width="50">
+        <div class="graphwideindex"><div style="width:44.51px;" class="bargray"></div></div>
+        
+        </td>
+        <td><font color="gray"><b>2.71</b></font></td>
+        <td rowspan="2" colspan="2" align="center" valign="middle">
+        <a class="button" style="background-color:#AAAAAA;font-color=white;" href="pmatch.asp?league=finland5&amp;stats=79-2-11-2019-sjk-akatemia-kajha"><font color="#f8f8f8">Stats</font></a>
+        </td>
+        
+        </tr>
+        <tr class="trow8" height="18">
+        <td align="right">
+        KajHa
+        </td>
+        
+        <td class="sgray">(away)</td>
+        <td class="sgray">6</td>
+        <td class="sgreen">17%</td>
+        
+        <td class="sblack">33%</td>
+        <td class="sblack">0%</td>
+        <td class="sblack">67%</td>
+        
+        <td class="sblue">3.83</td>
+        
+        <td class="sgreen">0.83</td>
+        <td class="sred">3.00</td>
+        <td class="sblack">100%</td>
+        
+        <td class="sblue">67%</td>
+        
+        <td class="sblack">50%</td>
+        
+        <td align="left" width="50">
+        <div class="graphwideindex"><div style="width:10.93px;" class="bargray"></div></div>
+        
+        </td>
+        <td><font color="gray"><b>0.67</b></font></td>
+        </tr>
+        <tr height="10"><td colspan="17"></td></tr>
+        
+        <tr height="10"><td colspan="18" align="center" valign="middle"><font size="1">&nbsp;</font></td></tr>
+        <tr class="trow2" height="40"><td colspan="7">
+        &nbsp;<img src="//www.soccerstatistics.com/img/flags/fi.png" width="16" height="11" alt="FINLAND6">
+        &nbsp;<font size="2">Finland - <font color="gray">Kolmonen Ita-&amp; Keski-S.</font></font>&nbsp;&nbsp;&nbsp;<a class="button" style="background-color:#eeeeee;font-color=white;" href="latest.asp?league=finland6"><font color="#666666">Stats</font></a>
+        </td>
+        <td colspan="11" align="right">
+        
+        &nbsp;&nbsp;<font color="gray" size="1">60 matches played out of 110</font>&nbsp;&nbsp;
+        
+        </td>
+        </tr>
+        
+        <tr class="trow2" height="24">
+        <td width="110"></td>
+        <td width="55"></td>
+        <td width="50"></td>
+        <td class="sgray">P</td>
+        <td class="sgray">W%</td>
+        
+        <td class="sgray">FTS</td>
+        <td class="sgray">CS</td>
+        <td class="sgray">BTS</td>
+        
+        <td class="sgray">TG</td>
+        
+        <td class="sgray">GF</td>
+        <td class="sgray">GA</td>
+        <td class="sgray">1.5+</td>
+        
+        <td class="sgray">2.5+</td>
+        
+        <td class="sgray">3.5+</td>
+        
+        <td colspan="2"><font color="gray">Points Per Game</font></td>
+        
+        <td width="25"></td>
+        <td width="25"></td>
+        </tr>
+        
+        <tr class="trow8" height="18">
+        <td align="right">
+        Kurkimaen Kisa
+        </td>
+        
+        <td rowspan="2" align="center" valign="middle">
+        <font size="1" color="gray">17:30</font>
+        </td>
+        
+        
+        <td class="sgray">(home)</td>
+        <td class="sgray">4</td>
+        <td class="sgreen">50%</td>
+        
+        <td class="sblack">0%</td>
+        <td class="sblack">0%</td>
+        <td class="sblack">100%</td>
+        
+        <td class="sblue">4.00</td>
+        
+        <td class="sgreen">2.25</td>
+        <td class="sred">1.75</td>
+        <td class="sblack">100%</td>
+        
+        <td class="sblue">100%</td>
+        
+        <td class="sblack">75%</td>
+        
+        <td align="left" width="50">
+        <div class="graphwideindex"><div style="width:28.70px;" class="bargray"></div></div>
+        
+        </td>
+        <td><font color="gray"><b>1.75</b></font></td>
+        <td rowspan="2" colspan="2" align="center" valign="middle">
+        <a class="button" style="background-color:#AAAAAA;font-color=white;" href="pmatch.asp?league=finland6&amp;stats=64-3-7-2019-kurkimaen-kisa-sc-riverball"><font color="#f8f8f8">Stats</font></a>
+        </td>
+        
+        </tr>
+        <tr class="trow8" height="18">
+        <td align="right">
+        SC Riverball
+        </td>
+        
+        <td class="sgray">(away)</td>
+        <td class="sgray">5</td>
+        <td class="sgreen">40%</td>
+        
+        <td class="sblack">20%</td>
+        <td class="sblack">0%</td>
+        <td class="sblack">80%</td>
+        
+        <td class="sblue">3.80</td>
+        
+        <td class="sgreen">1.60</td>
+        <td class="sred">2.20</td>
+        <td class="sblack">100%</td>
+        
+        <td class="sblue">100%</td>
+        
+        <td class="sblack">60%</td>
+        
+        <td align="left" width="50">
+        <div class="graphwideindex"><div style="width:22.96px;" class="bargray"></div></div>
+        
+        </td>
+        <td><font color="gray"><b>1.40</b></font></td>
+        </tr>
+        <tr height="10"><td colspan="17"></td></tr>
+        
+        <tr height="10"><td colspan="18" align="center" valign="middle"><font size="1">&nbsp;</font></td></tr>
+        <tr class="trow2" height="40"><td colspan="7">
+        &nbsp;<img src="//www.soccerstatistics.com/img/flags/fi.png" width="16" height="11" alt="FINLAND8">
+        &nbsp;<font size="2">Finland - <font color="gray">Kolmonen Keski-P. &amp; Va.</font></font>&nbsp;&nbsp;&nbsp;<a class="button" style="background-color:#eeeeee;font-color=white;" href="latest.asp?league=finland8"><font color="#666666">Stats</font></a>
+        </td>
+        <td colspan="11" align="right">
+        
+        &nbsp;&nbsp;<font color="gray" size="1">79 matches played out of 132</font>&nbsp;&nbsp;
+        
+        </td>
+        </tr>
+        
+        <tr class="trow2" height="24">
+        <td width="110"></td>
+        <td width="55"></td>
+        <td width="50"></td>
+        <td class="sgray">P</td>
+        <td class="sgray">W%</td>
+        
+        <td class="sgray">FTS</td>
+        <td class="sgray">CS</td>
+        <td class="sgray">BTS</td>
+        
+        <td class="sgray">TG</td>
+        
+        <td class="sgray">GF</td>
+        <td class="sgray">GA</td>
+        <td class="sgray">1.5+</td>
+        
+        <td class="sgray">2.5+</td>
+        
+        <td class="sgray">3.5+</td>
+        
+        <td colspan="2"><font color="gray">Points Per Game</font></td>
+        
+        <td width="25"></td>
+        <td width="25"></td>
+        </tr>
+        
+        <tr class="trow8" height="18">
+        <td align="right">
+        VPV
+        </td>
+        
+        <td rowspan="2" align="center" valign="middle">
+        <font size="1" color="gray">18:00</font>
+        </td>
+        
+        
+        <td class="sgray">(home)</td>
+        <td class="sgray">6</td>
+        <td class="sgreen">17%</td>
+        
+        <td class="sblack">0%</td>
+        <td class="sblack">17%</td>
+        <td class="sblack">83%</td>
+        
+        <td class="sblue">4.83</td>
+        
+        <td class="sgreen">2.33</td>
+        <td class="sred">2.50</td>
+        <td class="sblack">100%</td>
+        
+        <td class="sblue">100%</td>
+        
+        <td class="sblack">83%</td>
+        
+        <td align="left" width="50">
+        <div class="graphwideindex"><div style="width:13.67px;" class="bargray"></div></div>
+        
+        </td>
+        <td><font color="gray"><b>0.83</b></font></td>
+        <td rowspan="2" colspan="2" align="center" valign="middle">
+        <a class="button" style="background-color:#AAAAAA;font-color=white;" href="pmatch.asp?league=finland8&amp;stats=83-5-2-2019-vpv-kaskö-ik"><font color="#f8f8f8">Stats</font></a>
+        </td>
+        
+        </tr>
+        <tr class="trow8" height="18">
+        <td align="right">
+        Kaskö IK
+        </td>
+        
+        <td class="sgray">(away)</td>
+        <td class="sgray">4</td>
+        <td class="sgreen">50%</td>
+        
+        <td class="sblack">0%</td>
+        <td class="sblack">0%</td>
+        <td class="sblack">100%</td>
+        
+        <td class="sblue">6.25</td>
+        
+        <td class="sgreen">3.75</td>
+        <td class="sred">2.50</td>
+        <td class="sblack">100%</td>
+        
+        <td class="sblue">100%</td>
+        
+        <td class="sblack">100%</td>
+        
+        <td align="left" width="50">
+        <div class="graphwideindex"><div style="width:28.70px;" class="bargray"></div></div>
+        
+        </td>
+        <td><font color="gray"><b>1.75</b></font></td>
+        </tr>
+        <tr height="10"><td colspan="17"></td></tr>
+        
+        <tr height="10"><td colspan="18" align="center" valign="middle"><font size="1">&nbsp;</font></td></tr>
+        <tr class="trow2" height="40"><td colspan="7">
+        &nbsp;<img src="//www.soccerstatistics.com/img/flags/fi.png" width="16" height="11" alt="FINLAND10">
+        &nbsp;<font size="2">Finland - <font color="gray">Kolmonen Tampere &amp; Sat.</font></font>&nbsp;&nbsp;&nbsp;<a class="button" style="background-color:#eeeeee;font-color=white;" href="latest.asp?league=finland10"><font color="#666666">Stats</font></a>
+        </td>
+        <td colspan="11" align="right">
+        
+        &nbsp;&nbsp;<font color="gray" size="1">77 matches played out of 132</font>&nbsp;&nbsp;
+        
+        </td>
+        </tr>
+        
+        <tr class="trow2" height="24">
+        <td width="110"></td>
+        <td width="55"></td>
+        <td width="50"></td>
+        <td class="sgray">P</td>
+        <td class="sgray">W%</td>
+        
+        <td class="sgray">FTS</td>
+        <td class="sgray">CS</td>
+        <td class="sgray">BTS</td>
+        
+        <td class="sgray">TG</td>
+        
+        <td class="sgray">GF</td>
+        <td class="sgray">GA</td>
+        <td class="sgray">1.5+</td>
+        
+        <td class="sgray">2.5+</td>
+        
+        <td class="sgray">3.5+</td>
+        
+        <td colspan="2"><font color="gray">Points Per Game</font></td>
+        
+        <td width="25"></td>
+        <td width="25"></td>
+        </tr>
+        
+        <tr class="trow8" height="18">
+        <td align="right">
+        Ilves-Kissat
+        </td>
+        
+        <td rowspan="2" align="center" valign="middle">
+        <font size="1" color="gray">17:30</font>
+        </td>
+        
+        
+        <td class="sgray">(home)</td>
+        <td class="sgray">7</td>
+        <td class="sgreen">86%</td>
+        
+        <td class="sblack">0%</td>
+        <td class="sblack">43%</td>
+        <td class="sblack">57%</td>
+        
+        <td class="sblue">6.86</td>
+        
+        <td class="sgreen">5.71</td>
+        <td class="sred">1.14</td>
+        <td class="sblack">100%</td>
+        
+        <td class="sblue">86%</td>
+        
+        <td class="sblack">86%</td>
+        
+        <td align="left" width="50">
+        <div class="graphwideindex"><div style="width:42.17px;" class="bargray"></div></div>
+        
+        </td>
+        <td><font color="gray"><b>2.57</b></font></td>
+        <td rowspan="2" colspan="2" align="center" valign="middle">
+        <a class="button" style="background-color:#AAAAAA;font-color=white;" href="pmatch.asp?league=finland10&amp;stats=78-2-3-2019-ilves-kissat-tpv-b"><font color="#f8f8f8">Stats</font></a>
+        </td>
+        
+        </tr>
+        <tr class="trow8" height="18">
+        <td align="right">
+        TPV B
+        </td>
+        
+        <td class="sgray">(away)</td>
+        <td class="sgray">7</td>
+        <td class="sgreen">29%</td>
+        
+        <td class="sblack">14%</td>
+        <td class="sblack">14%</td>
+        <td class="sblack">71%</td>
+        
+        <td class="sblue">6.14</td>
+        
+        <td class="sgreen">2.29</td>
+        <td class="sred">3.86</td>
+        <td class="sblack">100%</td>
+        
+        <td class="sblue">100%</td>
+        
+        <td class="sblack">86%</td>
+        
+        <td align="left" width="50">
+        <div class="graphwideindex"><div style="width:14.06px;" class="bargray"></div></div>
+        
+        </td>
+        <td><font color="gray"><b>0.86</b></font></td>
+        </tr>
+        <tr height="10"><td colspan="17"></td></tr>
+        
+        <tr class="trow8" height="18">
+        <td align="right">
+        A.C. Estudiante
+        </td>
+        
+        <td rowspan="2" align="center" valign="middle">
+        <font size="1" color="gray">18:00</font>
+        </td>
+        
+        
+        <td class="sgray">(home)</td>
+        <td class="sgray">6</td>
+        <td class="sgreen">67%</td>
+        
+        <td class="sblack">17%</td>
+        <td class="sblack">50%</td>
+        <td class="sblack">50%</td>
+        
+        <td class="sblue">3.33</td>
+        
+        <td class="sgreen">2.17</td>
+        <td class="sred">1.17</td>
+        <td class="sblack">83%</td>
+        
+        <td class="sblue">67%</td>
+        
+        <td class="sblack">50%</td>
+        
+        <td align="left" width="50">
+        <div class="graphwideindex"><div style="width:35.53px;" class="bargray"></div></div>
+        
+        </td>
+        <td><font color="gray"><b>2.17</b></font></td>
+        <td rowspan="2" colspan="2" align="center" valign="middle">
+        <a class="button" style="background-color:#AAAAAA;font-color=white;" href="pmatch.asp?league=finland10&amp;stats=79-1-5-2019-a.c.-estudiante-fjk-forssa"><font color="#f8f8f8">Stats</font></a>
+        </td>
+        
+        </tr>
+        <tr class="trow8" height="18">
+        <td align="right">
+        FJK Forssa
+        </td>
+        
+        <td class="sgray">(away)</td>
+        <td class="sgray">5</td>
+        <td class="sgreen">20%</td>
+        
+        <td class="sblack">60%</td>
+        <td class="sblack">20%</td>
+        <td class="sblack">40%</td>
+        
+        <td class="sblue">5.40</td>
+        
+        <td class="sgreen">1.20</td>
+        <td class="sred">4.20</td>
+        <td class="sblack">80%</td>
+        
+        <td class="sblue">80%</td>
+        
+        <td class="sblack">80%</td>
+        
+        <td align="left" width="50">
+        <div class="graphwideindex"><div style="width:13.12px;" class="bargray"></div></div>
+        
+        </td>
+        <td><font color="gray"><b>0.80</b></font></td>
+        </tr>
+        <tr height="10"><td colspan="17"></td></tr>
+        
+        <tr class="trow8" height="18">
+        <td align="right">
+        PP-70
+        </td>
+        
+        <td rowspan="2" align="center" valign="middle">
+        <font size="1" color="gray">19:00</font>
+        </td>
+        
+        
+        <td class="sgray">(home)</td>
+        <td class="sgray">7</td>
+        <td class="sgreen">29%</td>
+        
+        <td class="sblack">14%</td>
+        <td class="sblack">0%</td>
+        <td class="sblack">86%</td>
+        
+        <td class="sblue">5.86</td>
+        
+        <td class="sgreen">2.00</td>
+        <td class="sred">3.86</td>
+        <td class="sblack">100%</td>
+        
+        <td class="sblue">100%</td>
+        
+        <td class="sblack">100%</td>
+        
+        <td align="left" width="50">
+        <div class="graphwideindex"><div style="width:14.06px;" class="bargray"></div></div>
+        
+        </td>
+        <td><font color="gray"><b>0.86</b></font></td>
+        <td rowspan="2" colspan="2" align="center" valign="middle">
+        <a class="button" style="background-color:#AAAAAA;font-color=white;" href="pmatch.asp?league=finland10&amp;stats=80-4-9-2019-pp-70-tp-t"><font color="#f8f8f8">Stats</font></a>
+        </td>
+        
+        </tr>
+        <tr class="trow8" height="18">
+        <td align="right">
+        TP-T
+        </td>
+        
+        <td class="sgray">(away)</td>
+        <td class="sgray">7</td>
+        <td class="sgreen">29%</td>
+        
+        <td class="sblack">43%</td>
+        <td class="sblack">0%</td>
+        <td class="sblack">57%</td>
+        
+        <td class="sblue">3.71</td>
+        
+        <td class="sgreen">1.29</td>
+        <td class="sred">2.43</td>
+        <td class="sblack">86%</td>
+        
+        <td class="sblue">71%</td>
+        
+        <td class="sblack">43%</td>
+        
+        <td align="left" width="50">
+        <div class="graphwideindex"><div style="width:18.74px;" class="bargray"></div></div>
+        
+        </td>
+        <td><font color="gray"><b>1.14</b></font></td>
+        </tr>
+        <tr height="10"><td colspan="17"></td></tr>
+        
+        <tr height="10"><td colspan="18" align="center" valign="middle"><font size="1">&nbsp;</font></td></tr>
+        <tr class="trow2" height="40"><td colspan="7">
+        &nbsp;<img src="//www.soccerstatistics.com/img/flags/fi.png" width="16" height="11" alt="FINLAND11">
+        &nbsp;<font size="2">Finland - <font color="gray">Kolmonen Länsi-Suomi</font></font>&nbsp;&nbsp;&nbsp;<a class="button" style="background-color:#eeeeee;font-color=white;" href="latest.asp?league=finland11"><font color="#666666">Stats</font></a>
+        </td>
+        <td colspan="11" align="right">
+        
+        &nbsp;&nbsp;<font color="gray" size="1">105 matches played out of 182</font>&nbsp;&nbsp;
+        
+        </td>
+        </tr>
+        
+        <tr class="trow2" height="24">
+        <td width="110"></td>
+        <td width="55"></td>
+        <td width="50"></td>
+        <td class="sgray">P</td>
+        <td class="sgray">W%</td>
+        
+        <td class="sgray">FTS</td>
+        <td class="sgray">CS</td>
+        <td class="sgray">BTS</td>
+        
+        <td class="sgray">TG</td>
+        
+        <td class="sgray">GF</td>
+        <td class="sgray">GA</td>
+        <td class="sgray">1.5+</td>
+        
+        <td class="sgray">2.5+</td>
+        
+        <td class="sgray">3.5+</td>
+        
+        <td colspan="2"><font color="gray">Points Per Game</font></td>
+        
+        <td width="25"></td>
+        <td width="25"></td>
+        </tr>
+        
+        <tr class="trow8" height="18">
+        <td align="right">
+        JyTy
+        </td>
+        
+        <td rowspan="2" align="center" valign="middle">
+        <font size="1" color="gray">18:00</font>
+        </td>
+        
+        
+        <td class="sgray">(home)</td>
+        <td class="sgray">8</td>
+        <td class="sgreen">25%</td>
+        
+        <td class="sblack">38%</td>
+        <td class="sblack">12%</td>
+        <td class="sblack">50%</td>
+        
+        <td class="sblue">4.25</td>
+        
+        <td class="sgreen">1.13</td>
+        <td class="sred">3.13</td>
+        <td class="sblack">88%</td>
+        
+        <td class="sblue">88%</td>
+        
+        <td class="sblack">62%</td>
+        
+        <td align="left" width="50">
+        <div class="graphwideindex"><div style="width:14.35px;" class="bargray"></div></div>
+        
+        </td>
+        <td><font color="gray"><b>0.88</b></font></td>
+        <td rowspan="2" colspan="2" align="center" valign="middle">
+        <a class="button" style="background-color:#AAAAAA;font-color=white;" href="pmatch.asp?league=finland11&amp;stats=107-2-13-2019-jyty-peimari-utd"><font color="#f8f8f8">Stats</font></a>
+        </td>
+        
+        </tr>
+        <tr class="trow8" height="18">
+        <td align="right">
+        Peimari Utd
+        </td>
+        
+        <td class="sgray">(away)</td>
+        <td class="sgray">8</td>
+        <td class="sgreen">50%</td>
+        
+        <td class="sblack">25%</td>
+        <td class="sblack">50%</td>
+        <td class="sblack">38%</td>
+        
+        <td class="sblue">3.00</td>
+        
+        <td class="sgreen">2.25</td>
+        <td class="sred">0.75</td>
+        <td class="sblack">88%</td>
+        
+        <td class="sred">50%</td>
+        
+        <td class="sblack">38%</td>
+        
+        <td align="left" width="50">
+        <div class="graphwideindex"><div style="width:30.75px;" class="bargray"></div></div>
+        
+        </td>
+        <td><font color="gray"><b>1.88</b></font></td>
+        </tr>
+        <tr height="10"><td colspan="17"></td></tr>
+        
+        <tr class="trow8" height="18">
+        <td align="right">
+        PaiHa
+        </td>
+        
+        <td rowspan="2" align="center" valign="middle">
+        <font size="1" color="gray">18:00</font>
+        </td>
+        
+        
+        <td class="sgray">(home)</td>
+        <td class="sgray">6</td>
+        <td class="sgreen">17%</td>
+        
+        <td class="sblack">67%</td>
+        <td class="sblack">17%</td>
+        <td class="sblack">33%</td>
+        
+        <td class="sred">2.17</td>
+        
+        <td class="sgreen">0.83</td>
+        <td class="sred">1.33</td>
+        <td class="sblack">50%</td>
+        
+        <td class="sred">33%</td>
+        
+        <td class="sblack">17%</td>
+        
+        <td align="left" width="50">
+        <div class="graphwideindex"><div style="width:13.67px;" class="bargray"></div></div>
+        
+        </td>
+        <td><font color="gray"><b>0.83</b></font></td>
+        <td rowspan="2" colspan="2" align="center" valign="middle">
+        <a class="button" style="background-color:#AAAAAA;font-color=white;" href="pmatch.asp?league=finland11&amp;stats=106-3-5-2019-paiha-tpk"><font color="#f8f8f8">Stats</font></a>
+        </td>
+        
+        </tr>
+        <tr class="trow8" height="18">
+        <td align="right">
+        TPK
+        </td>
+        
+        <td class="sgray">(away)</td>
+        <td class="sgray">8</td>
+        <td class="sgreen">50%</td>
+        
+        <td class="sblack">25%</td>
+        <td class="sblack">25%</td>
+        <td class="sblack">50%</td>
+        
+        <td class="sblue">4.00</td>
+        
+        <td class="sgreen">2.13</td>
+        <td class="sred">1.88</td>
+        <td class="sblack">100%</td>
+        
+        <td class="sblue">100%</td>
+        
+        <td class="sblack">50%</td>
+        
+        <td align="left" width="50">
+        <div class="graphwideindex"><div style="width:24.60px;" class="bargray"></div></div>
+        
+        </td>
+        <td><font color="gray"><b>1.50</b></font></td>
+        </tr>
+        <tr height="10"><td colspan="17"></td></tr>
+        
+        <tr class="trow8" height="18">
+        <td align="right">
+        SoVo
+        </td>
+        
+        <td rowspan="2" align="center" valign="middle">
+        <font size="1" color="gray">18:20</font>
+        </td>
+        
+        
+        <td class="sgray">(home)</td>
+        <td class="sgray">7</td>
+        <td class="sgreen">57%</td>
+        
+        <td class="sblack">43%</td>
+        <td class="sblack">43%</td>
+        <td class="sblack">29%</td>
+        
+        <td class="sblue">4.29</td>
+        
+        <td class="sgreen">2.14</td>
+        <td class="sred">2.14</td>
+        <td class="sblack">71%</td>
+        
+        <td class="sblue">71%</td>
+        
+        <td class="sblack">57%</td>
+        
+        <td align="left" width="50">
+        <div class="graphwideindex"><div style="width:30.46px;" class="bargray"></div></div>
+        
+        </td>
+        <td><font color="gray"><b>1.86</b></font></td>
+        <td rowspan="2" colspan="2" align="center" valign="middle">
+        <a class="button" style="background-color:#AAAAAA;font-color=white;" href="pmatch.asp?league=finland11&amp;stats=108-9-4-2019-sovo-pif"><font color="#f8f8f8">Stats</font></a>
+        </td>
+        
+        </tr>
+        <tr class="trow8" height="18">
+        <td align="right">
+        PIF
+        </td>
+        
+        <td class="sgray">(away)</td>
+        <td class="sgray">8</td>
+        <td class="sgreen">62%</td>
+        
+        <td class="sblack">25%</td>
+        <td class="sblack">25%</td>
+        <td class="sblack">50%</td>
+        
+        <td class="sblue">3.00</td>
+        
+        <td class="sgreen">2.00</td>
+        <td class="sred">1.00</td>
+        <td class="sblack">62%</td>
+        
+        <td class="sred">50%</td>
+        
+        <td class="sblack">25%</td>
+        
+        <td align="left" width="50">
+        <div class="graphwideindex"><div style="width:32.80px;" class="bargray"></div></div>
+        
+        </td>
+        <td><font color="gray"><b>2.00</b></font></td>
+        </tr>
+        <tr height="10"><td colspan="17"></td></tr>
+        
+        <tr height="10"><td colspan="18" align="center" valign="middle"><font size="1">&nbsp;</font></td></tr>
+        <tr class="trow2" height="40"><td colspan="7">
+        &nbsp;<img src="//www.soccerstatistics.com/img/flags/fi.png" width="16" height="11" alt="FINLAND12">
+        &nbsp;<font size="2">Finland - <font color="gray">Kolmonen Uusimaa &amp; H. 1</font></font>&nbsp;&nbsp;&nbsp;<a class="button" style="background-color:#eeeeee;font-color=white;" href="latest.asp?league=finland12"><font color="#666666">Stats</font></a>
+        </td>
+        <td colspan="11" align="right">
+        
+        &nbsp;&nbsp;<font color="gray" size="1">74 matches played out of 132</font>&nbsp;&nbsp;
+        
+        </td>
+        </tr>
+        
+        <tr class="trow2" height="24">
+        <td width="110"></td>
+        <td width="55"></td>
+        <td width="50"></td>
+        <td class="sgray">P</td>
+        <td class="sgray">W%</td>
+        
+        <td class="sgray">FTS</td>
+        <td class="sgray">CS</td>
+        <td class="sgray">BTS</td>
+        
+        <td class="sgray">TG</td>
+        
+        <td class="sgray">GF</td>
+        <td class="sgray">GA</td>
+        <td class="sgray">1.5+</td>
+        
+        <td class="sgray">2.5+</td>
+        
+        <td class="sgray">3.5+</td>
+        
+        <td colspan="2"><font color="gray">Points Per Game</font></td>
+        
+        <td width="25"></td>
+        <td width="25"></td>
+        </tr>
+        
+        <tr class="trow8" height="18">
+        <td align="right">
+        Toolon Taisto
+        </td>
+        
+        <td rowspan="2" align="center" valign="middle">
+        <font size="1" color="gray">18:15</font>
+        </td>
+        
+        
+        <td class="sgray">(home)</td>
+        <td class="sgray">6</td>
+        <td class="sgreen">50%</td>
+        
+        <td class="sblack">0%</td>
+        <td class="sblack">17%</td>
+        <td class="sblack">83%</td>
+        
+        <td class="sblue">3.67</td>
+        
+        <td class="sgreen">2.00</td>
+        <td class="sred">1.67</td>
+        <td class="sblack">100%</td>
+        
+        <td class="sblue">100%</td>
+        
+        <td class="sblack">33%</td>
+        
+        <td align="left" width="50">
+        <div class="graphwideindex"><div style="width:24.60px;" class="bargray"></div></div>
+        
+        </td>
+        <td><font color="gray"><b>1.50</b></font></td>
+        <td rowspan="2" colspan="2" align="center" valign="middle">
+        <a class="button" style="background-color:#AAAAAA;font-color=white;" href="pmatch.asp?league=finland12&amp;stats=76-10-8-2019-toolon-taisto-nups"><font color="#f8f8f8">Stats</font></a>
+        </td>
+        
+        </tr>
+        <tr class="trow8" height="18">
+        <td align="right">
+        NuPS
+        </td>
+        
+        <td class="sgray">(away)</td>
+        <td class="sgray">5</td>
+        <td class="sgreen">20%</td>
+        
+        <td class="sblack">40%</td>
+        <td class="sblack">0%</td>
+        <td class="sblack">60%</td>
+        
+        <td class="sblue">6.40</td>
+        
+        <td class="sgreen">2.80</td>
+        <td class="sred">3.60</td>
+        <td class="sblack">80%</td>
+        
+        <td class="sblue">60%</td>
+        
+        <td class="sblack">60%</td>
+        
+        <td align="left" width="50">
+        <div class="graphwideindex"><div style="width:13.12px;" class="bargray"></div></div>
+        
+        </td>
+        <td><font color="gray"><b>0.80</b></font></td>
+        </tr>
+        <tr height="10"><td colspan="17"></td></tr>
+        
+        <tr height="10"><td colspan="18" align="center" valign="middle"><font size="1">&nbsp;</font></td></tr>
+        <tr class="trow2" height="40"><td colspan="7">
+        &nbsp;<img src="//www.soccerstatistics.com/img/flags/fi.png" width="16" height="11" alt="FINLAND13">
+        &nbsp;<font size="2">Finland - <font color="gray">Kolmonen Uusimaa &amp; H. 2</font></font>&nbsp;&nbsp;&nbsp;<a class="button" style="background-color:#eeeeee;font-color=white;" href="latest.asp?league=finland13"><font color="#666666">Stats</font></a>
+        </td>
+        <td colspan="11" align="right">
+        
+        &nbsp;&nbsp;<font color="gray" size="1">72 matches played out of 132</font>&nbsp;&nbsp;
+        
+        </td>
+        </tr>
+        
+        <tr class="trow2" height="24">
+        <td width="110"></td>
+        <td width="55"></td>
+        <td width="50"></td>
+        <td class="sgray">P</td>
+        <td class="sgray">W%</td>
+        
+        <td class="sgray">FTS</td>
+        <td class="sgray">CS</td>
+        <td class="sgray">BTS</td>
+        
+        <td class="sgray">TG</td>
+        
+        <td class="sgray">GF</td>
+        <td class="sgray">GA</td>
+        <td class="sgray">1.5+</td>
+        
+        <td class="sgray">2.5+</td>
+        
+        <td class="sgray">3.5+</td>
+        
+        <td colspan="2"><font color="gray">Points Per Game</font></td>
+        
+        <td width="25"></td>
+        <td width="25"></td>
+        </tr>
+        
+        <tr class="trow8" height="18">
+        <td align="right">
+        TuPS
+        </td>
+        
+        <td rowspan="2" align="center" valign="middle">
+        <font size="1" color="gray">17:30</font>
+        </td>
+        
+        
+        <td class="sgray">(home)</td>
+        <td class="sgray">6</td>
+        <td class="sgreen">67%</td>
+        
+        <td class="sblack">17%</td>
+        <td class="sblack">0%</td>
+        <td class="sblack">83%</td>
+        
+        <td class="sblue">5.33</td>
+        
+        <td class="sgreen">3.00</td>
+        <td class="sred">2.33</td>
+        <td class="sblack">100%</td>
+        
+        <td class="sblue">100%</td>
+        
+        <td class="sblack">83%</td>
+        
+        <td align="left" width="50">
+        <div class="graphwideindex"><div style="width:32.80px;" class="bargray"></div></div>
+        
+        </td>
+        <td><font color="gray"><b>2.00</b></font></td>
+        <td rowspan="2" colspan="2" align="center" valign="middle">
+        <a class="button" style="background-color:#AAAAAA;font-color=white;" href="pmatch.asp?league=finland13&amp;stats=75-5-4-2019-tups-cle"><font color="#f8f8f8">Stats</font></a>
+        </td>
+        
+        </tr>
+        <tr class="trow8" height="18">
+        <td align="right">
+        CLE
+        </td>
+        
+        <td class="sgray">(away)</td>
+        <td class="sgray">6</td>
+        <td class="sgreen">0%</td>
+        
+        <td class="sblack">50%</td>
+        <td class="sblack">0%</td>
+        <td class="sblack">50%</td>
+        
+        <td class="sblue">5.17</td>
+        
+        <td class="sgreen">0.50</td>
+        <td class="sred">4.67</td>
+        <td class="sblack">100%</td>
+        
+        <td class="sblue">83%</td>
+        
+        <td class="sblack">50%</td>
+        
+        <td align="left" width="50">
+        <div class="graphwideindex"><div style="width:2.73px;" class="bargray"></div></div>
+        
+        </td>
+        <td><font color="gray"><b>0.17</b></font></td>
+        </tr>
+        <tr height="10"><td colspan="17"></td></tr>
+        
+        <tr class="trow8" height="18">
+        <td align="right">
+        Ponnistajat
+        </td>
+        
+        <td rowspan="2" align="center" valign="middle">
+        <font size="1" color="gray">18:15</font>
+        </td>
+        
+        
+        <td class="sgray">(home)</td>
+        <td class="sgray">5</td>
+        <td class="sgreen">80%</td>
+        
+        <td class="sblack">0%</td>
+        <td class="sblack">60%</td>
+        <td class="sblack">40%</td>
+        
+        <td class="sblue">3.20</td>
+        
+        <td class="sgreen">2.80</td>
+        <td class="sred">0.40</td>
+        <td class="sblack">100%</td>
+        
+        <td class="sblue">60%</td>
+        
+        <td class="sblack">20%</td>
+        
+        <td align="left" width="50">
+        <div class="graphwideindex"><div style="width:42.64px;" class="bargray"></div></div>
+        
+        </td>
+        <td><font color="gray"><b>2.60</b></font></td>
+        <td rowspan="2" colspan="2" align="center" valign="middle">
+        <a class="button" style="background-color:#AAAAAA;font-color=white;" href="pmatch.asp?league=finland13&amp;stats=76-7-2-2019-ponnistajat-tips"><font color="#f8f8f8">Stats</font></a>
+        </td>
+        
+        </tr>
+        <tr class="trow8" height="18">
+        <td align="right">
+        TiPS
+        </td>
+        
+        <td class="sgray">(away)</td>
+        <td class="sgray">4</td>
+        <td class="sgreen">75%</td>
+        
+        <td class="sblack">25%</td>
+        <td class="sblack">50%</td>
+        <td class="sblack">50%</td>
+        
+        <td class="sblue">4.25</td>
+        
+        <td class="sgreen">3.50</td>
+        <td class="sred">0.75</td>
+        <td class="sblack">75%</td>
+        
+        <td class="sblue">75%</td>
+        
+        <td class="sblack">75%</td>
+        
+        <td align="left" width="50">
+        <div class="graphwideindex"><div style="width:41.00px;" class="bargray"></div></div>
+        
+        </td>
+        <td><font color="gray"><b>2.50</b></font></td>
+        </tr>
+        <tr height="10"><td colspan="17"></td></tr>
+        
+        <tr height="10"><td colspan="18" align="center" valign="middle"><font size="1">&nbsp;</font></td></tr>
+        <tr class="trow2" height="40"><td colspan="7">
+        &nbsp;<img src="//www.soccerstatistics.com/img/flags/fi.png" width="16" height="11" alt="FINLAND14">
+        &nbsp;<font size="2">Finland - <font color="gray">Kolmonen Uusimaa &amp; H. 3</font></font>&nbsp;&nbsp;&nbsp;<a class="button" style="background-color:#eeeeee;font-color=white;" href="latest.asp?league=finland14"><font color="#666666">Stats</font></a>
+        </td>
+        <td colspan="11" align="right">
+        
+        &nbsp;&nbsp;<font color="gray" size="1">73 matches played out of 132</font>&nbsp;&nbsp;
+        
+        </td>
+        </tr>
+        
+        <tr class="trow2" height="24">
+        <td width="110"></td>
+        <td width="55"></td>
+        <td width="50"></td>
+        <td class="sgray">P</td>
+        <td class="sgray">W%</td>
+        
+        <td class="sgray">FTS</td>
+        <td class="sgray">CS</td>
+        <td class="sgray">BTS</td>
+        
+        <td class="sgray">TG</td>
+        
+        <td class="sgray">GF</td>
+        <td class="sgray">GA</td>
+        <td class="sgray">1.5+</td>
+        
+        <td class="sgray">2.5+</td>
+        
+        <td class="sgray">3.5+</td>
+        
+        <td colspan="2"><font color="gray">Points Per Game</font></td>
+        
+        <td width="25"></td>
+        <td width="25"></td>
+        </tr>
+        
+        <tr class="trow8" height="18">
+        <td align="right">
+        Viikingit B
+        </td>
+        
+        <td rowspan="2" align="center" valign="middle">
+        <font size="1" color="gray">19:00</font>
+        </td>
+        
+        
+        <td class="sgray">(home)</td>
+        <td class="sgray">5</td>
+        <td class="sgreen">0%</td>
+        
+        <td class="sblack">100%</td>
+        <td class="sblack">0%</td>
+        <td class="sblack">0%</td>
+        
+        <td class="sblue">4.00</td>
+        
+        <td class="sgreen">0.00</td>
+        <td class="sred">4.00</td>
+        <td class="sblack">100%</td>
+        
+        <td class="sblue">60%</td>
+        
+        <td class="sblack">60%</td>
+        
+        <td align="left" width="50">
+        <div class="graphwideindex"><div style="width:0.00px;" class="bargray"></div></div>
+        
+        </td>
+        <td><font color="gray"><b>0.00</b></font></td>
+        <td rowspan="2" colspan="2" align="center" valign="middle">
+        <a class="button" style="background-color:#AAAAAA;font-color=white;" href="pmatch.asp?league=finland14&amp;stats=74-3-8-2019-viikingit-b-joki"><font color="#f8f8f8">Stats</font></a>
+        </td>
+        
+        </tr>
+        <tr class="trow8" height="18">
+        <td align="right">
+        JoKi
+        </td>
+        
+        <td class="sgray">(away)</td>
+        <td class="sgray">5</td>
+        <td class="sgreen">0%</td>
+        
+        <td class="sblack">80%</td>
+        <td class="sblack">20%</td>
+        <td class="sblack">20%</td>
+        
+        <td class="sblue">2.80</td>
+        
+        <td class="sgreen">0.40</td>
+        <td class="sred">2.40</td>
+        <td class="sblack">80%</td>
+        
+        <td class="sblue">60%</td>
+        
+        <td class="sblack">40%</td>
+        
+        <td align="left" width="50">
+        <div class="graphwideindex"><div style="width:6.56px;" class="bargray"></div></div>
+        
+        </td>
+        <td><font color="gray"><b>0.40</b></font></td>
+        </tr>
+        <tr height="10"><td colspan="17"></td></tr>
+        
+        <tr height="10"><td colspan="18" align="center" valign="middle"><font size="1">&nbsp;</font></td></tr>
+        <tr class="trow2" height="40"><td colspan="7">
+        &nbsp;<img src="//www.soccerstatistics.com/img/flags/id.png" width="16" height="11" alt="INDONESIA">
+        &nbsp;<font size="2">Indonesia - <font color="gray">Liga 1</font></font>&nbsp;&nbsp;&nbsp;<a class="button" style="background-color:#eeeeee;font-color=white;" href="latest.asp?league=indonesia"><font color="#666666">Stats</font></a>
+        </td>
+        <td colspan="11" align="right">
+        
+        &nbsp;&nbsp;<font color="gray" size="1">89 matches played out of 306</font>&nbsp;&nbsp;
+        
+        </td>
+        </tr>
+        
+        <tr class="trow2" height="24">
+        <td width="110"></td>
+        <td width="55"></td>
+        <td width="50"></td>
+        <td class="sgray">P</td>
+        <td class="sgray">W%</td>
+        
+        <td class="sgray">FTS</td>
+        <td class="sgray">CS</td>
+        <td class="sgray">BTS</td>
+        
+        <td class="sgray">TG</td>
+        
+        <td class="sgray">GF</td>
+        <td class="sgray">GA</td>
+        <td class="sgray">1.5+</td>
+        
+        <td class="sgray">2.5+</td>
+        
+        <td class="sgray">3.5+</td>
+        
+        <td colspan="2"><font color="gray">Points Per Game</font></td>
+        
+        <td width="25"></td>
+        <td width="25"></td>
+        </tr>
+        
+        <tr class="trow8" height="18">
+        <td align="right">
+        Bali Utd
+        </td>
+        
+        <td rowspan="2" align="center" valign="middle">
+        <font size="1" color="gray">13:30</font>
+        </td>
+        
+        
+        <td class="sgray">(home)</td>
+        <td class="sgray">5</td>
+        <td class="sgreen">100%</td>
+        
+        <td class="sblack">0%</td>
+        <td class="sblack">60%</td>
+        <td class="sblack">40%</td>
+        
+        <td class="sred">2.00</td>
+        
+        <td class="sgreen">1.60</td>
+        <td class="sred">0.40</td>
+        <td class="sblack">40%</td>
+        
+        <td class="sred">40%</td>
+        
+        <td class="sblack">20%</td>
+        
+        <td align="left" width="50">
+        <div class="graphwideindex"><div style="width:49.20px;" class="bargray"></div></div>
+        
+        </td>
+        <td><font color="gray"><b>3.00</b></font></td>
+        <td rowspan="2" colspan="2" align="center" valign="middle">
+        <a class="button" style="background-color:#AAAAAA;font-color=white;" href="pmatch.asp?league=indonesia&amp;stats=107-3-17-2019-bali-utd-psm-makassar"><font color="#f8f8f8">Stats</font></a>
+        </td>
+        
+        </tr>
+        <tr class="trow8" height="18">
+        <td align="right">
+        PSM Makassar
+        </td>
+        
+        <td class="sgray">(away)</td>
+        <td class="sgray">2</td>
+        <td class="sgreen">0%</td>
+        
+        <td class="sblack">100%</td>
+        <td class="sblack">50%</td>
+        <td class="sblack">0%</td>
+        
+        <td class="sred">1.00</td>
+        
+        <td class="sgreen">0.00</td>
+        <td class="sred">1.00</td>
+        <td class="sblack">50%</td>
+        
+        <td class="sred">0%</td>
+        
+        <td class="sblack">0%</td>
+        
+        <td align="left" width="50">
+        <div class="graphwideindex"><div style="width:8.20px;" class="bargray"></div></div>
+        
+        </td>
+        <td><font color="gray"><b>0.50</b></font></td>
+        </tr>
+        <tr height="10"><td colspan="17"></td></tr>
+        
+        <tr height="10"><td colspan="18" align="center" valign="middle"><font size="1">&nbsp;</font></td></tr>
+        <tr class="trow2" height="40"><td colspan="7">
+        &nbsp;<img src="//www.soccerstatistics.com/img/flags/ru.png" width="16" height="11" alt="RUSSIA3">
+        &nbsp;<font size="2">Russia - <font color="gray">PFL - Center</font></font>&nbsp;&nbsp;&nbsp;<a class="button" style="background-color:#eeeeee;font-color=white;" href="latest.asp?league=russia3"><font color="#666666">Stats</font></a>
+        </td>
+        <td colspan="11" align="right">
+        
+        &nbsp;&nbsp;<font color="gray" size="1">14 matches played out of 182</font>&nbsp;&nbsp;
+        
+        </td>
+        </tr>
+        
+        <tr class="trow2" height="24">
+        <td width="110"></td>
+        <td width="55"></td>
+        <td width="50"></td>
+        <td class="sgray">P</td>
+        <td class="sgray">W%</td>
+        
+        <td class="sgray">FTS</td>
+        <td class="sgray">CS</td>
+        <td class="sgray">BTS</td>
+        
+        <td class="sgray">TG</td>
+        
+        <td class="sgray">GF</td>
+        <td class="sgray">GA</td>
+        <td class="sgray">1.5+</td>
+        
+        <td class="sgray">2.5+</td>
+        
+        <td class="sgray">3.5+</td>
+        
+        <td colspan="2"><font color="gray">Points Per Game</font></td>
+        
+        <td width="25"></td>
+        <td width="25"></td>
+        </tr>
+        
+        <tr class="trow8" height="18">
+        <td align="right">
+        Khimki B
+        </td>
+        
+        <td rowspan="2" align="center" valign="middle">
+        <font size="1" color="gray">12:00</font>
+        </td>
+        
+        
+        <td class="sgray">(home)</td>
+        <td class="sgray"></td>
+        <td class="sgreen"></td>
+        
+        <td class="sblack"></td>
+        <td class="sblack"></td>
+        <td class="sblack"></td>
+        
+        <td class="sblack"></td>
+        
+        <td class="sgreen"></td>
+        <td class="sred"></td>
+        <td class="sblack"></td>
+        
+        <td class="sblack"></td>
+        
+        <td class="sblack"></td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td>&nbsp;</td>
+        
+        </tr>
+        <tr class="trow8" height="18">
+        <td align="right">
+        Ryazan
+        </td>
+        
+        <td class="sgray">(away)</td>
+        <td class="sgray">1</td>
+        <td class="sgreen">0%</td>
+        
+        <td class="sblack">0%</td>
+        <td class="sblack">0%</td>
+        <td class="sblack">100%</td>
+        
+        <td class="sblue">3.00</td>
+        
+        <td class="sgreen">1.00</td>
+        <td class="sred">2.00</td>
+        <td class="sblack">100%</td>
+        
+        <td class="sblue">100%</td>
+        
+        <td class="sblack">0%</td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td><font color="gray"><b>0.00</b></font></td>
+        </tr>
+        <tr height="10"><td colspan="17"></td></tr>
+        
+        <tr class="trow8" height="18">
+        <td align="right">
+        Strogino
+        </td>
+        
+        <td rowspan="2" align="center" valign="middle">
+        <font size="1" color="gray">15:00</font>
+        </td>
+        
+        
+        <td class="sgray">(home)</td>
+        <td class="sgray">1</td>
+        <td class="sgreen">100%</td>
+        
+        <td class="sblack">0%</td>
+        <td class="sblack">0%</td>
+        <td class="sblack">100%</td>
+        
+        <td class="sblue">3.00</td>
+        
+        <td class="sgreen">2.00</td>
+        <td class="sred">1.00</td>
+        <td class="sblack">100%</td>
+        
+        <td class="sblue">100%</td>
+        
+        <td class="sblack">0%</td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td><font color="gray"><b>3.00</b></font></td>
+        
+        </tr>
+        <tr class="trow8" height="18">
+        <td align="right">
+        Kaluga
+        </td>
+        
+        <td class="sgray">(away)</td>
+        <td class="sgray">1</td>
+        <td class="sgreen">100%</td>
+        
+        <td class="sblack">0%</td>
+        <td class="sblack">100%</td>
+        <td class="sblack">0%</td>
+        
+        <td class="sred">1.00</td>
+        
+        <td class="sgreen">1.00</td>
+        <td class="sred">0.00</td>
+        <td class="sblack">0%</td>
+        
+        <td class="sred">0%</td>
+        
+        <td class="sblack">0%</td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td><font color="gray"><b>3.00</b></font></td>
+        </tr>
+        <tr height="10"><td colspan="17"></td></tr>
+        
+        <tr class="trow8" height="18">
+        <td align="right">
+        Rotor Volg. B
+        </td>
+        
+        <td rowspan="2" align="center" valign="middle">
+        <font size="1" color="gray">16:00</font>
+        </td>
+        
+        
+        <td class="sgray">(home)</td>
+        <td class="sgray">1</td>
+        <td class="sgreen">0%</td>
+        
+        <td class="sblack">100%</td>
+        <td class="sblack">0%</td>
+        <td class="sblack">0%</td>
+        
+        <td class="sred">1.00</td>
+        
+        <td class="sgreen">0.00</td>
+        <td class="sred">1.00</td>
+        <td class="sblack">0%</td>
+        
+        <td class="sred">0%</td>
+        
+        <td class="sblack">0%</td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td><font color="gray"><b>0.00</b></font></td>
+        
+        </tr>
+        <tr class="trow8" height="18">
+        <td align="right">
+        Salyut-Belgorod
+        </td>
+        
+        <td class="sgray">(away)</td>
+        <td class="sgray">1</td>
+        <td class="sgreen">100%</td>
+        
+        <td class="sblack">0%</td>
+        <td class="sblack">100%</td>
+        <td class="sblack">0%</td>
+        
+        <td class="sblue">4.00</td>
+        
+        <td class="sgreen">4.00</td>
+        <td class="sred">0.00</td>
+        <td class="sblack">100%</td>
+        
+        <td class="sblue">100%</td>
+        
+        <td class="sblack">100%</td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td><font color="gray"><b>3.00</b></font></td>
+        </tr>
+        <tr height="10"><td colspan="17"></td></tr>
+        
+        <tr class="trow8" height="18">
+        <td align="right">
+        Khimik Nov.
+        </td>
+        
+        <td rowspan="2" align="center" valign="middle">
+        <font size="1" color="gray">17:00</font>
+        </td>
+        
+        
+        <td class="sgray">(home)</td>
+        <td class="sgray">1</td>
+        <td class="sgreen">0%</td>
+        
+        <td class="sblack">0%</td>
+        <td class="sblack">0%</td>
+        <td class="sblack">100%</td>
+        
+        <td class="sblue">3.00</td>
+        
+        <td class="sgreen">1.00</td>
+        <td class="sred">2.00</td>
+        <td class="sblack">100%</td>
+        
+        <td class="sblue">100%</td>
+        
+        <td class="sblack">0%</td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td><font color="gray"><b>0.00</b></font></td>
+        
+        </tr>
+        <tr class="trow8" height="18">
+        <td align="right">
+        Met. Lipetsk
+        </td>
+        
+        <td class="sgray">(away)</td>
+        <td class="sgray">1</td>
+        <td class="sgreen">100%</td>
+        
+        <td class="sblack">0%</td>
+        <td class="sblack">100%</td>
+        <td class="sblack">0%</td>
+        
+        <td class="sred">2.00</td>
+        
+        <td class="sgreen">2.00</td>
+        <td class="sred">0.00</td>
+        <td class="sblack">100%</td>
+        
+        <td class="sred">0%</td>
+        
+        <td class="sblack">0%</td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td><font color="gray"><b>3.00</b></font></td>
+        </tr>
+        <tr height="10"><td colspan="17"></td></tr>
+        
+        <tr class="trow8" height="18">
+        <td align="right">
+        Sokol Saratov
+        </td>
+        
+        <td rowspan="2" align="center" valign="middle">
+        <font size="1" color="gray">17:00</font>
+        </td>
+        
+        
+        <td class="sgray">(home)</td>
+        <td class="sgray">1</td>
+        <td class="sgreen">0%</td>
+        
+        <td class="sblack">100%</td>
+        <td class="sblack">0%</td>
+        <td class="sblack">0%</td>
+        
+        <td class="sred">1.00</td>
+        
+        <td class="sgreen">0.00</td>
+        <td class="sred">1.00</td>
+        <td class="sblack">0%</td>
+        
+        <td class="sred">0%</td>
+        
+        <td class="sblack">0%</td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td><font color="gray"><b>0.00</b></font></td>
+        
+        </tr>
+        <tr class="trow8" height="18">
+        <td align="right">
+        FC Ararat Mosco
+        </td>
+        
+        <td class="sgray">(away)</td>
+        <td class="sgray"></td>
+        <td class="sgreen"></td>
+        
+        <td class="sblack"></td>
+        <td class="sblack"></td>
+        <td class="sblack"></td>
+        
+        <td class="sblack"></td>
+        
+        <td class="sgreen"></td>
+        <td class="sred"></td>
+        <td class="sblack"></td>
+        
+        <td class="sblack"></td>
+        
+        <td class="sblack"></td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td>&nbsp;</td>
+        </tr>
+        <tr height="10"><td colspan="17"></td></tr>
+        
+        <tr class="trow8" height="18">
+        <td align="right">
+        Zorkiy Kr.
+        </td>
+        
+        <td rowspan="2" align="center" valign="middle">
+        <font size="1" color="gray">17:00</font>
+        </td>
+        
+        
+        <td class="sgray">(home)</td>
+        <td class="sgray">1</td>
+        <td class="sgreen">0%</td>
+        
+        <td class="sblack">100%</td>
+        <td class="sblack">0%</td>
+        <td class="sblack">0%</td>
+        
+        <td class="sblue">4.00</td>
+        
+        <td class="sgreen">0.00</td>
+        <td class="sred">4.00</td>
+        <td class="sblack">100%</td>
+        
+        <td class="sblue">100%</td>
+        
+        <td class="sblack">100%</td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td><font color="gray"><b>0.00</b></font></td>
+        
+        </tr>
+        <tr class="trow8" height="18">
+        <td align="right">
+        Saturn Ramen.
+        </td>
+        
+        <td class="sgray">(away)</td>
+        <td class="sgray">1</td>
+        <td class="sgreen">0%</td>
+        
+        <td class="sblack">0%</td>
+        <td class="sblack">0%</td>
+        <td class="sblack">100%</td>
+        
+        <td class="sblue">10.00</td>
+        
+        <td class="sgreen">2.00</td>
+        <td class="sred">8.00</td>
+        <td class="sblack">100%</td>
+        
+        <td class="sblue">100%</td>
+        
+        <td class="sblack">100%</td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td><font color="gray"><b>0.00</b></font></td>
+        </tr>
+        <tr height="10"><td colspan="17"></td></tr>
+        
+        <tr class="trow8" height="18">
+        <td align="right">
+        Kvant
+        </td>
+        
+        <td rowspan="2" align="center" valign="middle">
+        <font size="1" color="gray">17:30</font>
+        </td>
+        
+        
+        <td class="sgray">(home)</td>
+        <td class="sgray">1</td>
+        <td class="sgreen">0%</td>
+        
+        <td class="sblack">100%</td>
+        <td class="sblack">0%</td>
+        <td class="sblack">0%</td>
+        
+        <td class="sred">2.00</td>
+        
+        <td class="sgreen">0.00</td>
+        <td class="sred">2.00</td>
+        <td class="sblack">100%</td>
+        
+        <td class="sred">0%</td>
+        
+        <td class="sblack">0%</td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td><font color="gray"><b>0.00</b></font></td>
+        
+        </tr>
+        <tr class="trow8" height="18">
+        <td align="right">
+        Dynamo Bryansk
+        </td>
+        
+        <td class="sgray">(away)</td>
+        <td class="sgray">1</td>
+        <td class="sgreen">100%</td>
+        
+        <td class="sblack">0%</td>
+        <td class="sblack">100%</td>
+        <td class="sblack">0%</td>
+        
+        <td class="sred">1.00</td>
+        
+        <td class="sgreen">1.00</td>
+        <td class="sred">0.00</td>
+        <td class="sblack">0%</td>
+        
+        <td class="sred">0%</td>
+        
+        <td class="sblack">0%</td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td><font color="gray"><b>3.00</b></font></td>
+        </tr>
+        <tr height="10"><td colspan="17"></td></tr>
+        
+        <tr height="10"><td colspan="18" align="center" valign="middle"><font size="1">&nbsp;</font></td></tr>
+        <tr class="trow2" height="40"><td colspan="7">
+        &nbsp;<img src="//www.soccerstatistics.com/img/flags/ru.png" width="16" height="11" alt="RUSSIA5">
+        &nbsp;<font size="2">Russia - <font color="gray">PFL - South</font></font>&nbsp;&nbsp;&nbsp;<a class="button" style="background-color:#eeeeee;font-color=white;" href="latest.asp?league=russia5"><font color="#666666">Stats</font></a>
+        </td>
+        <td colspan="11" align="right">
+        
+        &nbsp;&nbsp;<font color="gray" size="1">16 matches played out of 240</font>&nbsp;&nbsp;
+        
+        </td>
+        </tr>
+        
+        <tr class="trow2" height="24">
+        <td width="110"></td>
+        <td width="55"></td>
+        <td width="50"></td>
+        <td class="sgray">P</td>
+        <td class="sgray">W%</td>
+        
+        <td class="sgray">FTS</td>
+        <td class="sgray">CS</td>
+        <td class="sgray">BTS</td>
+        
+        <td class="sgray">TG</td>
+        
+        <td class="sgray">GF</td>
+        <td class="sgray">GA</td>
+        <td class="sgray">1.5+</td>
+        
+        <td class="sgray">2.5+</td>
+        
+        <td class="sgray">3.5+</td>
+        
+        <td colspan="2"><font color="gray">Points Per Game</font></td>
+        
+        <td width="25"></td>
+        <td width="25"></td>
+        </tr>
+        
+        <tr class="trow8" height="18">
+        <td align="right">
+        Dyn. Stavropol
+        </td>
+        
+        <td rowspan="2" align="center" valign="middle">
+        <font size="1" color="gray">16:00</font>
+        </td>
+        
+        
+        <td class="sgray">(home)</td>
+        <td class="sgray">1</td>
+        <td class="sgreen">100%</td>
+        
+        <td class="sblack">0%</td>
+        <td class="sblack">100%</td>
+        <td class="sblack">0%</td>
+        
+        <td class="sblue">3.00</td>
+        
+        <td class="sgreen">3.00</td>
+        <td class="sred">0.00</td>
+        <td class="sblack">100%</td>
+        
+        <td class="sblue">100%</td>
+        
+        <td class="sblack">0%</td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td><font color="gray"><b>3.00</b></font></td>
+        
+        </tr>
+        <tr class="trow8" height="18">
+        <td align="right">
+        Druzhba Maykop
+        </td>
+        
+        <td class="sgray">(away)</td>
+        <td class="sgray">1</td>
+        <td class="sgreen">100%</td>
+        
+        <td class="sblack">0%</td>
+        <td class="sblack">100%</td>
+        <td class="sblack">0%</td>
+        
+        <td class="sred">1.00</td>
+        
+        <td class="sgreen">1.00</td>
+        <td class="sred">0.00</td>
+        <td class="sblack">0%</td>
+        
+        <td class="sred">0%</td>
+        
+        <td class="sblack">0%</td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td><font color="gray"><b>3.00</b></font></td>
+        </tr>
+        <tr height="10"><td colspan="17"></td></tr>
+        
+        <tr class="trow8" height="18">
+        <td align="right">
+        FK Makhachkala
+        </td>
+        
+        <td rowspan="2" align="center" valign="middle">
+        <font size="1" color="gray">16:00</font>
+        </td>
+        
+        
+        <td class="sgray">(home)</td>
+        <td class="sgray">1</td>
+        <td class="sgreen">100%</td>
+        
+        <td class="sblack">0%</td>
+        <td class="sblack">100%</td>
+        <td class="sblack">0%</td>
+        
+        <td class="sred">1.00</td>
+        
+        <td class="sgreen">1.00</td>
+        <td class="sred">0.00</td>
+        <td class="sblack">0%</td>
+        
+        <td class="sred">0%</td>
+        
+        <td class="sblack">0%</td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td><font color="gray"><b>3.00</b></font></td>
+        
+        </tr>
+        <tr class="trow8" height="18">
+        <td align="right">
+        Urozhay
+        </td>
+        
+        <td class="sgray">(away)</td>
+        <td class="sgray">1</td>
+        <td class="sgreen">0%</td>
+        
+        <td class="sblack">100%</td>
+        <td class="sblack">0%</td>
+        <td class="sblack">0%</td>
+        
+        <td class="sred">2.00</td>
+        
+        <td class="sgreen">0.00</td>
+        <td class="sred">2.00</td>
+        <td class="sblack">100%</td>
+        
+        <td class="sred">0%</td>
+        
+        <td class="sblack">0%</td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td><font color="gray"><b>0.00</b></font></td>
+        </tr>
+        <tr height="10"><td colspan="17"></td></tr>
+        
+        <tr class="trow8" height="18">
+        <td align="right">
+        Sp. Vladikavkaz
+        </td>
+        
+        <td rowspan="2" align="center" valign="middle">
+        <font size="1" color="gray">16:00</font>
+        </td>
+        
+        
+        <td class="sgray">(home)</td>
+        <td class="sgray">1</td>
+        <td class="sgreen">0%</td>
+        
+        <td class="sblack">100%</td>
+        <td class="sblack">0%</td>
+        <td class="sblack">0%</td>
+        
+        <td class="sred">1.00</td>
+        
+        <td class="sgreen">0.00</td>
+        <td class="sred">1.00</td>
+        <td class="sblack">0%</td>
+        
+        <td class="sred">0%</td>
+        
+        <td class="sblack">0%</td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td><font color="gray"><b>0.00</b></font></td>
+        
+        </tr>
+        <tr class="trow8" height="18">
+        <td align="right">
+        Anzhi
+        </td>
+        
+        <td class="sgray">(away)</td>
+        <td class="sgray">1</td>
+        <td class="sgreen">0%</td>
+        
+        <td class="sblack">0%</td>
+        <td class="sblack">0%</td>
+        <td class="sblack">100%</td>
+        
+        <td class="sred">2.00</td>
+        
+        <td class="sgreen">1.00</td>
+        <td class="sred">1.00</td>
+        <td class="sblack">100%</td>
+        
+        <td class="sred">0%</td>
+        
+        <td class="sblack">0%</td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td><font color="gray"><b>1.00</b></font></td>
+        </tr>
+        <tr height="10"><td colspan="17"></td></tr>
+        
+        <tr class="trow8" height="18">
+        <td align="right">
+        Inter Cherkessk
+        </td>
+        
+        <td rowspan="2" align="center" valign="middle">
+        <font size="1" color="gray">17:00</font>
+        </td>
+        
+        
+        <td class="sgray">(home)</td>
+        <td class="sgray"></td>
+        <td class="sgreen"></td>
+        
+        <td class="sblack"></td>
+        <td class="sblack"></td>
+        <td class="sblack"></td>
+        
+        <td class="sblack"></td>
+        
+        <td class="sgreen"></td>
+        <td class="sred"></td>
+        <td class="sblack"></td>
+        
+        <td class="sblack"></td>
+        
+        <td class="sblack"></td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td>&nbsp;</td>
+        
+        </tr>
+        <tr class="trow8" height="18">
+        <td align="right">
+        Spartak Vladika
+        </td>
+        
+        <td class="sgray">(away)</td>
+        <td class="sgray"></td>
+        <td class="sgreen"></td>
+        
+        <td class="sblack"></td>
+        <td class="sblack"></td>
+        <td class="sblack"></td>
+        
+        <td class="sblack"></td>
+        
+        <td class="sgreen"></td>
+        <td class="sred"></td>
+        <td class="sblack"></td>
+        
+        <td class="sblack"></td>
+        
+        <td class="sblack"></td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td>&nbsp;</td>
+        </tr>
+        <tr height="10"><td colspan="17"></td></tr>
+        
+        <tr class="trow8" height="18">
+        <td align="right">
+        Krasnodar C
+        </td>
+        
+        <td rowspan="2" align="center" valign="middle">
+        <font size="1" color="gray">17:00</font>
+        </td>
+        
+        
+        <td class="sgray">(home)</td>
+        <td class="sgray">1</td>
+        <td class="sgreen">0%</td>
+        
+        <td class="sblack">0%</td>
+        <td class="sblack">0%</td>
+        <td class="sblack">100%</td>
+        
+        <td class="sred">2.00</td>
+        
+        <td class="sgreen">1.00</td>
+        <td class="sred">1.00</td>
+        <td class="sblack">100%</td>
+        
+        <td class="sred">0%</td>
+        
+        <td class="sblack">0%</td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td><font color="gray"><b>1.00</b></font></td>
+        
+        </tr>
+        <tr class="trow8" height="18">
+        <td align="right">
+        Legion Dynamo
+        </td>
+        
+        <td class="sgray">(away)</td>
+        <td class="sgray">1</td>
+        <td class="sgreen">100%</td>
+        
+        <td class="sblack">0%</td>
+        <td class="sblack">100%</td>
+        <td class="sblack">0%</td>
+        
+        <td class="sred">1.00</td>
+        
+        <td class="sgreen">1.00</td>
+        <td class="sred">0.00</td>
+        <td class="sblack">0%</td>
+        
+        <td class="sred">0%</td>
+        
+        <td class="sblack">0%</td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td><font color="gray"><b>3.00</b></font></td>
+        </tr>
+        <tr height="10"><td colspan="17"></td></tr>
+        
+        <tr class="trow8" height="18">
+        <td align="right">
+        Mashuk-KMV
+        </td>
+        
+        <td rowspan="2" align="center" valign="middle">
+        <font size="1" color="gray">17:00</font>
+        </td>
+        
+        
+        <td class="sgray">(home)</td>
+        <td class="sgray">1</td>
+        <td class="sgreen">0%</td>
+        
+        <td class="sblack">100%</td>
+        <td class="sblack">0%</td>
+        <td class="sblack">0%</td>
+        
+        <td class="sred">1.00</td>
+        
+        <td class="sgreen">0.00</td>
+        <td class="sred">1.00</td>
+        <td class="sblack">0%</td>
+        
+        <td class="sred">0%</td>
+        
+        <td class="sblack">0%</td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td><font color="gray"><b>0.00</b></font></td>
+        
+        </tr>
+        <tr class="trow8" height="18">
+        <td align="right">
+        Biolog Nov.
+        </td>
+        
+        <td class="sgray">(away)</td>
+        <td class="sgray">1</td>
+        <td class="sgreen">0%</td>
+        
+        <td class="sblack">0%</td>
+        <td class="sblack">0%</td>
+        <td class="sblack">100%</td>
+        
+        <td class="sred">2.00</td>
+        
+        <td class="sgreen">1.00</td>
+        <td class="sred">1.00</td>
+        <td class="sblack">100%</td>
+        
+        <td class="sred">0%</td>
+        
+        <td class="sblack">0%</td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td><font color="gray"><b>1.00</b></font></td>
+        </tr>
+        <tr height="10"><td colspan="17"></td></tr>
+        
+        <tr class="trow8" height="18">
+        <td align="right">
+        Volgar Ast.
+        </td>
+        
+        <td rowspan="2" align="center" valign="middle">
+        <font size="1" color="gray">17:00</font>
+        </td>
+        
+        
+        <td class="sgray">(home)</td>
+        <td class="sgray">1</td>
+        <td class="sgreen">100%</td>
+        
+        <td class="sblack">0%</td>
+        <td class="sblack">100%</td>
+        <td class="sblack">0%</td>
+        
+        <td class="sred">2.00</td>
+        
+        <td class="sgreen">2.00</td>
+        <td class="sred">0.00</td>
+        <td class="sblack">100%</td>
+        
+        <td class="sred">0%</td>
+        
+        <td class="sblack">0%</td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td><font color="gray"><b>3.00</b></font></td>
+        
+        </tr>
+        <tr class="trow8" height="18">
+        <td align="right">
+        SKA Rostov
+        </td>
+        
+        <td class="sgray">(away)</td>
+        <td class="sgray">1</td>
+        <td class="sgreen">100%</td>
+        
+        <td class="sblack">0%</td>
+        <td class="sblack">100%</td>
+        <td class="sblack">0%</td>
+        
+        <td class="sred">1.00</td>
+        
+        <td class="sgreen">1.00</td>
+        <td class="sred">0.00</td>
+        <td class="sblack">0%</td>
+        
+        <td class="sred">0%</td>
+        
+        <td class="sblack">0%</td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td><font color="gray"><b>3.00</b></font></td>
+        </tr>
+        <tr height="10"><td colspan="17"></td></tr>
+        
+        <tr class="trow8" height="18">
+        <td align="right">
+        Chernomorets N.
+        </td>
+        
+        <td rowspan="2" align="center" valign="middle">
+        <font size="1" color="gray">17:30</font>
+        </td>
+        
+        
+        <td class="sgray">(home)</td>
+        <td class="sgray">1</td>
+        <td class="sgreen">0%</td>
+        
+        <td class="sblack">100%</td>
+        <td class="sblack">0%</td>
+        <td class="sblack">0%</td>
+        
+        <td class="sred">1.00</td>
+        
+        <td class="sgreen">0.00</td>
+        <td class="sred">1.00</td>
+        <td class="sblack">0%</td>
+        
+        <td class="sred">0%</td>
+        
+        <td class="sblack">0%</td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td><font color="gray"><b>0.00</b></font></td>
+        
+        </tr>
+        <tr class="trow8" height="18">
+        <td align="right">
+        Spartak Nalchik
+        </td>
+        
+        <td class="sgray">(away)</td>
+        <td class="sgray"></td>
+        <td class="sgreen"></td>
+        
+        <td class="sblack"></td>
+        <td class="sblack"></td>
+        <td class="sblack"></td>
+        
+        <td class="sblack"></td>
+        
+        <td class="sgreen"></td>
+        <td class="sred"></td>
+        <td class="sblack"></td>
+        
+        <td class="sblack"></td>
+        
+        <td class="sblack"></td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td>&nbsp;</td>
+        </tr>
+        <tr height="10"><td colspan="17"></td></tr>
+        
+        <tr height="10"><td colspan="18" align="center" valign="middle"><font size="1">&nbsp;</font></td></tr>
+        <tr class="trow2" height="40"><td colspan="7">
+        &nbsp;<img src="//www.soccerstatistics.com/img/flags/ru.png" width="16" height="11" alt="RUSSIA6">
+        &nbsp;<font size="2">Russia - <font color="gray">PFL - Ural-Povol.</font></font>&nbsp;&nbsp;&nbsp;<a class="button" style="background-color:#eeeeee;font-color=white;" href="latest.asp?league=russia6"><font color="#666666">Stats</font></a>
+        </td>
+        <td colspan="11" align="right">
+        
+        &nbsp;&nbsp;<font color="gray" size="1">12 matches played out of 132</font>&nbsp;&nbsp;
+        
+        </td>
+        </tr>
+        
+        <tr class="trow2" height="24">
+        <td width="110"></td>
+        <td width="55"></td>
+        <td width="50"></td>
+        <td class="sgray">P</td>
+        <td class="sgray">W%</td>
+        
+        <td class="sgray">FTS</td>
+        <td class="sgray">CS</td>
+        <td class="sgray">BTS</td>
+        
+        <td class="sgray">TG</td>
+        
+        <td class="sgray">GF</td>
+        <td class="sgray">GA</td>
+        <td class="sgray">1.5+</td>
+        
+        <td class="sgray">2.5+</td>
+        
+        <td class="sgray">3.5+</td>
+        
+        <td colspan="2"><font color="gray">Points Per Game</font></td>
+        
+        <td width="25"></td>
+        <td width="25"></td>
+        </tr>
+        
+        <tr class="trow8" height="18">
+        <td align="right">
+        Ufa B
+        </td>
+        
+        <td rowspan="2" align="center" valign="middle">
+        <font size="1" color="gray">13:00</font>
+        </td>
+        
+        
+        <td class="sgray">(home)</td>
+        <td class="sgray"></td>
+        <td class="sgreen"></td>
+        
+        <td class="sblack"></td>
+        <td class="sblack"></td>
+        <td class="sblack"></td>
+        
+        <td class="sblack"></td>
+        
+        <td class="sgreen"></td>
+        <td class="sred"></td>
+        <td class="sblack"></td>
+        
+        <td class="sblack"></td>
+        
+        <td class="sblack"></td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td>&nbsp;</td>
+        
+        </tr>
+        <tr class="trow8" height="18">
+        <td align="right">
+        Akron
+        </td>
+        
+        <td class="sgray">(away)</td>
+        <td class="sgray">1</td>
+        <td class="sgreen">100%</td>
+        
+        <td class="sblack">0%</td>
+        <td class="sblack">100%</td>
+        <td class="sblack">0%</td>
+        
+        <td class="sred">1.00</td>
+        
+        <td class="sgreen">1.00</td>
+        <td class="sred">0.00</td>
+        <td class="sblack">0%</td>
+        
+        <td class="sred">0%</td>
+        
+        <td class="sblack">0%</td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td><font color="gray"><b>3.00</b></font></td>
+        </tr>
+        <tr height="10"><td colspan="17"></td></tr>
+        
+        <tr class="trow8" height="18">
+        <td align="right">
+        FC Tyumen
+        </td>
+        
+        <td rowspan="2" align="center" valign="middle">
+        <font size="1" color="gray">16:00</font>
+        </td>
+        
+        
+        <td class="sgray">(home)</td>
+        <td class="sgray">1</td>
+        <td class="sgreen">100%</td>
+        
+        <td class="sblack">0%</td>
+        <td class="sblack">0%</td>
+        <td class="sblack">100%</td>
+        
+        <td class="sblue">5.00</td>
+        
+        <td class="sgreen">3.00</td>
+        <td class="sred">2.00</td>
+        <td class="sblack">100%</td>
+        
+        <td class="sblue">100%</td>
+        
+        <td class="sblack">100%</td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td><font color="gray"><b>3.00</b></font></td>
+        
+        </tr>
+        <tr class="trow8" height="18">
+        <td align="right">
+        Zenit-Izhevsk
+        </td>
+        
+        <td class="sgray">(away)</td>
+        <td class="sgray"></td>
+        <td class="sgreen"></td>
+        
+        <td class="sblack"></td>
+        <td class="sblack"></td>
+        <td class="sblack"></td>
+        
+        <td class="sblack"></td>
+        
+        <td class="sgreen"></td>
+        <td class="sred"></td>
+        <td class="sblack"></td>
+        
+        <td class="sblack"></td>
+        
+        <td class="sblack"></td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td>&nbsp;</td>
+        </tr>
+        <tr height="10"><td colspan="17"></td></tr>
+        
+        <tr class="trow8" height="18">
+        <td align="right">
+        Lada SOK
+        </td>
+        
+        <td rowspan="2" align="center" valign="middle">
+        <font size="1" color="gray">16:00</font>
+        </td>
+        
+        
+        <td class="sgray">(home)</td>
+        <td class="sgray">1</td>
+        <td class="sgreen">0%</td>
+        
+        <td class="sblack">100%</td>
+        <td class="sblack">0%</td>
+        <td class="sblack">0%</td>
+        
+        <td class="sred">1.00</td>
+        
+        <td class="sgreen">0.00</td>
+        <td class="sred">1.00</td>
+        <td class="sblack">0%</td>
+        
+        <td class="sred">0%</td>
+        
+        <td class="sblack">0%</td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td><font color="gray"><b>0.00</b></font></td>
+        
+        </tr>
+        <tr class="trow8" height="18">
+        <td align="right">
+        Nosta
+        </td>
+        
+        <td class="sgray">(away)</td>
+        <td class="sgray">1</td>
+        <td class="sgreen">0%</td>
+        
+        <td class="sblack">100%</td>
+        <td class="sblack">0%</td>
+        <td class="sblack">0%</td>
+        
+        <td class="sred">2.00</td>
+        
+        <td class="sgreen">0.00</td>
+        <td class="sred">2.00</td>
+        <td class="sblack">100%</td>
+        
+        <td class="sred">0%</td>
+        
+        <td class="sblack">0%</td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td><font color="gray"><b>0.00</b></font></td>
+        </tr>
+        <tr height="10"><td colspan="17"></td></tr>
+        
+        <tr class="trow8" height="18">
+        <td align="right">
+        Zvezda Perm
+        </td>
+        
+        <td rowspan="2" align="center" valign="middle">
+        <font size="1" color="gray">16:00</font>
+        </td>
+        
+        
+        <td class="sgray">(home)</td>
+        <td class="sgray">1</td>
+        <td class="sgreen">0%</td>
+        
+        <td class="sblack">0%</td>
+        <td class="sblack">0%</td>
+        <td class="sblack">100%</td>
+        
+        <td class="sred">2.00</td>
+        
+        <td class="sgreen">1.00</td>
+        <td class="sred">1.00</td>
+        <td class="sblack">100%</td>
+        
+        <td class="sred">0%</td>
+        
+        <td class="sblack">0%</td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td><font color="gray"><b>1.00</b></font></td>
+        
+        </tr>
+        <tr class="trow8" height="18">
+        <td align="right">
+        Ural B
+        </td>
+        
+        <td class="sgray">(away)</td>
+        <td class="sgray"></td>
+        <td class="sgreen"></td>
+        
+        <td class="sblack"></td>
+        <td class="sblack"></td>
+        <td class="sblack"></td>
+        
+        <td class="sblack"></td>
+        
+        <td class="sgreen"></td>
+        <td class="sred"></td>
+        <td class="sblack"></td>
+        
+        <td class="sblack"></td>
+        
+        <td class="sblack"></td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td>&nbsp;</td>
+        </tr>
+        <tr height="10"><td colspan="17"></td></tr>
+        
+        <tr class="trow8" height="18">
+        <td align="right">
+        Lada Togliatti
+        </td>
+        
+        <td rowspan="2" align="center" valign="middle">
+        <font size="1" color="gray">16:30</font>
+        </td>
+        
+        
+        <td class="sgray">(home)</td>
+        <td class="sgray">1</td>
+        <td class="sgreen">100%</td>
+        
+        <td class="sblack">0%</td>
+        <td class="sblack">100%</td>
+        <td class="sblack">0%</td>
+        
+        <td class="sred">1.00</td>
+        
+        <td class="sgreen">1.00</td>
+        <td class="sred">0.00</td>
+        <td class="sblack">0%</td>
+        
+        <td class="sred">0%</td>
+        
+        <td class="sblack">0%</td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td><font color="gray"><b>3.00</b></font></td>
+        
+        </tr>
+        <tr class="trow8" height="18">
+        <td align="right">
+        Chelyabinsk
+        </td>
+        
+        <td class="sgray">(away)</td>
+        <td class="sgray">1</td>
+        <td class="sgreen">0%</td>
+        
+        <td class="sblack">0%</td>
+        <td class="sblack">0%</td>
+        <td class="sblack">100%</td>
+        
+        <td class="sred">2.00</td>
+        
+        <td class="sgreen">1.00</td>
+        <td class="sred">1.00</td>
+        <td class="sblack">100%</td>
+        
+        <td class="sred">0%</td>
+        
+        <td class="sblack">0%</td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td><font color="gray"><b>1.00</b></font></td>
+        </tr>
+        <tr height="10"><td colspan="17"></td></tr>
+        
+        <tr class="trow8" height="18">
+        <td align="right">
+        Kamaz
+        </td>
+        
+        <td rowspan="2" align="center" valign="middle">
+        <font size="1" color="gray">17:30</font>
+        </td>
+        
+        
+        <td class="sgray">(home)</td>
+        <td class="sgray"></td>
+        <td class="sgreen"></td>
+        
+        <td class="sblack"></td>
+        <td class="sblack"></td>
+        <td class="sblack"></td>
+        
+        <td class="sblack"></td>
+        
+        <td class="sgreen"></td>
+        <td class="sred"></td>
+        <td class="sblack"></td>
+        
+        <td class="sblack"></td>
+        
+        <td class="sblack"></td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td>&nbsp;</td>
+        
+        </tr>
+        <tr class="trow8" height="18">
+        <td align="right">
+        Volga Ulyanovsk
+        </td>
+        
+        <td class="sgray">(away)</td>
+        <td class="sgray">1</td>
+        <td class="sgreen">0%</td>
+        
+        <td class="sblack">100%</td>
+        <td class="sblack">0%</td>
+        <td class="sblack">0%</td>
+        
+        <td class="sred">1.00</td>
+        
+        <td class="sgreen">0.00</td>
+        <td class="sred">1.00</td>
+        <td class="sblack">0%</td>
+        
+        <td class="sred">0%</td>
+        
+        <td class="sblack">0%</td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td><font color="gray"><b>0.00</b></font></td>
+        </tr>
+        <tr height="10"><td colspan="17"></td></tr>
+        
+        <tr height="10"><td colspan="18" align="center" valign="middle"><font size="1">&nbsp;</font></td></tr>
+        <tr class="trow2" height="40"><td colspan="7">
+        &nbsp;<img src="//www.soccerstatistics.com/img/flags/ru.png" width="16" height="11" alt="RUSSIA7">
+        &nbsp;<font size="2">Russia - <font color="gray">PFL - West</font></font>&nbsp;&nbsp;&nbsp;<a class="button" style="background-color:#eeeeee;font-color=white;" href="latest.asp?league=russia7"><font color="#666666">Stats</font></a>
+        </td>
+        <td colspan="11" align="right">
+        
+        &nbsp;&nbsp;<font color="gray" size="1">14 matches played out of 182</font>&nbsp;&nbsp;
+        
+        </td>
+        </tr>
+        
+        <tr class="trow2" height="24">
+        <td width="110"></td>
+        <td width="55"></td>
+        <td width="50"></td>
+        <td class="sgray">P</td>
+        <td class="sgray">W%</td>
+        
+        <td class="sgray">FTS</td>
+        <td class="sgray">CS</td>
+        <td class="sgray">BTS</td>
+        
+        <td class="sgray">TG</td>
+        
+        <td class="sgray">GF</td>
+        <td class="sgray">GA</td>
+        <td class="sgray">1.5+</td>
+        
+        <td class="sgray">2.5+</td>
+        
+        <td class="sgray">3.5+</td>
+        
+        <td colspan="2"><font color="gray">Points Per Game</font></td>
+        
+        <td width="25"></td>
+        <td width="25"></td>
+        </tr>
+        
+        <tr class="trow8" height="18">
+        <td align="right">
+        Veles Moscow
+        </td>
+        
+        <td rowspan="2" align="center" valign="middle">
+        <font size="1" color="gray">16:00</font>
+        </td>
+        
+        
+        <td class="sgray">(home)</td>
+        <td class="sgray"></td>
+        <td class="sgreen"></td>
+        
+        <td class="sblack"></td>
+        <td class="sblack"></td>
+        <td class="sblack"></td>
+        
+        <td class="sblack"></td>
+        
+        <td class="sgreen"></td>
+        <td class="sred"></td>
+        <td class="sblack"></td>
+        
+        <td class="sblack"></td>
+        
+        <td class="sblack"></td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td>&nbsp;</td>
+        
+        </tr>
+        <tr class="trow8" height="18">
+        <td align="right">
+        FC Zvezda Saint
+        </td>
+        
+        <td class="sgray">(away)</td>
+        <td class="sgray">1</td>
+        <td class="sgreen">0%</td>
+        
+        <td class="sblack">100%</td>
+        <td class="sblack">0%</td>
+        <td class="sblack">0%</td>
+        
+        <td class="sblue">5.00</td>
+        
+        <td class="sgreen">0.00</td>
+        <td class="sred">5.00</td>
+        <td class="sblack">100%</td>
+        
+        <td class="sblue">100%</td>
+        
+        <td class="sblack">100%</td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td><font color="gray"><b>0.00</b></font></td>
+        </tr>
+        <tr height="10"><td colspan="17"></td></tr>
+        
+        <tr class="trow8" height="18">
+        <td align="right">
+        Znamya Truda
+        </td>
+        
+        <td rowspan="2" align="center" valign="middle">
+        <font size="1" color="gray">16:00</font>
+        </td>
+        
+        
+        <td class="sgray">(home)</td>
+        <td class="sgray">1</td>
+        <td class="sgreen">0%</td>
+        
+        <td class="sblack">0%</td>
+        <td class="sblack">0%</td>
+        <td class="sblack">100%</td>
+        
+        <td class="sblue">3.00</td>
+        
+        <td class="sgreen">1.00</td>
+        <td class="sred">2.00</td>
+        <td class="sblack">100%</td>
+        
+        <td class="sblue">100%</td>
+        
+        <td class="sblack">0%</td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td><font color="gray"><b>0.00</b></font></td>
+        
+        </tr>
+        <tr class="trow8" height="18">
+        <td align="right">
+        Rodina Moskva
+        </td>
+        
+        <td class="sgray">(away)</td>
+        <td class="sgray">1</td>
+        <td class="sgreen">0%</td>
+        
+        <td class="sblack">0%</td>
+        <td class="sblack">0%</td>
+        <td class="sblack">100%</td>
+        
+        <td class="sblue">4.00</td>
+        
+        <td class="sgreen">2.00</td>
+        <td class="sred">2.00</td>
+        <td class="sblack">100%</td>
+        
+        <td class="sblue">100%</td>
+        
+        <td class="sblack">100%</td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td><font color="gray"><b>1.00</b></font></td>
+        </tr>
+        <tr height="10"><td colspan="17"></td></tr>
+        
+        <tr class="trow8" height="18">
+        <td align="right">
+        Dolgoprudny
+        </td>
+        
+        <td rowspan="2" align="center" valign="middle">
+        <font size="1" color="gray">17:00</font>
+        </td>
+        
+        
+        <td class="sgray">(home)</td>
+        <td class="sgray">1</td>
+        <td class="sgreen">100%</td>
+        
+        <td class="sblack">0%</td>
+        <td class="sblack">100%</td>
+        <td class="sblack">0%</td>
+        
+        <td class="sblue">5.00</td>
+        
+        <td class="sgreen">5.00</td>
+        <td class="sred">0.00</td>
+        <td class="sblack">100%</td>
+        
+        <td class="sblue">100%</td>
+        
+        <td class="sblack">100%</td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td><font color="gray"><b>3.00</b></font></td>
+        
+        </tr>
+        <tr class="trow8" height="18">
+        <td align="right">
+        Luki-Energiya
+        </td>
+        
+        <td class="sgray">(away)</td>
+        <td class="sgray">1</td>
+        <td class="sgreen">100%</td>
+        
+        <td class="sblack">0%</td>
+        <td class="sblack">0%</td>
+        <td class="sblack">100%</td>
+        
+        <td class="sblue">3.00</td>
+        
+        <td class="sgreen">2.00</td>
+        <td class="sred">1.00</td>
+        <td class="sblack">100%</td>
+        
+        <td class="sblue">100%</td>
+        
+        <td class="sblack">0%</td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td><font color="gray"><b>3.00</b></font></td>
+        </tr>
+        <tr height="10"><td colspan="17"></td></tr>
+        
+        <tr class="trow8" height="18">
+        <td align="right">
+        Torp. Vladimir
+        </td>
+        
+        <td rowspan="2" align="center" valign="middle">
+        <font size="1" color="gray">17:00</font>
+        </td>
+        
+        
+        <td class="sgray">(home)</td>
+        <td class="sgray">1</td>
+        <td class="sgreen">0%</td>
+        
+        <td class="sblack">0%</td>
+        <td class="sblack">0%</td>
+        <td class="sblack">100%</td>
+        
+        <td class="sred">2.00</td>
+        
+        <td class="sgreen">1.00</td>
+        <td class="sred">1.00</td>
+        <td class="sblack">100%</td>
+        
+        <td class="sred">0%</td>
+        
+        <td class="sblack">0%</td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td><font color="gray"><b>1.00</b></font></td>
+        
+        </tr>
+        <tr class="trow8" height="18">
+        <td align="right">
+        Zenit St.Peters
+        </td>
+        
+        <td class="sgray">(away)</td>
+        <td class="sgray">1</td>
+        <td class="sgreen">100%</td>
+        
+        <td class="sblack">0%</td>
+        <td class="sblack">100%</td>
+        <td class="sblack">0%</td>
+        
+        <td class="sred">2.00</td>
+        
+        <td class="sgreen">2.00</td>
+        <td class="sred">0.00</td>
+        <td class="sblack">100%</td>
+        
+        <td class="sred">0%</td>
+        
+        <td class="sblack">0%</td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td><font color="gray"><b>3.00</b></font></td>
+        </tr>
+        <tr height="10"><td colspan="17"></td></tr>
+        
+        <tr class="trow8" height="18">
+        <td align="right">
+        Leningradets
+        </td>
+        
+        <td rowspan="2" align="center" valign="middle">
+        <font size="1" color="gray">17:30</font>
+        </td>
+        
+        
+        <td class="sgray">(home)</td>
+        <td class="sgray">1</td>
+        <td class="sgreen">0%</td>
+        
+        <td class="sblack">0%</td>
+        <td class="sblack">0%</td>
+        <td class="sblack">100%</td>
+        
+        <td class="sblue">4.00</td>
+        
+        <td class="sgreen">2.00</td>
+        <td class="sred">2.00</td>
+        <td class="sblack">100%</td>
+        
+        <td class="sblue">100%</td>
+        
+        <td class="sblack">100%</td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td><font color="gray"><b>1.00</b></font></td>
+        
+        </tr>
+        <tr class="trow8" height="18">
+        <td align="right">
+        Pskov-747
+        </td>
+        
+        <td class="sgray">(away)</td>
+        <td class="sgray">1</td>
+        <td class="sgreen">0%</td>
+        
+        <td class="sblack">100%</td>
+        <td class="sblack">100%</td>
+        <td class="sblack">0%</td>
+        
+        <td class="sred">0.00</td>
+        
+        <td class="sgreen">0.00</td>
+        <td class="sred">0.00</td>
+        <td class="sblack">0%</td>
+        
+        <td class="sred">0%</td>
+        
+        <td class="sblack">0%</td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td><font color="gray"><b>1.00</b></font></td>
+        </tr>
+        <tr height="10"><td colspan="17"></td></tr>
+        
+        <tr class="trow8" height="18">
+        <td align="right">
+        Lok. Kazanka
+        </td>
+        
+        <td rowspan="2" align="center" valign="middle">
+        <font size="1" color="gray">18:00</font>
+        </td>
+        
+        
+        <td class="sgray">(home)</td>
+        <td class="sgray">1</td>
+        <td class="sgreen">100%</td>
+        
+        <td class="sblack">0%</td>
+        <td class="sblack">0%</td>
+        <td class="sblack">100%</td>
+        
+        <td class="sblue">3.00</td>
+        
+        <td class="sgreen">2.00</td>
+        <td class="sred">1.00</td>
+        <td class="sblack">100%</td>
+        
+        <td class="sblue">100%</td>
+        
+        <td class="sblack">0%</td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td><font color="gray"><b>3.00</b></font></td>
+        
+        </tr>
+        <tr class="trow8" height="18">
+        <td align="right">
+        Olimp Khimki
+        </td>
+        
+        <td class="sgray">(away)</td>
+        <td class="sgray"></td>
+        <td class="sgreen"></td>
+        
+        <td class="sblack"></td>
+        <td class="sblack"></td>
+        <td class="sblack"></td>
+        
+        <td class="sblack"></td>
+        
+        <td class="sgreen"></td>
+        <td class="sred"></td>
+        <td class="sblack"></td>
+        
+        <td class="sblack"></td>
+        
+        <td class="sblack"></td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td>&nbsp;</td>
+        </tr>
+        <tr height="10"><td colspan="17"></td></tr>
+        
+        <tr class="trow8" height="18">
+        <td align="right">
+        Murom
+        </td>
+        
+        <td rowspan="2" align="center" valign="middle">
+        <font size="1" color="gray">18:00</font>
+        </td>
+        
+        
+        <td class="sgray">(home)</td>
+        <td class="sgray">1</td>
+        <td class="sgreen">0%</td>
+        
+        <td class="sblack">100%</td>
+        <td class="sblack">0%</td>
+        <td class="sblack">0%</td>
+        
+        <td class="sred">2.00</td>
+        
+        <td class="sgreen">0.00</td>
+        <td class="sred">2.00</td>
+        <td class="sblack">100%</td>
+        
+        <td class="sred">0%</td>
+        
+        <td class="sblack">0%</td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td><font color="gray"><b>0.00</b></font></td>
+        
+        </tr>
+        <tr class="trow8" height="18">
+        <td align="right">
+        Kolomna
+        </td>
+        
+        <td class="sgray">(away)</td>
+        <td class="sgray">1</td>
+        <td class="sgreen">0%</td>
+        
+        <td class="sblack">0%</td>
+        <td class="sblack">0%</td>
+        <td class="sblack">100%</td>
+        
+        <td class="sblue">3.00</td>
+        
+        <td class="sgreen">1.00</td>
+        <td class="sred">2.00</td>
+        <td class="sblack">100%</td>
+        
+        <td class="sblue">100%</td>
+        
+        <td class="sblack">0%</td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td><font color="gray"><b>0.00</b></font></td>
+        </tr>
+        <tr height="10"><td colspan="17"></td></tr>
+        
+        <tr height="10"><td colspan="18" align="center" valign="middle"><font size="1">&nbsp;</font></td></tr>
+        <tr class="trow2" height="40"><td colspan="7">
+        &nbsp;<img src="//www.soccerstatistics.com/img/flags/se.png" width="16" height="11" alt="SWEDEN2">
+        &nbsp;<font size="2">Sweden - <font color="gray">Superettan</font></font>&nbsp;&nbsp;&nbsp;<a class="button" style="background-color:#eeeeee;font-color=white;" href="latest.asp?league=sweden2"><font color="#666666">Stats</font></a>
+        </td>
+        <td colspan="11" align="right">
+        
+        &nbsp;&nbsp;<font color="gray" size="1">136 matches played out of 240</font>&nbsp;&nbsp;
+        
+        </td>
+        </tr>
+        
+        <tr class="trow2" height="24">
+        <td width="110"></td>
+        <td width="55"></td>
+        <td width="50"></td>
+        <td class="sgray">P</td>
+        <td class="sgray">W%</td>
+        
+        <td class="sgray">FTS</td>
+        <td class="sgray">CS</td>
+        <td class="sgray">BTS</td>
+        
+        <td class="sgray">TG</td>
+        
+        <td class="sgray">GF</td>
+        <td class="sgray">GA</td>
+        <td class="sgray">1.5+</td>
+        
+        <td class="sgray">2.5+</td>
+        
+        <td class="sgray">3.5+</td>
+        
+        <td colspan="2"><font color="gray">Points Per Game</font></td>
+        
+        <td width="25"></td>
+        <td width="25"></td>
+        </tr>
+        
+        <tr class="trow8" height="18">
+        <td align="right">
+        Mjällby AIF
+        </td>
+        
+        <td rowspan="2" align="center" valign="middle">
+        <font size="1" color="gray">19:00</font>
+        </td>
+        
+        
+        <td class="sgray">(home)</td>
+        <td class="sgray">9</td>
+        <td class="sgreen">78%</td>
+        
+        <td class="sblack">11%</td>
+        <td class="sblack">44%</td>
+        <td class="sblack">44%</td>
+        
+        <td class="sred">2.11</td>
+        
+        <td class="sgreen">1.44</td>
+        <td class="sred">0.67</td>
+        <td class="sblack">67%</td>
+        
+        <td class="sred">44%</td>
+        
+        <td class="sblack">0%</td>
+        
+        <td align="left" width="50">
+        <div class="graphwideindex"><div style="width:38.27px;" class="bargray"></div></div>
+        
+        </td>
+        <td><font color="gray"><b>2.33</b></font></td>
+        <td rowspan="2" colspan="2" align="center" valign="middle">
+        <a class="button" style="background-color:#AAAAAA;font-color=white;" href="pmatch.asp?league=sweden2&amp;stats=141-7-10-2019-mjällby-aif-norrby"><font color="#f8f8f8">Stats</font></a>
+        </td>
+        
+        </tr>
+        <tr class="trow8" height="18">
+        <td align="right">
+        Norrby
+        </td>
+        
+        <td class="sgray">(away)</td>
+        <td class="sgray">9</td>
+        <td class="sgreen">22%</td>
+        
+        <td class="sblack">33%</td>
+        <td class="sblack">33%</td>
+        <td class="sblack">56%</td>
+        
+        <td class="sred">2.11</td>
+        
+        <td class="sgreen">1.00</td>
+        <td class="sred">1.11</td>
+        <td class="sblack">56%</td>
+        
+        <td class="sred">33%</td>
+        
+        <td class="sblack">33%</td>
+        
+        <td align="left" width="50">
+        <div class="graphwideindex"><div style="width:18.22px;" class="bargray"></div></div>
+        
+        </td>
+        <td><font color="gray"><b>1.11</b></font></td>
+        </tr>
+        <tr height="10"><td colspan="17"></td></tr>
+        
+        <tr height="10"><td colspan="18" align="center" valign="middle"><font size="1">&nbsp;</font></td></tr>
+        <tr class="trow2" height="40"><td colspan="7">
+        &nbsp;<img src="//www.soccerstatistics.com/img/flags/se.png" width="16" height="11" alt="SWEDEN12">
+        &nbsp;<font size="2">Sweden - <font color="gray">Div 3 - M Norrland</font></font>&nbsp;&nbsp;&nbsp;<a class="button" style="background-color:#eeeeee;font-color=white;" href="latest.asp?league=sweden12"><font color="#666666">Stats</font></a>
+        </td>
+        <td colspan="11" align="right">
+        
+        &nbsp;&nbsp;<font color="gray" size="1">101 matches played out of 156</font>&nbsp;&nbsp;
+        
+        </td>
+        </tr>
+        
+        <tr class="trow2" height="24">
+        <td width="110"></td>
+        <td width="55"></td>
+        <td width="50"></td>
+        <td class="sgray">P</td>
+        <td class="sgray">W%</td>
+        
+        <td class="sgray">FTS</td>
+        <td class="sgray">CS</td>
+        <td class="sgray">BTS</td>
+        
+        <td class="sgray">TG</td>
+        
+        <td class="sgray">GF</td>
+        <td class="sgray">GA</td>
+        <td class="sgray">1.5+</td>
+        
+        <td class="sgray">2.5+</td>
+        
+        <td class="sgray">3.5+</td>
+        
+        <td colspan="2"><font color="gray">Points Per Game</font></td>
+        
+        <td width="25"></td>
+        <td width="25"></td>
+        </tr>
+        
+        <tr class="trow8" height="18">
+        <td align="right">
+        Lucksta IF
+        </td>
+        
+        <td rowspan="2" align="center" valign="middle">
+        <font size="1" color="gray">19:30</font>
+        </td>
+        
+        
+        <td class="sgray">(home)</td>
+        <td class="sgray">7</td>
+        <td class="sgreen">29%</td>
+        
+        <td class="sblack">29%</td>
+        <td class="sblack">14%</td>
+        <td class="sblack">57%</td>
+        
+        <td class="sblue">3.43</td>
+        
+        <td class="sgreen">1.57</td>
+        <td class="sred">1.86</td>
+        <td class="sblack">86%</td>
+        
+        <td class="sblue">71%</td>
+        
+        <td class="sblack">71%</td>
+        
+        <td align="left" width="50">
+        <div class="graphwideindex"><div style="width:18.74px;" class="bargray"></div></div>
+        
+        </td>
+        <td><font color="gray"><b>1.14</b></font></td>
+        <td rowspan="2" colspan="2" align="center" valign="middle">
+        <a class="button" style="background-color:#AAAAAA;font-color=white;" href="pmatch.asp?league=sweden12&amp;stats=102-11-2-2019-lucksta-if-frösö-if"><font color="#f8f8f8">Stats</font></a>
+        </td>
+        
+        </tr>
+        <tr class="trow8" height="18">
+        <td align="right">
+        Frösö IF
+        </td>
+        
+        <td class="sgray">(away)</td>
+        <td class="sgray">7</td>
+        <td class="sgreen">43%</td>
+        
+        <td class="sblack">0%</td>
+        <td class="sblack">14%</td>
+        <td class="sblack">86%</td>
+        
+        <td class="sblue">3.29</td>
+        
+        <td class="sgreen">2.00</td>
+        <td class="sred">1.29</td>
+        <td class="sblack">100%</td>
+        
+        <td class="sblue">57%</td>
+        
+        <td class="sblack">43%</td>
+        
+        <td align="left" width="50">
+        <div class="graphwideindex"><div style="width:30.46px;" class="bargray"></div></div>
+        
+        </td>
+        <td><font color="gray"><b>1.86</b></font></td>
+        </tr>
+        <tr height="10"><td colspan="17"></td></tr>
+        
+        <tr height="10"><td colspan="18" align="center" valign="middle"><font size="1">&nbsp;</font></td></tr>
+        <tr class="trow2" height="40"><td colspan="7">
+        &nbsp;<img src="//www.soccerstatistics.com/img/flags/se.png" width="16" height="11" alt="SWEDEN17">
+        &nbsp;<font size="2">Sweden - <font color="gray">Div 3 - S Götaland</font></font>&nbsp;&nbsp;&nbsp;<a class="button" style="background-color:#eeeeee;font-color=white;" href="latest.asp?league=sweden17"><font color="#666666">Stats</font></a>
+        </td>
+        <td colspan="11" align="right">
+        
+        &nbsp;&nbsp;<font color="gray" size="1">76 matches played out of 132</font>&nbsp;&nbsp;
+        
+        </td>
+        </tr>
+        
+        <tr class="trow2" height="24">
+        <td width="110"></td>
+        <td width="55"></td>
+        <td width="50"></td>
+        <td class="sgray">P</td>
+        <td class="sgray">W%</td>
+        
+        <td class="sgray">FTS</td>
+        <td class="sgray">CS</td>
+        <td class="sgray">BTS</td>
+        
+        <td class="sgray">TG</td>
+        
+        <td class="sgray">GF</td>
+        <td class="sgray">GA</td>
+        <td class="sgray">1.5+</td>
+        
+        <td class="sgray">2.5+</td>
+        
+        <td class="sgray">3.5+</td>
+        
+        <td colspan="2"><font color="gray">Points Per Game</font></td>
+        
+        <td width="25"></td>
+        <td width="25"></td>
+        </tr>
+        
+        <tr class="trow8" height="18">
+        <td align="right">
+        Malmö City FC
+        </td>
+        
+        <td rowspan="2" align="center" valign="middle">
+        <font size="1" color="gray">19:00</font>
+        </td>
+        
+        
+        <td class="sgray">(home)</td>
+        <td class="sgray">5</td>
+        <td class="sgreen">80%</td>
+        
+        <td class="sblack">0%</td>
+        <td class="sblack">20%</td>
+        <td class="sblack">80%</td>
+        
+        <td class="sblue">4.20</td>
+        
+        <td class="sgreen">2.60</td>
+        <td class="sred">1.60</td>
+        <td class="sblack">100%</td>
+        
+        <td class="sblue">100%</td>
+        
+        <td class="sblack">40%</td>
+        
+        <td align="left" width="50">
+        <div class="graphwideindex"><div style="width:39.36px;" class="bargray"></div></div>
+        
+        </td>
+        <td><font color="gray"><b>2.40</b></font></td>
+        <td rowspan="2" colspan="2" align="center" valign="middle">
+        <a class="button" style="background-color:#AAAAAA;font-color=white;" href="pmatch.asp?league=sweden17&amp;stats=78-6-5-2019-malmö-city-fc-bk-flagg"><font color="#f8f8f8">Stats</font></a>
+        </td>
+        
+        </tr>
+        <tr class="trow8" height="18">
+        <td align="right">
+        BK Flagg
+        </td>
+        
+        <td class="sgray">(away)</td>
+        <td class="sgray">5</td>
+        <td class="sgreen">20%</td>
+        
+        <td class="sblack">40%</td>
+        <td class="sblack">20%</td>
+        <td class="sblack">60%</td>
+        
+        <td class="sred">1.60</td>
+        
+        <td class="sgreen">0.80</td>
+        <td class="sred">0.80</td>
+        <td class="sblack">60%</td>
+        
+        <td class="sred">20%</td>
+        
+        <td class="sblack">0%</td>
+        
+        <td align="left" width="50">
+        <div class="graphwideindex"><div style="width:19.68px;" class="bargray"></div></div>
+        
+        </td>
+        <td><font color="gray"><b>1.20</b></font></td>
+        </tr>
+        <tr height="10"><td colspan="17"></td></tr>
+        
+        <tr height="10"><td colspan="18" align="center" valign="middle"><font size="1">&nbsp;</font></td></tr>
+        <tr class="trow2" height="40"><td colspan="7">
+        &nbsp;<img src="//www.soccerstatistics.com/img/flags/us.png" width="16" height="11" alt="USA2">
+        &nbsp;<font size="2">USA - <font color="gray">USL Championship</font></font>&nbsp;&nbsp;&nbsp;<a class="button" style="background-color:#eeeeee;font-color=white;" href="latest.asp?league=usa2"><font color="#666666">Stats</font></a>
+        </td>
+        <td colspan="11" align="right">
+        
+        &nbsp;&nbsp;<font color="gray" size="1">367 matches played out of 612</font>&nbsp;&nbsp;
+        
+        </td>
+        </tr>
+        
+        <tr class="trow2" height="24">
+        <td width="110"></td>
+        <td width="55"></td>
+        <td width="50"></td>
+        <td class="sgray">P</td>
+        <td class="sgray">W%</td>
+        
+        <td class="sgray">FTS</td>
+        <td class="sgray">CS</td>
+        <td class="sgray">BTS</td>
+        
+        <td class="sgray">TG</td>
+        
+        <td class="sgray">GF</td>
+        <td class="sgray">GA</td>
+        <td class="sgray">1.5+</td>
+        
+        <td class="sgray">2.5+</td>
+        
+        <td class="sgray">3.5+</td>
+        
+        <td colspan="2"><font color="gray">Points Per Game</font></td>
+        
+        <td width="25"></td>
+        <td width="25"></td>
+        </tr>
+        
+        <tr class="trow8" height="18">
+        <td align="right">
+        New Mexico Utd
+        </td>
+        
+        <td align="center" valign="middle">
+        <b>3</b>
+        </td>
+        
+        
+        <td></td>
+        <td class="sgray"></td>
+        <td class="sgreen"></td>
+        
+        <td class="sblack"></td>
+        <td class="sblack"></td>
+        <td class="sblack"></td>
+        
+        <td class="sblue"></td>
+        
+        <td class="sgreen"></td>
+        <td class="sred"></td>
+        <td class="sblack"></td>
+        
+        <td class="sblue"></td>
+        
+        <td class="sblack"></td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td>&nbsp;</td>
+        <td rowspan="2" colspan="2" align="center" valign="middle">
+        <a class="button" style="background-color:#dddddd;font-color=white;" href="round_details.asp?league=usa2&amp;mrevid=m377&amp;st1=17&amp;st2=7"><font size="1" color="#666666">analysis</font></a>
+        </td>
+        
+        </tr>
+        <tr class="trow8" height="18">
+        <td align="right">
+        El Paso
+        </td>
+        
+        <td align="center" valign="middle">
+        <b>0</b>
+        </td>
+        
+        <td></td>
+        <td class="sgray"></td>
+        <td class="sgreen"></td>
+        
+        <td class="sblack"></td>
+        <td class="sblack"></td>
+        <td class="sblack"></td>
+        
+        <td class="sred"></td>
+        
+        <td class="sgreen"></td>
+        <td class="sred"></td>
+        <td class="sblack"></td>
+        
+        <td class="sred"></td>
+        
+        <td class="sblack"></td>
+        
+        <td align="left" width="50">
+        
+        </td>
+        <td>&nbsp;</td>
+        </tr>
+        <tr height="10"><td colspan="17"></td></tr>
+        
+        <tr class="trow8" height="18">
+        <td align="right">
+        Bethlehem
+        </td>
+        
+        <td rowspan="2" align="center" valign="middle">
+        <font size="1" color="gray">23:00</font>
+        </td>
+        
+        
+        <td class="sgray">(home)</td>
+        <td class="sgray">12</td>
+        <td class="sgreen">17%</td>
+        
+        <td class="sblack">33%</td>
+        <td class="sblack">0%</td>
+        <td class="sblack">67%</td>
+        
+        <td class="sblue">3.42</td>
+        
+        <td class="sgreen">1.33</td>
+        <td class="sred">2.08</td>
+        <td class="sblack">83%</td>
+        
+        <td class="sblue">75%</td>
+        
+        <td class="sblack">50%</td>
+        
+        <td align="left" width="50">
+        <div class="graphwideindex"><div style="width:12.30px;" class="bargray"></div></div>
+        
+        </td>
+        <td><font color="gray"><b>0.75</b></font></td>
+        <td rowspan="2" colspan="2" align="center" valign="middle">
+        <a class="button" style="background-color:#AAAAAA;font-color=white;" href="pmatch.asp?league=usa2&amp;stats=376-4-2-2019-bethlehem-hartford-ath."><font color="#f8f8f8">Stats</font></a>
+        </td>
+        
+        </tr>
+        <tr class="trow8" height="18">
+        <td align="right">
+        Hartford Ath.
+        </td>
+        
+        <td class="sgray">(away)</td>
+        <td class="sgray">12</td>
+        <td class="sgreen">8%</td>
+        
+        <td class="sblack">33%</td>
+        <td class="sblack">0%</td>
+        <td class="sblack">67%</td>
+        
+        <td class="sblue">3.75</td>
+        
+        <td class="sgreen">1.00</td>
+        <td class="sred">2.75</td>
+        <td class="sblack">92%</td>
+        
+        <td class="sblue">83%</td>
+        
+        <td class="sblack">58%</td>
+        
+        <td align="left" width="50">
+        <div class="graphwideindex"><div style="width:5.47px;" class="bargray"></div></div>
+        
+        </td>
+        <td><font color="gray"><b>0.33</b></font></td>
+        </tr>
+        <tr height="10"><td colspan="17"></td></tr>
+        
+        </tbody>
+
+</table>
+</body>
+</html>
