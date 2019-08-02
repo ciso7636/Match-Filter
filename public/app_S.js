@@ -1608,7 +1608,7 @@ const filteringNotPossibleBettingLeague = (league) => {
         'netherlands4','netherlands5','netherlands6',
         'norway6','norway7','norway8','norway9','norway10','norway11',
         'poland4','poland5','poland7','poland8',
-        'sweden7','sweden8','sweden9','sweden10','sweden11','sweden12','sweden13',
+        'sweden7','sweden8','sweden9','sweden10','sweden11','sweden12','sweden13','sweden14','sweden15','sweden16','sweden17','sweden18','sweden19','sweden20',
         'finland7','finland8','finland9','finland10','finland11','finland12','finland13',
         'switzerland5', 'switzerland6','switzerland7','switzerlan8',
         'spain8','spain9','spain10','spain11','spain12','spain13','spain14',
