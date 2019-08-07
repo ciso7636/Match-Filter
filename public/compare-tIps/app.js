@@ -697,10 +697,16 @@ const mergeAllMatchesWithAllFiltredMatchces = (allMatches, filteredMatches, sele
             });
 
             if (findHomeTeam.length > 0 && findAwayTeam.length > 0) {
+
+                const matchName = findHomeTeam.length > findAwayTeam.length ? findAwayTeam : findHomeTeam;
+
+                if (matchName.length > 1) {
+                    break;
+                }
                 
                 let duplicate = null;
                 allMatchesTodayFiltered.forEach((match, i) => {
-                    if (match.id === findHomeTeam[0].homeTeam + findAwayTeam[0].awayTeam) {
+                    if (match.id === matchName[0].homeTeam + matchName[0].awayTeam) {
                         duplicate = i;
                         return;
                     }
@@ -712,15 +718,15 @@ const mergeAllMatchesWithAllFiltredMatchces = (allMatches, filteredMatches, sele
                 } else {
                     allMatchesTodayFiltered.push({
                         found: 1,
-                        matchTime: findHomeTeam[0].matchTime,
-                        homeTeam: findHomeTeam[0].homeTeam,
-                        awayTeam: findAwayTeam[0].awayTeam,
-                        league: findHomeTeam[0].league,
+                        matchTime: matchName[0].matchTime,
+                        homeTeam: matchName[0].homeTeam,
+                        awayTeam: matchName[0].awayTeam,
+                        league: matchName[0].league,
                         website: [filteredMatches[i].website],
-                        odds_1: findHomeTeam[0].odds_1,
-                        odds_x: findHomeTeam[0].odds_x,
-                        odds_2: findHomeTeam[0].odds_2,
-                        id: findHomeTeam[0].homeTeam + findAwayTeam[0].awayTeam,
+                        odds_1: matchName[0].odds_1,
+                        odds_x: matchName[0].odds_x,
+                        odds_2: matchName[0].odds_2,
+                        id: matchName[0].homeTeam + matchName[0].awayTeam,
                     })
                 }
             }
