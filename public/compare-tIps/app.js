@@ -782,7 +782,7 @@ function getToDay() {
 function resetSiteStats() {
     siteStats = [
         {site: 'footballpredictionsCom', url: 'https://footballpredictions.com/footballpredictions/', matches: 0, correctPrediction: 0},
-        {site: 'footballpredictions', url: 'https://footballpredictions.net/football-predictions-free-betting-tips', matches: 0, correctPrediction: 0},
+        {site: 'footballpredictionsNet', url: 'https://footballpredictions.net/football-predictions-free-betting-tips', matches: 0, correctPrediction: 0},
         {site: 'bettingtips1x2', url: 'https://bettingtips1x2.com/', matches: 0, correctPrediction: 0},
         {site: 'statarea', url: 'https://www.statarea.com/predictions', matches: 0, correctPrediction: 0},
         {site: 'predictz', url: 'https://www.predictz.com/predictions/', matches: 0, correctPrediction: 0},
