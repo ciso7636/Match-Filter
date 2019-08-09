@@ -827,9 +827,55 @@ function mergeSiteStats(savedSiteStats, siteStats) {
     return siteStats;
 }
 
-function getToDay() {
-    const date = new Date;
-    return ('0' + date.getDate()).slice(-2) + '.' + ('0' + (date.getMonth()+1)).slice(-2) + '.' + date.getFullYear();
+function getAllMatchData(matchLink) {
+    return new Promise(function (resolve, reject) {
+        getData('GET', matchLink).then(function (html) {
+            resolve(html); 
+        }).catch(function (err) {
+            console.log(err);
+            resolve();
+            if (err.status === 404) {
+                console.log(top.soccerUrl);
+            }
+        });
+    })
+}
+
+function getData(method, url, type = 'document') {
+    return new Promise(function (resolve, reject) {
+        var xhr = new XMLHttpRequest();
+        xhr.open(method, url);
+        xhr.responseType = type;
+        xhr.onload = function () {
+            if ((this.status >= 200 && this.status < 300) || this.status === 0) {
+                resolve(xhr.response);
+            } else {
+                reject({
+                    status: this.status,
+                    statusText: this.statusText
+                });
+            }
+        };
+        xhr.onerror = function () {
+            reject({
+                obj: this,
+                status: this.status,
+                statusText: this.statusText
+            });
+        };
+        xhr.send();
+    });
+}
+
+function setDataToLocalStorage(name, data) {
+    localStorage.setItem(name, data);
+}
+
+function getDataFromLocalStorage(name, data) {
+    let result = localStorage.getItem(name, data);
+    if(result !== ''){
+        return JSON.parse(result);
+    }
 }
 
 function resetSiteStats() {
@@ -869,61 +915,15 @@ function writeSiteStats(stats) {
     })
 }
 
+function getToDay() {
+    const date = new Date;
+    return ('0' + date.getDate()).slice(-2) + '.' + ('0' + (date.getMonth()+1)).slice(-2) + '.' + date.getFullYear();
+}
+
 function mathRound(num) {
     if (isNaN(num)) {
         return 0;
     } else {
         return Math.round(parseFloat(num) * 100 / 100)
     }
-}
-
-function setDataToLocalStorage(name, data) {
-    localStorage.setItem(name, data);
-}
-
-function getDataFromLocalStorage(name, data) {
-    let result = localStorage.getItem(name, data);
-    if(result !== ''){
-        return JSON.parse(result);
-    }
-}
-
-function getData(method, url, type = 'document') {
-    return new Promise(function (resolve, reject) {
-        var xhr = new XMLHttpRequest();
-        xhr.open(method, url);
-        xhr.responseType = type;
-        xhr.onload = function () {
-            if ((this.status >= 200 && this.status < 300) || this.status === 0) {
-                resolve(xhr.response);
-            } else {
-                reject({
-                    status: this.status,
-                    statusText: this.statusText
-                });
-            }
-        };
-        xhr.onerror = function () {
-            reject({
-                obj: this,
-                status: this.status,
-                statusText: this.statusText
-            });
-        };
-        xhr.send();
-    });
-}
-
-function getAllMatchData(matchLink) {
-    return new Promise(function (resolve, reject) {
-        getData('GET', matchLink).then(function (html) {
-            resolve(html); 
-        }).catch(function (err) {
-            console.log(err);
-            resolve();
-            if (err.status === 404) {
-                console.log(top.soccerUrl);
-            }
-        });
-    })
 }
