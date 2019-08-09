@@ -1,3 +1,6 @@
+let siteStats_1 = [];
+let siteStats_x = [];
+let siteStats_2 = [];
 let allMatchesToday = [];
 let allMatchesTodayFiltered = [];
 let scibet_MatchData = [];
@@ -40,6 +43,10 @@ let siteStats = [
 
 $(function(){
     $( "#datepicker" ).datepicker({ dateFormat: 'dd.mm.yy' });
+
+    siteStats_1 =  getDataFromLocalStorage('SiteStats' + '_' + '1');
+    siteStats_x =  getDataFromLocalStorage('SiteStats' + '_' + 'x');
+    siteStats_2 =  getDataFromLocalStorage('SiteStats' + '_' + '2');
 
     getAllMatchData('https://www.betexplorer.com/next/soccer/').then(function (html) {
 
@@ -484,9 +491,18 @@ $('html').on('click', '.stats-button_1', function() {
             }
         }
     }
-    
-    writeSiteStats(siteStats);
-    setDataToLocalStorage('SiteStats_1', JSON.stringify(siteStats))
+
+    // Zlucenie ulozenych siteStats s existujucimi datami zo zapasov
+    // const newSiteStats = mergeSiteStats(siteStats_1, siteStats);
+    // writeSiteStats(newSiteStats);
+    // setDataToLocalStorage('SiteStats_1', JSON.stringify(newSiteStats))
+
+    // Vypisanie konkretnych siteStats
+    writeSiteStats(siteStats_1);
+
+    // Vypisanie a ulozenie siteStats z dat zo zapasov
+    //writeSiteStats(siteStats);
+    //setDataToLocalStorage('SiteStats_1', JSON.stringify(siteStats))
 });
 
 $('html').on('click', '.stats-button_x', function() {
@@ -522,8 +538,18 @@ $('html').on('click', '.stats-button_x', function() {
             }
         }
     }
-    writeSiteStats(siteStats);
-    setDataToLocalStorage('SiteStats_x', JSON.stringify(siteStats))
+
+    // Zlucenie ulozenych siteStats s existujucimi datami zo zapasov
+    // const newSiteStats = mergeSiteStats(siteStats_x, siteStats);
+    // writeSiteStats(newSiteStats);
+    // setDataToLocalStorage('SiteStats_x', JSON.stringify(newSiteStats))
+
+    // Vypisanie konkretnych siteStats
+    writeSiteStats(siteStats_x);
+
+    // Vypisanie a ulozenie siteStats z dat zo zapasov
+    //writeSiteStats(siteStats);
+    //setDataToLocalStorage('SiteStats_x', JSON.stringify(siteStats))
 });
 
 $('html').on('click', '.stats-button_2', function() {
@@ -559,8 +585,17 @@ $('html').on('click', '.stats-button_2', function() {
         }
     }
 
-    writeSiteStats(siteStats);
-    setDataToLocalStorage('SiteStats_2', JSON.stringify(siteStats))
+    // Zlucenie ulozenych siteStats s existujucimi datami zo zapasov
+    // const newSiteStats = mergeSiteStats(siteStats_2, siteStats);
+    // writeSiteStats(newSiteStats);
+    // setDataToLocalStorage('SiteStats_2', JSON.stringify(newSiteStats))
+
+    // Vypisanie konkretnych siteStats
+    writeSiteStats(siteStats_2);
+
+    // Vypisanie a ulozenie siteStats z dat zo zapasov
+    // writeSiteStats(siteStats);
+    // setDataToLocalStorage('SiteStats_2', JSON.stringify(siteStats))
 });
 
 $('html').on('click', '.stats-button_reset', function() {
@@ -676,7 +711,7 @@ $('html').on('click', '.load-button_2', function() {
     })
 });
 
-const mergeAllMatchesWithAllFiltredMatchces = (allMatches, filteredMatches, selector, condition) => {
+function mergeAllMatchesWithAllFiltredMatchces (allMatches, filteredMatches, selector, condition) {
     for (let i = 0; i < filteredMatches.length; i++) { 
 
         if (filteredMatches[i][selector] === condition) {
@@ -778,6 +813,18 @@ function mergeResultMatchesFromBetexplorer(localStorageName, urlDate, localStora
 
         setDataToLocalStorage(localStorageName, JSON.stringify(localStorageData))
     })
+}
+
+function mergeSiteStats(savedSiteStats, siteStats) {
+    for (let i = 0; i < siteStats.length; i++) { 
+        for (let z = 0; z < savedSiteStats.length; z++) { 
+            if (siteStats[i].site === savedSiteStats[z].site) {
+                siteStats[i].matches += savedSiteStats[z].matches;
+                siteStats[i].correctPrediction += savedSiteStats[z].correctPrediction;
+            }
+        }
+    }
+    return siteStats;
 }
 
 function getToDay() {
