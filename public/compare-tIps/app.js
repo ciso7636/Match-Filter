@@ -104,6 +104,11 @@ $(function(){
                     prediction_x: false,
                     prediction_2: prediction_2,
                 }
+                
+                if (freesupertips_MatchData.find(match => match.homeTeam === matchData.homeTeam)) {
+                    continue;
+                }
+
                 freesupertips_MatchData.push(matchData);
             }
         }
