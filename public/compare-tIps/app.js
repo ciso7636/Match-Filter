@@ -627,6 +627,7 @@ $('html').on('click', '.set-button', function() {
 $('html').on('click', '.load-button_1', function() {
     allMatchesTodayFiltered = [];
 
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, olbg_MatchData, 'prediction_1', true);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, predictz_MatchData, 'prediction_1', true);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, scibet_MatchData, 'prediction_1', true);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, statarea_MatchData, 'prediction_1', true);
@@ -643,7 +644,6 @@ $('html').on('click', '.load-button_1', function() {
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, footballtips_MatchData, 'prediction_1', true);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, sportytrader_MatchData, 'prediction_1', true);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, betensured_MatchData, 'prediction_1', true);
-    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, olbg_MatchData, 'prediction_1', true);
 
     $('.save-button').data('save-type', '1');
 
@@ -738,12 +738,28 @@ function mergeAllMatchesWithAllFiltredMatchces (allMatches, filteredMatches, sel
 
             if (findHomeTeam.length > 0 && findAwayTeam.length > 0) {
 
-                const matchName = findHomeTeam.length > findAwayTeam.length ? findAwayTeam : findHomeTeam;
+                const matchesNameFromBetexplorer = findHomeTeam.length > findAwayTeam.length ? findHomeTeam : findAwayTeam;
+                let matchName;
 
-                if (matchName.length > 1) {
+                if (matchesNameFromBetexplorer.length > 1) {
+                    matchName = matchesNameFromBetexplorer.filter(match => {
+                        for (let x = 0; x < filteredMatches.length; x++) {
+                            const homeTeam = match.homeTeam.length >= filteredMatches[x].homeTeam.length ? match.homeTeam.toLowerCase().indexOf(filteredMatches[x].homeTeam.toLowerCase()) !== -1 : filteredMatches[x].homeTeam.toLowerCase().indexOf(match.homeTeam.toLowerCase()) !== -1
+                            const awayTeam = match.awayTeam.length >= filteredMatches[x].awayTeam.length ? match.awayTeam.toLowerCase().indexOf(filteredMatches[x].awayTeam.toLowerCase()) !== -1 : filteredMatches[x].awayTeam.toLowerCase().indexOf(match.awayTeam.toLowerCase()) !== -1
+
+                            if (homeTeam === true && awayTeam === true) {
+                                return true
+                            }
+                        }
+                    })
+                } else {
+                    matchName = matchesNameFromBetexplorer;
+                }
+
+                if (matchName.length === 0) {
                     break;
                 }
-                
+
                 let duplicate = null;
                 allMatchesTodayFiltered.forEach((match, i) => {
                     if (match.id === matchName[0].homeTeam + matchName[0].awayTeam) {
