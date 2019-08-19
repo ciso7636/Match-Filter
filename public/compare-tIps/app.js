@@ -20,6 +20,9 @@ let statarea_MatchData = [];
 let bettingtips1x2_MatchData = [];
 let footballpredictionsNet_MatchData = [];
 let footballpredictionsCom_MatchData = [];
+let tips180_MatchData = [];
+let footballbettingtips_MatchData = [];
+let footyaccumulators_MatchData = [];
 
 let siteStats = [
     {site: 'footballpredictionsCom', url: 'https://footballpredictions.com/footballpredictions/', matches: 0, correctPrediction: 0},
@@ -39,6 +42,11 @@ let siteStats = [
     {site: 'windrawwin', url: 'https://www.windrawwin.com/predictions/today/simple/all-games/all-stakes/all-venues/', matches: 0, correctPrediction: 0},
     {site: 'zulubet', url: 'http://www.zulubet.com/', matches: 0, correctPrediction: 0},
     {site: 'scibet', url: 'https://www.scibet.com/', matches: 0, correctPrediction: 0},
+    {site: 'tips180', url: 'https://www.tips180.com', matches: 0, correctPrediction: 0},
+    {site: 'footballbettingtips', url: 'https://footballbettingtips.org/tips/2019-08-19.html', matches: 0, correctPrediction: 0},
+    {site: 'footyaccumulators', url: 'https://footyaccumulators.com/football-tips', matches: 0, correctPrediction: 0},
+
+    
 ]
 
 $(function(){
@@ -453,6 +461,64 @@ $(function(){
             }
         }
     })
+
+    getAllMatchData('https://www.tips180.com').then(function (html) {
+        
+        let matchData;
+        const matches = $(html).contents().find('.table_change').eq(0).find('tr');
+        for (let i = 0; i < matches.length; i++) { 
+            matchData = {
+                website: 'tips180',
+                homeTeam: $(matches[i]).find('td').eq(2).text().split(' vs ')[0].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
+                awayTeam: $(matches[i]).find('td').eq(2).text().split(' vs ')[1].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
+                prediction_1: $(matches[i]).find('td').eq(3).text().trim() === '1' ? true : false,
+                prediction_x: $(matches[i]).find('td').eq(3).text().trim() === 'X' ? true : false,
+                prediction_2: $(matches[i]).find('td').eq(3).text().trim() === '2' ? true : false,
+            }
+            tips180_MatchData.push(matchData);
+        }
+    })
+
+    getAllMatchData('https://footballbettingtips.org/tips/' + getToDay('-') + '.html').then(function (html) {
+        
+        let matchData;
+        const matches = $(html).contents().find('.results').find('td a').closest('tr');
+        for (let i = 0; i < matches.length; i++) { 
+            const homeTeamGoal = parseFloat($(matches[i]).find('td').eq(5).text().split(':')[0].trim());
+            const awayTeamGoal = parseFloat($(matches[i]).find('td').eq(5).text().split(':')[1].trim());
+
+            matchData = {
+                website: 'footballbettingtips',
+                homeTeam: $(matches[i]).find('td').eq(1).text().split(' - ')[0].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
+                awayTeam: $(matches[i]).find('td').eq(1).text().split(' - ')[1].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
+                prediction_1: (homeTeamGoal > awayTeamGoal && homeTeamGoal - awayTeamGoal >= 3) ? true : false,
+                prediction_x: (homeTeamGoal === awayTeamGoal && homeTeamGoal + awayTeamGoal === 0) ? true : false,
+                prediction_2: (homeTeamGoal < awayTeamGoal && awayTeamGoal - homeTeamGoal >= 3) ? true : false,
+            }
+            footballbettingtips_MatchData.push(matchData);
+        }
+    })
+
+    getAllMatchData('https://footyaccumulators.com/football-tips').then(function (html) {
+        
+        let matchData;
+        const matches = $(html).contents().find('.selection');
+        for (let i = 0; i < matches.length; i++) { 
+            const winTeam = $(matches[i]).find('.cQkHWR > div:last-child').text().split(' to win')[0].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            const homeTeam = $(matches[i]).find('.cQkHWR > div').eq(0).text().trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            const awayTeam = $(matches[i]).find('.cQkHWR > div').eq(2).text().trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+            matchData = {
+                website: 'footyaccumulators',
+                homeTeam: homeTeam,
+                awayTeam: awayTeam,
+                prediction_1: homeTeam === winTeam ? true : false,
+                prediction_x: false,
+                prediction_2: awayTeam === winTeam ? true : false,
+            }
+            footyaccumulators_MatchData.push(matchData);
+        }
+    })
 })
 
 /* 
@@ -643,7 +709,13 @@ $('html').on('click', '.load-button_1', function() {
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, footballtips_MatchData, 'prediction_1', true);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, sportytrader_MatchData, 'prediction_1', true);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, betensured_MatchData, 'prediction_1', true);
+<<<<<<< HEAD
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, olbg_MatchData, 'prediction_1', true);
+=======
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, tips180_MatchData, 'prediction_1', true);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, footballbettingtips_MatchData, 'prediction_1', true);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, footyaccumulators_MatchData, 'prediction_1', true);
+>>>>>>> 684d37b5ddd795e7bed8646e8c5413b509ea8689
 
     $('.save-button').data('save-type', '1');
 
@@ -674,6 +746,9 @@ $('html').on('click', '.load-button_x', function() {
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, sportytrader_MatchData, 'prediction_x', true);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, betensured_MatchData, 'prediction_x', true);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, olbg_MatchData, 'prediction_x', true);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, tips180_MatchData, 'prediction_x', true);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, footballbettingtips_MatchData, 'prediction_x', true);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, footyaccumulators_MatchData, 'prediction_x', true);
 
     $('.save-button').data('save-type', 'x');
 
@@ -705,6 +780,9 @@ $('html').on('click', '.load-button_2', function() {
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, sportytrader_MatchData, 'prediction_2', true);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, betensured_MatchData, 'prediction_2', true);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, olbg_MatchData, 'prediction_2', true);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, tips180_MatchData, 'prediction_2', true);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, footballbettingtips_MatchData, 'prediction_2', true);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, footyaccumulators_MatchData, 'prediction_2', true);
 
     $('.save-button').data('save-type', '2');
 
@@ -902,6 +980,9 @@ function resetSiteStats() {
         {site: 'windrawwin', url: 'https://www.windrawwin.com/predictions/today/simple/all-games/all-stakes/all-venues/', matches: 0, correctPrediction: 0},
         {site: 'zulubet', url: 'http://www.zulubet.com/', matches: 0, correctPrediction: 0},
         {site: 'scibet', url: 'https://www.scibet.com/', matches: 0, correctPrediction: 0},
+        {site: 'tips180', url: 'https://www.tips180.com', matches: 0, correctPrediction: 0},
+        {site: 'footballbettingtips', url: 'https://footballbettingtips.org/tips/2019-08-19.html', matches: 0, correctPrediction: 0},
+        {site: 'footyaccumulators', url: 'https://footyaccumulators.com/football-tips', matches: 0, correctPrediction: 0},
     ]
 }
 
@@ -920,8 +1001,11 @@ function writeSiteStats(stats) {
     })
 }
 
-function getToDay() {
+function getToDay(type) {
     const date = new Date;
+    if (type === '-') {
+        return (date.getFullYear() + '-' + ('0' + (date.getMonth()+1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2));
+    }
     return ('0' + date.getDate()).slice(-2) + '.' + ('0' + (date.getMonth()+1)).slice(-2) + '.' + date.getFullYear();
 }
 
