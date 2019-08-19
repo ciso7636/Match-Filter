@@ -709,13 +709,10 @@ $('html').on('click', '.load-button_1', function() {
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, footballtips_MatchData, 'prediction_1', true);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, sportytrader_MatchData, 'prediction_1', true);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, betensured_MatchData, 'prediction_1', true);
-<<<<<<< HEAD
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, olbg_MatchData, 'prediction_1', true);
-=======
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, tips180_MatchData, 'prediction_1', true);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, footballbettingtips_MatchData, 'prediction_1', true);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, footyaccumulators_MatchData, 'prediction_1', true);
->>>>>>> 684d37b5ddd795e7bed8646e8c5413b509ea8689
 
     $('.save-button').data('save-type', '1');
 
