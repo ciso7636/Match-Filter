@@ -23,6 +23,9 @@ let footballpredictionsCom_MatchData = [];
 let tips180_MatchData = [];
 let footballbettingtips_MatchData = [];
 let footyaccumulators_MatchData = [];
+let oddslot_MatchData = [];
+let sbat_MatchData = [];
+let kickoff_MatchData = [];
 
 let siteStats = [
     {site: 'footballpredictionsCom', url: 'https://footballpredictions.com/footballpredictions/', matches: 0, correctPrediction: 0},
@@ -45,8 +48,9 @@ let siteStats = [
     {site: 'tips180', url: 'https://www.tips180.com', matches: 0, correctPrediction: 0},
     {site: 'footballbettingtips', url: 'https://footballbettingtips.org/tips/2019-08-19.html', matches: 0, correctPrediction: 0},
     {site: 'footyaccumulators', url: 'https://footyaccumulators.com/football-tips', matches: 0, correctPrediction: 0},
-
-    
+    {site: 'oddslot', url: 'https://oddslot.com/odds/', matches: 0, correctPrediction: 0},
+    {site: 'sbat', url: 'https://www.sbat.com/tips/free-football-betting-tips', matches: 0, correctPrediction: 0},
+    {site: 'kickoff', url: 'https://www.kickoff.co.uk/acca-smacker/', matches: 0, correctPrediction: 0},
 ]
 
 $(function(){
@@ -519,6 +523,71 @@ $(function(){
             footyaccumulators_MatchData.push(matchData);
         }
     })
+
+    getAllMatchData('https://oddslot.com/odds/').then(function (html) {
+        
+        let matchData;
+        const matches = $(html).contents().find('table.team-schedule--full tbody tr');
+        for (let i = 0; i < matches.length; i++) { 
+            const homeTeam = $(matches[i]).find('.team-meta__name').eq(0).text().trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            const awayTeam = $(matches[i]).find('.team-meta__name').eq(1).text().trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            const homeTeamChance = Math.round(parseFloat($(matches[i]).find('.team-schedule__status').eq(1).text()));
+            const awayTeamChance = Math.round(parseFloat($(matches[i]).find('.team-schedule__status').eq(5).text()));
+
+            matchData = {
+                website: 'oddslot',
+                homeTeam: homeTeam,
+                awayTeam: awayTeam,
+                prediction_1: (homeTeamChance >= 50 && awayTeamChance < 19) ? true : false,
+                prediction_x: (homeTeamChance >= 35 && awayTeamChance >= 35) ? true : false,
+                prediction_2: (homeTeamChance < 19 && awayTeamChance >= 50) ? true : false,
+            }
+            oddslot_MatchData.push(matchData);
+        }
+    })
+
+    getAllMatchData('https://www.sbat.com/tips/free-football-betting-tips').then(function (html) {
+        
+        let matchData;
+        const matches = $(html).contents().find('.free-tips__card');
+        for (let i = 0; i < matches.length; i++) { 
+            const homeTeam = $(matches[i]).find('.free-tips__match').text().split(' v ')[0].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            const awayTeam = $(matches[i]).find('.free-tips__match').text().split(' v ')[1].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            const winTeam = $(matches[i]).find('.free-tips__result').text().split('to win')[0].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+            matchData = {
+                website: 'sbat',
+                homeTeam: homeTeam,
+                awayTeam: awayTeam,
+                prediction_1: homeTeam === winTeam ? true : false,
+                prediction_x: false,
+                prediction_2: awayTeam === winTeam ? true : false,
+            }
+            sbat_MatchData.push(matchData);
+        }
+    })
+
+    getAllMatchData('https://www.kickoff.co.uk/acca-smacker/').then(function (html) {
+        
+        let matchData;
+        const matches = $(html).contents().find('.ko-awp-row-data');
+        for (let i = 0; i < matches.length; i++) { 
+            const homeTeam = $(matches[i]).find('.ko-awp-cell-team-names > div').eq(0).text().trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            const awayTeam = $(matches[i]).find('.ko-awp-cell-team-names > div').eq(2).text().trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            const winTeam = $(matches[i]).find('.ko-awp-prediction-wrap .ko-awp-prediction-market-name .ko-mobile-hide').text().split('Win')[0].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            const winTeamChance = Math.round(parseFloat($(matches[i]).find('.ko-awp-prediction-wrap .iconAccaPredSelectTextWrapper').text().split('%')[0].trim()));
+
+            matchData = {
+                website: 'kickoff',
+                homeTeam: homeTeam,
+                awayTeam: awayTeam,
+                prediction_1: ('Home' === winTeam && winTeamChance >= 55) ? true : false,
+                prediction_x: false,
+                prediction_2: ('Away' === winTeam && winTeamChance >= 55) ? true : false,
+            }
+            kickoff_MatchData.push(matchData);
+        }
+    })
 })
 
 /* 
@@ -713,6 +782,9 @@ $('html').on('click', '.load-button_1', function() {
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, tips180_MatchData, 'prediction_1', true);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, footballbettingtips_MatchData, 'prediction_1', true);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, footyaccumulators_MatchData, 'prediction_1', true);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, oddslot_MatchData, 'prediction_1', true);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, sbat_MatchData, 'prediction_1', true);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, kickoff_MatchData, 'prediction_1', true);
 
     $('.save-button').data('save-type', '1');
 
@@ -746,6 +818,9 @@ $('html').on('click', '.load-button_x', function() {
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, tips180_MatchData, 'prediction_x', true);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, footballbettingtips_MatchData, 'prediction_x', true);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, footyaccumulators_MatchData, 'prediction_x', true);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, oddslot_MatchData, 'prediction_x', true);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, sbat_MatchData, 'prediction_x', true);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, kickoff_MatchData, 'prediction_x', true);
 
     $('.save-button').data('save-type', 'x');
 
@@ -780,6 +855,9 @@ $('html').on('click', '.load-button_2', function() {
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, tips180_MatchData, 'prediction_2', true);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, footballbettingtips_MatchData, 'prediction_2', true);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, footyaccumulators_MatchData, 'prediction_2', true);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, oddslot_MatchData, 'prediction_2', true);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, sbat_MatchData, 'prediction_2', true);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, kickoff_MatchData, 'prediction_2', true);
 
     $('.save-button').data('save-type', '2');
 
@@ -980,6 +1058,9 @@ function resetSiteStats() {
         {site: 'tips180', url: 'https://www.tips180.com', matches: 0, correctPrediction: 0},
         {site: 'footballbettingtips', url: 'https://footballbettingtips.org/tips/2019-08-19.html', matches: 0, correctPrediction: 0},
         {site: 'footyaccumulators', url: 'https://footyaccumulators.com/football-tips', matches: 0, correctPrediction: 0},
+        {site: 'oddslot', url: 'https://oddslot.com/odds/', matches: 0, correctPrediction: 0},
+        {site: 'sbat', url: 'https://www.sbat.com/tips/free-football-betting-tips', matches: 0, correctPrediction: 0},
+        {site: 'kickoff', url: 'https://www.kickoff.co.uk/acca-smacker/', matches: 0, correctPrediction: 0},
     ]
 }
 
