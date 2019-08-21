@@ -149,13 +149,16 @@ $(function(){
         let matchData;
         const matches = $(html).contents().find('.pttr.ptcnt');
         for (let i = 0; i < matches.length; i++) { 
+            const homeTeamGoal = parseFloat($(matches[i]).find('.ptpredboxsml').text().split(' ')[1].split('-')[0]);
+            const awayTeamGoal = parseFloat($(matches[i]).find('.ptpredboxsml').text().split(' ')[1].split('-')[1]);
+
             matchData = {
                 website: 'predictz',
                 homeTeam: $(matches[i]).find('.pttd.ptgame').text().split(' v ')[0].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
                 awayTeam: $(matches[i]).find('.pttd.ptgame').text().split(' v ')[1].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
-                prediction_1: $(matches[i]).find('.ngreen.ptpredboxsml').length ? true : false,
+                prediction_1: ($(matches[i]).find('.ngreen.ptpredboxsml').length && homeTeamGoal - awayTeamGoal >= 2) ? true : false,
                 prediction_x: $(matches[i]).find('.nyellow.ptpredboxsml').length ? true : false,
-                prediction_2: $(matches[i]).find('.nred.ptpredboxsml').length ? true : false,
+                prediction_2: ($(matches[i]).find('.nred.ptpredboxsml').length && awayTeamGoal - homeTeamGoal >= 2) ? true : false,
             }
             predictz_MatchData.push(matchData);
         }
@@ -263,9 +266,9 @@ $(function(){
                 odds_1: Math.round(parseFloat($(matches[i]).find('td:nth-child(6)').text()) * 100) / 100,
                 odds_x: Math.round(parseFloat($(matches[i]).find('td:nth-child(7)').text()) * 100) / 100,
                 odds_2: Math.round(parseFloat($(matches[i]).find('td:nth-child(8)').text()) * 100) / 100,
-                prediction_1: Math.round(parseFloat($(matches[i]).find('td:nth-child(9) .bar-success').attr('style').split(':')[1].split('%')[0]) * 100) / 100 >= 60 ? true : false,
-                prediction_x: Math.round(parseFloat($(matches[i]).find('td:nth-child(9) .bar-warning').attr('style').split(':')[1].split('%')[0]) * 100) / 100 >= 60 ? true : false,
-                prediction_2: Math.round(parseFloat($(matches[i]).find('td:nth-child(9) .bar-danger').attr('style').split(':')[1].split('%')[0]) * 100) / 100 >= 60 ? true : false,
+                prediction_1: Math.round(parseFloat($(matches[i]).find('td:nth-child(9) .bar-success').attr('style').split(':')[1].split('%')[0]) * 100) / 100 >= 65 ? true : false,
+                prediction_x: Math.round(parseFloat($(matches[i]).find('td:nth-child(9) .bar-warning').attr('style').split(':')[1].split('%')[0]) * 100) / 100 >= 35 ? true : false,
+                prediction_2: Math.round(parseFloat($(matches[i]).find('td:nth-child(9) .bar-danger').attr('style').split(':')[1].split('%')[0]) * 100) / 100 >= 65 ? true : false,
             }
             scibet_MatchData.push(matchData);
         }
@@ -297,16 +300,16 @@ $(function(){
         let matchData;
         const matches = $(html).contents().find('.wttr.mbmt30').find('.wtmo').closest(".wttr.mbmt30");
         for (let i = 0; i < matches.length; i++) { 
+            const homeTeamGoal = parseFloat($(matches[i]).find('.wtsc').text().split('-')[0].trim());
+            const awayTeamGoal = parseFloat($(matches[i]).find('.wtsc').text().split('-')[1].trim());
+
             matchData = {
                 website: 'windrawwin',
                 homeTeam: $(matches[i]).find('.wtdesklnk').text().split(' v ')[0].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
                 awayTeam: $(matches[i]).find('.wtdesklnk').text().split(' v ')[1].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
-                odds_1: Math.round(parseFloat($(matches[i]).find('.wtmo > div:nth-child(2)').text()) * 100) / 100 >= 60 ? true : false,
-                odds_x: Math.round(parseFloat($(matches[i]).find('.wtmo > div:nth-child(3)').text()) * 100) / 100 >= 35 ? true : false,
-                odds_2: Math.round(parseFloat($(matches[i]).find('.wtmo > div:nth-child(4)').text()) * 100) / 100 >= 60 ? true : false,
-                prediction_1: $(matches[i]).find('.wtprd').text() === 'Home Win' ? true : false,
+                prediction_1: ($(matches[i]).find('.wtprd').text() === 'Home Win' && homeTeamGoal - awayTeamGoal >= 2) ? true : false,
                 prediction_x: $(matches[i]).find('.wtprd').text() === 'Draw' ? true : false,
-                prediction_2: $(matches[i]).find('.wtprd').text() === 'Away Win' ? true : false,
+                prediction_2: ($(matches[i]).find('.wtprd').text() === 'Away Win' && awayTeamGoal - homeTeamGoal >= 2) ? true : false,
             }
             windrawwin_MatchData.push(matchData);
         }
@@ -776,7 +779,7 @@ $('html').on('click', '.load-button_1', function() {
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, oddslot_MatchData, 'prediction_1', true);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, sbat_MatchData, 'prediction_1', true);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, kickoff_MatchData, 'prediction_1', true);
-    //mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, predictz_MatchData, 'prediction_1', true);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, predictz_MatchData, 'prediction_1', true);
     //mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, freesupertips_MatchData, 'prediction_1', true);
     //mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, footballpredictionsCom_MatchData, 'prediction_1', true);
     //mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, footballpredictionsNet_MatchData, 'prediction_1', true);
@@ -834,7 +837,7 @@ $('html').on('click', '.load-button_x', function() {
 
 $('html').on('click', '.load-button_2', function() {
     allMatchesTodayFiltered = [];
-    
+
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, statarea_MatchData, 'prediction_2', true);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, scibet_MatchData, 'prediction_2', true);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, forebet_MatchData, 'prediction_2', true);
@@ -849,7 +852,7 @@ $('html').on('click', '.load-button_2', function() {
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, oddslot_MatchData, 'prediction_2', true);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, sbat_MatchData, 'prediction_2', true);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, kickoff_MatchData, 'prediction_2', true);
-    //mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, predictz_MatchData, 'prediction_2', true);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, predictz_MatchData, 'prediction_2', true);
     //mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, freesupertips_MatchData, 'prediction_2', true);
     //mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, footballpredictionsCom_MatchData, 'prediction_2', true);
     //mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, footballpredictionsNet_MatchData, 'prediction_2', true);
