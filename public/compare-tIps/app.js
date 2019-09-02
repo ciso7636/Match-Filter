@@ -432,10 +432,13 @@ $(function(){
         let matchData;
         const matches = $(html).contents().find('.hide-iframe #today-div tr');
         for (let i = 0; i < matches.length; i++) { 
+
+            const match = $(matches[i]).find('td:nth-child(2)').text().split(' vs ').length === 2 ? $(matches[i]).find('td:nth-child(2)').text().split(' vs ') : $(matches[i]).find('td:nth-child(2)').text().split(' - ');
+
             matchData = {
                 website: 'betensured',
-                homeTeam: $(matches[i]).find('td:nth-child(2)').text().split(' vs ')[0].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
-                awayTeam: $(matches[i]).find('td:nth-child(2)').text().split(' vs ')[1].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
+                homeTeam: match[0].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
+                awayTeam: match[1].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
                 prediction_1: $(matches[i]).find('td:nth-child(3)').text() === '1' ? true : false,
                 prediction_1x: $(matches[i]).find('td:nth-child(3)').text() === '1X' ? true : false,
                 prediction_x: $(matches[i]).find('td:nth-child(3)').text() === 'X' ? true : false,
@@ -912,6 +915,7 @@ function mergeAllMatchesWithAllFiltredMatchces (allMatches, filteredMatches, sel
 
                         if (findHomeTeam === true && findAwayTeam === true) {
                             matchName = matches[y];
+                            break;
                         }
                     }
                     
