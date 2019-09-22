@@ -258,6 +258,9 @@ $(function(){
         let matchData;
         const matches = $(html).contents().find('#content .block .head h2 > a').closest(".block").find('table tr');
         for (let i = 0; i < matches.length; i++) { 
+            if ($(matches[i]).find('td:nth-child(9) .bar-success').length === 0) {
+                continue;
+            }
             matchData = {
                 website: 'scibet',
                 matchTime: $(matches[i]).find('td:nth-child(2) span').text(),
@@ -777,11 +780,11 @@ $('html').on('click', '.load-button_1', function() {
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, betensured_MatchData, 'prediction_1', true);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, footballbettingtips_MatchData, 'prediction_1', true);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, kickoff_MatchData, 'prediction_1', true);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, bettingtips1x2_MatchData, 'prediction_1', true);
 
     // Nizke percent
     // mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, oddslot_MatchData, 'prediction_1', true);
     // mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, vitibet_MatchData, 'prediction_1', true);
-    // mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, bettingtips1x2_MatchData, 'prediction_1', true);
     // mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, sbat_MatchData, 'prediction_1', true);
     // mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, footyaccumulators_MatchData, 'prediction_1', true);
     // mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, predictz_MatchData, 'prediction_1', true);
@@ -794,13 +797,15 @@ $('html').on('click', '.load-button_1', function() {
     // mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, sportytrader_MatchData, 'prediction_1', true);
     // mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, olbg_MatchData, 'prediction_1', true);
 
+    const probability = checkProbability(siteStats_1, allMatchesTodayFiltered);
+
     $('.save-button').data('save-type', '1');
 
-    const newArray = allMatchesTodayFiltered.sort((a, b) => (a.found < b.found) ? 1 : -1);
+    const newArray = probability.sort((a, b) => (a.found < b.found) ? 1 : -1);
 
-    console.log('Zhoda    Čas    Kurz      Zápas | Liga')
+    console.log('Zhoda    Čas    Pravdepod.    Kurz    Zápas | Liga')
     newArray.forEach(array => {
-        console.log('  ' + array.found + '     ' + array.matchTime + '   ' + array.odds_1 + '      ' + array.homeTeam + ' - ' + array.awayTeam + ' | ' + array.league + '                                 ' + array.website);
+        console.log('  ' + array.found + '     ' + array.matchTime + '      ' + array.probability + '         ' + array.odds_1 + '    ' + array.homeTeam + ' - ' + array.awayTeam + ' | ' + array.league + '                                 ' + array.website);
     })
 });
 
@@ -812,6 +817,7 @@ $('html').on('click', '.load-button_x', function() {
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, predictz_MatchData, 'prediction_x', true);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, footballbettingtips_MatchData, 'prediction_x', true);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, zulubet_MatchData, 'prediction_x', true);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, mybet_MatchData, 'prediction_x', true);
 
     // Nizke percent
     // mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, scibet_MatchData, 'prediction_x', true);
@@ -819,7 +825,6 @@ $('html').on('click', '.load-button_x', function() {
     // mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, footballpredictionsNet_MatchData, 'prediction_x', true);
     // mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, windrawwin_MatchData, 'prediction_x', true);
     // mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, vitibet_MatchData, 'prediction_x', true);
-    // mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, mybet_MatchData, 'prediction_x', true);
     // mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, supatips_MatchData, 'prediction_x', true);
     // mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, footballtips_MatchData, 'prediction_x', true);
     // mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, sportytrader_MatchData, 'prediction_x', true);
@@ -831,13 +836,15 @@ $('html').on('click', '.load-button_x', function() {
     // mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, sbat_MatchData, 'prediction_x', true);
     // mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, kickoff_MatchData, 'prediction_x', true);
 
+    const probability = checkProbability(siteStats_x, allMatchesTodayFiltered);
+
     $('.save-button').data('save-type', 'x');
 
-    const newArray = allMatchesTodayFiltered.sort((a, b) => (a.found < b.found) ? 1 : -1);
+    const newArray = probability.sort((a, b) => (a.found < b.found) ? 1 : -1);
 
-    console.log('Zhoda    Čas    Kurz      Zápas | Liga')
+    console.log('Zhoda    Čas    Pravdepod.    Kurz    Zápas | Liga')
     newArray.forEach(array => {
-        console.log('  ' + array.found + '     ' + array.matchTime + '   ' + array.odds_x + '      ' + array.homeTeam + ' - ' + array.awayTeam + ' | ' + array.league + '                                 ' + array.website);
+        console.log('  ' + array.found + '     ' + array.matchTime + '      ' + array.probability + '         ' + array.odds_x + '    ' + array.homeTeam + ' - ' + array.awayTeam + ' | ' + array.league + '                                 ' + array.website);
     })
 });
 
@@ -852,7 +859,6 @@ $('html').on('click', '.load-button_2', function() {
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, statarea_MatchData, 'prediction_2', true);
 
     // Nizke percent
-    // mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, footballbettingtips_MatchData, 'prediction_2', true);
     // mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, bettingtips1x2_MatchData, 'prediction_2', true);
     // mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, vitibet_MatchData, 'prediction_2', true);
     // mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, betensured_MatchData, 'prediction_2', true);
@@ -869,15 +875,36 @@ $('html').on('click', '.load-button_2', function() {
     // mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, sportytrader_MatchData, 'prediction_2', true);
     // mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, olbg_MatchData, 'prediction_2', true);
 
+    const probability = checkProbability(siteStats_2, allMatchesTodayFiltered);
+
     $('.save-button').data('save-type', '2');
 
-    const newArray = allMatchesTodayFiltered.sort((a, b) => (a.found < b.found) ? 1 : -1);
+    const newArray = probability.sort((a, b) => (a.found < b.found) ? 1 : -1);
 
-    console.log('Zhoda    Čas    Kurz      Zápas | Liga')
+    console.log('Zhoda    Čas    Pravdepod.    Kurz    Zápas | Liga')
     newArray.forEach(array => {
-        console.log('  ' + array.found + '     ' + array.matchTime + '   ' + array.odds_2 + '      ' + array.homeTeam + ' - ' + array.awayTeam + ' | ' + array.league + '                                 ' + array.website);
+        console.log('  ' + array.found + '     ' + array.matchTime + '      ' + array.probability + '         ' + array.odds_2 + '    ' + array.homeTeam + ' - ' + array.awayTeam + ' | ' + array.league + '                                 ' + array.website);
     })
 });
+
+function checkProbability (siteStats_1, allMatchesTodayFiltered) {
+    let newMatches = [];
+    let siteStats, siteProbability;
+
+    allMatchesTodayFiltered.forEach(match => {
+        let sumProbability = 0;
+
+        match.website.forEach((site, i) => {
+            siteStats = siteStats_1.find(siteStats => siteStats.site === site);
+            siteProbability = (siteStats.correctPrediction / siteStats.matches) * 100;
+            sumProbability += siteProbability;
+        })
+        match.probability = mathRound(sumProbability / match.found) + match.found;
+        newMatches.push(match);
+    })
+
+    return newMatches;
+}
 
 function mergeAllMatchesWithAllFiltredMatchces (allMatches, filteredMatches, selector, condition) {
     for (let i = 0; i < filteredMatches.length; i++) { 
