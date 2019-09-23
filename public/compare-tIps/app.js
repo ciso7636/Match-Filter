@@ -26,6 +26,9 @@ let footyaccumulators_MatchData = [];
 let oddslot_MatchData = [];
 let sbat_MatchData = [];
 let kickoff_MatchData = [];
+let footballduke_MatchData = [];
+let tips1960_MatchData = [];
+let scorepredictor_MatchData = [];
 
 let siteStats = [
     {site: 'footballpredictionsCom', url: 'https://footballpredictions.com/footballpredictions/', matches: 0, correctPrediction: 0},
@@ -51,6 +54,9 @@ let siteStats = [
     {site: 'oddslot', url: 'https://oddslot.com/odds/', matches: 0, correctPrediction: 0},
     {site: 'sbat', url: 'https://www.sbat.com/tips/free-football-betting-tips', matches: 0, correctPrediction: 0},
     {site: 'kickoff', url: 'https://www.kickoff.co.uk/acca-smacker/', matches: 0, correctPrediction: 0},
+    {site: 'footballduke', url: 'https://footballduke.com/football-tips-for-', matches: 0, correctPrediction: 0},
+    {site: '1960tips', url: 'https://www.1960tips.com', matches: 0, correctPrediction: 0},
+    {site: 'scorepredictor', url: 'https://scorepredictor.net/index.php?section=football', matches: 0, correctPrediction: 0},
 ]
 
 $(function(){
@@ -479,6 +485,9 @@ $(function(){
         
         let matchData;
         const matches = $(html).contents().find('.table_change').eq(0).find('tr');
+
+        if (matches.length <= 1) return;
+
         for (let i = 0; i < matches.length; i++) { 
             matchData = {
                 website: 'tips180',
@@ -595,6 +604,66 @@ $(function(){
                 prediction_2: ('Away' === winTeam && winTeamChance >= 55) ? true : false,
             }
             kickoff_MatchData.push(matchData);
+        }
+    })
+
+    getAllMatchData('https://footballduke.com/football-tips-for-' + getToDay('text')).then(function (html) {
+        
+        let matchData;
+        const matches = $(html).contents().find('#maintable tbody tr');
+        for (let i = 0; i < matches.length; i++) { 
+            const homeTeam = $(matches[i]).find('td').eq(2).text().split(' vs ')[0].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            const awayTeam = $(matches[i]).find('td').eq(2).text().split(' vs ')[1].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+            matchData = {
+                website: 'footballduke',
+                homeTeam: homeTeam,
+                awayTeam: awayTeam,
+                prediction_1: parseFloat($(matches[i]).find('td').eq(3).text()) >= 60 ? true : false,
+                prediction_x: parseFloat($(matches[i]).find('td').eq(4).text()) >= 35 ? true : false,
+                prediction_2: parseFloat($(matches[i]).find('td').eq(5).text()) >= 60 ? true : false,
+            }
+            footballduke_MatchData.push(matchData);
+        }
+    })
+
+    getAllMatchData('https://www.1960tips.com').then(function (html) {
+        
+        let matchData;
+        const matches = $(html).contents().find('.bodytop3downright #tabletoday tr td').closest('tr');
+        for (let i = 0; i < matches.length; i++) { 
+            const homeTeam = $(matches[i]).find('td').eq(2).text().toLowerCase().split('vs')[0].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            const awayTeam = $(matches[i]).find('td').eq(2).text().toLowerCase().split('vs')[1].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+            matchData = {
+                website: '1960tips',
+                homeTeam: homeTeam,
+                awayTeam: awayTeam,
+                prediction_1: $(matches[i]).find('td').eq(3).text().trim() === '1' ? true : false,
+                prediction_x: $(matches[i]).find('td').eq(3).text().toLowerCase().trim() === 'x' ? true : false,
+                prediction_2: $(matches[i]).find('td').eq(3).text().trim() === '2' ? true : false,
+            }
+            tips1960_MatchData.push(matchData);
+        }
+    })
+
+    getAllMatchData('https://scorepredictor.net').then(function (html) {
+        
+        let matchData;
+        const matches = $(html).contents().find('.block_table_l_2').eq(0).find('tr:not(":first-child")');
+        for (let i = 0; i < matches.length; i++) { 
+            const homeTeam = $(matches[i]).find('td').eq(0).text().trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            const awayTeam = $(matches[i]).find('td').eq(3).text().trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+            matchData = {
+                website: 'scorepredictor',
+                homeTeam: homeTeam,
+                awayTeam: awayTeam,
+                prediction_1: $(matches[i]).find('td').eq(4).text().trim() === '1' ? true : false,
+                prediction_x: $(matches[i]).find('td').eq(4).text().toLowerCase().trim() === 'x' ? true : false,
+                prediction_2: $(matches[i]).find('td').eq(4).text().trim() === '2' ? true : false,
+            }
+            scorepredictor_MatchData.push(matchData);
         }
     })
 })
@@ -781,6 +850,9 @@ $('html').on('click', '.load-button_1', function() {
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, footballbettingtips_MatchData, 'prediction_1', true);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, kickoff_MatchData, 'prediction_1', true);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, bettingtips1x2_MatchData, 'prediction_1', true);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, footballduke_MatchData, 'prediction_1', true);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, tips1960_MatchData, 'prediction_1', true);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, scorepredictor_MatchData, 'prediction_1', true);
 
     // Nizke percent
     // mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, oddslot_MatchData, 'prediction_1', true);
@@ -818,6 +890,9 @@ $('html').on('click', '.load-button_x', function() {
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, footballbettingtips_MatchData, 'prediction_x', true);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, zulubet_MatchData, 'prediction_x', true);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, mybet_MatchData, 'prediction_x', true);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, footballduke_MatchData, 'prediction_x', true);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, tips1960_MatchData, 'prediction_x', true);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, scorepredictor_MatchData, 'prediction_x', true);
 
     // Nizke percent
     // mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, scibet_MatchData, 'prediction_x', true);
@@ -857,6 +932,9 @@ $('html').on('click', '.load-button_2', function() {
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, tips180_MatchData, 'prediction_2', true);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, oddslot_MatchData, 'prediction_2', true);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, statarea_MatchData, 'prediction_2', true);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, footballduke_MatchData, 'prediction_2', true);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, tips1960_MatchData, 'prediction_2', true);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, scorepredictor_MatchData, 'prediction_2', true);
 
     // Nizke percent
     // mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, bettingtips1x2_MatchData, 'prediction_2', true);
@@ -893,13 +971,19 @@ function checkProbability (siteStats_1, allMatchesTodayFiltered) {
 
     allMatchesTodayFiltered.forEach(match => {
         let sumProbability = 0;
+        let matchFound = match.found;
 
         match.website.forEach((site, i) => {
             siteStats = siteStats_1.find(siteStats => siteStats.site === site);
-            siteProbability = (siteStats.correctPrediction / siteStats.matches) * 100;
-            sumProbability += siteProbability;
+
+            if (siteStats === undefined) {
+                matchFound += -1;
+            } else {
+                siteProbability = (siteStats.correctPrediction / siteStats.matches) * 100;
+                sumProbability += siteProbability;
+            }
         })
-        match.probability = mathRound(sumProbability / match.found) + match.found;
+        match.probability = mathRound(sumProbability / matchFound) + matchFound;
         newMatches.push(match);
     })
 
@@ -1117,6 +1201,9 @@ function resetSiteStats() {
         {site: 'oddslot', url: 'https://oddslot.com/odds/', matches: 0, correctPrediction: 0},
         {site: 'sbat', url: 'https://www.sbat.com/tips/free-football-betting-tips', matches: 0, correctPrediction: 0},
         {site: 'kickoff', url: 'https://www.kickoff.co.uk/acca-smacker/', matches: 0, correctPrediction: 0},
+        {site: 'footballduke', url: 'https://footballduke.com/football-tips-for-', matches: 0, correctPrediction: 0},
+        {site: '1960tips', url: 'https://www.1960tips.com', matches: 0, correctPrediction: 0},
+        {site: 'scorepredictor', url: 'https://scorepredictor.net/index.php?section=football', matches: 0, correctPrediction: 0},
     ]
 }
 
@@ -1137,8 +1224,15 @@ function writeSiteStats(stats) {
 
 function getToDay(type) {
     const date = new Date;
+    const monthNames = ["jan", "feb", "mar", "apr", "may", "june",
+        "july", "aug", "sep", "oct", "nov", "dec"
+    ];
+
     if (type === '-') {
         return (date.getFullYear() + '-' + ('0' + (date.getMonth()+1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2));
+    } else if (type === 'text') {
+        return ('0' + date.getDate()).slice(-2) + '-' + monthNames[date.getMonth()] + '-' + date.getFullYear();
+        
     }
     return ('0' + date.getDate()).slice(-2) + '.' + ('0' + (date.getMonth()+1)).slice(-2) + '.' + date.getFullYear();
 }
