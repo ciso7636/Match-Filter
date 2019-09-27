@@ -489,10 +489,12 @@ $(function(){
         if (matches.length <= 1) return;
 
         for (let i = 0; i < matches.length; i++) { 
+            const match = $(matches[i]).find('td').eq(2).text().split(' vs ').length === 2 ? $(matches[i]).find('td').eq(2).text().split(' vs ') : $(matches[i]).find('td').eq(2).text().split(' v ');
+
             matchData = {
                 website: 'tips180',
-                homeTeam: $(matches[i]).find('td').eq(2).text().split(' vs ')[0].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
-                awayTeam: $(matches[i]).find('td').eq(2).text().split(' vs ')[1].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
+                homeTeam: match[0].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
+                awayTeam: match[1].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
                 prediction_1: $(matches[i]).find('td').eq(3).text().trim() === '1' ? true : false,
                 prediction_x: $(matches[i]).find('td').eq(3).text().trim() === 'X' ? true : false,
                 prediction_2: $(matches[i]).find('td').eq(3).text().trim() === '2' ? true : false,
@@ -850,13 +852,14 @@ $('html').on('click', '.load-button_1', function() {
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, footballbettingtips_MatchData, 'prediction_1', true);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, kickoff_MatchData, 'prediction_1', true);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, bettingtips1x2_MatchData, 'prediction_1', true);
-    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, footballduke_MatchData, 'prediction_1', true);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, tips1960_MatchData, 'prediction_1', true);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, scorepredictor_MatchData, 'prediction_1', true);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, oddslot_MatchData, 'prediction_1', true);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, vitibet_MatchData, 'prediction_1', true);
+    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, footballduke_MatchData, 'prediction_1', true);
+
 
     // Nizke percent
-    // mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, oddslot_MatchData, 'prediction_1', true);
-    // mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, vitibet_MatchData, 'prediction_1', true);
     // mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, sbat_MatchData, 'prediction_1', true);
     // mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, footyaccumulators_MatchData, 'prediction_1', true);
     // mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, predictz_MatchData, 'prediction_1', true);
@@ -934,9 +937,9 @@ $('html').on('click', '.load-button_2', function() {
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, statarea_MatchData, 'prediction_2', true);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, footballduke_MatchData, 'prediction_2', true);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, tips1960_MatchData, 'prediction_2', true);
-    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, scorepredictor_MatchData, 'prediction_2', true);
 
     // Nizke percent
+    // mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, scorepredictor_MatchData, 'prediction_2', true);
     // mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, bettingtips1x2_MatchData, 'prediction_2', true);
     // mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, vitibet_MatchData, 'prediction_2', true);
     // mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, betensured_MatchData, 'prediction_2', true);
