@@ -275,9 +275,9 @@ $(function(){
                 odds_1: Math.round(parseFloat($(matches[i]).find('td:nth-child(6)').text()) * 100) / 100,
                 odds_x: Math.round(parseFloat($(matches[i]).find('td:nth-child(7)').text()) * 100) / 100,
                 odds_2: Math.round(parseFloat($(matches[i]).find('td:nth-child(8)').text()) * 100) / 100,
-                prediction_1: Math.round(parseFloat($(matches[i]).find('td:nth-child(9) .bar-success').attr('style').split(':')[1].split('%')[0]) * 100) / 100 >= 65 ? true : false,
-                prediction_x: Math.round(parseFloat($(matches[i]).find('td:nth-child(9) .bar-warning').attr('style').split(':')[1].split('%')[0]) * 100) / 100 >= 35 ? true : false,
-                prediction_2: Math.round(parseFloat($(matches[i]).find('td:nth-child(9) .bar-danger').attr('style').split(':')[1].split('%')[0]) * 100) / 100 >= 65 ? true : false,
+                prediction_1: Math.round(parseFloat($(matches[i]).find('td:nth-child(9) .bar-success').attr('style').split(':')[1].split('%')[0]) * 100) / 100 >= 75 ? true : false,
+                prediction_x: Math.round(parseFloat($(matches[i]).find('td:nth-child(9) .bar-warning').attr('style').split(':')[1].split('%')[0]) * 100) / 100 >= 40 ? true : false,
+                prediction_2: Math.round(parseFloat($(matches[i]).find('td:nth-child(9) .bar-danger').attr('style').split(':')[1].split('%')[0]) * 100) / 100 >= 70 ? true : false,
             }
             scibet_MatchData.push(matchData);
         }
@@ -853,13 +853,13 @@ $('html').on('click', '.load-button_1', function() {
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, kickoff_MatchData, 'prediction_1', true);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, bettingtips1x2_MatchData, 'prediction_1', true);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, tips1960_MatchData, 'prediction_1', true);
-    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, scorepredictor_MatchData, 'prediction_1', true);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, oddslot_MatchData, 'prediction_1', true);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, vitibet_MatchData, 'prediction_1', true);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, footballduke_MatchData, 'prediction_1', true);
 
 
     // Nizke percent
+    // mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, scorepredictor_MatchData, 'prediction_1', true);
     // mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, sbat_MatchData, 'prediction_1', true);
     // mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, footyaccumulators_MatchData, 'prediction_1', true);
     // mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, predictz_MatchData, 'prediction_1', true);
@@ -932,13 +932,13 @@ $('html').on('click', '.load-button_2', function() {
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, forebet_MatchData, 'prediction_2', true);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, scibet_MatchData, 'prediction_2', true);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, zulubet_MatchData, 'prediction_2', true);
-    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, tips180_MatchData, 'prediction_2', true);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, oddslot_MatchData, 'prediction_2', true);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, statarea_MatchData, 'prediction_2', true);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, footballduke_MatchData, 'prediction_2', true);
-    mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, tips1960_MatchData, 'prediction_2', true);
 
     // Nizke percent
+    // mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, tips180_MatchData, 'prediction_2', true);
+    // mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, tips1960_MatchData, 'prediction_2', true);
     // mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, scorepredictor_MatchData, 'prediction_2', true);
     // mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, bettingtips1x2_MatchData, 'prediction_2', true);
     // mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, vitibet_MatchData, 'prediction_2', true);
