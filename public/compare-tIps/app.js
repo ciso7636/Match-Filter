@@ -986,7 +986,8 @@ function checkProbability (siteStats_1, allMatchesTodayFiltered) {
                 sumProbability += siteProbability;
             }
         })
-        match.probability = mathRound(sumProbability / matchFound) + matchFound;
+        //match.probability = mathRound(sumProbability / matchFound) + matchFound;
+        match.probability = mathRound(sumProbability / matchFound);
         newMatches.push(match);
     })
 
