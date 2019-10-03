@@ -632,18 +632,18 @@ $(function(){
     getAllMatchData('https://www.1960tips.com').then(function (html) {
         
         let matchData;
-        const matches = $(html).contents().find('.bodytop3downright #tabletoday tr td').closest('tr');
+        const matches = $(html).contents().find('#bodytop2').eq(0).find('#tabletoday tr.nochangetr, #tabletoday tr.changetr')
         for (let i = 0; i < matches.length; i++) { 
-            const homeTeam = $(matches[i]).find('td').eq(2).text().toLowerCase().split('vs')[0].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-            const awayTeam = $(matches[i]).find('td').eq(2).text().toLowerCase().split('vs')[1].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            const homeTeam = $(matches[i]).find('td').eq(3).text().toLowerCase().split('vs')[0].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            const awayTeam = $(matches[i]).find('td').eq(3).text().toLowerCase().split('vs')[1].trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
             matchData = {
                 website: '1960tips',
                 homeTeam: homeTeam,
                 awayTeam: awayTeam,
-                prediction_1: $(matches[i]).find('td').eq(3).text().trim() === '1' ? true : false,
-                prediction_x: $(matches[i]).find('td').eq(3).text().toLowerCase().trim() === 'x' ? true : false,
-                prediction_2: $(matches[i]).find('td').eq(3).text().trim() === '2' ? true : false,
+                prediction_1: $(matches[i]).find('td').eq(5).text().trim() === '1' ? true : false,
+                prediction_x: $(matches[i]).find('td').eq(5).text().toLowerCase().trim() === 'x' ? true : false,
+                prediction_2: $(matches[i]).find('td').eq(5).text().trim() === '2' ? true : false,
             }
             tips1960_MatchData.push(matchData);
         }
