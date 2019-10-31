@@ -857,7 +857,6 @@ $('html').on('click', '.load-button_1', function() {
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, vitibet_MatchData, 'prediction_1', true);
     mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, footballduke_MatchData, 'prediction_1', true);
 
-
     // Nizke percent
     // mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, scorepredictor_MatchData, 'prediction_1', true);
     // mergeAllMatchesWithAllFiltredMatchces(allMatchesToday, sbat_MatchData, 'prediction_1', true);
@@ -876,7 +875,7 @@ $('html').on('click', '.load-button_1', function() {
 
     $('.save-button').data('save-type', '1');
 
-    const newArray = probability.sort((a, b) => (a.found < b.found) ? 1 : -1);
+    const newArray = probability.sort((a, b) => (a.probability < b.probability) ? 1 : -1);
 
     console.log('Zhoda    Čas    Pravdepod.    Kurz    Zápas | Liga')
     newArray.forEach(array => {
@@ -918,7 +917,7 @@ $('html').on('click', '.load-button_x', function() {
 
     $('.save-button').data('save-type', 'x');
 
-    const newArray = probability.sort((a, b) => (a.found < b.found) ? 1 : -1);
+    const newArray = probability.sort((a, b) => (a.probability < b.probability) ? 1 : -1);
 
     console.log('Zhoda    Čas    Pravdepod.    Kurz    Zápas | Liga')
     newArray.forEach(array => {
@@ -960,7 +959,7 @@ $('html').on('click', '.load-button_2', function() {
 
     $('.save-button').data('save-type', '2');
 
-    const newArray = probability.sort((a, b) => (a.found < b.found) ? 1 : -1);
+    const newArray = probability.sort((a, b) => (a.probability < b.probability) ? 1 : -1);
 
     console.log('Zhoda    Čas    Pravdepod.    Kurz    Zápas | Liga')
     newArray.forEach(array => {
@@ -986,8 +985,8 @@ function checkProbability (siteStats_1, allMatchesTodayFiltered) {
                 sumProbability += siteProbability;
             }
         })
-        //match.probability = mathRound(sumProbability / matchFound) + matchFound;
-        match.probability = mathRound(sumProbability / matchFound);
+        match.probability = mathRound(sumProbability / matchFound) + matchFound;
+        //match.probability = mathRound(sumProbability / matchFound);
         newMatches.push(match);
     })
 
