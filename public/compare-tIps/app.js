@@ -359,9 +359,9 @@ $(function(){
                 matchTime: $(matches[i]).find('td:nth-child(1)').text(),
                 homeTeam: $(matches[i]).find('td:nth-child(2)').text().trim().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
                 awayTeam: $(matches[i]).find('td:nth-child(4)').text().trim().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
-                prediction_1: Math.round(parseFloat($(matches[i]).find('td:nth-child(5)').text().split('%')[0]) * 100) / 100 >= 60 ? true : false,
+                prediction_1: Math.round(parseFloat($(matches[i]).find('td:nth-child(5)').text().split('%')[0]) * 100) / 100 >= 65 ? true : false,
                 prediction_x: Math.round(parseFloat($(matches[i]).find('td:nth-child(6)').text().split('%')[0]) * 100) / 100 >= 35 ? true : false,
-                prediction_2: Math.round(parseFloat($(matches[i]).find('td:nth-child(7)').text().split('%')[0]) * 100) / 100 >= 60 ? true : false,
+                prediction_2: Math.round(parseFloat($(matches[i]).find('td:nth-child(7)').text().split('%')[0]) * 100) / 100 >= 65 ? true : false,
             }
             mybet_MatchData.push(matchData);
         }
