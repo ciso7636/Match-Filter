@@ -136,19 +136,23 @@ $(function(){
     if ($('#index').length) {
         $('h1.header').text(`Load stats`).show();
     } else {
-        allLinks = document.querySelectorAll('#btable .trow8 td:last-child > a:first-child'); 
+        //allLinks = document.querySelectorAll('#btable tr[bgcolor="#eaeaea"] td:last-child > a:first-child'); 
         //allLinks = document.querySelectorAll('tbody .table-main__tt a');
-        allMatchesStatistics = getDataFromLocalStorage(allLinks.length) || [];   
+        getAllLinksFromSoccerStats('https://www.soccerstats.com/matches.asp').then(function (html) {
+            allLinks = $(html).contents().find('table table td:last-child a.button');
+
+            allMatchesStatistics = getDataFromLocalStorage(allLinks.length) || [];   
     
-        if (allMatchesStatistics.length > 0) {
-            $('.load-button').show().text(`Reload ${allLinks.length} matches`).removeClass('loading');
-            $('h1.header').text("Data is ready").show();
-            $('.row-buttons').show();
-            $('.row-buttons .ui.button').css('font-weight','300');
-        } else {
-            $('.load-button').show().text('Load matches').removeClass('loading');
-            $('h1.header').text(`Cick to load ${allLinks.length} matches`).show();
-        }  
+            if (allMatchesStatistics.length > 0) {
+                $('.load-button').show().text(`Reload ${allLinks.length} matches`).removeClass('loading');
+                $('h1.header').text("Data is ready").show();
+                $('.row-buttons').show();
+                $('.row-buttons .ui.button').css('font-weight','300');
+            } else {
+                $('.load-button').show().text('Load matches').removeClass('loading');
+                $('h1.header').text(`Cick to load ${allLinks.length} matches`).show();
+            }  
+        })
     }
 })
 
@@ -1820,16 +1824,17 @@ function switchTable(GF) {
 
 function hasTableSufficientNumberOfRows(rows) {
     if (rows.length >= 4) {
-        if(rows.last().find('td').length === 7) {
-            if (rows.last().find('td:nth-child(2)').text() !== " ") {
-                return true;
-            }
-        } else if(rows.last().prev().find('td').length === 7) {
-            if (rows.last().find('td:nth-child(2)').text() !== " ") {
-                return true;
-            }
-        }
-        return false;
+        // if(rows.last().find('td').length === 7) {
+        //     if (rows.last().find('td:nth-child(2)').text() !== " ") {
+        //         return true;
+        //     }
+        // } else if(rows.last().prev().find('td').length === 7) {
+        //     if (rows.last().find('td:nth-child(2)').text() !== " ") {
+        //         return true;
+        //     }
+        // }
+        // return false;
+        return true;
     } 
     return false;
 }
@@ -1980,6 +1985,20 @@ function showProgressBar(allLinks) {
 function moveProgressBar(i, multiple, allLinks) {
     $("#myBar").width(Math.round((multiple * i) * 100) / 100 + '%')
     $("#myBar").text(i * 1 + '/' + allLinks);
+}
+
+function getAllLinksFromSoccerStats(matchLink) {
+    return new Promise(function (resolve, reject) {
+        getData('GET', matchLink).then(function (html) {
+            resolve(html); 
+        }).catch(function (err) {
+            console.log(err);
+            resolve();
+            if (err.status === 404) {
+                console.log(top.soccerUrl);
+            }
+        });
+    })
 }
 
 function getData(method, url, type = 'document') {
