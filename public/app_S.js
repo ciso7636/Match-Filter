@@ -684,6 +684,53 @@ function homeTeamWinPrediction(allMatchesStatistics, writeToConsole){
     }
 }
 
+// function homeTeamWinPrediction_1(allMatchesStatistics, writeToConsole){
+//     let count = 0;
+//     let winPridiction = 0;
+//     for (let stats of allMatchesStatistics) {
+
+//         if (stats instanceof Object === false) continue;
+
+//         if (filteringNotPossibleBettingLeague(stats.Liga)) continue;
+
+//         switch (true) {
+//             case stats.homeTeamFavorits === false:
+//             case stats.awayTeamFavorits === true:
+//                 continue;
+//         }
+
+//         if (stats.Domaci.posledne_4_ZapasyDoma.streleneGolyPriemer - stats.Domaci.streleneGoly_Doma < 0) {
+//             continue;
+//         }
+
+//         // if (stats.Hostia.posledne_4_ZapasyVonku.streleneGolyPriemer - stats.Hostia.streleneGoly_Vonku > 0.35) {
+//         //     continue;
+//         // }
+
+//         if (stats.Hostia.posledne_4_ZapasyVonku.inkasovaneGolyPriemer - stats.Hostia.inkasovaneGoly_Vonku < 0.1) {
+//             continue;
+//         }
+
+//         if (writeToConsole !== false) returnDataToConsoleLog(stats, 'homeAwayWin');
+
+//         count++;
+//         winPridiction += (stats.výsledok.vyhral === 'domaci') ? 1 : 0;
+//     }
+//     if (count > 0) {
+//         if (writeToConsole !== false) {
+//             console.log(`Počet zápasov: ${count}, Výherných: ${winPridiction}, Úspešnosť: ${(winPridiction / count).toFixed(2) * 100}%, Min. zisk: ${calculateProfit(count, winPridiction, 3, 2.5, 100)}€`);
+//         }
+        
+//         weekProfit.homeTeamWinPrediction_1.zisk = calculateProfit(count, winPridiction, 3, 2.5, 100);        
+//         weekProfit.homeTeamWinPrediction_1.vyherneZapasy = winPridiction;        
+//         weekProfit.homeTeamWinPrediction_1.pocetZapasov = count;        
+//         weekProfit.homeTeamWinPrediction_1.percentualnaUspesnost = `${(winPridiction / count).toFixed(2) * 100}%`;
+//         weekProfit.filteredMatches += count;
+//     } else {
+//         console.log(`Nenašli sa žiadne zápasy!`);
+//     }
+// }
+
 function homeTeamWinPrediction_1(allMatchesStatistics, writeToConsole){
     let count = 0;
     let winPridiction = 0;
@@ -699,17 +746,17 @@ function homeTeamWinPrediction_1(allMatchesStatistics, writeToConsole){
                 continue;
         }
 
-        if (stats.Domaci.posledne_4_ZapasyDoma.streleneGolyPriemer - stats.Domaci.streleneGoly_Doma < 0) {
-            continue;
-        }
-
-        // if (stats.Hostia.posledne_4_ZapasyVonku.streleneGolyPriemer - stats.Hostia.streleneGoly_Vonku > 0.35) {
+        // if (stats.Domaci.posledne_4_ZapasyDoma.streleneGolyPriemer - stats.Domaci.streleneGoly_Doma < 0) {
         //     continue;
         // }
 
-        if (stats.Hostia.posledne_4_ZapasyVonku.inkasovaneGolyPriemer - stats.Hostia.inkasovaneGoly_Vonku < 0.1) {
-            continue;
-        }
+        // // if (stats.Hostia.posledne_4_ZapasyVonku.streleneGolyPriemer - stats.Hostia.streleneGoly_Vonku > 0.35) {
+        // //     continue;
+        // // }
+
+        // if (stats.Hostia.posledne_4_ZapasyVonku.inkasovaneGolyPriemer - stats.Hostia.inkasovaneGoly_Vonku < 0.1) {
+        //     continue;
+        // }
 
         if (writeToConsole !== false) returnDataToConsoleLog(stats, 'homeAwayWin');
 
@@ -866,9 +913,9 @@ function awayTeamWinPrediction_2(allMatchesStatistics, writeToConsole){
         //     }
         // }
 
-        if (stats.priemer_posledne4Zapasy_StrelenéGólyHostia_InkasovaneGólyDomáci < 1.9) {
-            continue;
-        }
+        // if (stats.priemer_posledne4Zapasy_StrelenéGólyHostia_InkasovaneGólyDomáci < 1.9) {
+        //     continue;
+        // }
 
         if (writeToConsole !== false) returnDataToConsoleLog(stats, 'homeAwayWin');
         
@@ -894,6 +941,63 @@ function awayTeamWinPrediction_2(allMatchesStatistics, writeToConsole){
         console.log(`Nenašli sa žiadne zápasy!`);
     }
 }
+
+// function awayTeamWinPrediction_2(allMatchesStatistics, writeToConsole){
+//     let count = 0;
+//     let winPridiction = 0;
+//     let win = 0;
+//     let draw = 0;
+//     for (let stats of allMatchesStatistics) {
+
+//         if (stats instanceof Object === false) continue;
+
+//         if (filteringNotPossibleBettingLeague(stats.Liga)) continue;
+
+//         switch (true) {
+//             case stats.homeTeamFavorits === true:
+//             case stats.awayTeamFavorits === false:
+//                 continue;
+//         }
+
+//         // if (stats.Domaci.cisteKontoDoma > 25) {
+//         //     continue;
+//         // }
+        
+//         // if (stats.Hostia.posledne_4_Zapasy.streleneGolyPriemer < stats.Hostia.streleneGoly_Vonku) {
+//         //     const checkForm = Math.abs(stats.Hostia.streleneGoly_Vonku * 100 - stats.Hostia.posledne_4_Zapasy.streleneGolyPriemer * 100) / stats.Hostia.streleneGoly_Vonku;
+//         //     if (checkForm >= 10) {
+//         //         continue;
+//         //     }
+//         // }
+
+//         if (stats.priemer_posledne4Zapasy_StrelenéGólyHostia_InkasovaneGólyDomáci < 1.9) {
+//             continue;
+//         }
+
+//         if (writeToConsole !== false) returnDataToConsoleLog(stats, 'homeAwayWin');
+        
+
+//         count++;
+//         winPridiction += (stats.výsledok.vyhral === 'host' || stats.výsledok.vyhral === 'remiza') ? 1 : 0;
+//         win += stats.výsledok.vyhral === 'host' ? 1 : 0;
+//         draw += stats.výsledok.vyhral === 'remiza' ? 1 : 0;
+//     }
+//     if (count > 0) {
+//         if (writeToConsole !== false) {
+//             console.log(`Počet zápasov: ${count}, Výherných: ${winPridiction}, Úspešnosť: ${(winPridiction / count).toFixed(2) * 100}%, Min. zisk: ${calculateProfit(count, winPridiction, 3, 2, 100)}€`);
+//             console.log(`Presné tipy:   ${win}, Úspešnosť: ${(win / count).toFixed(2) * 100}%,               Min. zisk: ${calculateProfit(count, win, 1, 1.85, 100)}€`);
+//             console.log(`Remízy:        ${draw}, Úspešnosť: ${(draw / count).toFixed(2) * 100}%,                Min. zisk: ${calculateProfit(count, draw, 1, 3.1, 100)}€`);
+//         }
+        
+//         weekProfit.awayTeamWinPrediction_2.zisk = calculateProfit(count, win, 1, 1.85, 100);
+//         weekProfit.awayTeamWinPrediction_2.vyherneZapasy = win;        
+//         weekProfit.awayTeamWinPrediction_2.pocetZapasov = count;        
+//         weekProfit.awayTeamWinPrediction_2.percentualnaUspesnost = `${(win / count).toFixed(2) * 100}%`;
+//         weekProfit.filteredMatches += count;
+//     } else {
+//         console.log(`Nenašli sa žiadne zápasy!`);
+//     }
+// }
 
 function handleGetWeekStats(input, select, button){
     const name = $(input).val();
@@ -1127,20 +1231,21 @@ function getAllMatchData(matchLink) {
                     cleanSheets = getCleanScheets(html.querySelectorAll('.trow3 td'));
                     scoredAndConcededGolas = getScoredAndConcededGolas(html.querySelectorAll('.trow2 td'));
 
-                    const fonts = $(html).contents().find('table font[color="#555555"]');
+                    const fonts1 = $(html).contents().find('table font[color="#fafafa"]');
+                    const fonts2 = $(html).contents().find('table font[color="#555555"]');
 
                     let lastMatchesTables, lastMatchesCurrentPositionTable;
 
-                    for (let i = 0; i < fonts.length; i++) { 
-                        if ($(fonts[i]).text().trim() === 'Latest results in the league (most recent first)') {
-                            lastMatchesTables = $(fonts[i]).closest('table').next();
+                    for (let i = 0; i < fonts1.length; i++) { 
+                        if ($(fonts1[i]).text().trim() === 'Latest results in the league (most recent first)') {
+                            lastMatchesTables = $(fonts1[i]).closest('table').next();
                             break;
                         }
                     }
 
-                    for (let i = 0; i < fonts.length; i++) { 
-                        if ($(fonts[i]).text().trim() === '(in the league, most recent first)') {
-                            lastMatchesCurrentPositionTable = $(fonts[i]).closest('table').next();
+                    for (let i = 0; i < fonts2.length; i++) { 
+                        if ($(fonts2[i]).text().trim() === '(in the league, most recent first)') {
+                            lastMatchesCurrentPositionTable = $(fonts2[i]).closest('table').next();
                             break;
                         }
                     }
